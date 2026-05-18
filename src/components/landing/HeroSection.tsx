@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const HeroSection = () => {
   return (
@@ -85,59 +86,14 @@ export const HeroSection = () => {
 </div>
 </div>
 <div className="flex-shrink-0 w-full md:w-[460px] h-[420px] rounded-3xl relative overflow-hidden" style={{'background': 'rgb(250, 250, 248)'}}>
-<svg aria-hidden="true" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 480 480">
-<defs>
-<pattern height="36" id="dot-grid" patternTransform="rotate(12)" patternUnits="userSpaceOnUse" width="36">
-<circle cx="18" cy="18" fill="#E5E7EB" r="1.5" />
-</pattern>
-<radialGradient cx="50%" cy="50%" id="grid-fade" r="55%">
-<stop offset="0%" stopColor="white" stopOpacity="0" />
-<stop offset="65%" stopColor="white" stopOpacity="0" />
-<stop offset="100%" stopColor="white" stopOpacity="1" />
-</radialGradient>
-<linearGradient id="edge-fade-r" x1="0%" x2="100%" y1="0%" y2="0%">
-<stop offset="0%" stopColor="white" stopOpacity="0.8" />
-<stop offset="40%" stopColor="white" stopOpacity="0" />
-<stop offset="100%" stopColor="white" stopOpacity="0" />
-</linearGradient>
-</defs>
-<rect fill="url(#dot-grid)" height="100%" width="100%" />
-<g opacity="0.6" stroke="#F3D5C0" strokeWidth="1">
-<line x1="72" x2="144" y1="108" y2="72" />
-<line x1="144" x2="252" y1="72" y2="108" />
-<line x1="252" x2="360" y1="108" y2="72" />
-<line x1="360" x2="432" y1="72" y2="144" />
-<line x1="72" x2="108" y1="108" y2="216" />
-<line x1="108" x2="252" y1="216" y2="252" />
-<line x1="252" x2="396" y1="252" y2="216" />
-<line x1="396" x2="432" y1="216" y2="144" />
-<line x1="108" x2="72" y1="216" y2="324" />
-<line x1="72" x2="216" y1="324" y2="360" />
-<line x1="216" x2="360" y1="360" y2="324" />
-<line x1="360" x2="396" y1="324" y2="216" />
-<line x1="216" x2="252" y1="360" y2="432" />
-<line x1="252" x2="360" y1="432" y2="324" />
-<line x1="144" x2="108" y1="72" y2="216" />
-<line x1="252" x2="252" y1="108" y2="252" />
-<line x1="360" x2="396" y1="72" y2="216" />
-</g>
-<g fill="#FDBA74" opacity="0.7">
-<circle cx="72" cy="108" r="3.5" />
-<circle cx="144" cy="72" r="3.5" />
-<circle cx="252" cy="108" r="3.5" />
-<circle cx="360" cy="72" r="3.5" />
-<circle cx="432" cy="144" r="3.5" />
-<circle cx="108" cy="216" r="3.5" />
-<circle cx="252" cy="252" r="3.5" />
-<circle cx="396" cy="216" r="3.5" />
-<circle cx="72" cy="324" r="3.5" />
-<circle cx="216" cy="360" r="3.5" />
-<circle cx="360" cy="324" r="3.5" />
-<circle cx="252" cy="432" r="3.5" />
-</g>
-<rect fill="url(#grid-fade)" height="100%" width="100%" />
-<rect fill="url(#edge-fade-r)" height="100%" width="100%" />
-</svg>
+<Image 
+ src="/images/hero-training.png" 
+ alt="Corporate Training Session" 
+ fill 
+ priority 
+ className="object-cover" 
+/>
+<div className="absolute inset-0 bg-skillary-navy/10"></div>
 <div className="skill-bubble absolute float-1" style={{'top': '6%', 'left': '8%', 'background': 'white', 'border': '1.5px solid rgb(240, 217, 200)', 'borderRadius': '999px', 'padding': '7px 14px', 'fontSize': '12px', 'fontWeight': '700', 'color': 'rgb(17, 24, 39)', 'whiteSpace': 'nowrap', 'boxShadow': 'rgba(0, 0, 0, 0.08) 0px 4px 16px', 'display': 'flex', 'alignItems': 'center', 'gap': '6px'}}>
 <span style={{'display': 'inline-block', 'width': '6px', 'height': '6px', 'borderRadius': '50%', 'background': 'linear-gradient(135deg, rgb(255, 138, 0), rgb(236, 72, 153))', 'flexShrink': '0'}}>
 </span>

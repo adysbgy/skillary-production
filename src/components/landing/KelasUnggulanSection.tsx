@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const KelasUnggulanSection = () => {
   return (
@@ -20,20 +21,10 @@ export const KelasUnggulanSection = () => {
 <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-3">
 {/* Card 1: Power BI Business Dashboard */}
 <div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
-<div className="bg-emerald-500 h-36 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
-<div className="absolute inset-0 overflow-hidden pointer-events-none">
-<div className="absolute top-2 right-2 w-16 h-16 rounded-full bg-white/10"></div>
-<div className="absolute bottom-2 left-2 w-10 h-10 rounded-full bg-white/10"></div>
-</div>
-<div className="bg-emerald-600 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
-<svg aria-hidden="true" className="lucide lucide-chart-column w-7 h-7 text-white" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 3v16a2 2 0 0 0 2 2h16" />
-<path d="M18 17V9" />
-<path d="M13 17V5" />
-<path d="M8 17v-3" />
-</svg>
-</div>
-<div className="absolute top-2.5 left-2.5 bg-white/90 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+<div className="h-36 relative overflow-hidden bg-gray-100">
+<Image src="/images/thumb-powerbi.png" alt="Power BI Dashboard" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+<div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
+<div className="absolute top-2.5 left-2.5 bg-white/95 text-gray-800 text-[10px] font-bold px-2 py-0.5 rounded-full z-10 shadow-sm">
           Program Organisasi
          </div>
 </div>
@@ -158,30 +149,10 @@ export const KelasUnggulanSection = () => {
 
 {/* Card 4: Business Presentation & Reporting */}
 <div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
-<div className="bg-sky-500 h-36 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
-<div className="absolute inset-0 overflow-hidden pointer-events-none">
-<div className="absolute top-2 right-2 w-16 h-16 rounded-full bg-white/10"></div>
-<div className="absolute bottom-2 left-2 w-10 h-10 rounded-full bg-white/10"></div>
-</div>
-<div className="bg-sky-600 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
-<svg aria-hidden="true" className="lucide lucide-cpu w-7 h-7 text-white" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 20v2" />
-<path d="M12 2v2" />
-<path d="M17 20v2" />
-<path d="M17 2v2" />
-<path d="M2 12h2" />
-<path d="M2 17h2" />
-<path d="M2 7h2" />
-<path d="M20 12h2" />
-<path d="M20 17h2" />
-<path d="M20 7h2" />
-<path d="M7 20v2" />
-<path d="M7 2v2" />
-<rect height="16" rx="2" width="16" x="4" y="4" />
-<rect height="8" rx="1" width="8" x="8" y="8" />
-</svg>
-</div>
-<div className="absolute top-2.5 left-2.5 bg-white/90 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+<div className="h-36 relative overflow-hidden bg-gray-100">
+<Image src="/images/thumb-presentation.png" alt="Business Presentation" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+<div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
+<div className="absolute top-2.5 left-2.5 bg-white/95 text-gray-800 text-[10px] font-bold px-2 py-0.5 rounded-full z-10 shadow-sm">
           Program Organisasi
          </div>
 </div>
@@ -214,30 +185,16 @@ export const KelasUnggulanSection = () => {
 
 {/* Card 5: AI Productivity for Teams */}
 <div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
-<div className="bg-rose-500 h-36 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
-<div className="absolute inset-0 overflow-hidden pointer-events-none">
-<div className="absolute top-2 right-2 w-16 h-16 rounded-full bg-white/10"></div>
-<div className="absolute bottom-2 left-2 w-10 h-10 rounded-full bg-white/10"></div>
-</div>
-<div className="bg-rose-600 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
-<svg aria-hidden="true" className="lucide lucide-brain w-7 h-7 text-white" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 18V5" />
-<path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
-<path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
-<path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" />
-<path d="M18 18a4 4 0 0 0 2-7.464" />
-<path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" />
-<path d="M6 18a4 4 0 0 1-2-7.464" />
-<path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" />
-</svg>
-</div>
-<div className="absolute top-2.5 left-2.5 bg-white/90 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
-          Program Organisasi
+<div className="h-36 relative overflow-hidden bg-gray-100">
+<Image src="/images/cert-mockup.png" alt="Sertifikat Resmi Skillary" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+<div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
+<div className="absolute top-2.5 left-2.5 bg-white/95 text-gray-800 text-[10px] font-bold px-2 py-0.5 rounded-full z-10 shadow-sm">
+          Sertifikasi Resmi
          </div>
 </div>
 <div className="p-4">
 <h3 className="font-bold text-sm text-skillary-navy leading-snug mb-2 line-clamp-2">
-          AI Productivity for Teams
+          Sertifikasi Berstandar Industri
          </h3>
 <div className="flex items-center gap-2 mb-2">
 <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
