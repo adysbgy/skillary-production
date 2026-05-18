@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 
 export const metadata: Metadata = {
@@ -65,6 +66,11 @@ export default function TrainingBriefPage() {
                   <p className="text-[#475569] leading-relaxed">
                     Brief yang jelas membantu kami memahami konteks spesifik dari kebutuhan organisasi Anda. Hal ini memastikan solusi pembelajaran, platform, maupun expert partner yang kami sarankan sangat relevan dengan target output pelatihan Anda.
                   </p>
+                </div>
+
+                {/* Add Mockup Image Here */}
+                <div className="mb-12 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform -rotate-1 hidden md:block">
+                  <Image src="/images/resource-template.png" alt="Training Brief Template Mockup" width={600} height={400} className="w-full h-[280px] object-cover" />
                 </div>
 
                 <div className="bg-[#FFFDF9] p-8 rounded-2xl shadow-sm relative" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>

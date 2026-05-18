@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 
@@ -12,36 +13,42 @@ const programAreas = [
   {
     slug: "infographics-visual-communication",
     title: "Infographics & Visual Communication",
+    image: "/images/thumb-infographic.png",
     topics: ["Data Visualization & Infographics", "Infographics Design with PowerPoint", "Advanced Visual Communication"],
     output: "Mengubah data, laporan, dan ide kompleks menjadi visual infografis yang jelas, menarik, dan profesional.",
   },
   {
     slug: "data-analytics-dashboard-storytelling",
     title: "Data Analytics, Dashboard & Storytelling",
+    image: "/images/thumb-data.png",
     topics: ["Business Analytics Using Power BI", "Interactive Dashboard with Excel", "Storytelling with Data"],
     output: "Membantu tim membaca data, membangun dashboard, menemukan insight, dan menyampaikan rekomendasi bisnis.",
   },
   {
     slug: "presentation-reporting",
     title: "Presentasi Bisnis & Reporting",
+    image: "/images/thumb-presentation.png",
     topics: ["Advanced PowerPoint", "Business Report with PowerPoint & Excel", "High Impact Presentation"],
     output: "Meningkatkan kualitas presentasi bisnis, laporan manajemen, dan komunikasi visual agar lebih berdampak.",
   },
   {
     slug: "process-improvement-quality",
     title: "SOP, Business Process & Quality",
+    image: "/images/resource-proposal.png",
     topics: ["Business Process Management", "Pelatihan ISO", "SOP for Business Process Improvement"],
     output: "Membantu organisasi merapikan proses, menyusun SOP, dan meningkatkan kualitas kerja.",
   },
   {
     slug: "ai-digital-mindset",
     title: "AI & Digital Mindset",
+    image: "/images/thumb-powerbi.png",
     topics: ["Data Analysis & AI", "AI for Productivity", "Digital Transformation"],
     output: "Mengenalkan pemanfaatan AI untuk meningkatkan produktivitas, pembelajaran, dan pekerjaan sehari-hari.",
   },
   {
     slug: "leadership-problem-solving",
     title: "Leadership & Creative Problem Solving",
+    image: "/images/hero-training.png",
     topics: ["Creative Problem Solving", "Motivational Leadership", "Decision Making"],
     output: "Membantu peserta memecahkan masalah, mengambil keputusan, dan membangun sikap kepemimpinan.",
   },
@@ -76,13 +83,17 @@ export default function ProgramCatalogPage() {
         <Container>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programAreas.map((area, idx) => (
-              <div key={idx} className="bg-[#FFFDF9] rounded-2xl p-6 flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-200" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: 'rgb(255, 138, 0)' }} />
-                  <h2 className="font-bold text-lg text-[#181818]">{area.title}</h2>
+              <div key={idx} className="bg-[#FFFDF9] rounded-2xl flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-200 overflow-hidden" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
+                <div className="h-44 relative w-full border-b" style={{ borderColor: 'rgb(240, 217, 200)' }}>
+                  <Image src={area.image} alt={area.title} fill className="object-cover" />
                 </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: 'rgb(255, 138, 0)' }} />
+                    <h2 className="font-bold text-lg text-[#181818]">{area.title}</h2>
+                  </div>
 
-                <div className="mb-4">
+                  <div className="mb-4">
                   <p className="text-xs font-bold uppercase tracking-widest text-black/45 mb-2">Contoh Topik</p>
                   <div className="flex flex-wrap gap-1.5">
                     {area.topics.map((topic, tIdx) => (
@@ -101,6 +112,7 @@ export default function ProgramCatalogPage() {
                 <Link href={`/contact?type=in-house&program=${area.slug}&source=program-catalog`} className="inline-flex items-center justify-center text-white font-bold text-sm px-5 py-2.5 rounded-full shadow-md hover:opacity-90 hover:-translate-y-0.5 transition-all" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>
                   Diskusikan Program Ini
                 </Link>
+                </div>
               </div>
             ))}
           </div>
