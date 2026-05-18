@@ -9,18 +9,18 @@ export const HeroSection = () => {
 <div className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 border" style={{'background': 'rgb(255, 244, 232)', 'borderColor': 'rgb(255, 214, 165)', 'color': 'rgb(255, 138, 0)'}}>
 <span className="w-1.5 h-1.5 rounded-full bg-skillary-orange inline-block">
 </span>
-        Berangkat dari pengalaman pelatihan sejak 1998
+        🚀 Platform Pelatihan Digital #1 di Indonesia
        </div>
 <h1 className="text-[2.6rem] md:text-[3.2rem] font-extrabold leading-[1.15] text-skillary-navy mb-5">
-        Kelola{' '}
+        Bangun{' '}
         <span className="gradient-text">
-         Pelatihan Organisasi
+         Skill Profesional
         </span>
 <br className="hidden md:block" />
-        dari Program hingga Laporan
+        yang Dibutuhkan Industri
        </h1>
 <p className="text-base text-skillary-muted leading-relaxed mb-6 max-w-md">
-        Skillary membantu HR, L&D, dan tim organisasi mengelola peserta, materi, assessment, sertifikat, hingga laporan progress dalam satu alur digital.
+        Skillary menyediakan kursus praktis, assessment terstruktur, dan sertifikat digital untuk membantu Anda dan organisasi Anda berkembang lebih cepat.
        </p>
 <Link href="/program-catalog" className="flex items-center gap-2 max-w-md bg-white rounded-full px-4 py-2.5 mb-4" style={{'border': '2px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(255, 138, 0, 0.08) 0px 2px 12px'}}>
 <svg aria-hidden="true" className="lucide lucide-search w-4 h-4 text-skillary-muted flex-shrink-0" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -76,11 +76,11 @@ export const HeroSection = () => {
          </div>
 </div>
 <p className="text-sm text-skillary-muted">
-         Dikembangkan dari{' '}
+         Dipercaya oleh{' '}
          <span className="font-semibold text-skillary-navy">
-          pengalaman pelatihan Allman
+          500+ profesional
          </span>
-         {' '}sejak 1998
+         {' '}di berbagai industri
         </p>
 </div>
 </div>

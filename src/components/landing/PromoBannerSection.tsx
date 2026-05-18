@@ -19,21 +19,20 @@ export const PromoBannerSection = () => {
          Solusi Training Organisasi
         </div>
 <h2 className="text-5xl md:text-6xl font-black text-white mb-2 leading-none tracking-tight">
-         Training Internal
+         Program Pelatihan
          <br />
-         Lebih Terstruktur
+         Siap Pakai untuk Tim Anda
         </h2>
 <p className="text-orange-100 text-lg font-semibold mb-1">
-         Kelola peserta, program, assessment, sertifikat,
+         Dari onboarding hingga sertifikasi —
         </p>
 <p className="text-orange-200 text-sm mb-6">
-         dan{' '}
          <span className="text-white font-bold">
-          laporan dalam satu alur digital.
+          satu platform untuk semua kebutuhan pengembangan SDM.
          </span>
 </p>
 <Link href="/proposal" className="inline-block font-black text-sm px-7 py-3 rounded-full shadow-lg uppercase tracking-wide transition-all hover:scale-105" style={{'background': 'white', 'color': 'rgb(255, 90, 95)', 'boxShadow': 'rgba(0, 0, 0, 0.15) 0px 6px 20px'}}>
-         MINTA PROPOSAL
+         MULAI SEKARANG
         </Link>
 </div>
 <div className="hidden md:block w-px bg-white opacity-20 self-stretch my-8">

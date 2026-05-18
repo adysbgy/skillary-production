@@ -13,8 +13,8 @@ import { KolaborasiSection } from "@/components/landing/KolaborasiSection";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Skillary — Platform Pelatihan Terukur untuk Organisasi",
-  description: "Skillary membantu HR, L&D, dan tim organisasi mengelola pelatihan internal dari peserta, materi, assessment, sertifikat digital, hingga laporan progress dalam satu alur digital.",
+  title: "Skillary — Upgrade Skill, Raih Karir | datacamp.id",
+  description: "Platform pelatihan digital dengan kursus praktis, assessment terstruktur, dan sertifikat digital. Untuk profesional dan organisasi yang ingin berkembang.",
 };
 
 export default function HomePage() {

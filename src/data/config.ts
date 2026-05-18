@@ -9,7 +9,7 @@
 export const FORMSPREE_ID = "YOUR_FORM_ID";
 
 /** WhatsApp number in international format (no +, no dashes) */
-export const WHATSAPP_NUMBER = "62XXXXXXXXXXX";
+export const WHATSAPP_NUMBER = "620811180303";
 
 /** Build a WhatsApp link with optional pre-filled message */
 export function whatsappLink(message?: string) {
@@ -18,11 +18,11 @@ export function whatsappLink(message?: string) {
 }
 
 /** Contact emails */
-export const EMAIL_GENERAL = "hello@skillary.id";
-export const EMAIL_TEAMS = "teams@skillary.id";
+export const EMAIL_GENERAL = "hello@datacamp.id";
+export const EMAIL_TEAMS = "teams@datacamp.id";
 
 /** Social links */
-export const INSTAGRAM_URL = "https://instagram.com/skillary.id";
+export const INSTAGRAM_URL = "https://instagram.com/datacamp.id";
 
 /** Site URL (used for OG images, sitemap, etc.) */
-export const SITE_URL = "https://skillary.id";
+export const SITE_URL = "https://datacamp.id";

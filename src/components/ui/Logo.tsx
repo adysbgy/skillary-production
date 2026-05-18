@@ -8,7 +8,7 @@ export function Logo() {
             </div>
             <div>
                 <div className="text-lg font-semibold tracking-tight">Skillary</div>
-                <div className="text-xs text-black/45">Platform Pelatihan Terukur</div>
+                <div className="text-xs text-black/45">Upgrade Skill, Raih Karir</div>
             </div>
         </div>
     );

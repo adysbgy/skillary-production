@@ -23,7 +23,7 @@ export const Footer = () => {
 </span>
 </div>
 <p className="text-gray-400 text-xs leading-relaxed mb-5">
-        Platform pelatihan terukur untuk organisasi, berangkat dari pengalaman pelatihan Allman sejak 1998.
+        Platform pelatihan digital untuk profesional dan organisasi yang ingin terus berkembang.
        </p>
 <div className="space-y-2.5">
 <div className="flex items-start gap-2">
@@ -41,8 +41,8 @@ export const Footer = () => {
 <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
 <rect height="16" rx="2" width="20" x="2" y="4" />
 </svg>
-<a className="text-xs text-gray-400 hover:text-white transition-colors" href="mailto:hello@skillary.id">
-          hello@skillary.id
+<a className="text-xs text-gray-400 hover:text-white transition-colors" href="mailto:hello@datacamp.id">
+          hello@datacamp.id
          </a>
 </div>
 </div>

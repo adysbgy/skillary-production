@@ -18,12 +18,10 @@ export const KolaborasiSection = () => {
 </svg>
 </div>
 <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
-       Siap Membuat Pelatihan Organisasi
-       <br />
-       Lebih Terukur?
+       Siap Meningkatkan Kompetensi Tim Anda?
       </h2>
 <p className="text-orange-100 text-sm md:text-base leading-relaxed mb-8">
-       Ceritakan kebutuhan training Anda. Skillary dapat membantu menyusun program, mengelola peserta, assessment, sertifikat, dan laporan yang lebih mudah dipantau.
+       Hubungi kami untuk mendiskusikan program pelatihan yang sesuai dengan kebutuhan organisasi Anda. Konsultasi gratis.
       </p>
 <div className="flex flex-col sm:flex-row gap-3 justify-center">
 <Link href="/proposal" className="inline-flex items-center justify-center gap-2 font-bold text-sm px-7 py-3.5 rounded-full transition-all hover:scale-105" style={{'background': 'white', 'color': 'rgb(255, 90, 95)', 'boxShadow': 'rgba(0, 0, 0, 0.15) 0px 6px 20px'}}>
