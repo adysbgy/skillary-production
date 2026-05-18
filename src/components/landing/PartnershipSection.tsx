@@ -5,13 +5,13 @@ export const PartnershipSection = () => {
     <section className="py-16 px-5 bg-white">
 <div className="max-w-4xl mx-auto text-center">
 <h2 className="text-2xl md:text-3xl font-extrabold text-skillary-navy mb-4">
-       Dari Pengalaman Pelatihan Allman ke{' '}
+       Pengalaman Pelatihan di{' '}
        <span className="gradient-text">
-        Platform Skillary
+        Berbagai Industri
        </span>
 </h2>
 <p className="text-skillary-muted text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
-       Skillary dikembangkan dari pengalaman pelatihan Allman sejak 1998. Sebagian arsip pengalaman tersebut telah terdokumentasi secara digital dan menjadi referensi pengembangan program, assessment, sertifikat, dan laporan pelatihan di Skillary.
+       Skillary dikembangkan dari lebih dari dua dekade pengalaman pelatihan profesional. Sebagian arsip pengalaman tersebut telah terdokumentasi secara digital dan menjadi referensi pengembangan program, assessment, sertifikat, dan laporan pelatihan.
       </p>
 <p className="text-xs font-semibold text-skillary-muted uppercase tracking-widest mb-5">
        Arsip pengalaman mencakup berbagai sektor
@@ -71,7 +71,7 @@ export const PartnershipSection = () => {
 </div>
 </div>
 <p className="text-[10px] text-skillary-muted mt-4 italic">
-       Dokumentasi digital adalah arsip terkurasi, bukan total keseluruhan pengalaman Allman sejak 1998.
+       Dokumentasi digital adalah arsip terkurasi dari pengalaman pelatihan profesional sejak 1998.
       </p>
 </div>
 </section>
