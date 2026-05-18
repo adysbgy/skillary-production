@@ -57,12 +57,4 @@ export async function POST(req: NextRequest) {
     }
 }
 
-/**
- * Next.js App Router config for this route.
- * Raise the body size limit for file uploads.
- */
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
+
