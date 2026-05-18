@@ -7,10 +7,10 @@
     "build": "prisma generate && prisma db push && npm run seed && next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "npx tsx prisma/seed.ts",
-    "seed:corporate-demo": "npx tsx scripts/seed_corporate_training_demo.ts",
-    "validate:proof-links": "npx tsx scripts/validate_legacy_proof_links.ts",
-    "generate:proof-tracker": "npx tsx scripts/generate_manual_proof_tracker.ts"
+    "seed": "npx -y tsx prisma/seed.ts",
+    "seed:corporate-demo": "npx -y tsx scripts/seed_corporate_training_demo.ts",
+    "validate:proof-links": "npx -y tsx scripts/validate_legacy_proof_links.ts",
+    "generate:proof-tracker": "npx -y tsx scripts/generate_manual_proof_tracker.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
