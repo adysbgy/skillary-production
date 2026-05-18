@@ -57,19 +57,10 @@ export const KelasUnggulanSection = () => {
 
 {/* Card 2: Data-Driven Decision Making */}
 <div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
-<div className="bg-violet-500 h-36 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
-<div className="absolute inset-0 overflow-hidden pointer-events-none">
-<div className="absolute top-2 right-2 w-16 h-16 rounded-full bg-white/10"></div>
-<div className="absolute bottom-2 left-2 w-10 h-10 rounded-full bg-white/10"></div>
-</div>
-<div className="bg-violet-600 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
-<svg aria-hidden="true" className="lucide lucide-layers w-7 h-7 text-white" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
-<path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
-<path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
-</svg>
-</div>
-<div className="absolute top-2.5 left-2.5 bg-white/90 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+<div className="h-36 relative overflow-hidden bg-gray-100">
+<Image src="/images/thumb-data.png" alt="Data-Driven Decision Making" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+<div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
+<div className="absolute top-2.5 left-2.5 bg-white/95 text-gray-800 text-[10px] font-bold px-2 py-0.5 rounded-full z-10 shadow-sm">
           Program Organisasi
          </div>
 </div>
@@ -102,21 +93,10 @@ export const KelasUnggulanSection = () => {
 
 {/* Card 3: Infographics & Visual Communication */}
 <div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
-<div className="bg-orange-500 h-36 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
-<div className="absolute inset-0 overflow-hidden pointer-events-none">
-<div className="absolute top-2 right-2 w-16 h-16 rounded-full bg-white/10"></div>
-<div className="absolute bottom-2 left-2 w-10 h-10 rounded-full bg-white/10"></div>
-</div>
-<div className="bg-orange-600 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
-<svg aria-hidden="true" className="lucide lucide-palette w-7 h-7 text-white" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" />
-<circle cx="13.5" cy="6.5" fill="currentColor" r=".5" />
-<circle cx="17.5" cy="10.5" fill="currentColor" r=".5" />
-<circle cx="6.5" cy="12.5" fill="currentColor" r=".5" />
-<circle cx="8.5" cy="7.5" fill="currentColor" r=".5" />
-</svg>
-</div>
-<div className="absolute top-2.5 left-2.5 bg-white/90 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+<div className="h-36 relative overflow-hidden bg-gray-100">
+<Image src="/images/thumb-infographic.png" alt="Infographics & Visual Communication" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+<div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
+<div className="absolute top-2.5 left-2.5 bg-white/95 text-gray-800 text-[10px] font-bold px-2 py-0.5 rounded-full z-10 shadow-sm">
           Program Organisasi
          </div>
 </div>
