@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  /* ===========================
+     SKILLARY COLOR TOKENS
+     =========================== */
+  --color-skillary-orange: hsl(33, 100%, 50%);
+  --color-skillary-coral: hsl(358, 100%, 67%);
+  --color-skillary-pink: hsl(322, 81%, 60%);
+  --color-skillary-peach: hsl(36, 100%, 96%);
+  --color-skillary-cream: hsl(36, 100%, 98%);
+  --color-skillary-navy: hsl(222, 47%, 9%);
+  --color-skillary-surface: hsl(36, 40%, 98%);
+  --color-skillary-border: hsl(26, 43%, 90%);
+  --color-skillary-muted: hsl(220, 9%, 46%);
+  --color-skillary-blue: hsl(221, 83%, 53%);
+  --color-skillary-cyan: hsl(199, 89%, 60%);
+  --color-skillary-light-blue: hsl(210, 100%, 95%);
+
+  /* ===========================
+     SKILLARY SHADOW TOKENS
+     =========================== */
+  --shadow-card-hover: 0 10px 28px -5px rgba(255,138,0,.18), 0 4px 12px -3px rgba(255,90,95,.1);
+  --shadow-banner: 0 20px 60px -10px rgba(255,90,95,.25);
+  --shadow-bubble: 0 4px 16px rgba(0,0,0,.08);
+  --shadow-bubble-hover: 0 8px 28px rgba(255,138,0,.2);
+}
+
+/* ===========================
+   SKILLARY MOTION SYSTEM
+   CSS-only, no JS required.
+   =========================== */
+
+/* --- Base Keyframes --- */
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes progress-fill {
+  0% { width: 0%; }
+}
+
+/* --- Float Keyframes (Landing Page Bubbles) --- */
+
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@keyframes float-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
+}
+
+@keyframes float-side {
+  0%, 100% { transform: translate(0) translateY(0); }
+  33% { transform: translate(4px) translateY(-5px); }
+  66% { transform: translate(-3px) translateY(3px); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+@keyframes shimmer-move {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* --- Motion Utility Classes --- */
+
+.motion-fade-up {
+  opacity: 0;
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.motion-scale-in {
+  opacity: 0;
+  animation: scale-fade-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.motion-fade-in {
+  opacity: 0;
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.motion-progress-fill {
+  animation: progress-fill 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* --- Stagger Delays --- */
+
+.motion-delay-100 { animation-delay: 100ms; }
+.motion-delay-200 { animation-delay: 200ms; }
+.motion-delay-300 { animation-delay: 300ms; }
+.motion-delay-400 { animation-delay: 400ms; }
+.motion-delay-500 { animation-delay: 500ms; }
+.motion-delay-600 { animation-delay: 600ms; }
+.motion-delay-700 { animation-delay: 700ms; }
+.motion-delay-800 { animation-delay: 800ms; }
+.motion-delay-900 { animation-delay: 900ms; }
+.motion-delay-1000 { animation-delay: 1000ms; }
+
+/* --- Card Hover Lift --- */
+
+.motion-hover-lift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(23, 37, 84, 0.08);
+}
+
+/* --- Button Micro-lift --- */
+
+.motion-btn {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.motion-btn:hover {
+  transform: translateY(-1px);
+}
+
+.motion-btn:active {
+  transform: translateY(0);
+}
+
+/* ===========================
+   SKILLARY LANDING UTILITIES
+   =========================== */
+
+/* --- Gradient Text --- */
+
+.gradient-text {
+  background: linear-gradient(120deg, #ff8a00, #ff5a5f 55%, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Float Animation Classes --- */
+
+.float-1 { animation: float-up 3s ease-in-out infinite; }
+.float-2 { animation: float-down 3.5s ease-in-out infinite 0.4s; }
+.float-3 { animation: float-up 4s ease-in-out infinite 0.9s; }
+.float-4 { animation: float-side 3.8s ease-in-out infinite 0.2s; }
+.float-5 { animation: float-down 3.2s ease-in-out infinite 1.1s; }
+.float-6 { animation: float-up 4.2s ease-in-out infinite 0.7s; }
+.float-7 { animation: float-side 3.6s ease-in-out infinite 1.4s; }
+.float-8 { animation: float-down 3.9s ease-in-out infinite 0.5s; }
+
+/* --- Card Hover Effect --- */
+
+.card-hover {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  cursor: pointer;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* --- Skill Bubble --- */
+
+.skill-bubble {
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.skill-bubble:hover {
+  transform: scale(1.06) translateY(-2px);
+  box-shadow: var(--shadow-bubble-hover) !important;
+}
+
+/* --- Shadow Utilities --- */
+
+.shadow-banner {
+  box-shadow: var(--shadow-banner);
+}
+
+/* --- Reduced Motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-fade-up,
+  .motion-scale-in,
+  .motion-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .motion-progress-fill {
+    animation: none !important;
+  }
+
+  .motion-hover-lift:hover {
+    transform: none !important;
+  }
+
+  .motion-btn:hover,
+  .motion-btn:active {
+    transform: none !important;
+  }
+
+  .float-1, .float-2, .float-3, .float-4,
+  .float-5, .float-6, .float-7, .float-8 {
+    animation: none !important;
+  }
+
+  .skill-bubble:hover {
+    transform: none !important;
+  }
+
+  .card-hover:hover {
+    transform: none !important;
+  }
+}
+
+/* --- Hide Scrollbar --- */
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Global Base --- */
+
+body {
+  background: #FFFDF9;
+  color: #181818;
+  font-family: Arial, Helvetica, sans-serif;
+}

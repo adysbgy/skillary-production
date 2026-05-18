@@ -1,0 +1,900 @@
+{
+  "generatedAt": "2026-05-01T01:32:31.389Z",
+  "summary": {
+    "totalUniqueUrls": 52,
+    "ok": 0,
+    "redirect": 0,
+    "privateOrLoginRequired": 52,
+    "notFound": 0,
+    "timeout": 0,
+    "networkError": 0,
+    "invalidUrl": 0,
+    "unknown": 0
+  },
+  "results": [
+    {
+      "url": "https://www.instagram.com/p/C7URYyEhtIY/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC7URYyEhtIY%2F&is_from_rle",
+      "relatedCardIds": [
+        1
+      ],
+      "relatedPrograms": [
+        "Kecerdasan Buatan / AI"
+      ],
+      "relatedClients": [
+        "Erlangga"
+      ],
+      "checkedAt": "2026-05-01T01:31:40.399Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C72wtVxB6D2/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC72wtVxB6D2%2F&is_from_rle",
+      "relatedCardIds": [
+        2
+      ],
+      "relatedPrograms": [
+        "Data Driven Decision Making"
+      ],
+      "relatedClients": [
+        "PPM"
+      ],
+      "checkedAt": "2026-05-01T01:31:41.335Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C75YRnjBLXO/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC75YRnjBLXO%2F&is_from_rle",
+      "relatedCardIds": [
+        3
+      ],
+      "relatedPrograms": [
+        "Storytelling with Data"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:31:42.414Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C75X79qh2EY/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC75X79qh2EY%2F&is_from_rle",
+      "relatedCardIds": [
+        4
+      ],
+      "relatedPrograms": [
+        "Storytelling with Data"
+      ],
+      "relatedClients": [
+        "Prof. Rhenald Kasali"
+      ],
+      "checkedAt": "2026-05-01T01:31:43.390Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C75YwsChrzi/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC75YwsChrzi%2F&is_from_rle",
+      "relatedCardIds": [
+        5
+      ],
+      "relatedPrograms": [
+        "Business Analytics Using Power BI"
+      ],
+      "relatedClients": [
+        "Gunung Sewu Kencana"
+      ],
+      "checkedAt": "2026-05-01T01:31:44.494Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9TiMjBnZwK/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9TiMjBnZwK%2F&is_from_rle",
+      "relatedCardIds": [
+        6
+      ],
+      "relatedPrograms": [
+        "Advanced Visual Communication with Infographics"
+      ],
+      "relatedClients": [
+        "PT Gapura Angkasa"
+      ],
+      "checkedAt": "2026-05-01T01:31:45.466Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9TiPKmnp4I/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9TiPKmnp4I%2F&is_from_rle",
+      "relatedCardIds": [
+        6
+      ],
+      "relatedPrograms": [
+        "Advanced Visual Communication with Infographics"
+      ],
+      "relatedClients": [
+        "PT Gapura Angkasa"
+      ],
+      "checkedAt": "2026-05-01T01:31:46.435Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9TiRlbH2d7/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9TiRlbH2d7%2F&is_from_rle",
+      "relatedCardIds": [
+        6
+      ],
+      "relatedPrograms": [
+        "Advanced Visual Communication with Infographics"
+      ],
+      "relatedClients": [
+        "PT Gapura Angkasa"
+      ],
+      "checkedAt": "2026-05-01T01:31:47.397Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9V0vg6nC6c/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9V0vg6nC6c%2F&is_from_rle",
+      "relatedCardIds": [
+        7,
+        10,
+        36
+      ],
+      "relatedPrograms": [
+        "Integrated Presentation Management"
+      ],
+      "relatedClients": [
+        "Bank Indonesia Institute",
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:31:48.301Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9YVe8kHREn/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9YVe8kHREn%2F&is_from_rle",
+      "relatedCardIds": [
+        7,
+        10,
+        36
+      ],
+      "relatedPrograms": [
+        "Integrated Presentation Management"
+      ],
+      "relatedClients": [
+        "Bank Indonesia Institute",
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:31:49.222Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9YVgs-HMMW/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9YVgs-HMMW%2F&is_from_rle",
+      "relatedCardIds": [
+        7,
+        10,
+        36
+      ],
+      "relatedPrograms": [
+        "Integrated Presentation Management"
+      ],
+      "relatedClients": [
+        "Bank Indonesia Institute",
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:31:50.148Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9gPvRUnUgt/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9gPvRUnUgt%2F&is_from_rle",
+      "relatedCardIds": [
+        8
+      ],
+      "relatedPrograms": [
+        "High Impact Presentation"
+      ],
+      "relatedClients": [
+        "Bank Indonesia Institute"
+      ],
+      "checkedAt": "2026-05-01T01:31:51.079Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9lg6H_H4JL/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9lg6H_H4JL%2F&is_from_rle",
+      "relatedCardIds": [
+        8
+      ],
+      "relatedPrograms": [
+        "High Impact Presentation"
+      ],
+      "relatedClients": [
+        "Bank Indonesia Institute"
+      ],
+      "checkedAt": "2026-05-01T01:31:52.007Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B9noynwn235/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB9noynwn235%2F&is_from_rle",
+      "relatedCardIds": [
+        8
+      ],
+      "relatedPrograms": [
+        "High Impact Presentation"
+      ],
+      "relatedClients": [
+        "Bank Indonesia Institute"
+      ],
+      "checkedAt": "2026-05-01T01:31:52.953Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C7py6ovhh5k/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC7py6ovhh5k%2F&is_from_rle",
+      "relatedCardIds": [
+        9
+      ],
+      "relatedPrograms": [
+        "Presentation Skills"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:31:53.910Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B7P9IttH3G3/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB7P9IttH3G3%2F&is_from_rle",
+      "relatedCardIds": [
+        11
+      ],
+      "relatedPrograms": [
+        "Advanced Visual Communication with Infographics"
+      ],
+      "relatedClients": [
+        "BNI"
+      ],
+      "checkedAt": "2026-05-01T01:31:54.935Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B7P9FHQns77/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB7P9FHQns77%2F&is_from_rle",
+      "relatedCardIds": [
+        11
+      ],
+      "relatedPrograms": [
+        "Advanced Visual Communication with Infographics"
+      ],
+      "relatedClients": [
+        "BNI"
+      ],
+      "checkedAt": "2026-05-01T01:31:55.866Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B7P8Fd1nrQx/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB7P8Fd1nrQx%2F&is_from_rle",
+      "relatedCardIds": [
+        11
+      ],
+      "relatedPrograms": [
+        "Advanced Visual Communication with Infographics"
+      ],
+      "relatedClients": [
+        "BNI"
+      ],
+      "checkedAt": "2026-05-01T01:31:56.883Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B6SYctwHBG3/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB6SYctwHBG3%2F&is_from_rle",
+      "relatedCardIds": [
+        12
+      ],
+      "relatedPrograms": [
+        "Data Analysis and Training For Trainers"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:31:57.904Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B6SaLpdHie0/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB6SaLpdHie0%2F&is_from_rle",
+      "relatedCardIds": [
+        12
+      ],
+      "relatedPrograms": [
+        "Data Analysis and Training For Trainers"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:31:58.928Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B6SaM8EH-xC/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB6SaM8EH-xC%2F&is_from_rle",
+      "relatedCardIds": [
+        12
+      ],
+      "relatedPrograms": [
+        "Data Analysis and Training For Trainers"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:31:59.954Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B5uDvs3nSGI/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB5uDvs3nSGI%2F&is_from_rle",
+      "relatedCardIds": [
+        13
+      ],
+      "relatedPrograms": [
+        "Interactive Dashboard with Microsoft Excel"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:32:00.977Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B5uDsikn1n0/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB5uDsikn1n0%2F&is_from_rle",
+      "relatedCardIds": [
+        13
+      ],
+      "relatedPrograms": [
+        "Interactive Dashboard with Microsoft Excel"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:32:02.069Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B5KLwbaHZrA/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB5KLwbaHZrA%2F&is_from_rle",
+      "relatedCardIds": [
+        14
+      ],
+      "relatedPrograms": [
+        "Advanced Data Visualization & Infographics"
+      ],
+      "relatedClients": [
+        "BNI"
+      ],
+      "checkedAt": "2026-05-01T01:32:03.026Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B4_SQCZnBA8/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB4_SQCZnBA8%2F&is_from_rle",
+      "relatedCardIds": [
+        14
+      ],
+      "relatedPrograms": [
+        "Advanced Data Visualization & Infographics"
+      ],
+      "relatedClients": [
+        "BNI"
+      ],
+      "checkedAt": "2026-05-01T01:32:04.006Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B4_SMmwngx1/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB4_SMmwngx1%2F&is_from_rle",
+      "relatedCardIds": [
+        14
+      ],
+      "relatedPrograms": [
+        "Advanced Data Visualization & Infographics"
+      ],
+      "relatedClients": [
+        "BNI"
+      ],
+      "checkedAt": "2026-05-01T01:32:05.017Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B3gHvwdn5IJ/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB3gHvwdn5IJ%2F&is_from_rle",
+      "relatedCardIds": [
+        15
+      ],
+      "relatedPrograms": [
+        "Infographics Design"
+      ],
+      "relatedClients": [
+        "KPPU"
+      ],
+      "checkedAt": "2026-05-01T01:32:05.994Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B3gHyzmnsRW/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB3gHyzmnsRW%2F&is_from_rle",
+      "relatedCardIds": [
+        15
+      ],
+      "relatedPrograms": [
+        "Infographics Design"
+      ],
+      "relatedClients": [
+        "KPPU"
+      ],
+      "checkedAt": "2026-05-01T01:32:07.019Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B3gHwyEHDI5/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB3gHwyEHDI5%2F&is_from_rle",
+      "relatedCardIds": [
+        15
+      ],
+      "relatedPrograms": [
+        "Infographics Design"
+      ],
+      "relatedClients": [
+        "KPPU"
+      ],
+      "checkedAt": "2026-05-01T01:32:07.990Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B4L9DPoHrjF/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB4L9DPoHrjF%2F&is_from_rle",
+      "relatedCardIds": [
+        17,
+        21,
+        28,
+        38
+      ],
+      "relatedPrograms": [
+        "Infographics Design with PowerPoint",
+        "Infographics",
+        "Business Report with PowerPoint & Excel",
+        "Infographics for Business"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:32:09.066Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B4MaheQHI30/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB4MaheQHI30%2F&is_from_rle",
+      "relatedCardIds": [
+        17,
+        21
+      ],
+      "relatedPrograms": [
+        "Infographics Design with PowerPoint",
+        "Infographics"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:32:09.997Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B4L8_MTHElz/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB4L8_MTHElz%2F&is_from_rle",
+      "relatedCardIds": [
+        17,
+        21
+      ],
+      "relatedPrograms": [
+        "Infographics Design with PowerPoint",
+        "Infographics"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:32:10.913Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B2oY8b2H33M/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB2oY8b2H33M%2F&is_from_rle",
+      "relatedCardIds": [
+        18
+      ],
+      "relatedPrograms": [
+        "Infographics"
+      ],
+      "relatedClients": [
+        "Otoritas Jasa Keuangan (OJK)"
+      ],
+      "checkedAt": "2026-05-01T01:32:12.036Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B2oYzq7nAVg/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB2oYzq7nAVg%2F&is_from_rle",
+      "relatedCardIds": [
+        18
+      ],
+      "relatedPrograms": [
+        "Infographics"
+      ],
+      "relatedClients": [
+        "Otoritas Jasa Keuangan (OJK)"
+      ],
+      "checkedAt": "2026-05-01T01:32:13.075Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B2oYxRKnhLr/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB2oYxRKnhLr%2F&is_from_rle",
+      "relatedCardIds": [
+        18
+      ],
+      "relatedPrograms": [
+        "Infographics"
+      ],
+      "relatedClients": [
+        "Otoritas Jasa Keuangan (OJK)"
+      ],
+      "checkedAt": "2026-05-01T01:32:14.290Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B1pkWujHO88/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB1pkWujHO88%2F&is_from_rle",
+      "relatedCardIds": [
+        19,
+        23
+      ],
+      "relatedPrograms": [
+        "Infographics",
+        "Motivational Leadership"
+      ],
+      "relatedClients": [
+        "Indofood / Indofood CBP"
+      ],
+      "checkedAt": "2026-05-01T01:32:15.300Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B1pkUHkn-0q/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB1pkUHkn-0q%2F&is_from_rle",
+      "relatedCardIds": [
+        19,
+        23
+      ],
+      "relatedPrograms": [
+        "Infographics",
+        "Motivational Leadership"
+      ],
+      "relatedClients": [
+        "Indofood / Indofood CBP"
+      ],
+      "checkedAt": "2026-05-01T01:32:16.336Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B1pkRvzHSws/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB1pkRvzHSws%2F&is_from_rle",
+      "relatedCardIds": [
+        19,
+        23
+      ],
+      "relatedPrograms": [
+        "Infographics",
+        "Motivational Leadership"
+      ],
+      "relatedClients": [
+        "Indofood / Indofood CBP"
+      ],
+      "checkedAt": "2026-05-01T01:32:17.371Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B2dYZhhHJJf/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB2dYZhhHJJf%2F&is_from_rle",
+      "relatedCardIds": [
+        20
+      ],
+      "relatedPrograms": [
+        "Creative Problem Solving"
+      ],
+      "relatedClients": [
+        "Indofood / Indofood CBP"
+      ],
+      "checkedAt": "2026-05-01T01:32:18.291Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B2dYdDznUyx/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB2dYdDznUyx%2F&is_from_rle",
+      "relatedCardIds": [
+        20
+      ],
+      "relatedPrograms": [
+        "Creative Problem Solving"
+      ],
+      "relatedClients": [
+        "Indofood / Indofood CBP"
+      ],
+      "checkedAt": "2026-05-01T01:32:19.220Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/B2gDkLznyp4/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FB2gDkLznyp4%2F&is_from_rle",
+      "relatedCardIds": [
+        20
+      ],
+      "relatedPrograms": [
+        "Creative Problem Solving"
+      ],
+      "relatedClients": [
+        "Indofood / Indofood CBP"
+      ],
+      "checkedAt": "2026-05-01T01:32:20.175Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/BwI_0NQB-Nv/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FBwI_0NQB-Nv%2F&is_from_rle",
+      "relatedCardIds": [
+        25
+      ],
+      "relatedPrograms": [
+        "Teknik Dasar Infografis"
+      ],
+      "relatedClients": [
+        "Kementerian PUPR"
+      ],
+      "checkedAt": "2026-05-01T01:32:21.175Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/BwI_ochBUp2/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FBwI_ochBUp2%2F&is_from_rle",
+      "relatedCardIds": [
+        25
+      ],
+      "relatedPrograms": [
+        "Teknik Dasar Infografis"
+      ],
+      "relatedClients": [
+        "Kementerian PUPR"
+      ],
+      "checkedAt": "2026-05-01T01:32:22.071Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/BwlZsYpBRrL/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FBwlZsYpBRrL%2F&is_from_rle",
+      "relatedCardIds": [
+        26
+      ],
+      "relatedPrograms": [
+        "Infographics for Business"
+      ],
+      "relatedClients": [
+        "Kemendes RI"
+      ],
+      "checkedAt": "2026-05-01T01:32:23.198Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/Bu7z_adBibD/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FBu7z_adBibD%2F&is_from_rle",
+      "relatedCardIds": [
+        27
+      ],
+      "relatedPrograms": [
+        "Infographics Design with PowerPoint"
+      ],
+      "relatedClients": [
+        "Universitas Atmajaya"
+      ],
+      "checkedAt": "2026-05-01T01:32:24.223Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C7iMLKnh4nz/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC7iMLKnh4nz%2F&is_from_rle",
+      "relatedCardIds": [
+        29,
+        39
+      ],
+      "relatedPrograms": [
+        "Interactive Dashboard with Microsoft Excel"
+      ],
+      "relatedClients": [
+        "Bank DKI"
+      ],
+      "checkedAt": "2026-05-01T01:32:25.220Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C70OKQzhGoH/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC70OKQzhGoH%2F&is_from_rle",
+      "relatedCardIds": [
+        30
+      ],
+      "relatedPrograms": [
+        "Storytelling with Data"
+      ],
+      "relatedClients": [
+        "BRI Corporate University"
+      ],
+      "checkedAt": "2026-05-01T01:32:26.172Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C70NjhUBkwk/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC70NjhUBkwk%2F&is_from_rle",
+      "relatedCardIds": [
+        31
+      ],
+      "relatedPrograms": [
+        "Story & Infographics"
+      ],
+      "relatedClients": [
+        "BCA"
+      ],
+      "checkedAt": "2026-05-01T01:32:27.193Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C7p0QMfBwd2/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC7p0QMfBwd2%2F&is_from_rle",
+      "relatedCardIds": [
+        32
+      ],
+      "relatedPrograms": [
+        "Business Process Management"
+      ],
+      "relatedClients": [
+        "Indosat"
+      ],
+      "checkedAt": "2026-05-01T01:32:28.181Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/C7klyXKhCNm/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FC7klyXKhCNm%2F&is_from_rle",
+      "relatedCardIds": [
+        33
+      ],
+      "relatedPrograms": [
+        "Advanced PowerPoint"
+      ],
+      "relatedClients": [
+        "Freeport"
+      ],
+      "checkedAt": "2026-05-01T01:32:29.239Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/Bu7xLd-hFSH/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FBu7xLd-hFSH%2F&is_from_rle",
+      "relatedCardIds": [
+        35
+      ],
+      "relatedPrograms": [
+        "Data Visualization & Infographics"
+      ],
+      "relatedClients": [
+        "Bank Indonesia Institute"
+      ],
+      "checkedAt": "2026-05-01T01:32:30.262Z"
+    },
+    {
+      "url": "https://www.instagram.com/p/BtxDzD5BLVF/",
+      "status": "PRIVATE_OR_LOGIN_REQUIRED",
+      "httpCode": 200,
+      "redirectUrl": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fp%2FBtxDzD5BLVF%2F&is_from_rle",
+      "relatedCardIds": [
+        37
+      ],
+      "relatedPrograms": [
+        "Data Analysis & Visualization"
+      ],
+      "relatedClients": [
+        "Bank Indonesia"
+      ],
+      "checkedAt": "2026-05-01T01:32:31.388Z"
+    }
+  ],
+  "missingProofCards": [
+    {
+      "id": 16,
+      "program": "Data Analysis & Visualization",
+      "client": "Bank Indonesia Institute",
+      "date": "28 Okt 2019 | 29 Okt 2019"
+    },
+    {
+      "id": 22,
+      "program": "SOP for Bank / Business Process Improvement",
+      "client": "Mandiri University",
+      "date": "30-31 Agu 2019"
+    },
+    {
+      "id": 24,
+      "program": "Pelatihan ISO",
+      "client": "Ombudsman RI",
+      "date": "1 Jul 2019 | 2 Jul 2019"
+    },
+    {
+      "id": 34,
+      "program": "Infographics Design with PowerPoint",
+      "client": "Kementerian PUPR",
+      "date": null
+    }
+  ]
+}

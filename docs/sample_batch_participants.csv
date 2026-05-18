@@ -1,0 +1,4 @@
+name,email,whatsapp,role,notes
+Demo Peserta 1,demo.peserta1@skillary.demo,0811111111,Staff,Demo participant
+Demo Peserta 2,demo.peserta2@skillary.demo,0811111112,Supervisor,Demo participant
+Demo Peserta Invalid,invalid-email,0811111113,Staff,Invalid email example

@@ -1,0 +1,4 @@
+Question,Type,Option A,Option B,Option C,Option D,Correct Answer,Explanation
+"What is the main purpose of data storytelling?","MULTIPLE_CHOICE","To show all available data","To create a clear narrative for decision making","To design beautiful charts","To write SQL queries","B","Data storytelling turns raw data into a clear, actionable narrative for stakeholders."
+"Which chart type is best for showing a trend over time?","MULTIPLE_CHOICE","Pie Chart","Bar Chart","Line Chart","Scatter Plot","C","Line charts effectively display continuous changes over a period of time."
+"A good data presentation should include every single data point you analyzed.","TRUE_FALSE","True","False","","","B","You should filter out noise and only present data that supports the core insight."
