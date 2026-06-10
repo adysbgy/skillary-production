@@ -76,7 +76,7 @@ export function Header() {
     return (
         <>
             <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur shadow-sm" : "bg-white"}`} style={{ borderBottom: '1.5px solid rgb(240, 217, 200)' }}>
-                <div className="w-full mx-auto px-5 md:px-6 lg:px-8 flex items-center justify-between py-4">
+                <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8 flex items-center justify-between py-4">
                     <Link href="/" className="text-left">
                         <Logo />
                     </Link>

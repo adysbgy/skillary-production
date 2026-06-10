@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const KolaborasiSection = () => {
   return (
-    <section className="py-20 px-5 relative overflow-hidden">
+    <section className="py-16 md:py-20 lg:py-24 px-5 md:px-6 lg:px-8 relative overflow-hidden">
 <div className="absolute inset-0" style={{'background': 'linear-gradient(135deg, rgb(255, 138, 0) 0%, rgb(255, 90, 95) 55%, rgb(236, 72, 153) 100%)'}}>
 </div>
 <div className="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none">

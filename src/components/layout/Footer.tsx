@@ -10,12 +10,9 @@ export function Footer() {
 
                     {/* Brand + Address */}
                     <div className="md:col-span-2">
-                        <div className="mb-6 -ml-2">
+                        <div className="mb-8">
                             <Logo variant="dark" />
                         </div>
-                        <p className="text-gray-400 text-xs leading-relaxed mb-5">
-                            Upgrade Skill, Raih Karir
-                        </p>
                         <div className="space-y-2.5">
                             <div className="flex items-start gap-2">
                                 <svg aria-hidden="true" className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: 'rgb(255, 138, 0)' }} fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
