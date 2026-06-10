@@ -9,9 +9,9 @@ const TESTIMONIALS = [
     image: "/images/testimonial-alya.png",
   },
   {
-    quote: "Yang paling saya suka bukan hanya kontennya, tapi perasaan bahwa saya terus berkembang selangkah demi selangkah.",
+    quote: "Sebagai Training Manager, saya butuh platform yang bisa dikelola dengan mudah dari sisi admin. Skillary memungkinkan saya mendistribusikan program, memantau progress peserta, dan menyiapkan sertifikat dalam satu alur yang rapi.",
     name: "Raka M.",
-    role: "Career Switcher",
+    role: "Training Manager",
     image: "/images/testimonial-raka.png",
   },
   {

@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 export const CareerPlusSection = () => {
   return (
-    <section className="py-16 px-5 max-w-6xl mx-auto">
+    <section className="py-16 md:py-20 lg:py-24 px-5 md:px-6 lg:px-8">
+<div className="max-w-7xl mx-auto">
 <div className="text-center mb-10">
 <h2 className="text-2xl md:text-3xl font-extrabold text-skillary-navy mb-3">
        Pilihan Program Korporat yang{' '}
@@ -117,6 +118,7 @@ export const CareerPlusSection = () => {
 <p className="text-orange-200 text-xs">
             Monitoring Terstruktur
            </p>
+</div>
 </div>
 </div>
 </div>

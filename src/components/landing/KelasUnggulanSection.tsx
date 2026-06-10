@@ -8,9 +8,12 @@ export const KelasUnggulanSection = () => {
       <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 gap-4">
           <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-skillary-navy">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-skillary-navy mb-2">
               Program Pelatihan Unggulan
             </h2>
+            <p className="text-skillary-muted text-sm md:text-base max-w-xl">
+              Program pelatihan siap pakai dengan assessment, sertifikat, dan laporan untuk tim Anda.
+            </p>
           </div>
           <Link href="/program-catalog" className="inline-flex items-center gap-1 text-skillary-orange text-sm font-semibold hover:underline flex-shrink-0 md:mb-1">
             Lihat Semua Program
@@ -163,8 +166,8 @@ export const KelasUnggulanSection = () => {
            Assessment • Sertifikat • Report
           </span>
 </div>
-<Link href="/program-catalog" className="block w-full text-center text-white text-xs font-bold py-2 rounded-lg transition-all hover:opacity-90 hover:shadow-md" style={{'background': 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))'}}>
-          Lihat Program
+<Link href="/proposal" className="block w-full text-center text-white text-xs font-bold py-2 rounded-lg transition-all hover:opacity-90 hover:shadow-md" style={{'background': 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))'}}>
+          Minta Proposal
          </Link>
 </div>
 </div>

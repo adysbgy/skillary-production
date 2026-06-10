@@ -10,7 +10,8 @@ const BENEFITS = [
 
 export const PromoBannerSection = () => {
   return (
-    <section className="px-5 pb-10 max-w-6xl mx-auto">
+    <section className="py-16 md:py-20 px-5 md:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
       <div
         className="relative rounded-3xl overflow-hidden shadow-banner"
         style={{
@@ -144,6 +145,7 @@ export const PromoBannerSection = () => {
             </h3>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

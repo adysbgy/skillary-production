@@ -25,9 +25,9 @@ export default function HomePage() {
       <CategoryPillsSection />
       <KelasUnggulanSection />
       <LearningPathSection />
-      <CareerPlusSection />
       <BeasiswaSection />
       <TestimoniSection />
+      <CareerPlusSection />
       <PartnershipSection />
       <BeritaSection />
       <InsightSection />

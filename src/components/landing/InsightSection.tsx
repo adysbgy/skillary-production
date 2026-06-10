@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 export const InsightSection = () => {
   return (
-    <section className="py-24 px-5" style={{ background: 'rgb(255, 251, 245)' }}>
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
+    <section className="py-16 md:py-20 lg:py-24 px-5 md:px-6 lg:px-8" style={{ background: 'rgb(255, 251, 245)' }}>
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
         <div className="flex-1">
           <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border bg-white" style={{ borderColor: 'rgb(255, 214, 165)' }}>
             <svg aria-hidden="true" className="lucide lucide-sparkles w-4 h-4 text-skillary-orange" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

@@ -40,7 +40,7 @@ export const HeroSection = () => {
 
           {/* Subheadline */}
           <p className="text-base text-skillary-muted leading-relaxed mb-8 max-w-md">
-            Skillary menyediakan kursus praktis, assessment terstruktur, dan sertifikat digital untuk membantu Anda dan organisasi Anda berkembang lebih cepat.
+            Skillary menyediakan program pelatihan terstruktur, assessment, dan sertifikat digital untuk membantu tim dan organisasi Anda berkembang lebih cepat.
           </p>
 
           {/* ─── CTA Buttons ─── */}
