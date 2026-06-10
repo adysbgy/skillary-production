@@ -85,9 +85,12 @@ export default function ExploreClient({ programs }: { programs: Program[] }) {
             <Container className="py-8 pb-20">
                 {filtered.length > 0 ? (
                     <>
-                        <div className="mb-8">
-                            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl" style={{ color: '#0F172A' }}>{filtered.length} program ditemukan</h2>
-                            <p className="mt-3 text-base leading-8 text-black/60">Program terkurasi untuk bisnis, pertumbuhan digital, dan pembelajaran praktis.</p>
+                        <div className="mb-8 flex flex-col gap-2">
+                            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl" style={{ color: '#0F172A' }}>Katalog Program</h2>
+                            <div className="flex items-center gap-2">
+                                <span className="px-2.5 py-1 text-xs font-bold rounded bg-gray-100 text-gray-700">{filtered.length} program ditemukan</span>
+                            </div>
+                            <p className="mt-2 text-base leading-7 text-black/60">Program terkurasi untuk bisnis, pertumbuhan digital, dan pembelajaran praktis.</p>
                         </div>
                         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                             {filtered.map((item) => (
