@@ -24,8 +24,8 @@ const TESTIMONIALS = [
 
 export const TestimoniSection = () => {
   return (
-    <section className="py-16 px-5 bg-white">
-<div className="max-w-6xl mx-auto">
+    <section className="py-16 md:py-20 lg:py-24 px-5 md:px-6 lg:px-8 bg-white">
+      <div className="max-w-7xl mx-auto">
 <div className="text-center mb-10">
 <h2 className="text-2xl md:text-3xl font-extrabold text-skillary-navy mb-2">
         Apa Kata{' '}

@@ -4,23 +4,29 @@ import Image from 'next/image';
 
 export const KelasUnggulanSection = () => {
   return (
-    <section className="py-12" style={{'background': 'rgb(255, 251, 245)'}}>
-<div className="max-w-6xl mx-auto px-5">
-<div className="flex items-center justify-between mb-6">
-<h2 className="text-xl md:text-2xl font-extrabold text-skillary-navy">
-        Program Pelatihan Unggulan
-       </h2>
-<Link href="/program-catalog" className="flex items-center gap-1 text-skillary-orange text-sm font-semibold hover:underline">
-        Lihat Semua Program
-        <svg aria-hidden="true" className="lucide lucide-arrow-right w-4 h-4" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 12h14" />
-<path d="m12 5 7 7-7 7" />
-</svg>
-</Link>
-</div>
-<div className="flex gap-4 overflow-x-auto hide-scrollbar pb-3">
-{/* Card 1: Power BI Business Dashboard */}
-<div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+    <section className="py-16 md:py-20 lg:py-24 relative overflow-hidden" style={{'background': 'rgb(255, 251, 245)'}}>
+      <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 gap-4">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-skillary-navy">
+              Program Pelatihan Unggulan
+            </h2>
+          </div>
+          <Link href="/program-catalog" className="inline-flex items-center gap-1 text-skillary-orange text-sm font-semibold hover:underline flex-shrink-0 md:mb-1">
+            Lihat Semua Program
+            <svg aria-hidden="true" className="lucide lucide-arrow-right w-4 h-4" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto relative">
+        <div className="absolute top-0 right-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[#fffbf5] to-transparent z-10 pointer-events-none"></div>
+        <div className="flex gap-4 md:gap-5 lg:gap-6 overflow-x-auto hide-scrollbar pb-6 pt-2 px-5 md:px-6 lg:px-8">
+          {/* Card 1: Power BI Business Dashboard */}
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-36 relative overflow-hidden bg-gray-100">
 <Image src="/images/thumb-powerbi.png" alt="Power BI Dashboard" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
 <div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
@@ -56,7 +62,7 @@ export const KelasUnggulanSection = () => {
 </div>
 
 {/* Card 2: Data-Driven Decision Making */}
-<div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-36 relative overflow-hidden bg-gray-100">
 <Image src="/images/thumb-data.png" alt="Data-Driven Decision Making" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
 <div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
@@ -92,7 +98,7 @@ export const KelasUnggulanSection = () => {
 </div>
 
 {/* Card 3: Infographics & Visual Communication */}
-<div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-36 relative overflow-hidden bg-gray-100">
 <Image src="/images/thumb-infographic.png" alt="Infographics & Visual Communication" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
 <div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
@@ -128,7 +134,7 @@ export const KelasUnggulanSection = () => {
 </div>
 
 {/* Card 4: Business Presentation & Reporting */}
-<div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-36 relative overflow-hidden bg-gray-100">
 <Image src="/images/thumb-presentation.png" alt="Business Presentation" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
 <div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
@@ -164,7 +170,7 @@ export const KelasUnggulanSection = () => {
 </div>
 
 {/* Card 5: AI Productivity for Teams */}
-<div className="flex-shrink-0 w-60 bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover group" style={{'border': '1.5px solid rgb(240, 217, 200)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-36 relative overflow-hidden bg-gray-100">
 <Image src="/images/cert-mockup.png" alt="Sertifikat Resmi Skillary" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
 <div className="absolute inset-0 bg-gradient-to-t from-skillary-navy/60 to-transparent pointer-events-none"></div>
@@ -198,8 +204,8 @@ export const KelasUnggulanSection = () => {
          </Link>
 </div>
 </div>
-</div>
-</div>
-</section>
+        </div>
+      </div>
+    </section>
   );
 };

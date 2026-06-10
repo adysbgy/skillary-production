@@ -3,28 +3,32 @@ import Link from 'next/link';
 
 export const LearningPathSection = () => {
   return (
-    <section className="py-12 bg-white">
-<div className="max-w-6xl mx-auto px-5">
-<div className="flex items-center justify-between mb-6">
-<div>
-<h2 className="text-xl md:text-2xl font-extrabold text-skillary-navy">
-         Pilih Alur Pelatihan Sesuai Kebutuhan Organisasi
-        </h2>
-<p className="text-skillary-muted text-sm mt-1">
-         Program dapat disusun berdasarkan level peserta, kebutuhan divisi, dan target kompetensi internal.
-        </p>
-</div>
-<Link href="/program-catalog" className="hidden md:flex items-center gap-1 text-skillary-orange text-sm font-semibold hover:underline">
-        Lihat Semua
-        <svg aria-hidden="true" className="lucide lucide-arrow-right w-4 h-4" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 12h14" />
-<path d="m12 5 7 7-7 7" />
-</svg>
-</Link>
-</div>
-<div className="flex gap-4 overflow-x-auto hide-scrollbar pb-3">
-{/* Path 1: Data-Driven Decision Making */}
-<div className="flex-shrink-0 w-64 bg-white rounded-2xl overflow-hidden card-hover" style={{'border': '1.5px solid rgb(191, 219, 254)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+    <section className="py-16 md:py-20 lg:py-24 relative overflow-hidden bg-white">
+      <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 gap-4">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-skillary-navy mb-2">
+              Pilih Alur Pelatihan Sesuai Kebutuhan Organisasi
+            </h2>
+            <p className="text-skillary-muted text-sm md:text-base">
+              Program dapat disusun berdasarkan level peserta, kebutuhan divisi, dan target kompetensi internal.
+            </p>
+          </div>
+          <Link href="/program-catalog" className="inline-flex items-center gap-1 text-skillary-orange text-sm font-semibold hover:underline flex-shrink-0 md:mb-1">
+            Lihat Semua Path
+            <svg aria-hidden="true" className="lucide lucide-arrow-right w-4 h-4" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto relative">
+        <div className="absolute top-0 right-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+        <div className="flex gap-4 md:gap-5 lg:gap-6 overflow-x-auto hide-scrollbar pb-6 pt-2 px-5 md:px-6 lg:px-8">
+          {/* Path 1: Data-Driven Decision Making */}
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover" style={{'border': '1.5px solid rgb(191, 219, 254)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-2 w-full" style={{'background': 'linear-gradient(90deg, rgb(59, 130, 246), rgba(59, 130, 246, 0.8)'}}></div>
 <div className="p-5">
 <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-3" style={{'background': 'rgb(239, 246, 255)'}}>
@@ -71,7 +75,7 @@ export const LearningPathSection = () => {
 </div>
 
 {/* Path 2: Visual Communication */}
-<div className="flex-shrink-0 w-64 bg-white rounded-2xl overflow-hidden card-hover" style={{'border': '1.5px solid rgb(221, 214, 254)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover" style={{'border': '1.5px solid rgb(221, 214, 254)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-2 w-full" style={{'background': 'linear-gradient(90deg, rgb(139, 92, 246), rgba(139, 92, 246, 0.8)'}}></div>
 <div className="p-5">
 <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-3" style={{'background': 'rgb(245, 243, 255)'}}>
@@ -117,7 +121,7 @@ export const LearningPathSection = () => {
 </div>
 
 {/* Path 3: AI Productivity for Teams */}
-<div className="flex-shrink-0 w-64 bg-white rounded-2xl overflow-hidden card-hover" style={{'border': '1.5px solid rgb(254, 205, 211)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover" style={{'border': '1.5px solid rgb(254, 205, 211)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-2 w-full" style={{'background': 'linear-gradient(90deg, rgb(255, 90, 95), rgba(255, 90, 95, 0.8)'}}></div>
 <div className="p-5">
 <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-3" style={{'background': 'rgb(255, 241, 242)'}}>
@@ -168,7 +172,7 @@ export const LearningPathSection = () => {
 </div>
 
 {/* Path 4: Leadership & Problem Solving */}
-<div className="flex-shrink-0 w-64 bg-white rounded-2xl overflow-hidden card-hover" style={{'border': '1.5px solid rgb(255, 214, 165)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
+<div className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] bg-white rounded-2xl overflow-hidden card-hover" style={{'border': '1.5px solid rgb(255, 214, 165)', 'boxShadow': 'rgba(0, 0, 0, 0.06) 0px 1px 4px'}}>
 <div className="h-2 w-full" style={{'background': 'linear-gradient(90deg, rgb(255, 138, 0), rgba(255, 138, 0, 0.8)'}}></div>
 <div className="p-5">
 <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-3" style={{'background': 'rgb(255, 244, 232)'}}>
@@ -212,8 +216,8 @@ export const LearningPathSection = () => {
 </Link>
 </div>
 </div>
-</div>
-</div>
-</section>
+        </div>
+      </div>
+    </section>
   );
 };
