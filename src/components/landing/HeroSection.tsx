@@ -123,24 +123,11 @@ export const HeroSection = () => {
             <Link
               href={`/program-catalog?q=${encodeURIComponent(bubble.label)}`}
               key={bubble.label}
-              className={`skill-bubble absolute ${bubble.animClass} group flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-[13px] whitespace-nowrap shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-colors duration-300 border-[1.5px]`}
+              className={`skill-bubble absolute ${bubble.animClass} group flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-[13px] whitespace-nowrap shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-colors duration-300 border-[1.5px] bg-white text-gray-900 border-[#F0D9C8] hover:bg-skillary-orange hover:text-white hover:border-skillary-orange`}
               style={{
                 top: bubble.top,
                 left: bubble.left,
                 right: bubble.right,
-                background: 'white',
-                color: 'rgb(17, 24, 39)',
-                borderColor: 'rgb(240, 217, 200)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgb(255, 138, 0)';
-                e.currentTarget.style.color = 'white';
-                e.currentTarget.style.borderColor = 'rgb(255, 138, 0)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'white';
-                e.currentTarget.style.color = 'rgb(17, 24, 39)';
-                e.currentTarget.style.borderColor = 'rgb(240, 217, 200)';
               }}
             >
               <span
