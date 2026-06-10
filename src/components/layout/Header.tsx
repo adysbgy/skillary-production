@@ -159,7 +159,7 @@ export function Header() {
                         ) : (
                             <>
                                 <Link href="/login" className="hidden rounded-full px-4 py-2 text-sm font-medium text-black/70 transition hover:bg-black/5 lg:inline-flex">
-                                    Log In
+                                    Masuk
                                 </Link>
                                 <Link href="/proposal" className="hidden sm:inline-flex">
                                     <button className="px-5 py-2.5 text-sm font-bold text-white rounded-full shadow-md hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>Minta Proposal</button>
@@ -269,7 +269,7 @@ export function Header() {
                                 onClick={() => setMenuOpen(false)}
                                 className="mt-3 block w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-center text-sm font-semibold text-black/70 transition hover:bg-black/5"
                             >
-                                Log In
+                                Masuk
                             </Link>
                         </>
                     )}

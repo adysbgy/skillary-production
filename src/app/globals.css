@@ -259,6 +259,13 @@
   display: none;
 }
 
+/* --- Hero Dot Pattern --- */
+
+.hero-dot-pattern {
+  background-image: radial-gradient(circle, rgb(220, 210, 195) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
 /* --- Global Base --- */
 
 body {
