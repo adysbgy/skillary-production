@@ -11,19 +11,10 @@ const TOPIC_BUBBLES = [
   { label: 'Problem Solving', top: '72%', left: '54%', animClass: 'float-7' },
 ];
 
-const POPULAR_CHIPS = [
-  'Data Analytics',
-  'Power BI',
-  'Infografis',
-  'Presentasi Bisnis',
-  'AI Produktivitas',
-  'SOP & Proses',
-];
-
 export const HeroSection = () => {
   return (
-    <section className="bg-white py-14 px-5 overflow-hidden">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
+    <section className="bg-white py-16 md:py-20 lg:py-24 px-5 md:px-6 lg:px-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
         {/* ─── Left Column ─── */}
         <div className="flex-1 min-w-0">
           {/* Badge */}
@@ -48,12 +39,12 @@ export const HeroSection = () => {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-base text-skillary-muted leading-relaxed mb-6 max-w-md">
+          <p className="text-base text-skillary-muted leading-relaxed mb-8 max-w-md">
             Skillary menyediakan kursus praktis, assessment terstruktur, dan sertifikat digital untuk membantu Anda dan organisasi Anda berkembang lebih cepat.
           </p>
 
           {/* ─── CTA Buttons ─── */}
-          <div className="flex flex-wrap items-center gap-3 mb-5">
+          <div className="flex flex-wrap items-center gap-3 mb-8">
             <Link
               href="/program-catalog"
               className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
@@ -72,61 +63,6 @@ export const HeroSection = () => {
             >
               Untuk Organisasi
             </Link>
-          </div>
-
-          {/* ─── Search Bar ─── */}
-          <Link
-            href="/program-catalog"
-            className="flex items-center gap-2 max-w-md bg-white rounded-full px-4 py-2.5 mb-4"
-            style={{
-              border: '2px solid rgb(240, 217, 200)',
-              boxShadow: 'rgba(255, 138, 0, 0.08) 0px 2px 12px',
-            }}
-          >
-            <svg
-              aria-hidden="true"
-              className="lucide lucide-search w-4 h-4 text-skillary-muted flex-shrink-0"
-              fill="none"
-              height="24"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="m21 21-4.34-4.34" />
-              <circle cx="11" cy="11" r="8" />
-            </svg>
-            <span className="text-sm text-skillary-muted flex-1">
-              Cari program pelatihan...
-            </span>
-            <span
-              className="text-white text-xs font-bold px-4 py-1.5 rounded-full hover:opacity-90 transition-opacity"
-              style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}
-            >
-              Cari
-            </span>
-          </Link>
-
-          {/* ─── Popular Chips ─── */}
-          <div className="flex flex-wrap items-center gap-2 mb-7">
-            <span className="text-xs text-skillary-muted font-medium">Populer:</span>
-            {POPULAR_CHIPS.map((label) => (
-              <Link
-                key={label}
-                href="/program-catalog"
-                className="text-xs font-medium px-3 py-1 rounded-full border transition-all duration-150 hover:scale-105"
-                style={{
-                  background: 'rgb(255, 249, 243)',
-                  borderColor: 'rgb(255, 224, 188)',
-                  color: 'rgb(200, 100, 0)',
-                }}
-              >
-                {label}
-              </Link>
-            ))}
           </div>
 
           {/* ─── Social Proof ─── */}

@@ -5,7 +5,7 @@ import { Logo } from "@/components/ui/Logo";
 export function Footer() {
     return (
         <footer className="bg-skillary-navy text-white pt-14 pb-8">
-            <div className="max-w-6xl mx-auto px-6 lg:px-10">
+            <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-10 mb-10">
 
                     {/* Brand + Address */}
@@ -14,7 +14,7 @@ export function Footer() {
                             <Logo variant="dark" />
                         </div>
                         <p className="text-gray-400 text-xs leading-relaxed mb-5">
-                            Platform pelatihan terukur untuk organisasi, berangkat dari pengalaman pelatihan Allman sejak 1998.
+                            Upgrade Skill, Raih Karir
                         </p>
                         <div className="space-y-2.5">
                             <div className="flex items-start gap-2">
