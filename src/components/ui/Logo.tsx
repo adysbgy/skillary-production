@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 interface LogoProps {
     variant?: 'light' | 'dark';
@@ -9,11 +10,13 @@ export function Logo({ variant = 'light' }: LogoProps) {
     
     return (
         <div className="flex items-center gap-3">
-            <div 
-                className="flex h-10 w-10 items-center justify-center shrink-0 rounded-xl shadow-sm"
-                style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}
-            >
-                <span className="text-white font-extrabold text-xl">S</span>
+            <div className="relative flex h-10 w-14 items-center justify-center shrink-0">
+                <Image 
+                    src="/logo.png" 
+                    alt="Skillary Logo" 
+                    fill 
+                    className="object-contain"
+                />
             </div>
             <div>
                 <div className={`text-lg font-semibold tracking-tight ${isDark ? 'text-white' : 'text-skillary-navy'}`}>Skillary</div>
