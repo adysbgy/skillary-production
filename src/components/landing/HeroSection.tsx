@@ -95,7 +95,13 @@ export const HeroSection = () => {
           style={{ background: 'rgb(252, 251, 249)' }}
         >
           {/* Dot pattern background */}
-          <div className="absolute inset-0 hero-dot-pattern opacity-40" />
+          <div 
+            className="absolute inset-0 opacity-40" 
+            style={{
+              backgroundImage: 'radial-gradient(circle, #94A3B8 1.5px, transparent 1.5px)',
+              backgroundSize: '36px 36px',
+            }}
+          />
 
           {/* Soft orange accent glow */}
           <div
@@ -114,39 +120,37 @@ export const HeroSection = () => {
 
           {/* Topic Bubbles */}
           {TOPIC_BUBBLES.map((bubble) => (
-            <div
+            <Link
+              href={`/program-catalog?q=${encodeURIComponent(bubble.label)}`}
               key={bubble.label}
-              className={`skill-bubble absolute ${bubble.animClass}`}
+              className={`skill-bubble absolute ${bubble.animClass} group flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-[13px] whitespace-nowrap shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-colors duration-300 border-[1.5px]`}
               style={{
                 top: bubble.top,
                 left: bubble.left,
                 right: bubble.right,
                 background: 'white',
-                border: '1.5px solid rgb(240, 217, 200)',
-                borderRadius: '999px',
-                padding: '8px 16px',
-                fontSize: '13px',
-                fontWeight: '600',
                 color: 'rgb(17, 24, 39)',
-                whiteSpace: 'nowrap',
-                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.06)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
+                borderColor: 'rgb(240, 217, 200)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgb(255, 138, 0)';
+                e.currentTarget.style.color = 'white';
+                e.currentTarget.style.borderColor = 'rgb(255, 138, 0)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'white';
+                e.currentTarget.style.color = 'rgb(17, 24, 39)';
+                e.currentTarget.style.borderColor = 'rgb(240, 217, 200)';
               }}
             >
               <span
+                className="w-[7px] h-[7px] rounded-full shrink-0 group-hover:!bg-white transition-colors duration-300"
                 style={{
-                  display: 'inline-block',
-                  width: '7px',
-                  height: '7px',
-                  borderRadius: '50%',
                   background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))',
-                  flexShrink: 0,
                 }}
               />
               {bubble.label}
-            </div>
+            </Link>
           ))}
         </div>
       </div>
