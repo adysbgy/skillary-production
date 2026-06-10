@@ -68,29 +68,18 @@ export const HeroSection = () => {
           {/* ─── Social Proof ─── */}
           <div className="flex items-center gap-3">
             <div className="flex items-center">
-              {['S', 'A', 'D', 'R'].map((initial, i) => (
-                <div
-                  key={initial}
-                  className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+              {[1, 2, 3, 4].map((num, i) => (
+                <img
+                  key={num}
+                  src={`/images/avatar/skillary-avatar-0${num}.png`}
+                  alt={`Skillary professional learner avatar ${num}`}
+                  className="w-10 h-10 rounded-full border-2 border-white object-cover flex-shrink-0 shadow-sm"
                   style={{
-                    marginLeft: i === 0 ? '0px' : '-8px',
+                    marginLeft: i === 0 ? '0px' : '-12px',
                     zIndex: 5 - i,
-                    background: 'linear-gradient(135deg, rgb(255, 158, 50), rgb(255, 110, 100))',
                   }}
-                >
-                  {initial}
-                </div>
+                />
               ))}
-              <div
-                className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold flex-shrink-0"
-                style={{
-                  marginLeft: '-8px',
-                  background: 'rgb(255, 244, 232)',
-                  color: 'rgb(255, 138, 0)',
-                }}
-              >
-                +
-              </div>
             </div>
             <p className="text-sm text-skillary-muted">
               Dipercaya oleh{' '}
