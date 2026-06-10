@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
     return (
@@ -9,17 +10,8 @@ export function Footer() {
 
                     {/* Brand + Address */}
                     <div className="md:col-span-2">
-                        <div className="flex items-center gap-2 mb-4">
-                            <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>
-                                <svg aria-hidden="true" className="w-5 h-5 text-white" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                                    <path d="m3.3 7 8.7 5 8.7-5" />
-                                    <path d="M12 22V12" />
-                                </svg>
-                            </div>
-                            <span className="text-xl font-extrabold tracking-tight">
-                                Skill<span style={{ color: 'rgb(251, 191, 36)' }}>ary</span>
-                            </span>
+                        <div className="mb-6 -ml-2">
+                            <Logo variant="dark" />
                         </div>
                         <p className="text-gray-400 text-xs leading-relaxed mb-5">
                             Platform pelatihan terukur untuk organisasi, berangkat dari pengalaman pelatihan Allman sejak 1998.
