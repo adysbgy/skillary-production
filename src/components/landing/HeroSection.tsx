@@ -89,17 +89,26 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        {/* ─── Right Column — Clean Dot Background + Topic Bubbles ─── */}
+        {/* ─── Right Column — Perspective Grid Background + Speech Bubbles ─── */}
         <div
           className="flex-shrink-0 w-full md:w-[460px] h-[420px] rounded-3xl relative overflow-hidden"
           style={{ background: 'rgb(252, 251, 249)' }}
         >
-          {/* Dot pattern background */}
+          {/* Perspective Grid Background */}
           <div 
-            className="absolute inset-0 opacity-40" 
+            className="absolute inset-0 opacity-[0.35]" 
             style={{
-              backgroundImage: 'radial-gradient(circle, #94A3B8 1.5px, transparent 1.5px)',
-              backgroundSize: '36px 36px',
+              backgroundImage: `
+                radial-gradient(circle at 0px 0px, #64748B 2px, transparent 2.5px),
+                linear-gradient(to right, rgba(148, 163, 184, 0.25) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.25) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px',
+              backgroundPosition: '0 0, 0 0, 0 0',
+              transform: 'perspective(800px) rotateX(60deg) scale(2) translateY(-20px)',
+              transformOrigin: 'top center',
+              maskImage: 'radial-gradient(circle at center, black 30%, transparent 70%)',
+              WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 70%)',
             }}
           />
 
@@ -110,33 +119,29 @@ export const HeroSection = () => {
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '220px',
-              height: '220px',
+              width: '240px',
+              height: '240px',
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(255, 138, 0, 0.08) 0%, transparent 70%)',
               pointerEvents: 'none',
             }}
           />
 
-          {/* Topic Bubbles */}
+          {/* Topic Speech Bubbles */}
           {TOPIC_BUBBLES.map((bubble) => (
             <Link
               href={`/program-catalog?q=${encodeURIComponent(bubble.label)}`}
               key={bubble.label}
-              className={`skill-bubble absolute ${bubble.animClass} group flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-[13px] whitespace-nowrap shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-colors duration-300 border-[1.5px] bg-white text-gray-900 border-[#F0D9C8] hover:bg-skillary-orange hover:text-white hover:border-skillary-orange`}
+              className={`skill-bubble absolute ${bubble.animClass} group flex items-center justify-center px-5 py-2.5 rounded-full font-extrabold text-[12px] md:text-[13px] whitespace-nowrap shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-300 border-[1.5px] bg-white text-gray-800 border-gray-200 hover:bg-skillary-orange hover:text-white hover:border-skillary-orange hover:shadow-[0_8px_25px_rgba(255,138,0,0.25)]`}
               style={{
                 top: bubble.top,
                 left: bubble.left,
                 right: bubble.right,
               }}
             >
-              <span
-                className="w-[7px] h-[7px] rounded-full shrink-0 group-hover:!bg-white transition-colors duration-300"
-                style={{
-                  background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))',
-                }}
-              />
               {bubble.label}
+              {/* Speech bubble tail */}
+              <span className="absolute -bottom-[6.5px] left-1/2 -translate-x-1/2 w-[12px] h-[12px] bg-white border-r-[1.5px] border-b-[1.5px] border-gray-200 rotate-45 rounded-[2px] group-hover:bg-skillary-orange group-hover:border-skillary-orange transition-colors duration-300" />
             </Link>
           ))}
         </div>
