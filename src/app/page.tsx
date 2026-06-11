@@ -10,11 +10,12 @@ import { PartnershipSection } from "@/components/landing/PartnershipSection";
 import { BeritaSection } from "@/components/landing/BeritaSection";
 import { InsightSection } from "@/components/landing/InsightSection";
 import { KolaborasiSection } from "@/components/landing/KolaborasiSection";
+import { DocumentasiSection } from "@/components/home/DocumentasiSection";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Skillary — Upgrade Skill, Raih Karir | datacamp.id",
-  description: "Platform pelatihan digital dengan kursus praktis, assessment terstruktur, dan sertifikat digital. Untuk profesional dan organisasi yang ingin berkembang.",
+  title: "Skillary — Platform Pelatihan Digital untuk Tim & Organisasi",
+  description: "Skillary membantu HR, L&D, sekolah, yayasan, dan perusahaan menjalankan pelatihan terstruktur dengan materi, assessment, sertifikat digital, dan laporan peserta.",
 };
 
 export default function HomePage() {
@@ -24,6 +25,7 @@ export default function HomePage() {
       <PromoBannerSection />
       <CategoryPillsSection />
       <KelasUnggulanSection />
+      <DocumentasiSection />
       <LearningPathSection />
       <BeasiswaSection />
       <TestimoniSection />
@@ -35,3 +37,4 @@ export default function HomePage() {
     </>
   );
 }
+

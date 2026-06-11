@@ -16,20 +16,23 @@ const programAreas = [
     image: "/images/thumb-infographic.png",
     topics: ["Data Visualization & Infographics", "Infographics Design with PowerPoint", "Advanced Visual Communication"],
     output: "Mengubah data, laporan, dan ide kompleks menjadi visual infografis yang jelas, menarik, dan profesional.",
+    badge: "Visual",
   },
   {
-    slug: "data-analytics-dashboard-storytelling",
-    title: "Data Analytics, Dashboard & Storytelling",
+    slug: "data-analytics-dashboard",
+    title: "Data & Dashboard",
     image: "/images/thumb-data.png",
-    topics: ["Business Analytics Using Power BI", "Interactive Dashboard with Excel", "Storytelling with Data"],
-    output: "Membantu tim membaca data, membangun dashboard, menemukan insight, dan menyampaikan rekomendasi bisnis.",
+    topics: ["Business Analytics Using Power BI", "Interactive Dashboard with Excel", "Data Analysis & Visualization"],
+    output: "Membantu tim membaca data, membangun dashboard interaktif, dan menemukan insight untuk keputusan bisnis.",
+    badge: "Data",
   },
   {
-    slug: "presentation-reporting",
-    title: "Presentasi Bisnis & Reporting",
+    slug: "business-presentation-data-storytelling",
+    title: "Business Presentation & Data Storytelling",
     image: "/images/thumb-presentation.png",
-    topics: ["Advanced PowerPoint", "Business Report with PowerPoint & Excel", "High Impact Presentation"],
-    output: "Meningkatkan kualitas presentasi bisnis, laporan manajemen, dan komunikasi visual agar lebih berdampak.",
+    topics: ["Storytelling with Data", "Executive Presentation", "Business Report with PowerPoint & Excel", "High Impact Presentation"],
+    output: "Mengkomunikasikan insight, laporan manajemen, dan rekomendasi bisnis secara persuasif dan mudah dipahami.",
+    badge: "Presentasi",
   },
   {
     slug: "process-improvement-quality",
@@ -37,6 +40,7 @@ const programAreas = [
     image: "/images/resource-proposal.png",
     topics: ["Business Process Management", "Pelatihan ISO", "SOP for Business Process Improvement"],
     output: "Membantu organisasi merapikan proses, menyusun SOP, dan meningkatkan kualitas kerja.",
+    badge: "Proses",
   },
   {
     slug: "ai-digital-mindset",
@@ -44,6 +48,7 @@ const programAreas = [
     image: "/images/thumb-powerbi.png",
     topics: ["Data Analysis & AI", "AI for Productivity", "Digital Transformation"],
     output: "Mengenalkan pemanfaatan AI untuk meningkatkan produktivitas, pembelajaran, dan pekerjaan sehari-hari.",
+    badge: "AI",
   },
   {
     slug: "leadership-problem-solving",
@@ -51,6 +56,7 @@ const programAreas = [
     image: "/images/hero-training.png",
     topics: ["Creative Problem Solving", "Motivational Leadership", "Decision Making"],
     output: "Membantu peserta memecahkan masalah, mengambil keputusan, dan membangun sikap kepemimpinan.",
+    badge: "Leadership",
   },
 ];
 

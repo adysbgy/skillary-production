@@ -5,16 +5,16 @@ import { Container } from "@/components/ui/Container";
 export function ProgramAreasSection() {
   const programs = [
     {
-      title: "Data Analytics, Dashboard & Storytelling",
-      desc: "Membantu tim mengolah data menjadi insight yang mudah dipahami dan ditindaklanjuti.",
+      title: "Data & Dashboard",
+      desc: "Membantu tim membaca data, membangun dashboard interaktif, dan menemukan insight untuk keputusan bisnis. Mencakup Power BI, Excel, dan data analytics.",
+    },
+    {
+      title: "Business Presentation & Data Storytelling",
+      desc: "Mengkomunikasikan insight, laporan manajemen, dan rekomendasi bisnis secara persuasif. Mencakup storytelling with data dan executive presentation.",
     },
     {
       title: "Infographics & Visual Communication",
       desc: "Menyusun informasi kompleks menjadi visual yang menarik dan mudah dicerna.",
-    },
-    {
-      title: "Presentation, Reporting & Business Communication",
-      desc: "Meningkatkan kemampuan menyampaikan laporan dan presentasi secara profesional.",
     },
     {
       title: "AI & Digital Mindset",
