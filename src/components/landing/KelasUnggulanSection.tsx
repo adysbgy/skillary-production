@@ -59,7 +59,7 @@ export const KelasUnggulanSection = () => {
           </span>
 </div>
 <Link href="/proposal" className="block w-full text-center text-white text-xs font-bold py-2 rounded-lg transition-all hover:opacity-90 hover:shadow-md" style={{'background': 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))'}}>
-          Minta Proposal
+          Diskusikan Kebutuhan Training
          </Link>
 </div>
 </div>
@@ -95,7 +95,7 @@ export const KelasUnggulanSection = () => {
           </span>
 </div>
 <Link href="/proposal" className="block w-full text-center text-white text-xs font-bold py-2 rounded-lg transition-all hover:opacity-90 hover:shadow-md" style={{'background': 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))'}}>
-          Minta Proposal
+          Diskusikan Kebutuhan Training
          </Link>
 </div>
 </div>
@@ -131,7 +131,7 @@ export const KelasUnggulanSection = () => {
           </span>
 </div>
 <Link href="/proposal" className="block w-full text-center text-white text-xs font-bold py-2 rounded-lg transition-all hover:opacity-90 hover:shadow-md" style={{'background': 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))'}}>
-          Minta Proposal
+          Diskusikan Kebutuhan Training
          </Link>
 </div>
 </div>
@@ -167,7 +167,7 @@ export const KelasUnggulanSection = () => {
           </span>
 </div>
 <Link href="/proposal" className="block w-full text-center text-white text-xs font-bold py-2 rounded-lg transition-all hover:opacity-90 hover:shadow-md" style={{'background': 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))'}}>
-          Minta Proposal
+          Diskusikan Kebutuhan Training
          </Link>
 </div>
 </div>
@@ -203,7 +203,7 @@ export const KelasUnggulanSection = () => {
           </span>
 </div>
 <Link href="/proposal" className="block w-full text-center text-white text-xs font-bold py-2 rounded-lg transition-all hover:opacity-90 hover:shadow-md" style={{'background': 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))'}}>
-          Minta Proposal
+          Diskusikan Kebutuhan Training
          </Link>
 </div>
 </div>

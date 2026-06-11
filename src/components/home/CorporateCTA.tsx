@@ -20,7 +20,7 @@ export function CorporateCTA() {
           </Link>
           <Link href="/proposal">
             <button className="bg-white border-2 border-[#E7DDD4] text-[#334155] font-bold px-8 py-4 rounded-lg shadow-sm hover:bg-[#FFF8F1] transition-all text-lg">
-              Minta Proposal
+              Diskusikan Kebutuhan Training
             </button>
           </Link>
         </div>

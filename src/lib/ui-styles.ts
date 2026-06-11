@@ -5,7 +5,7 @@
  *
  * Usage (Sprint 2+ public page refactoring):
  *   import { btn, card, pill } from "@/lib/ui-styles";
- *   <button className={btn.gradient}>Minta Proposal</button>
+ *   <button className={btn.gradient}>Diskusikan Kebutuhan Training</button>
  *   <div className={card.warm}>…</div>
  *
  * For React components, prefer the typed Button variants in:

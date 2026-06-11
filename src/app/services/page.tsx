@@ -4,8 +4,8 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
 export const metadata: Metadata = {
-  title: "Layanan Skillary | Corporate Training Solutions",
-  description: "Format kerja sama yang dapat disesuaikan dengan kebutuhan pelatihan organisasi.",
+  title: "Solusi Training Korporat | Skillary",
+  description: "Bantu HR, L&D, sekolah, yayasan, dan perusahaan menjalankan pelatihan internal dengan materi, assessment, sertifikat digital, dan laporan peserta dalam satu alur.",
 };
 
 export default function ServicesPage() {
@@ -50,15 +50,15 @@ export default function ServicesPage() {
               Solusi Organisasi
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-[#181818] mb-6">
-              Layanan Skillary
+              Solusi Training Korporat yang Terukur dari Materi, Assessment, Sertifikat, hingga Laporan
             </h1>
             <p className="text-xl text-[#181818] font-semibold mb-6">
-              Format kerja sama yang dapat disesuaikan dengan kebutuhan pelatihan organisasi.
+              Bantu HR, L&D, sekolah, yayasan, dan perusahaan menjalankan pelatihan internal dengan alur yang lebih rapi, terdokumentasi, dan mudah dievaluasi.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
               <Link href="/proposal">
                 <button className="text-white px-7 py-3.5 shadow-lg font-semibold rounded-full hover:opacity-90 hover:-translate-y-0.5 transition-all" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>
-                  Minta Proposal
+                  Diskusikan Kebutuhan Training
                 </button>
               </Link>
               <Link href="/contact">
@@ -81,15 +81,15 @@ export default function ServicesPage() {
 
                   <div className="space-y-4 mb-10 flex-1">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-black/45 block mb-1">Membantu Solusi</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-black/45 block mb-1">Masalah yang Dibantu</span>
                       <p className="text-[#181818] text-sm font-medium">{service.solves}</p>
                     </div>
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-black/45 block mb-1">Cocok Untuk</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-black/45 block mb-1">Cocok untuk</span>
                       <p className="text-[#181818] text-sm font-medium">{service.suitable}</p>
                     </div>
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-black/45 block mb-1">Target Output</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-black/45 block mb-1">Output yang Didapat</span>
                       <p className="text-[#181818] text-sm font-medium">{service.output}</p>
                     </div>
                   </div>
@@ -118,7 +118,7 @@ export default function ServicesPage() {
               </Link>
               <Link href="/proposal">
                 <button className="bg-white text-[#334155] font-bold px-8 py-4 rounded-full shadow-sm hover:bg-[#FFF8F1] hover:-translate-y-0.5 transition-all" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
-                  Minta Proposal
+                  Diskusikan Kebutuhan Training
                 </button>
               </Link>
             </div>

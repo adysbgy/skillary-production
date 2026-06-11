@@ -13,7 +13,7 @@ const TOPIC_BUBBLES = [
 
 export const HeroSection = () => {
   return (
-    <section className="bg-white py-16 md:py-20 lg:py-24 px-5 md:px-6 lg:px-8 overflow-hidden">
+    <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
         {/* ─── Left Column ─── */}
         <div className="flex-1 min-w-0">
@@ -32,25 +32,23 @@ export const HeroSection = () => {
 
           {/* Headline */}
           <h1 className="text-[2.6rem] md:text-[3.2rem] font-extrabold leading-[1.15] text-skillary-navy mb-5">
-            Bangun{' '}
-            <span className="gradient-text">Skill Profesional</span>
-            <br className="hidden md:block" />
-            {' '}yang Dibutuhkan Industri
+            Training Digital untuk Tim yang Butuh Skill{' '}
+            <span className="gradient-text">Data, AI, dan Presentasi Bisnis</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-base text-skillary-muted leading-relaxed mb-8 max-w-md">
-            Skillary menyediakan program pelatihan terstruktur, assessment, dan sertifikat digital untuk membantu tim dan organisasi Anda berkembang lebih cepat.
+            Skillary membantu organisasi menjalankan pelatihan terstruktur dengan materi, assessment, sertifikat digital, dan laporan peserta dalam satu alur.
           </p>
 
           {/* ─── CTA Buttons ─── */}
           <div className="flex flex-wrap items-center gap-3 mb-8">
             <Link
-              href="/program-catalog"
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
               style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}
             >
-              Cari Program
+              Diskusikan Kebutuhan Training
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
@@ -61,7 +59,7 @@ export const HeroSection = () => {
               className="inline-flex items-center rounded-full px-7 py-3 text-sm font-semibold transition-all duration-200 hover:bg-[#FFF8F1] hover:-translate-y-0.5 border bg-white"
               style={{ borderColor: 'rgb(240, 217, 200)', color: '#334155' }}
             >
-              Untuk Organisasi
+              Lihat Program untuk Tim
             </Link>
           </div>
 
@@ -82,9 +80,7 @@ export const HeroSection = () => {
               ))}
             </div>
             <p className="text-sm text-skillary-muted">
-              Dipercaya oleh{' '}
-              <span className="font-bold text-skillary-navy">500+ profesional</span>
-              {' '}di berbagai industri
+              Dipakai untuk kebutuhan HR, L&D, sekolah, yayasan, komunitas, dan organisasi.
             </p>
           </div>
         </div>

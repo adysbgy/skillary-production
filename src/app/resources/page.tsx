@@ -12,7 +12,7 @@ const salesResources = [
   {
     title: "Proposal Skillary",
     desc: "Ringkasan pendekatan Skillary, fitur platform, format kerja sama, dan output untuk organisasi.",
-    cta: "Minta Proposal",
+    cta: "Diskusikan Kebutuhan Training",
     href: "/proposal",
   },
   {
@@ -163,7 +163,7 @@ export default function ResourcesPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/proposal">
               <button className="text-white font-bold px-8 py-4 rounded-full shadow-lg hover:opacity-90 hover:-translate-y-0.5 transition-all text-lg" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>
-                Minta Proposal
+                Diskusikan Kebutuhan Training
               </button>
             </Link>
             <Link href="/contact">

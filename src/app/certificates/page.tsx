@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default function CertificatesPage() {
   const howItWorks = [
-    "Peserta mengikuti materi",
-    "Peserta menyelesaikan assessment",
-    "Sistem memeriksa ketentuan program",
-    "Sertifikat digital diterbitkan",
-    "Sertifikat dapat diverifikasi melalui ID",
+    { label: "Peserta mengikuti materi", icon: (<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>) },
+    { label: "Peserta menyelesaikan assessment", icon: (<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>) },
+    { label: "Sistem memeriksa ketentuan program", icon: (<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>) },
+    { label: "Sertifikat digital diterbitkan", icon: (<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>) },
+    { label: "Sertifikat dapat diverifikasi melalui ID", icon: (<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>) },
   ];
 
   const benefitsOrg = [
@@ -81,13 +81,13 @@ export default function CertificatesPage() {
                 <h3 className="text-sm font-bold uppercase tracking-widest text-black/45 mb-6">
                   Alur Penerbitan Otomatis
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {howItWorks.map((step, idx) => (
                     <div key={idx} className="flex gap-4 items-center p-3 rounded-xl" style={{ background: 'rgb(255, 248, 241)', border: '1px solid rgb(240, 217, 200)' }}>
-                      <div className="h-8 w-8 rounded bg-white flex items-center justify-center font-bold text-sm shrink-0 shadow-sm" style={{ color: 'rgb(255, 138, 0)', border: '1px solid rgb(240, 217, 200)' }}>
-                        {idx + 1}
+                      <div className="h-9 w-9 rounded-lg bg-white flex items-center justify-center shrink-0 shadow-sm" style={{ color: 'rgb(255, 138, 0)', border: '1px solid rgb(240, 217, 200)' }}>
+                        {step.icon}
                       </div>
-                      <p className="font-semibold text-[#181818]">{step}</p>
+                      <p className="font-semibold text-[#181818] text-sm">{step.label}</p>
                     </div>
                   ))}
                 </div>
@@ -142,7 +142,9 @@ export default function CertificatesPage() {
           <Container className="max-w-5xl">
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white p-8 rounded-2xl shadow-sm" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
-                <div className="h-12 w-12 rounded-full flex items-center justify-center mb-6 text-xl" style={{ background: 'rgb(255, 244, 232)', color: 'rgb(255, 138, 0)', border: '1.5px solid rgb(255, 214, 165)' }}>🏢</div>
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-6" style={{ background: 'rgb(255, 244, 232)', color: 'rgb(255, 138, 0)', border: '1.5px solid rgb(255, 214, 165)' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                </div>
                 <h3 className="text-xl font-bold text-[#181818] mb-6">Manfaat Bagi Organisasi</h3>
                 <ul className="space-y-4">
                   {benefitsOrg.map((b, idx) => (
@@ -155,7 +157,9 @@ export default function CertificatesPage() {
               </div>
 
               <div className="bg-white p-8 rounded-2xl shadow-sm" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
-                <div className="h-12 w-12 rounded-full flex items-center justify-center mb-6 text-xl" style={{ background: 'rgb(255, 244, 232)', color: 'rgb(255, 138, 0)', border: '1.5px solid rgb(255, 214, 165)' }}>👩‍💻</div>
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-6" style={{ background: 'rgb(255, 244, 232)', color: 'rgb(255, 138, 0)', border: '1.5px solid rgb(255, 214, 165)' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                </div>
                 <h3 className="text-xl font-bold text-[#181818] mb-6">Manfaat Bagi Peserta</h3>
                 <ul className="space-y-4">
                   {benefitsParticipant.map((b, idx) => (
@@ -171,21 +175,23 @@ export default function CertificatesPage() {
         </section>
 
         {/* CTA Bottom */}
-        <section className="py-20 text-center" style={{ borderTop: '1.5px solid rgb(240, 217, 200)' }}>
-          <Container className="max-w-3xl">
-            <h2 className="text-3xl font-bold tracking-tight text-[#181818] mb-6">Diskusikan Program Sertifikasi Anda</h2>
-            <p className="text-lg text-black/60 mb-10">Tim Skillary siap membantu merancang program pelatihan dengan sertifikat digital yang terukur.</p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link href="/program-catalog">
-                <button className="text-white px-8 py-4 shadow-lg font-bold rounded-full hover:opacity-90 hover:-translate-y-0.5 transition-all" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>
-                  Lihat Program
-                </button>
-              </Link>
-              <Link href="/contact">
-                <button className="bg-white text-[#334155] font-bold px-8 py-4 rounded-full shadow-sm hover:bg-[#FFF8F1] hover:-translate-y-0.5 transition-all" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
-                  Diskusikan Sertifikat Training
-                </button>
-              </Link>
+        <section className="py-14 text-center" style={{ borderTop: '1.5px solid rgb(240, 217, 200)' }}>
+          <Container className="max-w-2xl">
+            <div className="bg-white rounded-3xl p-10 shadow-sm" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
+              <h2 className="text-2xl font-bold tracking-tight text-[#181818] mb-3">Ingin Sertifikat untuk Program Internal Anda?</h2>
+              <p className="text-base text-black/60 mb-8 leading-relaxed">Kami dapat membantu menyusun alur assessment, kriteria kelulusan, format sertifikat digital, dan laporan peserta sesuai kebutuhan organisasi.</p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Link href="/contact?type=assessment">
+                  <button className="text-white px-7 py-3.5 shadow-lg font-bold rounded-full hover:opacity-90 hover:-translate-y-0.5 transition-all text-sm" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>
+                    Diskusikan Sertifikat Training
+                  </button>
+                </Link>
+                <Link href="/platform">
+                  <button className="bg-white text-[#334155] font-bold px-7 py-3.5 rounded-full shadow-sm hover:bg-[#FFF8F1] hover:-translate-y-0.5 transition-all text-sm" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
+                    Lihat Contoh Alur Sertifikat
+                  </button>
+                </Link>
+              </div>
             </div>
           </Container>
         </section>

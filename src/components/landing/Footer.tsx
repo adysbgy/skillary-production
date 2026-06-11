@@ -69,7 +69,7 @@ export const Footer = () => {
 <ul className="space-y-2.5">
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/services">Solusi Organisasi</Link></li>
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/training-brief">Brief Training</Link></li>
-<li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/proposal">Minta Proposal</Link></li>
+<li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/proposal">Diskusikan Kebutuhan Training</Link></li>
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/contact">Kontak</Link></li>
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/portfolio">Portofolio</Link></li>
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/about">Tentang Kami</Link></li>

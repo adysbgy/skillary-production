@@ -25,7 +25,7 @@ export function FinalCTASection() {
           </Link>
           <Link href="/proposal">
             <button className="motion-btn px-8 py-4 font-bold rounded-xl border border-white/20 text-white hover:bg-white/10 text-sm">
-              Minta Proposal
+              Diskusikan Kebutuhan Training
             </button>
           </Link>
         </div>

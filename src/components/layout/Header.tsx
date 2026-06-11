@@ -162,7 +162,7 @@ export function Header() {
                                     Masuk
                                 </Link>
                                 <Link href="/proposal" className="hidden sm:inline-flex">
-                                    <button className="px-5 py-2.5 text-sm font-bold text-white rounded-full shadow-md hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>Minta Proposal</button>
+                                    <button className="px-5 py-2.5 text-sm font-bold text-white rounded-full shadow-md hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>Diskusikan Kebutuhan Training</button>
                                 </Link>
                             </>
                         )}
@@ -262,7 +262,7 @@ export function Header() {
                     ) : (
                         <>
                             <Link href="/proposal" onClick={() => setMenuOpen(false)}>
-                                <button className="w-full px-6 py-3 text-sm font-bold text-white rounded-full shadow-md hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>Minta Proposal</button>
+                                <button className="w-full px-6 py-3 text-sm font-bold text-white rounded-full shadow-md hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>Diskusikan Kebutuhan Training</button>
                             </Link>
                             <Link
                                 href="/login"

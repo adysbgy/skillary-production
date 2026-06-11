@@ -30,7 +30,7 @@ export function HeroSection() {
           <div className="motion-fade-up motion-delay-300 mt-8 flex flex-wrap items-center gap-3">
             <Link href="/proposal">
               <button className="motion-btn bg-[#172554] hover:bg-[#1E3A8A] text-white px-7 py-3.5 shadow-lg shadow-[#172554]/15 font-semibold rounded-xl text-sm">
-                Minta Proposal
+                Diskusikan Kebutuhan Training
               </button>
             </Link>
             <Link href="/portfolio">

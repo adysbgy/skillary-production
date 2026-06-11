@@ -128,7 +128,7 @@ export default function AboutPage() {
             </Link>
             <Link href="/proposal">
               <button className="bg-white/20 text-white border border-white/30 font-bold px-8 py-4 rounded-full hover:bg-white/30 transition-colors text-lg">
-                Minta Proposal
+                Diskusikan Kebutuhan Training
               </button>
             </Link>
           </div>

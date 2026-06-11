@@ -59,7 +59,7 @@ export default function DemoPage() {
               </Link>
               <Link href="/proposal">
                 <button className="px-7 py-3.5 font-semibold rounded-full bg-white text-[#334155] hover:bg-[#FFF8F1] hover:-translate-y-0.5 transition-all" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
-                  Minta Proposal
+                  Diskusikan Kebutuhan Training
                 </button>
               </Link>
             </div>
@@ -131,7 +131,7 @@ export default function DemoPage() {
               </Link>
               <Link href="/proposal">
                 <button className="bg-white text-[#334155] font-bold px-8 py-4 rounded-full shadow-sm hover:bg-[#FFF8F1] hover:-translate-y-0.5 transition-all" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
-                  Minta Proposal
+                  Diskusikan Kebutuhan Training
                 </button>
               </Link>
             </div>

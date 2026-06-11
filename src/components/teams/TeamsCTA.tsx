@@ -23,7 +23,7 @@ export function TeamsCTA() {
           </Link>
           <Link href="/contact">
             <button className="bg-[#FFFDF9] text-[#334155] font-bold px-8 py-4 rounded-full shadow-sm hover:bg-[#FFF8F1] transition-all text-lg" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
-              Minta Proposal
+              Diskusikan Kebutuhan Training
             </button>
           </Link>
         </div>

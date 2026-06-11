@@ -33,7 +33,7 @@ export function TeamsFAQ() {
     },
     {
       q: "Bagaimana cara meminta proposal?",
-      a: "Anda dapat menghubungi tim kami melalui halaman kontak atau klik tombol 'Minta Proposal' di halaman ini. Tim kami akan merespons dalam 1–2 hari kerja.",
+      a: "Anda dapat menghubungi tim kami melalui halaman kontak atau klik tombol 'Diskusikan Kebutuhan Training' di halaman ini. Tim kami akan merespons dalam 1–2 hari kerja.",
     },
   ];
 
