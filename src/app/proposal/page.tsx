@@ -36,7 +36,7 @@ function BriefChecklist() {
     ? `Halo Skillary, saya sudah menyiapkan: ${selectedLabels}. Saya ingin mendiskusikan kebutuhan training.`
     : "Halo Skillary, saya ingin mendiskusikan kebutuhan training untuk organisasi saya.";
 
-  const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(whatsappText)}`;
+  const waUrl = `https://wa.me/62811186363?text=${encodeURIComponent(whatsappText)}`;
 
   return (
     <div className="bg-[#FFFDF9] rounded-2xl p-8 lg:p-10" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>

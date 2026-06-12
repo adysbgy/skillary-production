@@ -9,7 +9,7 @@
 export const FORMSPREE_ID = "YOUR_FORM_ID";
 
 /** WhatsApp number in international format (no +, no dashes) */
-export const WHATSAPP_NUMBER = "620811180303";
+export const WHATSAPP_NUMBER = "62811186363";
 
 /** Build a WhatsApp link with optional pre-filled message */
 export function whatsappLink(message?: string) {
