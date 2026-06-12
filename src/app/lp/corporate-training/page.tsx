@@ -18,8 +18,10 @@ interface FormState {
   _honeypot: string;
 }
 
+type FormErrors = Partial<Record<keyof FormState, string>>;
+
 // ─────────────────────────────────────────────
-// ICONS (inline SVG, outline-2px)
+// ICONS  (outline 2px)
 // ─────────────────────────────────────────────
 const IconDatabase = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -42,79 +44,81 @@ const IconPortfolio = () => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
   </svg>
 );
-const IconCheck = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+const IconCheck = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className={`${className} shrink-0`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
   </svg>
 );
 const IconChevron = ({ open }: { open: boolean }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={`w-5 h-5 transition-transform duration-300 ${open ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+  <svg xmlns="http://www.w3.org/2000/svg" className={`w-5 h-5 shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
   </svg>
 );
 
 // ─────────────────────────────────────────────
-// GRADIENT CTA BUTTON
+// BUTTON PRIMITIVES
 // ─────────────────────────────────────────────
-function CTAButton({ children, onClick, href, size = "md", className = "" }: {
+type BtnSize = "sm" | "md" | "lg";
+const BTN_SIZES: Record<BtnSize, string> = {
+  sm: "px-5 py-2.5 text-sm",
+  md: "px-7 py-3.5 text-sm",
+  lg: "px-8 py-4 text-base",
+};
+const GRADIENT = "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))";
+
+function CTAButton({
+  children, onClick, href, size = "md", className = "", type = "button",
+}: {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string;
-  size?: "sm" | "md" | "lg";
+  size?: BtnSize;
   className?: string;
+  type?: "button" | "submit";
 }) {
-  const sizes = {
-    sm: "px-5 py-2.5 text-sm",
-    md: "px-7 py-3.5 text-sm",
-    lg: "px-8 py-4 text-base",
-  };
-  const base = `inline-flex items-center justify-center gap-2 rounded-full font-bold text-white shadow-lg transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 ${sizes[size]} ${className}`;
-  const style = { background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" };
-  if (href) return <Link href={href} className={base} style={style}>{children}</Link>;
-  return <button onClick={onClick} className={base} style={style}>{children}</button>;
+  const base = `inline-flex items-center justify-center gap-2 rounded-full font-bold text-white shadow-lg transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 ${BTN_SIZES[size]} ${className}`;
+  if (href) return <Link href={href} className={base} style={{ background: GRADIENT }}>{children}</Link>;
+  return <button type={type} onClick={onClick} className={base} style={{ background: GRADIENT }}>{children}</button>;
 }
 
-function SecondaryButton({ children, href, onClick, size = "md", className = "" }: {
+function SecondaryButton({
+  children, href, onClick, size = "md", className = "",
+}: {
   children: React.ReactNode;
   href?: string;
   onClick?: () => void;
-  size?: "sm" | "md" | "lg";
+  size?: BtnSize;
   className?: string;
 }) {
-  const sizes = { sm: "px-5 py-2.5 text-sm", md: "px-7 py-3.5 text-sm", lg: "px-8 py-4 text-base" };
-  const base = `inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 hover:-translate-y-0.5 border ${sizes[size]} ${className}`;
+  const base = `inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 border ${BTN_SIZES[size]} ${className}`;
   const style = { borderColor: "rgb(240,217,200)", color: "#334155", background: "#fff" };
   if (href) return <Link href={href} className={base} style={style}>{children}</Link>;
-  return <button onClick={onClick} className={base} style={style}>{children}</button>;
+  return <button type="button" onClick={onClick} className={base} style={style}>{children}</button>;
 }
 
 // ─────────────────────────────────────────────
-// SECTION 0 — COMPACT LANDING HEADER
+// COMPACT LANDING HEADER
 // ─────────────────────────────────────────────
 function LPHeader({ onCTAClick }: { onCTAClick: () => void }) {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#F0D9C8]">
       <div className="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="/" className="shrink-0">
-          <Image src="/logo.png" alt="Skillary" width={120} height={36} className="h-8 w-auto object-contain" />
+        <Link href="/" className="shrink-0" aria-label="Skillary beranda">
+          <Image src="/logo.png" alt="Skillary" width={120} height={36} className="h-8 w-auto object-contain" priority />
         </Link>
 
         {/* Trust Badges — hide on small mobile */}
-        <div className="hidden sm:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2" aria-hidden="true">
           {["Sertifikat Digital", "Training Report", "Dokumentasi Event"].map((badge) => (
-            <span
-              key={badge}
-              className="text-[10px] font-bold px-3 py-1.5 rounded-full"
-              style={{ background: "rgb(255,244,232)", color: "rgb(180,100,0)", border: "1px solid rgb(255,214,165)" }}
-            >
+            <span key={badge} className="text-[10px] font-bold px-3 py-1.5 rounded-full" style={{ background: "rgb(255,244,232)", color: "rgb(180,100,0)", border: "1px solid rgb(255,214,165)" }}>
               {badge}
             </span>
           ))}
         </div>
 
-        {/* CTA */}
-        <CTAButton size="sm" onClick={onCTAClick}>
+        {/* Header CTA — scrolls to form */}
+        <CTAButton size="sm" onClick={onCTAClick} aria-label="Minta Proposal Training">
           Minta Proposal
         </CTAButton>
       </div>
@@ -123,7 +127,98 @@ function LPHeader({ onCTAClick }: { onCTAClick: () => void }) {
 }
 
 // ─────────────────────────────────────────────
-// SECTION 1 — HERO + LEAD FORM
+// HERO VISUAL MOCKUP
+// Communicates: training report, certificate, participant DB, event docs
+// ─────────────────────────────────────────────
+function HeroVisual() {
+  return (
+    <div className="flex flex-col gap-3 w-full" aria-hidden="true">
+      {/* Training Report Card */}
+      <div className="bg-white rounded-2xl p-5 shadow-lg border border-[#E2D4C8]">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <p className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-widest">Training Report</p>
+            <p className="text-sm font-bold text-[#0F172A] mt-0.5">Corporate Training — Jun 2025</p>
+          </div>
+          <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-green-50 text-green-700 border border-green-200">✓ Completed</span>
+        </div>
+        {/* KPI Strip */}
+        <div className="grid grid-cols-3 gap-2 mb-4">
+          {[["48", "Peserta"], ["92%", "Kehadiran"], ["4.7★", "Rating"]].map(([val, lbl]) => (
+            <div key={lbl} className="bg-[#FFFDF9] rounded-xl p-3 text-center border border-[#F0D9C8]">
+              <p className="text-lg font-extrabold" style={{ color: "rgb(255,138,0)" }}>{val}</p>
+              <p className="text-[9px] text-[#64748B] font-semibold">{lbl}</p>
+            </div>
+          ))}
+        </div>
+        {/* Progress Bars */}
+        <div className="space-y-2">
+          {[["Data Literacy", 88], ["Power BI Dashboard", 76], ["Presentasi Bisnis", 93]].map(([topic, pct]) => (
+            <div key={topic as string}>
+              <div className="flex justify-between text-[9px] font-semibold mb-1">
+                <span className="text-[#475569]">{topic}</span>
+                <span style={{ color: "rgb(255,138,0)" }}>{pct}%</span>
+              </div>
+              <div className="h-1.5 bg-[#F0D9C8] rounded-full overflow-hidden">
+                <div className="h-full rounded-full" style={{ width: `${pct}%`, background: GRADIENT }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Certificate + Database row */}
+      <div className="grid grid-cols-2 gap-3">
+        {/* Sertifikat Digital */}
+        <div className="bg-[#0F172A] rounded-2xl p-4 shadow-lg">
+          <p className="text-[9px] font-bold text-[#64748B] uppercase tracking-widest mb-3">Sertifikat Digital</p>
+          <div className="space-y-2">
+            {["Andi S.", "Dewi R.", "Budi W.", "Sari M."].map((n) => (
+              <div key={n} className="flex items-center gap-2">
+                <div className="w-5 h-5 rounded-full shrink-0" style={{ background: GRADIENT }} />
+                <span className="text-[11px] text-white font-medium flex-1 truncate">{n}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Database Peserta */}
+        <div className="bg-white rounded-2xl p-4 shadow-lg border border-[#E2D4C8]">
+          <p className="text-[9px] font-bold text-[#94A3B8] uppercase tracking-widest mb-3">Database Peserta</p>
+          <div className="space-y-2.5">
+            {[["Total Peserta", "48"], ["Selesai Program", "44"], ["Bersertifikat", "38"], ["Pass Assessment", "91%"]].map(([label, val]) => (
+              <div key={label} className="flex justify-between items-center">
+                <span className="text-[9px] text-[#64748B]">{label}</span>
+                <span className="text-[10px] font-extrabold text-[#0F172A]">{val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Event Documentation strip */}
+      <div className="bg-[#FFFDF9] rounded-xl px-4 py-3 border border-[#E2D4C8] flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "rgb(255,244,232)" }}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="rgb(255,138,0)" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+          </div>
+          <div>
+            <p className="text-[9px] font-bold text-[#94A3B8] uppercase tracking-wider">Dokumentasi Event</p>
+            <p className="text-[11px] font-bold text-[#0F172A]">Foto, Absensi, Feedback — Tersimpan</p>
+          </div>
+        </div>
+        <span className="text-[9px] font-bold px-2 py-1 rounded-lg bg-green-50 text-green-700 border border-green-100">Siap Laporan</span>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// LEAD FORM
+// Payload validated against /api/leads schema:
+// name, email, whatsapp, organization, role,
+// inquiryType, programInterest, sourcePage, message, _honeypot
 // ─────────────────────────────────────────────
 const KEBUTUHAN_OPTIONS = [
   "In-House Training",
@@ -132,150 +227,191 @@ const KEBUTUHAN_OPTIONS = [
   "Platform / LMS Discussion",
   "Expert Partner Collaboration",
   "General Inquiry",
-];
+] as const;
 
-const PESERTA_OPTIONS = ["< 20 peserta", "20–50 peserta", "50–100 peserta", "100–200 peserta", "> 200 peserta"];
+const PESERTA_OPTIONS = ["< 20 peserta", "20–50 peserta", "50–100 peserta", "100–200 peserta", "> 200 peserta"] as const;
+
+const SOURCE_PAGE = "/lp/corporate-training";
 
 function LeadForm({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }) {
   const [form, setForm] = useState<FormState>({
-    nama: "", perusahaan: "", jabatan: "", whatsapp: "", email: "",
-    kebutuhan: "", peserta: "", _honeypot: "",
+    nama: "", perusahaan: "", jabatan: "", whatsapp: "",
+    email: "", kebutuhan: "", peserta: "", _honeypot: "",
   });
-  const [errors, setErrors] = useState<Partial<FormState>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState("");
 
   const validate = (): boolean => {
-    const e: Partial<FormState> = {};
+    const e: FormErrors = {};
     if (!form.nama.trim()) e.nama = "Nama wajib diisi";
     if (!form.perusahaan.trim()) e.perusahaan = "Nama perusahaan/instansi wajib diisi";
-    if (!form.whatsapp.trim()) e.whatsapp = "WhatsApp wajib diisi";
-    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Email tidak valid";
+    if (!form.whatsapp.trim()) e.whatsapp = "Nomor WhatsApp wajib diisi";
+    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) e.email = "Format email tidak valid";
     if (!form.kebutuhan) e.kebutuhan = "Pilih kebutuhan training";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    // Clear error on change
     if (errors[name as keyof FormState]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
     setServerError("");
     try {
+      // Build payload matching the /api/leads schema exactly:
+      // { name, email, whatsapp?, organization?, role?, inquiryType,
+      //   programInterest?, sourcePage?, message, _honeypot? }
+      const payload = {
+        name: form.nama.trim(),
+        email: form.email.trim(),
+        whatsapp: form.whatsapp.trim(),
+        organization: form.perusahaan.trim(),
+        role: form.jabatan.trim(),
+        inquiryType: form.kebutuhan,                         // maps to inquiryType — required
+        programInterest: form.peserta ? `Perkiraan peserta: ${form.peserta}` : "",
+        sourcePage: SOURCE_PAGE,                             // identifies this lead's origin
+        // message encodes campaign context for admin CRM view
+        message: [
+          "[Corporate Training LP]",
+          `Kebutuhan: ${form.kebutuhan}`,
+          form.peserta ? `Jumlah peserta: ${form.peserta}` : "",
+          form.jabatan ? `Jabatan: ${form.jabatan}` : "",
+        ].filter(Boolean).join(" | "),
+        _honeypot: form._honeypot,
+      };
+
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.nama,
-          email: form.email,
-          whatsapp: form.whatsapp,
-          organization: form.perusahaan,
-          role: form.jabatan,
-          inquiryType: form.kebutuhan || "In-House Training",
-          programInterest: form.peserta ? `Peserta: ${form.peserta}` : "",
-          sourcePage: "/lp/corporate-training",
-          message: `Corporate training lead dari halaman /lp/corporate-training. Kebutuhan: ${form.kebutuhan}. Perkiraan peserta: ${form.peserta || "-"}.`,
-          _honeypot: form._honeypot,
-        }),
+        body: JSON.stringify(payload),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Gagal mengirim");
+      const data: { ok?: boolean; error?: string } = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal mengirim formulir");
       setSuccess(true);
-    } catch (err: any) {
-      setServerError(err.message || "Terjadi kesalahan. Silakan coba lagi.");
+    } catch (err: unknown) {
+      setServerError(err instanceof Error ? err.message : "Terjadi kesalahan. Silakan coba lagi.");
     } finally {
       setSubmitting(false);
     }
   };
 
-  const fieldClass = (err?: string) =>
-    `w-full rounded-xl border px-4 py-3 text-sm text-[#1e293b] placeholder:text-[#94a3b8] outline-none transition-all focus:ring-2 ${err
-      ? "border-red-400 focus:ring-red-200"
-      : "border-[#E2D4C8] focus:border-[#FF8A00] focus:ring-[#FF8A00]/20"
-    }`;
+  const fieldBase = "w-full rounded-xl border px-4 py-3 text-sm text-[#1e293b] placeholder:text-[#94a3b8] outline-none transition-all duration-150 focus:ring-2 bg-white";
+  const fieldOk = "border-[#E2D4C8] focus:border-[#FF8A00] focus:ring-[#FF8A00]/20";
+  const fieldErr = "border-red-400 bg-red-50 focus:ring-red-200";
+  const fc = (err?: string) => `${fieldBase} ${err ? fieldErr : fieldOk}`;
 
   return (
     <div ref={formRef} className="bg-white rounded-2xl shadow-xl p-6 md:p-8" style={{ border: "1.5px solid rgb(240,217,200)" }}>
       {success ? (
-        <div className="text-center py-8">
-          <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4 border-2 border-green-200">
+        /* ── Success state ── */
+        <div className="text-center py-8" role="alert" aria-live="polite">
+          <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5 border-2 border-green-200">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
           </div>
-          <h3 className="text-xl font-bold text-[#0F172A] mb-2">Terima Kasih!</h3>
-          <p className="text-[#475569] text-sm leading-relaxed">
+          <h3 className="text-xl font-bold text-[#0F172A] mb-3">Terima Kasih!</h3>
+          <p className="text-sm text-[#475569] leading-relaxed max-w-xs mx-auto">
             Tim Skillary akan menghubungi Anda untuk mendiskusikan kebutuhan training organisasi Anda.
+          </p>
+          <p className="mt-4 text-xs text-[#94A3B8]">
+            Cek WhatsApp atau email Anda dalam 1×24 jam kerja.
           </p>
         </div>
       ) : (
         <>
           <h3 className="text-lg font-bold text-[#0F172A] mb-1">Minta Proposal Training</h3>
-          <p className="text-sm text-[#64748B] mb-6">Isi form berikut dan tim kami akan segera menghubungi Anda.</p>
+          <p className="text-sm text-[#64748B] mb-6">Isi form berikut — tim kami akan menghubungi Anda.</p>
 
+          {/* Server error banner */}
           {serverError && (
-            <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">{serverError}</div>
+            <div role="alert" aria-live="assertive" className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
+              {serverError}
+            </div>
           )}
 
-          <form onSubmit={handleSubmit} noValidate className="space-y-4">
-            {/* Honeypot (hidden from real users) */}
-            <input type="text" name="_honeypot" value={form._honeypot} onChange={handleChange} className="hidden" tabIndex={-1} aria-hidden="true" />
+          <form onSubmit={handleSubmit} noValidate className="space-y-4" aria-label="Form Minta Proposal Training">
+            {/* Honeypot — hidden from real users, catches bots */}
+            <input type="text" name="_honeypot" value={form._honeypot} onChange={handleChange} className="sr-only" tabIndex={-1} aria-hidden="true" autoComplete="off" />
 
+            {/* Row: Nama + Perusahaan */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="lp-nama" className="block text-xs font-semibold text-[#475569] mb-1.5">Nama <span className="text-red-500">*</span></label>
-                <input id="lp-nama" name="nama" type="text" placeholder="Nama lengkap" value={form.nama} onChange={handleChange} className={fieldClass(errors.nama)} />
-                {errors.nama && <p className="text-xs text-red-500 mt-1">{errors.nama}</p>}
+                <label htmlFor="lp-nama" className="block text-xs font-semibold text-[#475569] mb-1.5">
+                  Nama <span className="text-red-500" aria-label="wajib">*</span>
+                </label>
+                <input id="lp-nama" name="nama" type="text" placeholder="Nama lengkap" value={form.nama} onChange={handleChange} className={fc(errors.nama)} aria-describedby={errors.nama ? "err-nama" : undefined} autoComplete="name" />
+                {errors.nama && <p id="err-nama" role="alert" className="text-xs text-red-500 mt-1">{errors.nama}</p>}
               </div>
               <div>
-                <label htmlFor="lp-perusahaan" className="block text-xs font-semibold text-[#475569] mb-1.5">Perusahaan / Instansi <span className="text-red-500">*</span></label>
-                <input id="lp-perusahaan" name="perusahaan" type="text" placeholder="Nama perusahaan/instansi" value={form.perusahaan} onChange={handleChange} className={fieldClass(errors.perusahaan)} />
-                {errors.perusahaan && <p className="text-xs text-red-500 mt-1">{errors.perusahaan}</p>}
+                <label htmlFor="lp-perusahaan" className="block text-xs font-semibold text-[#475569] mb-1.5">
+                  Perusahaan / Instansi <span className="text-red-500" aria-label="wajib">*</span>
+                </label>
+                <input id="lp-perusahaan" name="perusahaan" type="text" placeholder="PT / Yayasan / Lembaga" value={form.perusahaan} onChange={handleChange} className={fc(errors.perusahaan)} aria-describedby={errors.perusahaan ? "err-perusahaan" : undefined} autoComplete="organization" />
+                {errors.perusahaan && <p id="err-perusahaan" role="alert" className="text-xs text-red-500 mt-1">{errors.perusahaan}</p>}
               </div>
             </div>
 
+            {/* Jabatan */}
             <div>
               <label htmlFor="lp-jabatan" className="block text-xs font-semibold text-[#475569] mb-1.5">Jabatan</label>
-              <input id="lp-jabatan" name="jabatan" type="text" placeholder="HR Manager, Training Manager, dll." value={form.jabatan} onChange={handleChange} className={fieldClass()} />
+              <input id="lp-jabatan" name="jabatan" type="text" placeholder="HR Manager, Training Manager, dll." value={form.jabatan} onChange={handleChange} className={fc()} autoComplete="organization-title" />
             </div>
 
+            {/* Row: WhatsApp + Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="lp-whatsapp" className="block text-xs font-semibold text-[#475569] mb-1.5">WhatsApp <span className="text-red-500">*</span></label>
-                <input id="lp-whatsapp" name="whatsapp" type="tel" placeholder="08xxxxxxxxxx" value={form.whatsapp} onChange={handleChange} className={fieldClass(errors.whatsapp)} />
-                {errors.whatsapp && <p className="text-xs text-red-500 mt-1">{errors.whatsapp}</p>}
+                <label htmlFor="lp-whatsapp" className="block text-xs font-semibold text-[#475569] mb-1.5">
+                  WhatsApp <span className="text-red-500" aria-label="wajib">*</span>
+                </label>
+                <input id="lp-whatsapp" name="whatsapp" type="tel" placeholder="08xxxxxxxxxx" value={form.whatsapp} onChange={handleChange} className={fc(errors.whatsapp)} aria-describedby={errors.whatsapp ? "err-wa" : undefined} autoComplete="tel" />
+                {errors.whatsapp && <p id="err-wa" role="alert" className="text-xs text-red-500 mt-1">{errors.whatsapp}</p>}
               </div>
               <div>
-                <label htmlFor="lp-email" className="block text-xs font-semibold text-[#475569] mb-1.5">Email <span className="text-red-500">*</span></label>
-                <input id="lp-email" name="email" type="email" placeholder="email@perusahaan.com" value={form.email} onChange={handleChange} className={fieldClass(errors.email)} />
-                {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+                <label htmlFor="lp-email" className="block text-xs font-semibold text-[#475569] mb-1.5">
+                  Email <span className="text-red-500" aria-label="wajib">*</span>
+                </label>
+                <input id="lp-email" name="email" type="email" placeholder="email@perusahaan.com" value={form.email} onChange={handleChange} className={fc(errors.email)} aria-describedby={errors.email ? "err-email" : undefined} autoComplete="email" />
+                {errors.email && <p id="err-email" role="alert" className="text-xs text-red-500 mt-1">{errors.email}</p>}
               </div>
             </div>
 
+            {/* Kebutuhan */}
             <div>
-              <label htmlFor="lp-kebutuhan" className="block text-xs font-semibold text-[#475569] mb-1.5">Kebutuhan Training <span className="text-red-500">*</span></label>
-              <select id="lp-kebutuhan" name="kebutuhan" value={form.kebutuhan} onChange={handleChange} className={fieldClass(errors.kebutuhan)}>
+              <label htmlFor="lp-kebutuhan" className="block text-xs font-semibold text-[#475569] mb-1.5">
+                Kebutuhan Training <span className="text-red-500" aria-label="wajib">*</span>
+              </label>
+              <select id="lp-kebutuhan" name="kebutuhan" value={form.kebutuhan} onChange={handleChange} className={fc(errors.kebutuhan)} aria-describedby={errors.kebutuhan ? "err-kebutuhan" : undefined}>
                 <option value="">Pilih kebutuhan…</option>
                 {KEBUTUHAN_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
               </select>
-              {errors.kebutuhan && <p className="text-xs text-red-500 mt-1">{errors.kebutuhan}</p>}
+              {errors.kebutuhan && <p id="err-kebutuhan" role="alert" className="text-xs text-red-500 mt-1">{errors.kebutuhan}</p>}
             </div>
 
+            {/* Peserta */}
             <div>
               <label htmlFor="lp-peserta" className="block text-xs font-semibold text-[#475569] mb-1.5">Perkiraan Jumlah Peserta</label>
-              <select id="lp-peserta" name="peserta" value={form.peserta} onChange={handleChange} className={fieldClass()}>
+              <select id="lp-peserta" name="peserta" value={form.peserta} onChange={handleChange} className={fc()}>
                 <option value="">Pilih jumlah…</option>
                 {PESERTA_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
               </select>
             </div>
 
-            <CTAButton size="lg" className="w-full justify-center">
-              {submitting ? "Mengirim…" : "Minta Proposal Training →"}
+            {/* Submit — type="submit" explicit */}
+            <CTAButton type="submit" size="lg" className="w-full justify-center" aria-label="Kirim formulir minta proposal training">
+              {submitting ? (
+                <span className="flex items-center gap-2">
+                  <svg className="animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg>
+                  Mengirim…
+                </span>
+              ) : "Minta Proposal Training →"}
             </CTAButton>
 
             <p className="text-center text-xs text-[#94A3B8] leading-relaxed">
@@ -288,115 +424,66 @@ function LeadForm({ formRef }: { formRef: React.RefObject<HTMLDivElement | null>
   );
 }
 
-// Dashboard Mockup Visual
-function DashboardMockup() {
-  return (
-    <div className="relative w-full h-full min-h-[400px] flex flex-col gap-3">
-      {/* Main card */}
-      <div className="bg-white rounded-2xl p-5 shadow-lg border border-[#E2D4C8]">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <p className="text-xs font-bold text-[#94A3B8] uppercase tracking-widest">Training Report</p>
-            <h4 className="text-sm font-bold text-[#0F172A] mt-0.5">Corporate Training — Jun 2025</h4>
-          </div>
-          <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-green-50 text-green-700 border border-green-200">Completed</span>
-        </div>
-        <div className="grid grid-cols-3 gap-3 mb-4">
-          {[["48", "Peserta"], ["92%", "Kehadiran"], ["4.7", "Rating"]].map(([val, lbl]) => (
-            <div key={lbl} className="bg-[#FFFDF9] rounded-xl p-3 text-center border border-[#F0D9C8]">
-              <p className="text-xl font-extrabold text-[#FF8A00]">{val}</p>
-              <p className="text-[10px] text-[#64748B] font-medium">{lbl}</p>
-            </div>
-          ))}
-        </div>
-        <div className="space-y-2">
-          {[["Data Literacy", 88], ["Power BI", 76], ["Presentasi Bisnis", 92]].map(([topic, pct]) => (
-            <div key={topic as string}>
-              <div className="flex justify-between text-[10px] font-semibold mb-1">
-                <span className="text-[#475569]">{topic}</span>
-                <span className="text-[#FF8A00]">{pct}%</span>
-              </div>
-              <div className="h-1.5 bg-[#F0D9C8] rounded-full overflow-hidden">
-                <div className="h-full rounded-full" style={{ width: `${pct}%`, background: "linear-gradient(90deg,rgb(255,138,0),rgb(255,90,95))" }} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Certificate + DB cards side by side */}
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-[#0F172A] rounded-2xl p-4 shadow-lg">
-          <p className="text-[10px] font-bold text-[#64748B] uppercase tracking-widest mb-2">Sertifikat Digital</p>
-          <div className="flex flex-col gap-1.5">
-            {["Andi S.", "Dewi R.", "Budi W."].map((n) => (
-              <div key={n} className="flex items-center gap-2">
-                <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 shrink-0" />
-                <span className="text-xs text-white font-medium">{n}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-green-400 ml-auto shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-4 shadow-lg border border-[#E2D4C8]">
-          <p className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-widest mb-2">Database Peserta</p>
-          <div className="space-y-2">
-            {[["Divisi", "48 org"], ["Selesai", "44 org"], ["Sertifikat", "38 org"]].map(([label, val]) => (
-              <div key={label} className="flex justify-between items-center">
-                <span className="text-[10px] text-[#64748B]">{label}</span>
-                <span className="text-[10px] font-bold text-[#0F172A]">{val}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+// ─────────────────────────────────────────────
+// HERO SECTION
+// ─────────────────────────────────────────────
 function HeroSection({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }) {
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   return (
-    <section className="bg-gradient-to-b from-[#FFFDF9] to-white py-16 md:py-24 px-5 md:px-8 overflow-hidden" style={{ borderBottom: "1.5px solid rgb(240,217,200)" }}>
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-        {/* Left */}
+    <section className="bg-gradient-to-b from-[#FFFDF9] to-white py-16 md:py-24 px-5 md:px-8 overflow-x-hidden" style={{ borderBottom: "1.5px solid rgb(240,217,200)" }}>
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+        {/* LEFT — copy + hero CTA */}
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest mb-6" style={{ background: "rgb(255,244,232)", color: "rgb(180,100,0)", border: "1.5px solid rgb(255,214,165)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse inline-block" />
-            Corporate Training Platform
+          {/* Badge — QA fix: updated to match spec */}
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest mb-6 flex-wrap" style={{ background: "rgb(255,244,232)", color: "rgb(180,100,0)", border: "1.5px solid rgb(255,214,165)" }}>
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse inline-block shrink-0" aria-hidden="true" />
+            Corporate Training &nbsp;·&nbsp; Sertifikat Digital &nbsp;·&nbsp; Training Report
           </div>
-          <h1 className="text-3xl md:text-4xl lg:text-[2.8rem] font-extrabold leading-[1.15] text-[#0F172A] mb-5 tracking-tight">
+
+          <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold leading-[1.15] text-[#0F172A] mb-5 tracking-tight">
             Pelatihan Korporat yang{" "}
-            <span style={{ background: "linear-gradient(135deg,rgb(255,138,0),rgb(255,90,95))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ background: GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               Terdokumentasi, Tersertifikasi
             </span>
             , dan Siap Dilaporkan
           </h1>
+
           <p className="text-base md:text-lg text-[#475569] leading-relaxed mb-8 max-w-lg">
             Skillary membantu perusahaan menjalankan program pelatihan yang lebih terstruktur melalui materi, database peserta, absensi, dokumentasi event, sertifikat digital, evaluasi, dan laporan hasil training.
           </p>
 
           {/* Trust strip */}
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="flex flex-wrap gap-2 mb-8" aria-label="Fitur utama Skillary">
             {["✓ Sertifikat Digital", "✓ Training Report", "✓ Database Peserta", "✓ Dokumentasi Event"].map((t) => (
               <span key={t} className="text-xs font-semibold text-[#334155] px-3 py-1.5 rounded-full bg-white border border-[#E2D4C8] shadow-sm">{t}</span>
             ))}
           </div>
 
+          {/* Hero CTAs — both scroll to form */}
           <div className="flex flex-wrap gap-3">
-            <CTAButton size="lg" onClick={scrollToForm}>
+            <CTAButton size="lg" onClick={scrollToForm} aria-label="Isi form untuk minta proposal training">
               Minta Proposal Training
             </CTAButton>
-            <SecondaryButton size="lg" onClick={scrollToForm}>
+            <SecondaryButton size="lg" onClick={scrollToForm} aria-label="Scroll ke form diskusi kebutuhan tim">
               Diskusikan Kebutuhan Tim
             </SecondaryButton>
           </div>
+
+          {/* Reassurance */}
+          <p className="mt-5 text-xs text-[#94A3B8] leading-relaxed max-w-sm">
+            Respon dalam 1×24 jam kerja. Tidak ada komitmen di awal—mulai dari diskusi.
+          </p>
         </div>
 
-        {/* Right — Lead Form */}
-        <div>
+        {/* RIGHT — Lead Form on top + Hero Visual below on desktop */}
+        <div className="flex flex-col gap-6">
           <LeadForm formRef={formRef} />
+          {/* Dashboard visual — hidden on mobile to keep page fast */}
+          <div className="hidden lg:block">
+            <p className="text-[10px] text-[#94A3B8] uppercase tracking-widest font-bold mb-3 text-center">Contoh Output yang Dihasilkan</p>
+            <HeroVisual />
+          </div>
         </div>
       </div>
     </section>
@@ -404,7 +491,7 @@ function HeroSection({ formRef }: { formRef: React.RefObject<HTMLDivElement | nu
 }
 
 // ─────────────────────────────────────────────
-// SECTION 2 — PROBLEM
+// PROBLEM SECTION
 // ─────────────────────────────────────────────
 const PROBLEMS = [
   {
@@ -435,8 +522,8 @@ function ProblemSection() {
           </h2>
         </div>
         <div className="grid md:grid-cols-3 gap-5">
-          {PROBLEMS.map((p) => (
-            <div key={p.title} className="rounded-2xl p-6 flex flex-col gap-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          {PROBLEMS.map((p, i) => (
+            <div key={i} className="rounded-2xl p-6 flex flex-col gap-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(255,138,0,0.12)", color: "rgb(255,175,80)" }}>
                 {p.icon}
               </div>
@@ -453,7 +540,7 @@ function ProblemSection() {
 }
 
 // ─────────────────────────────────────────────
-// SECTION 3 — SOLUTION
+// SOLUTION SECTION
 // ─────────────────────────────────────────────
 const SOLUTIONS = [
   { icon: <IconDatabase />, title: "Event & Participant Database", desc: "Setiap training memiliki data peserta, absensi, feedback, dan dokumentasi yang lebih rapi." },
@@ -473,8 +560,8 @@ function SolutionSection() {
           </h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {SOLUTIONS.map((s) => (
-            <div key={s.title} className="rounded-2xl p-6 flex flex-col gap-4 hover:shadow-md transition-shadow group" style={{ background: "rgb(255,251,245)", border: "1.5px solid rgb(240,217,200)" }}>
+          {SOLUTIONS.map((s, i) => (
+            <div key={i} className="rounded-2xl p-6 flex flex-col gap-4 hover:shadow-md transition-shadow" style={{ background: "rgb(255,251,245)", border: "1.5px solid rgb(240,217,200)" }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgb(255,244,232)", color: "rgb(255,138,0)", border: "1.5px solid rgb(255,214,165)" }}>
                 {s.icon}
               </div>
@@ -491,7 +578,7 @@ function SolutionSection() {
 }
 
 // ─────────────────────────────────────────────
-// SECTION 4 — TRUST / ALLMAN EXPERIENCE
+// TRUST / ALLMAN EXPERIENCE
 // ─────────────────────────────────────────────
 const TRUST_POINTS = [
   "Pengalaman event dan training",
@@ -515,7 +602,7 @@ function TrustSection() {
           <p className="text-base text-[#475569] leading-relaxed mb-8">
             Skillary dikembangkan untuk membawa pengalaman event dan training Allman ke sistem digital yang lebih rapi. Dengan Skillary, setiap program tidak hanya berjalan sebagai event, tetapi juga menghasilkan data peserta, sertifikat, dokumentasi, laporan, dan portofolio yang dapat digunakan kembali.
           </p>
-          <ul className="space-y-3 mb-8">
+          <ul className="space-y-3" aria-label="Keunggulan Skillary">
             {TRUST_POINTS.map((pt) => (
               <li key={pt} className="flex items-center gap-3">
                 <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-green-600 bg-green-50 border border-green-200">
@@ -527,7 +614,6 @@ function TrustSection() {
           </ul>
         </div>
         <div className="space-y-5">
-          {/* Stats */}
           <div className="grid grid-cols-3 gap-4">
             {[["1998", "Mulai training"], ["39+", "Dokumentasi"], ["21+", "Organisasi"]].map(([val, lbl]) => (
               <div key={lbl} className="bg-white rounded-2xl p-5 text-center shadow-sm border border-[#E2D4C8]">
@@ -536,7 +622,6 @@ function TrustSection() {
               </div>
             ))}
           </div>
-          {/* Sector chips */}
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#E2D4C8]">
             <p className="text-xs font-bold uppercase tracking-widest text-[#94A3B8] mb-4">Sektor yang Pernah Dilayani</p>
             <div className="flex flex-wrap gap-2">
@@ -554,7 +639,7 @@ function TrustSection() {
 }
 
 // ─────────────────────────────────────────────
-// SECTION 5 — HOW IT WORKS
+// HOW IT WORKS
 // ─────────────────────────────────────────────
 const HOW_STEPS = [
   { num: "01", title: "Diskusi Kebutuhan", desc: "Tim Skillary memahami kebutuhan training, profil peserta, tujuan organisasi, dan format pelaksanaan." },
@@ -573,9 +658,8 @@ function HowItWorksSection() {
         </div>
         {/* Desktop: horizontal */}
         <div className="hidden lg:grid grid-cols-4 gap-0 relative">
-          {/* connector line */}
-          <div className="absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-orange-200 via-orange-300 to-orange-200" />
-          {HOW_STEPS.map((step, idx) => (
+          <div className="absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-orange-200 via-orange-300 to-orange-200" aria-hidden="true" />
+          {HOW_STEPS.map((step) => (
             <div key={step.num} className="relative flex flex-col items-center text-center px-4">
               <div className="w-20 h-20 rounded-full bg-white border-4 border-orange-100 flex items-center justify-center mb-5 relative z-10 shadow-sm">
                 <span className="text-2xl font-extrabold" style={{ color: "rgb(255,138,0)" }}>{step.num}</span>
@@ -586,10 +670,10 @@ function HowItWorksSection() {
           ))}
         </div>
         {/* Mobile: vertical */}
-        <div className="lg:hidden space-y-0 relative">
-          <div className="absolute left-7 top-10 bottom-10 w-0.5 bg-gradient-to-b from-orange-200 to-orange-100" />
+        <ol className="lg:hidden space-y-0 relative" aria-label="Langkah-langkah cara kerja Skillary">
+          <div className="absolute left-7 top-10 bottom-10 w-0.5 bg-gradient-to-b from-orange-200 to-orange-100" aria-hidden="true" />
           {HOW_STEPS.map((step) => (
-            <div key={step.num} className="flex gap-5 pb-8 relative">
+            <li key={step.num} className="flex gap-5 pb-8 relative">
               <div className="w-14 h-14 rounded-full bg-white border-4 border-orange-100 flex items-center justify-center shrink-0 z-10 shadow-sm">
                 <span className="text-lg font-extrabold" style={{ color: "rgb(255,138,0)" }}>{step.num}</span>
               </div>
@@ -597,16 +681,16 @@ function HowItWorksSection() {
                 <h3 className="text-sm font-bold text-[#0F172A] mb-1.5">{step.title}</h3>
                 <p className="text-xs text-[#475569] leading-relaxed">{step.desc}</p>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
 }
 
 // ─────────────────────────────────────────────
-// SECTION 6 — PROGRAM OPTIONS
+// PROGRAM OPTIONS
 // ─────────────────────────────────────────────
 const PROGRAMS = [
   { title: "AI Productivity for Teams", desc: "Pelatihan penggunaan AI tools untuk meningkatkan produktivitas kerja, membuat laporan, menyusun ide, dan mempercepat workflow harian.", format: "Hybrid" },
@@ -636,14 +720,23 @@ function ProgramOptionsSection({ formRef }: { formRef: React.RefObject<HTMLDivEl
               </span>
               <h3 className="text-sm font-bold text-[#0F172A] leading-snug">{prog.title}</h3>
               <p className="text-xs text-[#475569] leading-relaxed flex-1">{prog.desc}</p>
-              <button onClick={scroll} className="text-xs font-bold mt-2 text-left hover:underline" style={{ color: "rgb(255,138,0)" }}>
+              {/* Program card CTA — scrolls to form */}
+              <button
+                type="button"
+                onClick={scroll}
+                className="text-xs font-bold mt-2 text-left hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 rounded"
+                style={{ color: "rgb(255,138,0)" }}
+                aria-label={`Diskusikan program ${prog.title}`}
+              >
                 Diskusikan Program →
               </button>
             </div>
           ))}
         </div>
         <div className="text-center">
-          <CTAButton size="md" onClick={scroll}>Minta Proposal Training</CTAButton>
+          <CTAButton size="md" onClick={scroll} aria-label="Minta proposal training dari halaman program">
+            Minta Proposal Training
+          </CTAButton>
         </div>
       </div>
     </section>
@@ -651,7 +744,7 @@ function ProgramOptionsSection({ formRef }: { formRef: React.RefObject<HTMLDivEl
 }
 
 // ─────────────────────────────────────────────
-// SECTION 7 — DELIVERABLES
+// DELIVERABLES
 // ─────────────────────────────────────────────
 const DELIVERABLES = [
   "Materi pelatihan", "Absensi peserta", "Dokumentasi kegiatan", "Feedback peserta",
@@ -663,14 +756,14 @@ function DeliverablesSection() {
   return (
     <section className="py-16 md:py-24 px-5 md:px-8 bg-white" style={{ borderBottom: "1.5px solid rgb(240,217,200)" }}>
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-        {/* Visual mockup */}
-        <div className="relative">
+        {/* Dark mockup visual */}
+        <div className="relative" aria-hidden="true">
           <div className="bg-[#0F172A] rounded-2xl p-6 shadow-xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-400" />
               <div className="w-3 h-3 rounded-full bg-yellow-400" />
               <div className="w-3 h-3 rounded-full bg-green-400" />
-              <span className="text-xs text-[#64748B] ml-2 font-mono">training-report.pdf</span>
+              <span className="text-[10px] text-[#64748B] ml-2 font-mono">laporan-training-final.pdf</span>
             </div>
             <div className="space-y-3">
               <div className="bg-white/10 rounded-xl p-4">
@@ -691,9 +784,9 @@ function DeliverablesSection() {
                 </div>
               </div>
               <div className="bg-white/5 rounded-xl p-4">
-                <p className="text-[10px] text-[#94A3B8] font-bold uppercase tracking-widest mb-2">Output Tersedia</p>
+                <p className="text-[9px] text-[#94A3B8] font-bold uppercase tracking-widest mb-2">Output Tersedia</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {["Absensi", "Sertifikat", "Materi", "Laporan", "Feedback"].map((tag) => (
+                  {["Absensi", "Sertifikat", "Materi", "Laporan", "Feedback", "Database"].map((tag) => (
                     <span key={tag} className="text-[9px] font-semibold px-2 py-0.5 rounded-md bg-orange-500/20 text-orange-300">{tag}</span>
                   ))}
                 </div>
@@ -711,7 +804,7 @@ function DeliverablesSection() {
           <p className="text-sm text-[#475569] leading-relaxed mb-8">
             Dengan output yang jelas, HR/L&D lebih mudah membuktikan bahwa training sudah berjalan, peserta tercatat, dan hasilnya dapat dievaluasi.
           </p>
-          <ul className="space-y-3">
+          <ul className="space-y-3" aria-label="Daftar deliverable Skillary">
             {DELIVERABLES.map((d) => (
               <li key={d} className="flex items-center gap-3">
                 <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-green-600 bg-green-50 border border-green-200">
@@ -728,7 +821,7 @@ function DeliverablesSection() {
 }
 
 // ─────────────────────────────────────────────
-// SECTION 8 — WHY SKILLARY
+// WHY SKILLARY
 // ─────────────────────────────────────────────
 const WHY_ITEMS = [
   { title: "Berbasis Event dan Training Nyata", desc: "Skillary dikembangkan dari pengalaman menjalankan event dan training, bukan hanya dari konsep platform digital." },
@@ -765,7 +858,7 @@ function WhySkillarySection() {
 }
 
 // ─────────────────────────────────────────────
-// SECTION 9 — FAQ
+// FAQ  (accessible accordion)
 // ─────────────────────────────────────────────
 const FAQ_ITEMS = [
   { q: "Apakah program bisa disesuaikan dengan kebutuhan perusahaan?", a: "Ya. Skillary dapat menyesuaikan topik, durasi, format, dan output berdasarkan kebutuhan organisasi." },
@@ -776,23 +869,27 @@ const FAQ_ITEMS = [
   { q: "Apakah tersedia program untuk kampus?", a: "Ya. Skillary juga dapat menyiapkan program seminar, workshop, dan internship berbasis proyek untuk kampus." },
 ];
 
-function FAQItem({ q, a }: { q: string; a: string }) {
+function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
+  const id = `faq-answer-${index}`;
   return (
     <div className="border rounded-2xl overflow-hidden" style={{ borderColor: "rgb(240,217,200)" }}>
       <button
+        type="button"
+        id={`faq-btn-${index}`}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="w-full flex items-center justify-between text-left px-6 py-4 bg-white hover:bg-[#FFFDF9] transition-colors"
+        aria-controls={id}
+        className="w-full flex items-center justify-between text-left px-6 py-4 bg-white hover:bg-[#FFFDF9] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-orange-400"
       >
         <span className="text-sm font-bold text-[#0F172A] pr-4">{q}</span>
         <IconChevron open={open} />
       </button>
-      {open && (
+      <div id={id} role="region" aria-labelledby={`faq-btn-${index}`} hidden={!open}>
         <div className="px-6 pb-5 bg-[#FFFDF9]">
           <p className="text-sm text-[#475569] leading-relaxed">{a}</p>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -805,8 +902,8 @@ function FAQSection() {
           <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "rgb(180,100,0)" }}>FAQ</p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F172A]">Pertanyaan Umum</h2>
         </div>
-        <div className="space-y-3">
-          {FAQ_ITEMS.map((item) => <FAQItem key={item.q} q={item.q} a={item.a} />)}
+        <div className="space-y-3" role="list" aria-label="Pertanyaan yang sering ditanyakan">
+          {FAQ_ITEMS.map((item, i) => <FAQItem key={i} q={item.q} a={item.a} index={i} />)}
         </div>
       </div>
     </section>
@@ -814,7 +911,7 @@ function FAQSection() {
 }
 
 // ─────────────────────────────────────────────
-// SECTION 10 — FINAL CTA
+// FINAL CTA
 // ─────────────────────────────────────────────
 function FinalCTASection({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }) {
   const scroll = () => formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -824,10 +921,11 @@ function FinalCTASection({ formRef }: { formRef: React.RefObject<HTMLDivElement 
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
           Siap Membuat Training Perusahaan Lebih Terukur?
         </h2>
-        <p className="text-base text-[#94A3B8] mb-8 leading-relaxed max-w-xl mx-auto">
+        <p className="text-base text-[#94A3B8] mb-10 leading-relaxed max-w-xl mx-auto">
           Diskusikan kebutuhan tim Anda bersama Skillary dan dapatkan rekomendasi program yang sesuai.
         </p>
-        <CTAButton size="lg" onClick={scroll} className="mb-4">
+        {/* Final CTA — scrolls to form at top */}
+        <CTAButton size="lg" onClick={scroll} className="mb-4" aria-label="Scroll ke form untuk minta proposal training">
           Minta Proposal Training
         </CTAButton>
         <p className="text-xs text-[#475569] max-w-sm mx-auto leading-relaxed">
@@ -839,7 +937,7 @@ function FinalCTASection({ formRef }: { formRef: React.RefObject<HTMLDivElement 
 }
 
 // ─────────────────────────────────────────────
-// SECTION 11 — COMPACT FOOTER
+// COMPACT FOOTER
 // ─────────────────────────────────────────────
 function LPFooter() {
   return (
@@ -850,9 +948,9 @@ function LPFooter() {
             <Image src="/logo.png" alt="Skillary" width={100} height={30} className="h-7 w-auto object-contain mb-2" />
             <p className="text-xs text-[#475569]">Upgrade Skill, Raih Karir</p>
           </div>
-          <nav className="flex flex-wrap gap-4 text-xs text-[#475569]" aria-label="Footer navigation">
-            {[["Program", "/program-catalog"], ["Corporate Training", "/lp/corporate-training"], ["Kontak", "/contact"], ["Privacy", "/privacy"]].map(([label, href]) => (
-              <Link key={label as string} href={href as string} className="hover:text-white transition-colors">{label}</Link>
+          <nav className="flex flex-wrap justify-center md:justify-end gap-x-5 gap-y-2 text-xs text-[#475569]" aria-label="Footer landing page navigation">
+            {([["Program", "/program-catalog"], ["Corporate Training", "/lp/corporate-training"], ["Kontak", "/contact"], ["Privacy", "/privacy"]] as [string, string][]).map(([label, href]) => (
+              <Link key={label} href={href} className="hover:text-white transition-colors focus:outline-none focus-visible:underline">{label}</Link>
             ))}
           </nav>
         </div>
@@ -863,16 +961,18 @@ function LPFooter() {
 }
 
 // ─────────────────────────────────────────────
-// MAIN PAGE COMPONENT
+// PAGE ROOT
 // ─────────────────────────────────────────────
 export default function CorporateTrainingLandingPage() {
+  // Single ref passed down — all CTAs scroll to the lead form
   const formRef = useRef<HTMLDivElement>(null);
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
 
   return (
-    <div className="min-h-screen font-sans antialiased">
+    <div className="min-h-screen font-sans antialiased overflow-x-hidden">
+      {/* Isolated compact header — no global nav */}
       <LPHeader onCTAClick={scrollToForm} />
-      <main>
+      <main id="main-content">
         <HeroSection formRef={formRef} />
         <ProblemSection />
         <SolutionSection />
