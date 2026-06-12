@@ -858,6 +858,108 @@ function WhySkillarySection() {
 }
 
 // ─────────────────────────────────────────────
+// CLIENT MARQUEE (DUMMY)
+// ─────────────────────────────────────────────
+const DUMMY_CLIENTS = [
+  "TECH NUSANTARA", "BANK SYARIAH", "KEMENTERIAN X", "UNIVERSITAS Y", "CORP GLOBAL", "STARTUP HUB"
+];
+
+function ClientMarqueeSection() {
+  return (
+    <section className="py-8 bg-white border-b border-[#F0D9C8]">
+      <div className="max-w-6xl mx-auto px-5 md:px-8 text-center">
+        <p className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-widest mb-4">Dipercaya oleh organisasi terkemuka</p>
+        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 opacity-60 grayscale">
+          {DUMMY_CLIENTS.map((client) => (
+            <div key={client} className="text-sm md:text-base font-extrabold text-[#334155] tracking-tighter">
+              {client}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────
+// TESTIMONIALS (DUMMY)
+// ─────────────────────────────────────────────
+const DUMMY_TESTIMONIALS = [
+  {
+    quote: "Sistem Skillary membuat kami tidak perlu pusing lagi memikirkan sertifikat dan rekap absensi. Semua sudah diatur dan dilaporkan di akhir.",
+    name: "Budi Santoso",
+    title: "HR Director, Tech Nusantara",
+  },
+  {
+    quote: "Program data storytelling mereka mengubah cara tim kami melakukan presentasi bulanan. Laporannya sangat komprehensif.",
+    name: "Sari Wulandari",
+    title: "L&D Manager, Bank Syariah",
+  },
+  {
+    quote: "Database peserta sangat membantu kami melacak siapa saja yang sudah lulus sertifikasi dasar sebelum lanjut ke materi advance.",
+    name: "Andi Permana",
+    title: "VP of People, Corp Global",
+  },
+];
+
+function TestimonialSection() {
+  return (
+    <section className="py-16 md:py-24 px-5 md:px-8 bg-[#0F172A]">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-3">Apa Kata Klien Kami</p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+            Bukti Nyata dari Organisasi yang Telah Bekerja Sama
+          </h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {DUMMY_TESTIMONIALS.map((t, i) => (
+            <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-5">
+              <div className="text-orange-400">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
+              </div>
+              <p className="text-sm text-[#CBD5E1] leading-relaxed flex-1">"{t.quote}"</p>
+              <div>
+                <p className="text-sm font-bold text-white mb-0.5">{t.name}</p>
+                <p className="text-xs text-[#94A3B8]">{t.title}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────
+// GALLERY / DOKUMENTASI (DUMMY)
+// ─────────────────────────────────────────────
+function GallerySection() {
+  return (
+    <section className="py-16 md:py-24 px-5 md:px-8 bg-white" style={{ borderBottom: "1.5px solid rgb(240,217,200)" }}>
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center max-w-xl mx-auto mb-12">
+          <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "rgb(180,100,0)" }}>Dokumentasi Kegiatan</p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F172A]">Suasana Training Skillary</h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {[1, 2, 3, 4].map((item) => (
+            <div key={item} className="aspect-square rounded-2xl bg-[#F8FAFC] border border-[#E2D4C8] flex flex-col items-center justify-center relative overflow-hidden group">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-[#CBD5E1] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              <p className="text-[10px] font-bold text-[#94A3B8]">Placeholder {item}</p>
+              {/* Overlay hover effect */}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span className="text-[10px] font-bold text-white px-3 py-1.5 rounded-full border border-white/30 backdrop-blur-sm">In-House Training</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────
 // FAQ  (accessible accordion)
 // ─────────────────────────────────────────────
 const FAQ_ITEMS = [
@@ -974,13 +1076,16 @@ export default function CorporateTrainingLandingPage() {
       <LPHeader onCTAClick={scrollToForm} />
       <main id="main-content">
         <HeroSection formRef={formRef} />
+        <ClientMarqueeSection />
         <ProblemSection />
         <SolutionSection />
         <TrustSection />
         <HowItWorksSection />
         <ProgramOptionsSection formRef={formRef} />
         <DeliverablesSection />
+        <TestimonialSection />
         <WhySkillarySection />
+        <GallerySection />
         <FAQSection />
         <FinalCTASection formRef={formRef} />
       </main>
