@@ -1,9 +1,12 @@
 import NextAuth from "next-auth";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    adapter: PrismaAdapter(prisma),
     session: { strategy: "jwt" },
     pages: {
         signIn: "/login",
@@ -22,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     where: { email: credentials.email as string },
                 });
 
-                if (!user) return null;
+                if (!user || !user.passwordHash) return null;
 
                 const valid = await bcrypt.compare(
                     credentials.password as string,
@@ -39,12 +42,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 };
             },
         }),
+        Google({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            allowDangerousEmailAccountLinking: true,
+        }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user, account }) {
             if (user) {
                 token.id = user.id;
                 token.role = user.role;
+            }
+            if (!token.role) {
+                token.role = "LEARNER";
             }
             return token;
         },

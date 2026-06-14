@@ -18,6 +18,9 @@ export async function PUT(req: Request) {
         if (name && name.trim() !== "") updateData.name = name.trim();
 
         if (currentPassword && newPassword) {
+            if (!user.passwordHash) {
+                return NextResponse.json({ error: "Your account uses a third-party provider and does not have a password." }, { status: 400 });
+            }
             const isMatch = await bcrypt.compare(currentPassword, user.passwordHash);
             if (!isMatch) return NextResponse.json({ error: "Incorrect current password." }, { status: 403 });
             if (newPassword.length < 6) return NextResponse.json({ error: "New password must be at least 6 characters." }, { status: 400 });
