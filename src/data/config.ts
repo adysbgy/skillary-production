@@ -9,7 +9,7 @@
 export const FORMSPREE_ID = "YOUR_FORM_ID";
 
 /** WhatsApp number in international format (no +, no dashes) */
-export const WHATSAPP_NUMBER = "62811186363";
+export const WHATSAPP_NUMBER = "6282223617700";
 
 /** Build a WhatsApp link with optional pre-filled message */
 export function whatsappLink(message?: string) {
@@ -25,4 +25,5 @@ export const EMAIL_TEAMS = "teams@datacamp.id";
 export const INSTAGRAM_URL = "https://instagram.com/datacamp.id";
 
 /** Site URL (used for OG images, sitemap, etc.) */
-export const SITE_URL = "https://datacamp.id";
+// Primary domain: skillary.my.id (added 2026-06-14). datacamp.id stays active.
+export const SITE_URL = "https://skillary.my.id";
