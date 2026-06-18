@@ -27,7 +27,10 @@ export const HeroSection = () => {
             }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-skillary-orange inline-block" />
-            🚀 Platform Pelatihan Digital #1 di Indonesia
+            <svg className="w-3.5 h-3.5 text-[#F97316] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.499 4.499 0 001.415-1.415L4.342 19.658a.25.25 0 00-.027.347l.08.08a.25.25 0 00.347-.027l5.448-5.45z" />
+            </svg>
+            Platform Pelatihan Digital #1 di Indonesia
           </div>
 
           {/* Headline */}
