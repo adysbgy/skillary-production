@@ -1,8 +1,17 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
+    const pathname = usePathname();
+
+    // Hide global footer on standalone landing pages that have their own footer
+    const hiddenPaths = ["/lp", "/skillary-campus"];
+    if (hiddenPaths.some(p => pathname.startsWith(p))) return null;
+
     return (
         <footer className="bg-skillary-navy text-white pt-14 pb-8">
             <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8">

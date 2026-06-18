@@ -73,6 +73,10 @@ export function Header() {
     const creatorLabel = role === "ADMIN" ? "Admin" : "Instructor";
     const userInitial = session?.user?.name?.charAt(0)?.toUpperCase() || "U";
 
+    // Hide global header on standalone landing pages that have their own header
+    const hiddenPaths = ["/lp", "/skillary-campus"];
+    if (hiddenPaths.some(p => pathname.startsWith(p))) return null;
+
     return (
         <>
             <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur shadow-sm" : "bg-white"}`} style={{ borderBottom: '1.5px solid rgb(240, 217, 200)' }}>
