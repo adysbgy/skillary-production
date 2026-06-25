@@ -121,8 +121,8 @@ export function HeaderV2() {
   const role = session?.user?.role as string | undefined;
   const userInitial = session?.user?.name?.charAt(0)?.toUpperCase() || "U";
 
-  // Hide on standalone pages
-  const hiddenPaths = ["/lp", "/skillary-campus"];
+  // Hide marketing chrome on standalone landing pages and authed app/auth routes
+  const hiddenPaths = ["/lp", "/skillary-campus", "/admin", "/dashboard", "/learn", "/login", "/register"];
   if (hiddenPaths.some(p => pathname.startsWith(p))) return null;
 
   return (

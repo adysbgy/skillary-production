@@ -1,12 +1,6 @@
-import { HeaderV2 } from "@/components/v2/layout/HeaderV2";
-import { FooterV2 } from "@/components/v2/layout/FooterV2";
-
+// Header & footer are now provided by the root layout (production switch).
+// This layout is kept as a passthrough so /v2/* routes continue to resolve
+// without rendering a second, duplicate set of chrome.
 export default function V2Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="v2-root flex flex-col min-h-screen">
-      <HeaderV2 />
-      <main className="flex-1">{children}</main>
-      <FooterV2 />
-    </div>
-  );
+  return <>{children}</>;
 }

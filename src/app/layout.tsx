@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { HeaderV2 } from "@/components/v2/layout/HeaderV2";
+import { FooterV2 } from "@/components/v2/layout/FooterV2";
 import { Providers } from "@/components/Providers";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -52,11 +52,11 @@ export default function RootLayout({
     <html lang="id" className={`${plusJakarta.variable} ${jbMono.variable} antialiased`}>
       <body className="flex flex-col text-[#181818] font-sans">
         <Providers>
-          <Header />
+          <HeaderV2 />
           <main className="flex-1">
             {children}
           </main>
-          <Footer />
+          <FooterV2 />
         </Providers>
       </body>
     </html>

@@ -1,40 +1,27 @@
-import { HeroSection } from "@/components/landing/HeroSection";
-import { PromoBannerSection } from "@/components/landing/PromoBannerSection";
-import { CategoryPillsSection } from "@/components/landing/CategoryPillsSection";
-import { KelasUnggulanSection } from "@/components/landing/KelasUnggulanSection";
-import { LearningPathSection } from "@/components/landing/LearningPathSection";
-import { CareerPlusSection } from "@/components/landing/CareerPlusSection";
-import { BeasiswaSection } from "@/components/landing/BeasiswaSection";
-import { TestimoniSection } from "@/components/landing/TestimoniSection";
-import { PartnershipSection } from "@/components/landing/PartnershipSection";
-import { BeritaSection } from "@/components/landing/BeritaSection";
-import { InsightSection } from "@/components/landing/InsightSection";
-import { KolaborasiSection } from "@/components/landing/KolaborasiSection";
-import { DocumentasiSection } from "@/components/home/DocumentasiSection";
 import type { Metadata } from "next";
+import { HeroV2 } from "@/components/v2/home/HeroV2";
+import { CredibilityV2 } from "@/components/v2/home/CredibilityV2";
+import { ProgramsV2 } from "@/components/v2/home/ProgramsV2";
+import { HowItWorksV2 } from "@/components/v2/home/HowItWorksV2";
+import { SocialProofV2 } from "@/components/v2/home/SocialProofV2";
+import { AffiliateCtaV2 } from "@/components/v2/home/AffiliateCtaV2";
+import { FinalCtaV2 } from "@/components/v2/home/FinalCtaV2";
 
 export const metadata: Metadata = {
-  title: "Skillary — Platform Pelatihan Digital untuk Tim & Organisasi",
-  description: "Skillary membantu HR, L&D, sekolah, yayasan, dan perusahaan menjalankan pelatihan terstruktur dengan materi, assessment, sertifikat digital, dan laporan peserta.",
+  title: "Skillary — Platform Pelatihan Organisasi Terukur & Bersertifikat",
+  description: "Platform LMS untuk HR & L&D. Pelatihan in-house terstruktur, sertifikat digital resmi, laporan peserta otomatis. Dipercaya BNI, Bank Indonesia, OJK, Indofood, Freeport.",
 };
 
-export default function HomePage() {
+export default function Homepage() {
   return (
     <>
-      <HeroSection />
-      <PromoBannerSection />
-      <CategoryPillsSection />
-      <KelasUnggulanSection />
-      <DocumentasiSection />
-      <LearningPathSection />
-      <BeasiswaSection />
-      <TestimoniSection />
-      <CareerPlusSection />
-      <PartnershipSection />
-      <BeritaSection />
-      <InsightSection />
-      <KolaborasiSection />
+      <HeroV2 />
+      <CredibilityV2 />
+      <ProgramsV2 />
+      <HowItWorksV2 />
+      <SocialProofV2 />
+      <AffiliateCtaV2 />
+      <FinalCtaV2 />
     </>
   );
 }
-

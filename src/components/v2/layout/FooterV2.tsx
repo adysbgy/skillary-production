@@ -56,7 +56,7 @@ const ACCREDITATIONS = [
 export function FooterV2() {
   const pathname = usePathname();
 
-  const hiddenPaths = ["/lp", "/skillary-campus"];
+  const hiddenPaths = ["/lp", "/skillary-campus", "/admin", "/dashboard", "/learn", "/login", "/register"];
   if (hiddenPaths.some((p) => pathname.startsWith(p))) return null;
 
   return (
