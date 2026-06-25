@@ -133,13 +133,13 @@ export default function AffiliatePage() {
                     </div>
                   ))}
                 </div>
-                <Link
-                  href={`/contact?type=affiliate&segment=${current.id}`}
+                <a
+                  href="#daftar-mitra"
                   className="inline-flex items-center gap-2 mt-7 text-white text-sm font-bold px-6 py-3 rounded-full shadow-md hover:opacity-90 hover:-translate-y-0.5 transition-all"
                   style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}
                 >
                   Ajukan sebagai {current.title} →
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -169,11 +169,62 @@ export default function AffiliatePage() {
   );
 }
 
+const TRACK_LABELS: Record<string, string> = {
+  campus: "Kampus & Akademik",
+  community: "Komunitas & Profesi",
+  expert: "Trainer & Expert",
+};
+
 function PartnerForm() {
   const [sent, setSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    const fd = new FormData(e.currentTarget);
+    const track = String(fd.get("track") || "");
+    const trackLabel = TRACK_LABELS[track] || track;
+
+    const message = [
+      (fd.get("about") as string) || "",
+      `Jalur kemitraan: ${trackLabel || "-"}`,
+      `Institusi/Komunitas: ${fd.get("organization") || "-"}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fd.get("name"),
+          email: fd.get("email"),
+          organization: fd.get("organization"),
+          inquiryType: "Expert Partner Collaboration",
+          programInterest: trackLabel,
+          sourcePage: "/v2/affiliate",
+          message,
+          _honeypot: fd.get("_honeypot") || "",
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal mengirim. Coba lagi.");
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Terjadi kesalahan. Coba lagi.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
-    <section className="py-20 px-5 md:px-6 lg:px-8">
+    <section id="daftar-mitra" className="py-20 px-5 md:px-6 lg:px-8 scroll-mt-24">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-[#0F172A] mb-3">Daftar sebagai Mitra</h2>
@@ -181,16 +232,19 @@ function PartnerForm() {
         </div>
         <div className="bg-white rounded-2xl p-8" style={{ border: "1.5px solid rgb(240, 217, 200)" }}>
           {!sent ? (
-            <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot — hidden from humans, catches bots */}
+              <input type="text" name="_honeypot" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] w-px h-px opacity-0" />
               <div className="grid sm:grid-cols-2 gap-4">
-                <Field label="Nama Lengkap" placeholder="Nama Anda" type="text" required />
-                <Field label="Email" placeholder="nama@institusi.com" type="email" required />
+                <Field label="Nama Lengkap" name="name" placeholder="Nama Anda" type="text" required />
+                <Field label="Email" name="email" placeholder="nama@institusi.com" type="email" required />
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                <Field label="Institusi / Komunitas" placeholder="Nama institusi" type="text" required />
+                <Field label="Institusi / Komunitas" name="organization" placeholder="Nama institusi" type="text" required />
                 <div>
                   <label className="block text-sm font-semibold text-[#334155] mb-1.5">Jalur Kemitraan</label>
                   <select
+                    name="track"
                     required
                     defaultValue=""
                     className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] focus:outline-none focus:ring-2 bg-white"
@@ -206,17 +260,26 @@ function PartnerForm() {
               <div>
                 <label className="block text-sm font-semibold text-[#334155] mb-1.5">Ceritakan singkat tentang Anda</label>
                 <textarea
+                  name="about"
                   rows={4}
+                  required
+                  minLength={10}
                   placeholder="Bidang, jumlah anggota/mahasiswa, atau bentuk kolaborasi yang Anda harapkan..."
                   className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2 resize-none"
                   style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }}
                 />
               </div>
-              <button type="submit" className="w-full text-white text-sm font-bold py-3.5 rounded-xl transition-opacity hover:opacity-90" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
-                Kirim Pendaftaran Mitra
+              {error && (
+                <div className="flex items-start gap-2.5 px-4 py-3 rounded-xl text-sm" style={{ background: "rgb(254, 242, 242)", border: "1.5px solid rgb(252, 165, 165)", color: "rgb(185, 28, 28)" }} role="alert">
+                  <svg className="w-5 h-5 shrink-0 mt-px" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span className="font-medium">{error}</span>
+                </div>
+              )}
+              <button type="submit" disabled={isLoading} className="w-full text-white text-sm font-bold py-3.5 rounded-xl transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
+                {isLoading ? "Mengirim..." : "Kirim Pendaftaran Mitra"}
               </button>
               <p className="text-[11px] text-[#94A3B8] text-center">
-                Atau hubungi tim kami langsung melalui <Link href="/contact" className="font-semibold hover:underline" style={{ color: "rgb(255,138,0)" }}>halaman kontak</Link>.
+                Atau hubungi tim kami langsung melalui <Link href="/v2/proposal" className="font-semibold hover:underline" style={{ color: "rgb(255,138,0)" }}>halaman konsultasi</Link>.
               </p>
             </form>
           ) : (
@@ -234,12 +297,12 @@ function PartnerForm() {
   );
 }
 
-function Field({ label, placeholder, type, required }: { label: string; placeholder: string; type: string; required?: boolean }) {
+function Field({ label, name, placeholder, type, required }: { label: string; name: string; placeholder: string; type: string; required?: boolean }) {
   return (
     <div>
       <label className="block text-sm font-semibold text-[#334155] mb-1.5">{label}</label>
       <input
-        type={type} required={required} placeholder={placeholder}
+        name={name} type={type} required={required} placeholder={placeholder}
         className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2"
         style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }}
       />

@@ -4,9 +4,8 @@ import { Container } from "@/components/ui/Container";
 import { GradientButton } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Portofolio Klien",
-  description: "Dipercaya oleh organisasi terkemuka Indonesia — Bank Indonesia, BNI, OJK, Indofood, Freeport, dan lainnya.",
-  robots: { index: false, follow: false },
+  title: "Portofolio Klien — Skillary",
+  description: "Dipercaya oleh BNI, Bank Indonesia, OJK, Indofood, Freeport, dan 17+ organisasi terkemuka Indonesia.",
 };
 
 const IMPACT_STATS = [

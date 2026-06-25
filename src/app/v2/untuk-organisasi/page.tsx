@@ -4,9 +4,8 @@ import { Container } from "@/components/ui/Container";
 import { GradientButton, GhostWarmButton } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Untuk Organisasi — Pelatihan In-House",
-  description: "Platform pelatihan in-house untuk tim Anda — dari kebutuhan sampai laporan peserta, Skillary handle semuanya.",
-  robots: { index: false, follow: false },
+  title: "Pelatihan In-House untuk Organisasi — Skillary",
+  description: "Solusi pelatihan korporat terstruktur: LMS khusus batch, instruktur berpengalaman, sertifikat resmi, laporan otomatis.",
 };
 
 const PAINS = [

@@ -38,11 +38,62 @@ const CLIENT_LOGOS = [
 export default function ProposalV2Page() {
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const toggleTopic = (t: string) =>
     setSelectedTopics((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
 
   const waMessage = "Halo Skillary, saya ingin berkonsultasi mengenai kebutuhan training tim kami.";
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    const fd = new FormData(e.currentTarget);
+    const formats = fd.getAll("format").map((f) => String(f));
+
+    // Compose a rich message from all secondary fields so nothing is lost
+    const message = [
+      (fd.get("topic") as string) || "",
+      `Jumlah peserta: ${fd.get("participants") || "-"}`,
+      `Format pelatihan: ${formats.length ? formats.join(", ") : "-"}`,
+      selectedTopics.length > 0 ? `Topik diminati: ${selectedTopics.join(", ")}` : "",
+      (fd.get("extraMessage") as string)
+        ? `Pesan tambahan: ${fd.get("extraMessage")}`
+        : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fd.get("name"),
+          email: fd.get("email"),
+          whatsapp: fd.get("whatsapp"),
+          organization: fd.get("organization"),
+          role: fd.get("role"),
+          inquiryType: "B2B Training Consultation",
+          programInterest: selectedTopics.join(", "),
+          sourcePage: "/v2/proposal",
+          message,
+          _honeypot: fd.get("_honeypot") || "",
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal mengirim. Coba lagi.");
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Terjadi kesalahan. Coba lagi.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div className="bg-[#FAFAFA] min-h-screen">
@@ -71,20 +122,29 @@ export default function ProposalV2Page() {
           {/* Form (left, wider) */}
           <div className="lg:col-span-3 bg-white rounded-2xl p-7 md:p-9" style={{ border: "1.5px solid rgb(240, 217, 200)" }}>
             {!submitted ? (
-              <form action="#" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot — hidden from humans, catches bots */}
+                <input
+                  type="text"
+                  name="_honeypot"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute -left-[9999px] w-px h-px opacity-0"
+                />
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <Field label="Nama lengkap" placeholder="Nama Anda" type="text" required />
-                  <Field label="Nama organisasi" placeholder="PT / Instansi" type="text" required />
+                  <Field label="Nama lengkap" name="name" placeholder="Nama Anda" type="text" required />
+                  <Field label="Nama organisasi" name="organization" placeholder="PT / Instansi" type="text" required />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <Field label="Jabatan" placeholder="HR Manager, L&D, dll" type="text" required />
-                  <Field label="Email" placeholder="nama@organisasi.com" type="email" required />
+                  <Field label="Jabatan" name="role" placeholder="HR Manager, L&D, dll" type="text" required />
+                  <Field label="Email" name="email" placeholder="nama@organisasi.com" type="email" required />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <Field label="No. WhatsApp" placeholder="08xxxxxxxxxx" type="tel" required />
+                  <Field label="No. WhatsApp" name="whatsapp" placeholder="08xxxxxxxxxx" type="tel" required />
                   <div>
                     <label className="block text-sm font-semibold text-[#334155] mb-1.5">Jumlah peserta</label>
-                    <select required defaultValue="" className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] bg-white focus:outline-none focus:ring-2" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }}>
+                    <select name="participants" required defaultValue="" className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] bg-white focus:outline-none focus:ring-2" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }}>
                       <option value="" disabled>Pilih jumlah</option>
                       <option value="<10">Kurang dari 10</option>
                       <option value="10-30">10 – 30</option>
@@ -111,7 +171,7 @@ export default function ProposalV2Page() {
                 {/* Topic textarea */}
                 <div>
                   <label className="block text-sm font-semibold text-[#334155] mb-1.5">Topik pelatihan yang dibutuhkan</label>
-                  <textarea rows={3} required placeholder="Ceritakan singkat topik atau skill yang ingin ditingkatkan timnya..." className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2 resize-none" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }} />
+                  <textarea name="topic" rows={3} required minLength={10} placeholder="Ceritakan singkat topik atau skill yang ingin ditingkatkan timnya..." className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2 resize-none" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }} />
                 </div>
 
                 {/* Interactive topic chips */}
@@ -132,11 +192,18 @@ export default function ProposalV2Page() {
                 {/* Optional message */}
                 <div>
                   <label className="block text-sm font-semibold text-[#334155] mb-1.5">Pesan tambahan <span className="font-normal text-[#94A3B8]">(opsional)</span></label>
-                  <textarea rows={2} placeholder="Timeline, budget range, atau hal lain yang ingin disampaikan..." className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2 resize-none" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }} />
+                  <textarea name="extraMessage" rows={2} placeholder="Timeline, budget range, atau hal lain yang ingin disampaikan..." className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2 resize-none" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }} />
                 </div>
 
-                <button type="submit" className="w-full text-white text-sm font-bold py-3.5 rounded-xl shadow-md transition-all hover:opacity-90 hover:-translate-y-0.5" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
-                  Kirim Permintaan Konsultasi →
+                {error && (
+                  <div className="flex items-start gap-2.5 px-4 py-3 rounded-xl text-sm" style={{ background: "rgb(254, 242, 242)", border: "1.5px solid rgb(252, 165, 165)", color: "rgb(185, 28, 28)" }} role="alert">
+                    <svg className="w-5 h-5 shrink-0 mt-px" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span className="font-medium">{error}</span>
+                  </div>
+                )}
+
+                <button type="submit" disabled={isLoading} className="w-full text-white text-sm font-bold py-3.5 rounded-xl shadow-md transition-all hover:opacity-90 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
+                  {isLoading ? "Mengirim..." : "Kirim Permintaan Konsultasi →"}
                 </button>
                 <p className="text-[11px] text-[#94A3B8] text-center">Data Anda hanya digunakan untuk keperluan konsultasi training. Tidak akan dibagikan ke pihak ketiga.</p>
               </form>
@@ -215,11 +282,11 @@ export default function ProposalV2Page() {
   );
 }
 
-function Field({ label, placeholder, type, required }: { label: string; placeholder: string; type: string; required?: boolean }) {
+function Field({ label, name, placeholder, type, required }: { label: string; name: string; placeholder: string; type: string; required?: boolean }) {
   return (
     <div>
       <label className="block text-sm font-semibold text-[#334155] mb-1.5">{label}</label>
-      <input type={type} required={required} placeholder={placeholder} className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }} />
+      <input name={name} type={type} required={required} placeholder={placeholder} className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }} />
     </div>
   );
 }

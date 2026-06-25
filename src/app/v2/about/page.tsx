@@ -4,9 +4,8 @@ import { Container } from "@/components/ui/Container";
 import { GradientButton, GhostWarmButton } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Tentang Kami",
-  description: "Berpengalaman sejak 1998, Skillary adalah evolusi digital dari puluhan tahun pengalaman pelatihan korporat untuk organisasi terkemuka Indonesia.",
-  robots: { index: false, follow: false },
+  title: "Tentang Skillary — Berpengalaman sejak 1998",
+  description: "Skillary adalah evolusi digital dari pengalaman 25+ tahun pelatihan korporat. Platform LMS modern dengan rekam jejak nyata.",
 };
 
 const IMPACT_STATS = [

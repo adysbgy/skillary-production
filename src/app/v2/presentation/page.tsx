@@ -4,9 +4,8 @@ import { Container } from "@/components/ui/Container";
 import { GradientButton, GhostWarmButton } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Presentation & Business Storytelling",
-  description: "Program pelatihan menyusun presentasi bisnis yang meyakinkan — struktur cerita, desain slide profesional, dan teknik delivery.",
-  robots: { index: false, follow: false },
+  title: "Business Presentation & Storytelling Training — Skillary",
+  description: "Program pelatihan presentasi bisnis dan business storytelling untuk manajer, konsultan, dan tim profesional.",
 };
 
 const PAINS = [
@@ -49,7 +48,7 @@ export default function PresentationPage() {
             bersih, dan delivery yang percaya diri — menggerakkan keputusan, bukan sekadar menginformasikan.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/proposal"><GradientButton className="px-7 py-3.5">Diskusikan untuk Tim Anda →</GradientButton></Link>
+            <Link href="/v2/proposal"><GradientButton className="px-7 py-3.5">Diskusikan untuk Tim Anda →</GradientButton></Link>
             <Link href="#variants"><GhostWarmButton className="px-7 py-3.5">Lihat Pilihan Program</GhostWarmButton></Link>
           </div>
         </Container>
@@ -147,7 +146,7 @@ export default function PresentationPage() {
                   ))}
                 </ul>
                 <Link
-                  href="/proposal"
+                  href="/v2/proposal"
                   className="block w-full text-center text-sm font-bold py-3 rounded-xl transition-all hover:opacity-90"
                   style={v.featured
                     ? { background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))", color: "white" }
@@ -192,7 +191,7 @@ export default function PresentationPage() {
             <h2 className="text-2xl font-bold tracking-tight text-[#181818] mb-3">Siap Membuat Tim Anda Lebih Meyakinkan?</h2>
             <p className="text-base text-black/60 mb-8 leading-relaxed">Diskusikan kebutuhan tim Anda — kami bantu rancang program presentasi yang sesuai industri, level, dan tujuan organisasi.</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link href="/proposal"><GradientButton className="px-7 py-3.5 text-sm">Diskusikan Program Presentasi →</GradientButton></Link>
+              <Link href="/v2/proposal"><GradientButton className="px-7 py-3.5 text-sm">Diskusikan Program Presentasi →</GradientButton></Link>
               <Link href="/v2/catalog"><GhostWarmButton className="px-7 py-3.5 text-sm">Lihat Program Lain</GhostWarmButton></Link>
             </div>
           </div>

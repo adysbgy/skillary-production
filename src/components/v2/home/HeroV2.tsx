@@ -47,7 +47,7 @@ export function HeroV2() {
           {/* CTA group */}
           <div className="flex flex-wrap items-center gap-3 mb-12">
             <Link
-              href="/proposal"
+              href="/v2/proposal"
               className="inline-flex items-center gap-2 text-white font-bold text-sm px-7 py-3.5 rounded-full shadow-lg hover:opacity-90 hover:-translate-y-0.5 transition-all"
               style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}
             >

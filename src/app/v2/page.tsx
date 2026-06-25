@@ -8,9 +8,8 @@ import { AffiliateCtaV2 } from "@/components/v2/home/AffiliateCtaV2";
 import { FinalCtaV2 } from "@/components/v2/home/FinalCtaV2";
 
 export const metadata: Metadata = {
-  title: "Skillary V2 — Preview",
-  description: "Pelatihan Tim yang Terukur, Bersertifikat, dan Terdokumentasi.",
-  robots: { index: false, follow: false },
+  title: "Skillary — Platform Pelatihan Organisasi Terukur & Bersertifikat",
+  description: "Platform LMS untuk HR & L&D. Pelatihan in-house terstruktur, sertifikat digital resmi, laporan peserta otomatis. Dipercaya BNI, Bank Indonesia, OJK, Indofood, Freeport.",
 };
 
 /**

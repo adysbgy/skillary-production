@@ -5,9 +5,8 @@ import { GradientButton, GhostWarmButton } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
 
 export const metadata: Metadata = {
-  title: "Sertifikasi Badge Profesional | Skillary",
-  description: "Badge kompetensi yang diakui — ISO, K3, BNSP, dan Microsoft Office Specialist — untuk memperkuat profil profesional tim Anda.",
-  robots: { index: false, follow: false },
+  title: "Program Sertifikasi & Badge Kompetensi — Skillary",
+  description: "Program sertifikasi ISO, K3, Microsoft Office, dan digital skills dengan badge kompetensi yang dapat diverifikasi.",
 };
 
 // NetCampus-style — kategori badge dengan level & issuing body
@@ -95,7 +94,7 @@ export default function BadgeProgramsPage() {
             standar (ISO, K3, BNSP, MOS) yang dapat diverifikasi pihak ketiga.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/proposal">
+            <Link href="/v2/proposal">
               <GradientButton className="px-8 py-4">Diskusikan Skema Badge untuk Tim →</GradientButton>
             </Link>
             <Link href="/v2/certificates">
@@ -143,7 +142,7 @@ export default function BadgeProgramsPage() {
                       <p className="text-xs text-black/45 mb-4">{badge.issuer}</p>
                       <div className="flex items-center justify-between pt-3" style={{ borderTop: "1px solid rgb(240, 217, 200)" }}>
                         <span className="text-xs font-semibold text-black/50">{badge.duration}</span>
-                        <Link href="/proposal" className="text-xs font-bold hover:underline" style={{ color: "rgb(255, 138, 0)" }}>
+                        <Link href="/v2/proposal" className="text-xs font-bold hover:underline" style={{ color: "rgb(255, 138, 0)" }}>
                           Diskusikan →
                         </Link>
                       </div>
@@ -187,7 +186,7 @@ export default function BadgeProgramsPage() {
               partner, dan mengintegrasikannya ke platform pelaporan Anda.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link href="/proposal">
+              <Link href="/v2/proposal">
                 <GradientButton className="px-7 py-3.5 text-sm">Diskusikan Skema Badge →</GradientButton>
               </Link>
               <Link href="/v2/catalog">

@@ -255,7 +255,7 @@ export function ProgramsV2() {
 
                 {/* CTA */}
                 <Link
-                  href={`/contact?type=in-house&program=${encodeURIComponent(program.title)}`}
+                  href={`/v2/proposal?program=${encodeURIComponent(program.title)}`}
                   className="block w-full text-center text-sm font-bold py-2.5 rounded-xl transition-all hover:opacity-90"
                   style={{ background: "rgb(255,244,232)", color: "rgb(255,138,0)", border: "1.5px solid rgb(255,214,165)" }}
                 >
@@ -271,7 +271,7 @@ export function ProgramsV2() {
           <p className="text-[#0F172A] font-semibold mb-2">Tidak menemukan yang sesuai?</p>
           <p className="text-sm text-[#64748B] mb-5">Setiap program dapat dirancang ulang berdasarkan kebutuhan spesifik organisasi Anda — topik, durasi, format, dan output dapat didiskusikan.</p>
           <Link
-            href="/contact"
+            href="/v2/proposal"
             className="inline-flex items-center gap-2 text-white text-sm font-bold px-7 py-3 rounded-full shadow-md hover:opacity-90 hover:-translate-y-0.5 transition-all"
             style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}
           >
