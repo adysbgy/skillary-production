@@ -67,7 +67,7 @@ export function CredibilityV2() {
             </div>
           </div>
           <p className="text-center text-[10px] text-gray-600 mt-4">
-            Nama klien merujuk pada arsip dokumentasi pelatihan Allman yang menjadi fondasi Skillary.
+            Nama klien merujuk pada arsip dokumentasi pelatihan korporat sejak 1998 yang menjadi fondasi Skillary.
           </p>
         </div>
       </div>
