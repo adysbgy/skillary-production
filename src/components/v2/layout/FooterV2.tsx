@@ -32,7 +32,6 @@ const LINK_COLUMNS = [
       { label: "Solusi Organisasi", href: "/v2/untuk-organisasi" },
       { label: "Diskusikan Kebutuhan", href: "/v2/proposal" },
       { label: "Program Afiliasi", href: "/v2/affiliate" },
-      { label: "Studi Kasus", href: "/v2/portfolio" },
       { label: "Portofolio", href: "/v2/portfolio" },
     ],
   },

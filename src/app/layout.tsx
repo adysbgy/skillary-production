@@ -16,7 +16,7 @@ const jbMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://skillary.id"),
+  metadataBase: new URL("https://skillary.my.id"),
   title: {
     default: "Skillary — Platform Pelatihan Terukur untuk Organisasi",
     template: "%s | Skillary",
