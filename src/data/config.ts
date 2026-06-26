@@ -18,11 +18,11 @@ export function whatsappLink(message?: string) {
 }
 
 /** Contact emails */
-export const EMAIL_GENERAL = "hello@datacamp.id";
-export const EMAIL_TEAMS = "teams@datacamp.id";
+export const EMAIL_GENERAL = "hello@skillary.id";
+export const EMAIL_TEAMS = "teams@skillary.id";
 
 /** Social links */
-export const INSTAGRAM_URL = "https://instagram.com/datacamp.id";
+export const INSTAGRAM_URL = "https://instagram.com/skillary.id";
 
 /** Site URL (used for OG images, sitemap, etc.) */
 // Primary domain: skillary.my.id (added 2026-06-14). datacamp.id stays active.
