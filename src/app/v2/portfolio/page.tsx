@@ -63,8 +63,8 @@ export default function PortfolioV2Page() {
       <section style={{ background: "rgb(17, 24, 39)" }}>
         <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-0 md:divide-x" style={{ borderColor: "rgb(55, 65, 81)" }}>
-            {IMPACT_STATS.map((s) => (
-              <div key={s.label} className="text-center md:px-6">
+            {IMPACT_STATS.map((s, i) => (
+              <div key={s.label} className={`text-center md:px-6 ${i === IMPACT_STATS.length - 1 ? "col-span-2 md:col-span-1" : ""}`}>
                 <div className="text-3xl md:text-4xl font-extrabold text-white">
                   {s.value}<span style={{ color: "rgb(255, 138, 0)" }}>{s.suffix}</span>
                 </div>

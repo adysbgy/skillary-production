@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import { slugify } from "@/data/v2-programs";
 
 // ─── Category visual system (gradient + SVG icon, no emoji) ──────────────
 const CATEGORY_STYLE: Record<string, { gradient: string; icon: React.ReactNode }> = {
@@ -206,13 +207,23 @@ export default function CatalogPage() {
                         ))}
                       </div>
 
-                      <Link
-                        href={`/v2/proposal?program=${encodeURIComponent(program.title)}`}
-                        className="block w-full text-center text-sm font-bold py-2.5 rounded-xl transition-all hover:opacity-90"
-                        style={{ background: "rgb(255,244,232)", color: "rgb(255,138,0)", border: "1.5px solid rgb(255,214,165)" }}
-                      >
-                        Diskusikan Program
-                      </Link>
+                      <div className="space-y-2.5">
+                        <Link
+                          href={`/v2/program/${slugify(program.title)}`}
+                          className="flex items-center justify-center gap-1 text-sm font-bold py-3 rounded-xl hover:underline"
+                          style={{ color: "rgb(255,138,0)" }}
+                        >
+                          Lihat Detail
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                        </Link>
+                        <Link
+                          href={`/v2/proposal?program=${encodeURIComponent(program.title)}`}
+                          className="block w-full text-center text-sm font-bold py-2.5 rounded-xl transition-all hover:opacity-90"
+                          style={{ background: "rgb(255,244,232)", color: "rgb(255,138,0)", border: "1.5px solid rgb(255,214,165)" }}
+                        >
+                          Diskusikan Program
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 );
@@ -271,7 +282,7 @@ function FilterRow({ label, options, active, onSelect, compact }: {
         <button
           key={opt}
           onClick={() => onSelect(opt)}
-          className="text-xs font-semibold px-3.5 py-1.5 rounded-full transition-all"
+          className="text-xs font-semibold px-3.5 py-2.5 rounded-full transition-all"
           style={
             active === opt
               ? { background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))", color: "white" }

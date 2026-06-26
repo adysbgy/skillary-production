@@ -278,7 +278,7 @@ export function HeaderV2() {
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-3 -mr-1 rounded-lg hover:bg-gray-100 transition-colors"
               aria-label="Toggle menu"
             >
               {mobileOpen ? (

@@ -284,6 +284,16 @@ npm run dev
 | Untuk Organisasi (B2B service) | `src/app/v2/untuk-organisasi/page.tsx` | ✅ Done — hero, 3 pain points (semantik merah), 5 fitur B2B, tabel "Konvensional vs Skillary" (6 baris), alur 4-langkah, 4 persona, CTA→/v2/proposal. |
 | Portfolio (trust builder) | `src/app/v2/portfolio/page.tsx` | ✅ Done — hero, impact stats bar dark (5 angka termasuk 500+ peserta), grid 8 klien + 4 placeholder, 6 sektor coverage, disclaimer arsip, CTA→/v2/proposal. |
 
+### Detail page per program — SELESAI (Update: 2026-06-25):
+| Bagian | File | Status |
+|---|---|---|
+| Data program | `src/data/v2-programs.ts` | ✅ Single source: `PROGRAM_INDEX` (union semua program di catalog + ProgramsV2), `slugify()`, `CATEGORY_GRADIENT`, `getProgramBySlug()`, `getAllProgramSlugs()`. Detail kaya untuk 6 program populer (Power BI, Data-Driven, Business Presentation, AI Productivity, Storytelling, Creative Problem Solving — alias 2 slug). Sisanya fallback partial. |
+| Detail page | `src/app/v2/program/[slug]/page.tsx` | ✅ Server component, `generateStaticParams` + `generateMetadata`. 6 section: hero gradient+breadcrumb+badge, Outcomes, Untuk Siapa, Silabus (accordion `<details>`), Informasi Teknis, CTA dark+3 logo. Fallback note untuk program tanpa detail. `notFound()` untuk slug tak dikenal. |
+| Catalog cards | `src/app/v2/catalog/page.tsx` | ✅ Tambah link "Lihat Detail →" (text) di atas tombol "Diskusikan Program" (tetap ke proposal). |
+| ProgramsV2 cards | `src/components/v2/home/ProgramsV2.tsx` | ✅ Idem — "Lihat Detail →" + "Diskusikan Program Ini". |
+
+Verifikasi: 6 full + alias + fallback → HTTP 200, slug tak dikenal → 404, accordion interaktif, SEO title per halaman (template `%s | Skillary` tidak dobel), `tsc` 0 error. Contoh: `/v2/program/power-bi-business-dashboard` (full), `/v2/program/iso-9001-awareness` (fallback).
+
 ### Halaman About — SELESAI (Update: 2026-06-25):
 | Halaman | File | Status |
 |---|---|---|
