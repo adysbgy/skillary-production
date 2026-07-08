@@ -32,14 +32,42 @@ const NAV = [
 
 // Staggered "Your Accounts"-style participant cards (hero visual)
 const BATCH_CARDS = [
-  { initial: "DA", name: "Dian A.", org: "Nusantara Corp", role: "Business Analyst", badge: "active" },
-  { initial: "RP", name: "Rizky P.", org: "Nusantara Corp", role: "Head of Marketing", badge: "active" },
-  { initial: "JM", name: "Joko M.", org: "Nusantara Corp", role: "Senior Business Development", badge: "active" },
-  { initial: "MB", name: "Maya B.", org: "Nusantara Corp", role: "Finance Officer", badge: "cert" },
-  { initial: "TE", name: "Tono E.", org: "Nusantara Corp", role: "Operations Supervisor", badge: "cert" },
-  { initial: "EJ", name: "Elin J.", org: "Nusantara Corp", role: "HR Generalist", badge: "cert" },
-  { initial: "OW", name: "Okta W.", org: "Nusantara Corp", role: "Sales Supervisor", badge: "cert" },
-  { initial: "CH", name: "Candra H.", org: "Nusantara Corp", role: "Data Analyst", badge: "cert" },
+  { av: 1, initial: "DA", name: "Dian A.", org: "Nusantara Corp", role: "Business Analyst", badge: "active" },
+  { av: 5, initial: "RP", name: "Rizky P.", org: "Nusantara Corp", role: "Head of Marketing", badge: "active" },
+  { av: 3, initial: "JM", name: "Joko M.", org: "Nusantara Corp", role: "Senior Business Development", badge: "active" },
+  { av: 2, initial: "MB", name: "Maya B.", org: "Nusantara Corp", role: "Finance Officer", badge: "cert" },
+  { av: 9, initial: "TE", name: "Tono E.", org: "Nusantara Corp", role: "Operations Supervisor", badge: "cert" },
+  { av: 4, initial: "EJ", name: "Elin J.", org: "Nusantara Corp", role: "HR Generalist", badge: "cert" },
+  { av: 6, initial: "OW", name: "Okta W.", org: "Nusantara Corp", role: "Sales Supervisor", badge: "cert" },
+  { av: 7, initial: "CH", name: "Candra H.", org: "Nusantara Corp", role: "Data Analyst", badge: "cert" },
+];
+
+// Portfolio references for the dark trust strip. No approved logo assets
+// exist in /public yet, so every item renders as a text fallback tile;
+// drop an approved file into /public/images/logos and set logoSrc to use it.
+type PortfolioRef = { name: string; category: string; logoSrc: string | null; fallbackLabel: string; alt: string };
+const PORTFOLIO_REFS: PortfolioRef[] = [
+  { name: "Erlangga", category: "Pendidikan & Knowledge Institution", logoSrc: null, fallbackLabel: "Erlangga", alt: "Erlangga logo" },
+  { name: "PPM", category: "Pendidikan & Knowledge Institution", logoSrc: null, fallbackLabel: "PPM", alt: "PPM logo" },
+  { name: "Bank Indonesia", category: "Regulator & Institusi Publik", logoSrc: null, fallbackLabel: "Bank Indonesia", alt: "Bank Indonesia logo" },
+  { name: "Bank Indonesia Institute", category: "Regulator & Institusi Publik", logoSrc: null, fallbackLabel: "Bank Indonesia Institute", alt: "Bank Indonesia Institute logo" },
+  { name: "Prof. Rhenald Kasali", category: "Pendidikan & Knowledge Institution", logoSrc: null, fallbackLabel: "Prof. Rhenald Kasali", alt: "Prof. Rhenald Kasali portfolio reference" },
+  { name: "Gunung Sewu Kencana", category: "Korporasi & Industri", logoSrc: null, fallbackLabel: "Gunung Sewu Kencana", alt: "Gunung Sewu Kencana logo" },
+  { name: "PT Gapura Angkasa", category: "Korporasi & Industri", logoSrc: null, fallbackLabel: "PT Gapura Angkasa", alt: "PT Gapura Angkasa logo" },
+  { name: "BNI", category: "Perbankan & Corporate University", logoSrc: "/images/logos/bni.svg", fallbackLabel: "BNI", alt: "BNI logo" },
+  { name: "KPPU", category: "Regulator & Institusi Publik", logoSrc: "/images/logos/kppu.svg", fallbackLabel: "KPPU", alt: "KPPU logo" },
+  { name: "Otoritas Jasa Keuangan", category: "Regulator & Institusi Publik", logoSrc: "/images/logos/ojk.png", fallbackLabel: "Otoritas Jasa Keuangan", alt: "Otoritas Jasa Keuangan logo" },
+  { name: "Indofood / Indofood CBP", category: "Korporasi & Industri", logoSrc: "/images/logos/indofood.svg", fallbackLabel: "Indofood / Indofood CBP", alt: "Indofood / Indofood CBP logo" },
+  { name: "Mandiri University", category: "Perbankan & Corporate University", logoSrc: null, fallbackLabel: "Mandiri University", alt: "Mandiri University logo" },
+  { name: "Ombudsman RI", category: "Regulator & Institusi Publik", logoSrc: "/images/logos/ombudsman.svg", fallbackLabel: "Ombudsman RI", alt: "Ombudsman RI logo" },
+  { name: "Kementerian PUPR", category: "Regulator & Institusi Publik", logoSrc: "/images/logos/pupr.svg", fallbackLabel: "Kementerian PUPR", alt: "Kementerian PUPR logo" },
+  { name: "Kemendes RI", category: "Regulator & Institusi Publik", logoSrc: null, fallbackLabel: "Kemendes RI", alt: "Kemendes RI logo" },
+  { name: "Universitas Atmajaya", category: "Pendidikan & Knowledge Institution", logoSrc: null, fallbackLabel: "Universitas Atmajaya", alt: "Universitas Atmajaya logo" },
+  { name: "Bank DKI", category: "Perbankan & Corporate University", logoSrc: "/images/logos/bank-dki.svg", fallbackLabel: "Bank DKI", alt: "Bank DKI logo" },
+  { name: "BRI Corporate University", category: "Perbankan & Corporate University", logoSrc: "/images/logos/bri-corpu.svg", fallbackLabel: "BRI Corporate University", alt: "BRI Corporate University logo" },
+  { name: "BCA", category: "Perbankan & Corporate University", logoSrc: "/images/logos/bca.svg", fallbackLabel: "BCA", alt: "BCA logo" },
+  { name: "Indosat", category: "Korporasi & Industri", logoSrc: "/images/logos/indosat.svg", fallbackLabel: "Indosat", alt: "Indosat logo" },
+  { name: "Freeport", category: "Korporasi & Industri", logoSrc: "/images/logos/freeport.svg", fallbackLabel: "Freeport", alt: "Freeport logo" },
 ];
 
 const GRID_CHIPS = ["Data & Analytics", "AI & Produktivitas", "Presentasi Bisnis", "Leadership", "SOP & Proses"];
@@ -148,11 +176,11 @@ const TABS = [
 type TabId = (typeof TABS)[number]["id"];
 
 const PARTICIPANTS = [
-  { initial: "DA", name: "Dian Anggraini", role: "Business Analyst", progress: 92 },
-  { initial: "RP", name: "Rizky Pratama", role: "Marketing Lead", progress: 84 },
-  { initial: "SN", name: "Sari Nurhaliza", role: "Finance Officer", progress: 76 },
-  { initial: "BS", name: "Bayu Santoso", role: "Operations Supervisor", progress: 68 },
-  { initial: "LW", name: "Lina Wibowo", role: "HR Generalist", progress: 55 },
+  { av: 1, initial: "DA", name: "Dian Anggraini", role: "Business Analyst", progress: 92 },
+  { av: 5, initial: "RP", name: "Rizky Pratama", role: "Marketing Lead", progress: 84 },
+  { av: 8, initial: "SN", name: "Sari Nurhaliza", role: "Finance Officer", progress: 76 },
+  { av: 3, initial: "BS", name: "Bayu Santoso", role: "Operations Supervisor", progress: 68 },
+  { av: 10, initial: "LW", name: "Lina Wibowo", role: "HR Generalist", progress: 55 },
 ];
 
 const WALL_TESTIMONIALS = [
@@ -497,13 +525,46 @@ export default function StartupConceptPage() {
           </div>
         </div>
       </section>
+      </main>
+      </div>
+
+      {/* ── Dark trust strip — canvas peeks between the two white containers (Aimfox gap) ── */}
+      <section className="px-5 py-12 md:py-16">
+        <div data-reveal className="max-w-5xl mx-auto text-center">
+          <p className="text-sm md:text-base font-semibold text-white/80">
+            Berangkat dari arsip pengalaman pelatihan sejak 1998
+          </p>
+          <p className="text-xs md:text-sm text-white/45 mt-2 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Portofolio pelatihan mencakup regulator, perbankan, corporate university, institusi publik, pendidikan, FMCG, telekomunikasi, transportasi, dan energi.
+          </p>
+
+          {/* Portfolio logo cloud — bare monochrome marks on the dark canvas
+              (Aimfox style: no tiles; text fallbacks styled as wordmarks) */}
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 md:gap-x-11 md:gap-y-8 max-w-4xl mx-auto">
+            {PORTFOLIO_REFS.map((r) => (
+              <div key={r.name} title={r.alt} className="opacity-70 hover:opacity-100 transition-opacity">
+                {r.logoSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={r.logoSrc} alt={r.alt} className="h-5 md:h-7 w-auto max-w-[130px] md:max-w-[160px] object-contain" style={{ filter: "grayscale(1) invert(1) brightness(1.75) contrast(0.9)" }} loading="lazy" />
+                ) : (
+                  <span className="text-xs md:text-sm font-extrabold tracking-tight text-white/85 whitespace-nowrap">{r.fallbackLabel}</span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <p className="text-[10px] text-white/30 mt-6">
+            Logo ditampilkan sebagai referensi portofolio berdasarkan arsip dokumentasi pelatihan, bukan bentuk endorsement.
+          </p>
+        </div>
+      </section>
+
+      {/* ── White container B: wash → FAQ ── */}
+      <main className="bg-white rounded-[2rem] md:rounded-[2.75rem] overflow-hidden">
 
       {/* ── Full-bleed warm gradient wash spanning batch + mosaic (Aimfox features bg) ── */}
       <div
-        style={{
-          background:
-            "radial-gradient(75% 42% at 50% 6%, rgba(255,206,166,0.5) 0%, rgba(255,232,214,0.3) 40%, rgba(255,255,255,0) 72%), radial-gradient(55% 30% at 22% 30%, rgba(255,214,196,0.28) 0%, rgba(255,255,255,0) 70%), radial-gradient(55% 30% at 78% 30%, rgba(255,224,186,0.28) 0%, rgba(255,255,255,0) 70%)",
-        }}
+        style={{ backgroundImage: "url(/images/lp-startup-wash.svg)", backgroundSize: "100% 100%" }}
       >
 
       {/* ── "Peserta Batch Anda" — staggered white cards (Aimfox "Your Accounts") ── */}
@@ -610,39 +671,30 @@ export default function StartupConceptPage() {
               return (
                 <div
                   key={i}
-                  className={`aspect-square rounded-lg md:rounded-xl items-center justify-center text-[9px] md:text-[11px] font-bold ${i >= 28 ? "hidden md:flex" : "flex"}`}
+                  className={`aspect-square rounded-lg md:rounded-xl overflow-hidden items-center justify-center ${i >= 28 ? "hidden md:flex" : "flex"}`}
                   style={
                     filled
-                      ? { background: TILE_COLORS[fillIdx % TILE_COLORS.length], color: "white", boxShadow: "0 2px 5px rgba(15,23,42,0.12)" }
+                      ? { boxShadow: "0 2px 5px rgba(15,23,42,0.12)" }
                       : { background: "rgb(250, 251, 253)", border: "1px solid rgb(241, 245, 249)" }
                   }
                 >
-                  {filled ? TILES[fillIdx % TILES.length] : ""}
+                  {filled ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={`/images/avatars/av${(fillIdx % 10) + 1}.svg`} alt="" className="w-full h-full object-cover" loading="lazy" />
+                  ) : (
+                    ""
+                  )}
                 </div>
               );
             })}
           </div>
 
-          {/* Trust strip */}
-          <div className="text-center mt-10">
-            <p className="text-xs text-[#94A3B8] mb-3">Berangkat dari arsip pengalaman pelatihan korporat sejak 1998</p>
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {["Perbankan", "Regulator", "FMCG", "Energi", "Pendidikan", "Organisasi Publik"].map((c) => (
-                <span key={c} className="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white text-[#475569]" style={{ border: "1px solid rgb(226, 232, 240)" }}>
-                  {c}
-                </span>
-              ))}
-            </div>
-            <p className="text-[10px] text-[#CBD5E1] mt-3">
-              Pengalaman program di sektor perbankan, regulator, FMCG, energi, pendidikan, dan organisasi publik. Logo klien hanya ditampilkan jika telah mendapat persetujuan penggunaan.
-            </p>
-          </div>
         </div>
       </section>
       </div>
 
       {/* ── Features grid ── */}
-      <section id="events" className="px-5 py-16 md:py-24 scroll-mt-24" style={{ background: "rgb(250, 250, 251)" }}>
+      <section id="events" className="px-5 py-16 md:py-24 scroll-mt-24" style={{ backgroundImage: "url(/images/lp-startup-band.svg)", backgroundSize: "100% 100%" }}>
         <div className="max-w-6xl mx-auto">
           <SectionHeading
             eyebrow="Fitur"
@@ -721,9 +773,7 @@ export default function StartupConceptPage() {
                 <div className="space-y-2.5">
                   {PARTICIPANTS.map((p) => (
                     <div key={p.name} className="flex items-center gap-3 rounded-xl px-3.5 py-2.5" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0" style={{ background: GRADIENT_SIMPLE }}>
-                        {p.initial}
-                      </div>
+                      <Image src={`/images/avatars/av${p.av}.svg`} alt="" width={32} height={32} className="w-8 h-8 rounded-full shrink-0" />
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-semibold text-white truncate">{p.name}</p>
                         <p className="text-[11px] text-white/40 truncate">{p.role}</p>
@@ -782,7 +832,7 @@ export default function StartupConceptPage() {
       </section>
 
       {/* ── Program — integrations-style with floating tool tiles (LottieFiles) ── */}
-      <section id="program" className="relative px-5 py-24 md:py-36 overflow-hidden scroll-mt-24">
+      <section id="program" className="relative px-5 py-24 md:py-36 overflow-hidden scroll-mt-24" style={{ background: "radial-gradient(46% 38% at 50% 46%, rgba(255,226,200,0.35) 0%, rgba(255,255,255,0) 70%)" }}>
         {/* Floating tiles field */}
         <div className="absolute inset-0 max-w-6xl mx-auto pointer-events-none select-none" aria-hidden>
           {FLOAT_TILES.map((t, i) => (
@@ -823,7 +873,7 @@ export default function StartupConceptPage() {
       </section>
 
       {/* ── Testimonial wall — slow marquee sliding left (LottieFiles) ── */}
-      <section id="testimoni" className="px-0 py-16 md:py-24 scroll-mt-24 overflow-hidden" style={{ background: "rgb(250, 250, 251)" }}>
+      <section id="testimoni" className="px-0 py-16 md:py-24 scroll-mt-24 overflow-hidden" style={{ backgroundImage: "url(/images/lp-startup-band.svg)", backgroundSize: "100% 100%" }}>
         <div data-reveal className="max-w-6xl mx-auto px-5">
           <SectionHeading
             eyebrow="Testimoni"
@@ -925,7 +975,7 @@ export default function StartupConceptPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="px-5 py-16 md:py-24 scroll-mt-24" style={{ background: "rgb(250, 250, 251)" }}>
+      <section id="faq" className="px-5 py-16 md:py-24 scroll-mt-24" style={{ backgroundImage: "url(/images/lp-startup-band.svg)", backgroundSize: "100% 100%" }}>
         <div data-reveal className="max-w-2xl mx-auto">
           <SectionHeading eyebrow="FAQ" title="Pertanyaan yang sering diajukan" sub="" />
           <div className="mt-10 space-y-3">
@@ -944,9 +994,8 @@ export default function StartupConceptPage() {
         </div>
       </section>
 
-      {/* ── Close white mega-container — final CTA + footer live on the dark canvas ── */}
+      {/* ── Close white container B — final CTA + footer live on the dark canvas ── */}
       </main>
-      </div>
 
       {/* ── Final CTA + footer — saturated warm gradient section (Aimfox "Start scaling") ── */}
       <section className="relative overflow-hidden px-3 md:px-5 pt-20 md:pt-28 pb-3 md:pb-5">
@@ -1102,13 +1151,11 @@ function MarqueeGroup({ ariaHidden = false }: { ariaHidden?: boolean }) {
   const T = (i: number) => {
     const t = WALL_TESTIMONIALS[i];
     const [role, org] = t.role.split(" · ");
-    const initials = t.name.split(" ").map((w) => w[0]).slice(0, 2).join("");
+    const AV = [6, 2, 5, 9, 4, 8];
     return (
       <div className={card} style={cardStyle}>
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0" style={{ background: GRADIENT_SIMPLE }}>
-            {initials}
-          </div>
+          <Image src={`/images/avatars/av${AV[i]}.svg`} alt="" width={40} height={40} className="w-10 h-10 rounded-full shrink-0" />
           <div>
             <p className="text-sm font-semibold leading-tight">{t.name}</p>
             <p className="text-xs text-[#94A3B8]">{role}</p>
@@ -1212,9 +1259,7 @@ function SectionHeading({ eyebrow, title, sub }: { eyebrow: string; title: React
 function BatchCard({ c }: { c: (typeof BATCH_CARDS)[number] }) {
   return (
     <div className="lp-lift flex items-center gap-3 rounded-full bg-white pl-2 pr-3 py-2" style={{ border: "1px solid rgb(240, 242, 247)", boxShadow: "0 2px 11px -6px rgba(0,0,0,0.10), 0 12px 32px -18px rgba(255,120,50,0.18)" }}>
-      <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0" style={{ background: GRADIENT_SIMPLE }}>
-        {c.initial}
-      </div>
+      <Image src={`/images/avatars/av${c.av}.svg`} alt="" width={40} height={40} className="w-10 h-10 rounded-full shrink-0" />
       <div className="min-w-0 flex-1">
         <p className="text-sm font-bold truncate">
           {c.name} <span className="font-medium text-[#94A3B8] text-xs">· {c.org}</span>
