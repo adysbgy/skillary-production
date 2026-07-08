@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import StartupHomepage from "./lp/startup/page";
 
 export const metadata: Metadata = {
-  title: "Skillary — Platform Pelatihan Organisasi Terukur & Bersertifikat",
+  title: "Skillary — Pelatihan Profesional dari Events hingga Program Korporat",
   description:
-    "Skalakan pelatihan tim Anda: materi, assessment, sertifikat digital terverifikasi, dan laporan peserta dalam satu platform. Dipercaya 21+ organisasi.",
+    "Ekosistem pembelajaran profesional: webinar berbayar rutin, program batch tim, assessment, sertifikat digital terverifikasi, dan laporan pelatihan untuk HR & L&D.",
 };
 
 export default function Homepage() {

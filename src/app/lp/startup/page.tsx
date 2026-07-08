@@ -22,7 +22,8 @@ const GRADIENT_SIMPLE = "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))
 const DARK = "rgb(13, 16, 28)";
 
 const NAV = [
-  { label: "Fitur", href: "#fitur" },
+  { label: "Events", href: "#events" },
+  { label: "Program", href: "#program" },
   { label: "Platform", href: "#platform" },
   { label: "Testimoni", href: "#testimoni" },
   { label: "Paket", href: "#paket" },
@@ -86,34 +87,40 @@ const TILES =
 
 const FEATURES = [
   {
-    title: "Materi yang dipahami, bukan sekadar ditonton",
-    desc: "Video, teks interaktif, dan mini-project di setiap modul — peserta praktik langsung, bukan cuma menyimak.",
-    tags: ["Video & teks", "Mini-project", "Studi kasus"],
-    wide: true,
-  },
-  {
-    title: "Sertifikat yang benar-benar dihargai",
-    desc: "Sertifikat digital resmi dengan ID verifikasi — bernilai untuk CV peserta dan audit organisasi.",
-    tags: ["ID verifikasi", "Digital"],
+    title: "Events yang praktis dan terjadwal",
+    desc: "Ikuti webinar berbayar dan sesi praktis untuk topik kerja yang relevan: AI, data, presentasi, produktivitas, karier, dan leadership.",
+    tags: ["Webinar", "Praktis", "Terjadwal"],
     wide: false,
   },
   {
-    title: "Assessment terstruktur",
-    desc: "Quiz elaboratif dan capstone assessment mengukur pemahaman nyata di setiap tahap.",
-    tags: ["Quiz", "Capstone"],
+    title: "Materi yang dipraktikkan",
+    desc: "Modul, studi kasus, dan mini-project membantu peserta menerapkan materi pada konteks pekerjaan sehari-hari.",
+    tags: ["Studi kasus", "Mini-project", "Praktik"],
     wide: false,
   },
   {
-    title: "Laporan tanpa rekap manual",
-    desc: "Kehadiran, progress, dan nilai terekam otomatis — laporan batch siap diunduh untuk manajemen.",
+    title: "Assessment yang terstruktur",
+    desc: "Pre-test, post-test, quiz, dan capstone membantu mengukur pemahaman peserta dari awal hingga akhir program.",
+    tags: ["Pre-test", "Post-test", "Capstone"],
+    wide: false,
+  },
+  {
+    title: "Sertifikat digital terverifikasi",
+    desc: "Peserta yang memenuhi kriteria dapat menerima sertifikat digital dengan ID verifikasi sebagai bukti penyelesaian program.",
+    tags: ["ID Verifikasi", "Digital", "Siap arsip"],
+    wide: false,
+  },
+  {
+    title: "Laporan batch untuk HR/L&D",
+    desc: "Kehadiran, progress, nilai, dan status sertifikat dirangkum agar tim HR/L&D tidak perlu merekap semuanya dari nol.",
     tags: ["Kehadiran", "Nilai", "Completion"],
     wide: false,
   },
   {
-    title: "Format yang mengikuti tim Anda",
-    desc: "In-house di kantor, online, atau hybrid — jadwal dan kedalaman materi menyesuaikan kebutuhan.",
-    tags: ["In-house", "Online", "Hybrid"],
-    wide: true,
+    title: "Format yang fleksibel",
+    desc: "Program dapat dijalankan sebagai webinar, online training, in-house workshop, atau hybrid sesuai kebutuhan tim.",
+    tags: ["Events", "Online", "Hybrid"],
+    wide: false,
   },
 ];
 
@@ -122,7 +129,7 @@ const TABS = [
     id: "peserta",
     label: "Peserta",
     title: "Semua peserta dalam satu daftar",
-    desc: "Pantau siapa yang aktif, siapa yang tertinggal, dan siapa yang siap disertifikasi — tanpa spreadsheet.",
+    desc: "Lihat siapa yang terdaftar, siapa yang aktif, siapa yang perlu follow-up, dan siapa yang sudah memenuhi kriteria sertifikasi.",
   },
   {
     id: "progress",
@@ -150,40 +157,40 @@ const PARTICIPANTS = [
 
 const WALL_TESTIMONIALS = [
   {
-    title: "Laporan yang biasanya seminggu, sekarang sehari",
-    body: "Dulu tim saya rekap kehadiran dan nilai manual di Excel. Sekarang laporan batch keluar otomatis begitu program selesai.",
-    name: "Siti Rahmawati",
-    role: "HR Manager · Manufaktur",
+    title: "Laporan batch tanpa rekap manual",
+    body: "Yang paling membantu adalah laporan batch. Tim tidak perlu lagi menggabungkan kehadiran, nilai, dan status peserta dari banyak file berbeda.",
+    name: "HR Manager",
+    role: "Use case · Manufaktur",
   },
   {
-    title: "Peserta jauh lebih serius",
-    body: "Sertifikat digital yang bisa diverifikasi bikin peserta menyelesaikan program sampai tuntas. Completion rate kami naik signifikan.",
-    name: "Andri Pratama",
-    role: "L&D Lead · Institusi Keuangan",
+    title: "Sertifikat yang mudah diarsipkan",
+    body: "Sertifikat digital dengan ID verifikasi membantu proses penyelesaian program lebih rapi dan mudah diarsipkan.",
+    name: "L&D Lead",
+    role: "Use case · Institusi Keuangan",
   },
   {
-    title: "Batch kedua tinggal duplikasi",
-    body: "Materi, assessment, dan alur sudah tersimpan di platform. Batch berikutnya jalan tanpa mulai dari nol.",
-    name: "Fajar Nugroho",
-    role: "Training Coordinator · BUMN",
+    title: "Batch berikutnya tanpa mulai dari nol",
+    body: "Materi, assessment, dan alur program tersimpan lebih rapi. Batch berikutnya bisa dijalankan tanpa mulai dari nol.",
+    name: "Training Coordinator",
+    role: "Use case · BUMN",
   },
   {
-    title: "Onboarding cepat, support responsif",
-    body: "Tim Skillary mendampingi dari penyusunan silabus sampai batch selesai. Pertanyaan dijawab di hari yang sama.",
-    name: "Dewi Lestari",
-    role: "People Development · Retail",
+    title: "Praktis untuk pekerjaan harian",
+    body: "Webinarnya praktis dan langsung bisa diterapkan untuk pekerjaan harian, bukan hanya teori umum.",
+    name: "Peserta Webinar",
+    role: "Events · AI Productivity",
   },
   {
-    title: "Manajemen akhirnya bisa lihat ROI pelatihan",
-    body: "Angka completion, nilai assessment, dan sertifikat per divisi — semua ada datanya. Diskusi budget pelatihan jadi jauh lebih mudah.",
-    name: "Budi Hartono",
-    role: "GM Human Capital · Energi",
+    title: "Format mengikuti kondisi tim",
+    body: "Format training bisa disesuaikan dengan kondisi tim, baik online, in-house, maupun hybrid.",
+    name: "People Development",
+    role: "Use case · Retail",
   },
   {
-    title: "Materinya disesuaikan dengan konteks kami",
-    body: "Bukan materi template. Studi kasus dan latihan memakai data dan proses yang mirip dengan pekerjaan harian tim kami.",
-    name: "Nina Sari",
-    role: "Head of Academy · Telekomunikasi",
+    title: "Data untuk evaluasi pelatihan",
+    body: "Completion, nilai assessment, dan status sertifikat per divisi terangkum — evaluasi dan perencanaan pelatihan jadi lebih terarah.",
+    name: "Human Capital",
+    role: "Use case · Energi",
   },
 ];
 
@@ -191,26 +198,26 @@ const PLANS = [
   {
     name: "Program Batch",
     icon: "bolt" as const,
-    desc: "Untuk satu program pelatihan, satu batch.",
+    desc: "Untuk satu program training terstruktur dengan satu batch peserta.",
     aurora: "/images/lp-startup-aurora-1.svg",
-    pill: "sesuai kebutuhan",
+    pill: "disusun sesuai kebutuhan",
     listHeader: "Untuk tim & departemen",
     highlight: false,
     features: [
       "10–25 peserta per batch",
-      "In-house, online, atau hybrid",
+      "Online, in-house, atau hybrid",
       "Materi + assessment terstruktur",
-      "Sertifikat digital terverifikasi",
-      "Laporan batch untuk HR",
+      "Sertifikat digital dengan ID verifikasi",
+      "Laporan batch untuk HR/L&D",
     ],
     cta: "Diskusikan Kebutuhan",
   },
   {
     name: "Corporate Plan",
     icon: "briefcase" as const,
-    desc: "Untuk organisasi dengan kebutuhan pelatihan berkelanjutan.",
+    desc: "Untuk organisasi dengan kebutuhan pembelajaran dan training berkelanjutan.",
     aurora: "/images/lp-startup-aurora-2.svg",
-    pill: "multi-batch · tahunan",
+    pill: "multi-program · multi-batch",
     listHeader: "Semua yang organisasi butuhkan",
     highlight: true,
     features: [
@@ -220,35 +227,44 @@ const PLANS = [
       "Dashboard organisasi",
       "Dedicated account manager",
       "Prioritas jadwal trainer",
+      "Laporan evaluasi berkala",
     ],
-    cta: "Jadwalkan Call",
+    cta: "Jadwalkan Konsultasi",
   },
 ];
 
 const FAQS = [
   {
+    q: "Apakah Skillary hanya untuk perusahaan?",
+    a: "Tidak. Skillary melayani profesional yang mengikuti events berbayar secara individu, sekaligus tim, HR/L&D, dan organisasi yang membutuhkan program training terstruktur.",
+  },
+  {
+    q: "Bagaimana cara mengikuti Events berbayar Skillary?",
+    a: "Jadwal events diumumkan berkala melalui kanal Skillary. Pilih topik yang relevan, lakukan pendaftaran, dan ikuti sesinya — materi sesi dibagikan kepada peserta.",
+  },
+  {
+    q: "Apakah webinar Skillary mendapatkan sertifikat?",
+    a: "Peserta yang memenuhi kriteria kehadiran dapat menerima sertifikat keikutsertaan digital. Untuk program batch dan korporat, tersedia sertifikat penyelesaian dengan ID verifikasi.",
+  },
+  {
     q: "Apakah program bisa diadakan in-house di kantor kami?",
-    a: "Bisa. Sebagian besar klien kami menjalankan program in-house — trainer datang ke lokasi Anda, dan peserta tetap mendapat akses platform untuk materi, assessment, dan sertifikat.",
+    a: "Bisa. Program dapat dijalankan in-house — trainer hadir di lokasi Anda, dan peserta tetap mendapat akses materi, assessment, dan sertifikat melalui platform.",
   },
   {
     q: "Berapa jumlah peserta ideal per batch?",
     a: "10–25 orang per batch untuk sesi yang efektif. Untuk kebutuhan lebih besar, program dibagi menjadi beberapa batch dengan laporan terpisah per batch.",
   },
   {
-    q: "Apakah sertifikatnya resmi dan bisa diverifikasi?",
-    a: "Ya. Setiap sertifikat memiliki ID verifikasi unik yang bisa dicek keasliannya — bernilai untuk arsip organisasi maupun CV peserta.",
-  },
-  {
     q: "Apakah materi bisa disesuaikan dengan kebutuhan tim kami?",
-    a: "Bisa. Silabus, studi kasus, dan kedalaman materi disesuaikan lewat sesi konsultasi sebelum program berjalan — tanpa biaya tambahan untuk penyusunan.",
+    a: "Bisa. Silabus, studi kasus, dan kedalaman materi disesuaikan lewat sesi konsultasi sebelum program berjalan.",
   },
   {
-    q: "Laporan seperti apa yang diterima HR setelah program?",
-    a: "Laporan batch berisi kehadiran, progress modul, nilai assessment, dan status sertifikasi setiap peserta — siap dipakai untuk evaluasi dan pelaporan ke manajemen.",
+    q: "Laporan seperti apa yang diterima HR/L&D setelah program?",
+    a: "Laporan batch berisi kehadiran, progress modul, nilai assessment, dan status sertifikat setiap peserta — siap dipakai untuk evaluasi dan pelaporan ke manajemen.",
   },
   {
-    q: "Bagaimana cara memulai?",
-    a: "Mulai dari konsultasi gratis. Ceritakan kebutuhan tim Anda, kami bantu petakan program, format, dan timeline yang paling sesuai — respon dalam 1 hari kerja.",
+    q: "Bagaimana cara memulai konsultasi program?",
+    a: "Mulai dari konsultasi gratis. Ceritakan kebutuhan tim Anda, kami bantu rekomendasikan topik, format, durasi, dan timeline yang paling sesuai — respon dalam 1 hari kerja.",
   },
 ];
 
@@ -325,14 +341,14 @@ export default function StartupConceptPage() {
         >
           <div className="h-11 flex items-center justify-center gap-3 px-4 text-white">
             <p className="text-[11px] md:text-xs font-semibold truncate">
-              ✦ BARU: Program AI Productivity untuk Tim
+              ✦ BARU: Events Skillary — webinar praktis dan kelas singkat untuk skill kerja profesional
             </p>
             <Link
-              href="/v2/program/ai-productivity-for-teams"
+              href="#events"
               className="shrink-0 text-[11px] md:text-xs font-bold px-3.5 py-1 rounded-full transition-colors hover:bg-white/20"
               style={{ border: "1px solid rgba(255,255,255,0.35)", background: "rgba(255,255,255,0.12)" }}
             >
-              Lihat
+              Lihat Events
             </Link>
           </div>
         </div>
@@ -365,24 +381,24 @@ export default function StartupConceptPage() {
           {/* Desktop right cluster */}
           <div className="hidden lg:flex items-center gap-4">
             <Link href="/v2/proposal" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">
-              Jadwalkan Demo
+              Jadwalkan Konsultasi
             </Link>
             <span className="w-px h-5 bg-white/20" />
             <Link href="/login" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">
               Masuk
             </Link>
             <Link
-              href="/register"
+              href="/v2/proposal"
               className="text-sm font-bold px-5 py-2.5 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors"
             >
-              Mulai Gratis
+              Konsultasi Gratis
             </Link>
           </div>
 
           {/* Mobile right cluster */}
           <div className="flex lg:hidden items-center gap-2">
-            <Link href="/register" className="text-xs font-bold px-4 py-2 rounded-full bg-white text-[#0F172A]">
-              Mulai Gratis
+            <Link href="/v2/proposal" className="text-xs font-bold px-4 py-2 rounded-full bg-white text-[#0F172A]">
+              Konsultasi Gratis
             </Link>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -417,8 +433,8 @@ export default function StartupConceptPage() {
                 <Link href="/login" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full text-white" style={{ border: "1px solid rgba(255,255,255,0.25)" }}>
                   Masuk
                 </Link>
-                <Link href="/register" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full bg-white text-[#0F172A]">
-                  Mulai Gratis
+                <Link href="/v2/proposal" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full bg-white text-[#0F172A]">
+                  Konsultasi Gratis
                 </Link>
               </div>
             </nav>
@@ -442,40 +458,41 @@ export default function StartupConceptPage() {
         <div className="relative max-w-4xl mx-auto text-center">
           <div data-reveal className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-1.5 rounded-full mb-7 text-[#64748B] bg-white" style={{ border: "1px solid rgb(234, 222, 210)", boxShadow: "0 1px 3px rgba(15,23,42,0.06)" }}>
             <span className="w-1.5 h-1.5 rounded-full" style={{ background: "rgb(255,138,0)" }} />
-            Untuk HR, L&D & Training Manager
+            Untuk Profesional, Tim, HR & L&D
           </div>
 
           <h1 data-reveal style={{ transitionDelay: "0.1s" }} className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08] mb-6">
+            Dari{" "}
             <span className="bg-clip-text text-transparent" style={{ backgroundImage: GRADIENT }}>
-              Skalakan
+              webinar praktis
             </span>{" "}
-            pelatihan tim Anda. Terukur.
+            hingga training korporat. Semua lebih terukur.
           </h1>
 
           <p data-reveal style={{ transitionDelay: "0.2s" }} className="text-base md:text-lg text-[#64748B] max-w-2xl mx-auto mb-8 leading-relaxed">
-            Jalankan pelatihan untuk puluhan hingga ratusan karyawan dengan platform end-to-end — materi, assessment, sertifikat terverifikasi, dan laporan dalam satu tempat.
+            Skillary membantu profesional, tim, HR, dan L&D menjalankan pembelajaran yang lebih rapi — mulai dari events berbayar, program batch, assessment, sertifikat digital, hingga laporan pelatihan.
           </p>
 
           <div data-reveal style={{ transitionDelay: "0.3s" }} className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
             <Link
-              href="/v2/proposal"
+              href="#events"
               className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg"
               style={{ background: GRADIENT_SIMPLE }}
             >
-              Mulai Konsultasi Gratis →
+              Lihat Events →
             </Link>
             <Link
-              href="/v2/catalog"
+              href="/v2/proposal"
               className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-[#0F172A] bg-white hover:bg-gray-50 transition-colors"
               style={{ border: "1.5px solid rgb(226, 232, 240)" }}
             >
-              Lihat Katalog Program
+              Konsultasi Program
             </Link>
           </div>
 
           <div data-reveal style={{ transitionDelay: "0.4s" }} className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-[#94A3B8]">
-            <span className="flex items-center gap-1.5"><Check /> Konsultasi gratis</span>
-            <span className="flex items-center gap-1.5"><Check /> Tanpa komitmen</span>
+            <span className="flex items-center gap-1.5"><Check /> Events berbayar rutin</span>
+            <span className="flex items-center gap-1.5"><Check /> Program tim & korporat</span>
             <span className="flex items-center gap-1.5"><Check /> Respon 1 hari kerja</span>
           </div>
         </div>
@@ -608,16 +625,16 @@ export default function StartupConceptPage() {
 
           {/* Trust strip */}
           <div className="text-center mt-10">
-            <p className="text-xs text-[#94A3B8] mb-3">Dipercaya 21+ organisasi · 500+ peserta tersertifikasi</p>
+            <p className="text-xs text-[#94A3B8] mb-3">Berangkat dari arsip pengalaman pelatihan korporat sejak 1998</p>
             <div className="flex flex-wrap items-center justify-center gap-2">
-              {["Bank Indonesia", "BNI", "OJK", "Indofood", "Freeport"].map((c) => (
+              {["Perbankan", "Regulator", "FMCG", "Energi", "Pendidikan", "Organisasi Publik"].map((c) => (
                 <span key={c} className="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white text-[#475569]" style={{ border: "1px solid rgb(226, 232, 240)" }}>
                   {c}
                 </span>
               ))}
             </div>
             <p className="text-[10px] text-[#CBD5E1] mt-3">
-              Nama klien merujuk pada arsip dokumentasi pelatihan korporat sejak 1998 yang menjadi fondasi Skillary.
+              Pengalaman program di sektor perbankan, regulator, FMCG, energi, pendidikan, dan organisasi publik. Logo klien hanya ditampilkan jika telah mendapat persetujuan penggunaan.
             </p>
           </div>
         </div>
@@ -625,16 +642,16 @@ export default function StartupConceptPage() {
       </div>
 
       {/* ── Features grid ── */}
-      <section id="fitur" className="px-5 py-16 md:py-24 scroll-mt-24" style={{ background: "rgb(250, 250, 251)" }}>
+      <section id="events" className="px-5 py-16 md:py-24 scroll-mt-24" style={{ background: "rgb(250, 250, 251)" }}>
         <div className="max-w-6xl mx-auto">
           <SectionHeading
             eyebrow="Fitur"
             title={
               <>
-                Dibuat untuk <span className="bg-clip-text text-transparent" style={{ backgroundImage: GRADIENT }}>hasil</span>, bukan sekadar hadir
+                Dibuat agar pembelajaran menghasilkan <span className="bg-clip-text text-transparent" style={{ backgroundImage: GRADIENT }}>bukti nyata</span>
               </>
             }
-            sub="Setiap fitur dirancang supaya pelatihan menghasilkan skill yang terpakai — dan bukti yang bisa dilaporkan."
+            sub="Dari events rutin sampai training korporat, Skillary membantu setiap program memiliki alur, peserta, assessment, sertifikat, dan laporan yang lebih rapi."
           />
 
           <div data-reveal className="grid md:grid-cols-6 gap-4 mt-12">
@@ -664,8 +681,8 @@ export default function StartupConceptPage() {
         <div className="max-w-6xl mx-auto">
           <SectionHeading
             eyebrow="Platform"
-            title="Menara kontrol pelatihan Anda"
-            sub="Satu dashboard untuk memantau seluruh batch — dari peserta pertama sampai laporan akhir."
+            title="Dashboard kendali pembelajaran dan training"
+            sub="Pantau event, peserta, batch, progress, assessment, sertifikat, dan laporan dalam satu alur yang lebih rapi."
           />
 
           <div className="flex justify-center gap-2 mt-10 mb-8">
@@ -691,10 +708,10 @@ export default function StartupConceptPage() {
               <p className="text-[#64748B] leading-relaxed mb-6">{activeTab.desc}</p>
               <div className="rounded-2xl p-5 bg-white" style={{ border: "1px solid rgb(234, 237, 243)", boxShadow: "0 1px 3px rgba(15,23,42,0.04)" }}>
                 <p className="text-sm text-[#475569] leading-relaxed mb-3">
-                  &ldquo;Satu koordinator kami meng-handle 4 batch sekaligus dari satu dashboard. Semua data yang kami butuhkan ada di sana.&rdquo;
+                  &ldquo;Koordinator training dapat memantau beberapa batch dari satu dashboard, mulai dari progress peserta sampai laporan akhir.&rdquo;
                 </p>
-                <p className="text-sm font-bold">Fitri Handayani</p>
-                <p className="text-xs text-[#94A3B8]">Learning Ops · Perbankan</p>
+                <p className="text-sm font-bold">Learning Operations</p>
+                <p className="text-xs text-[#94A3B8]">Corporate Training</p>
               </div>
             </div>
 
@@ -765,7 +782,7 @@ export default function StartupConceptPage() {
       </section>
 
       {/* ── Program — integrations-style with floating tool tiles (LottieFiles) ── */}
-      <section className="relative px-5 py-24 md:py-36 overflow-hidden">
+      <section id="program" className="relative px-5 py-24 md:py-36 overflow-hidden scroll-mt-24">
         {/* Floating tiles field */}
         <div className="absolute inset-0 max-w-6xl mx-auto pointer-events-none select-none" aria-hidden>
           {FLOAT_TILES.map((t, i) => (
@@ -790,17 +807,17 @@ export default function StartupConceptPage() {
 
         <div data-reveal className="relative max-w-xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight mb-5">
-            Program untuk setiap kebutuhan tim
+            Program untuk berbagai kebutuhan belajar dan training
           </h2>
           <p className="text-[#64748B] leading-relaxed mb-8 max-w-md mx-auto">
-            Dari data & AI sampai leadership — terintegrasi dengan tools yang tim Anda pakai sehari-hari.
+            Dari events singkat sampai corporate batch, Skillary menyiapkan topik yang relevan untuk pekerjaan, tim, dan organisasi.
           </p>
           <Link
             href="/v2/catalog"
             className="inline-block text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg"
             style={{ background: GRADIENT_SIMPLE }}
           >
-            Lihat Semua Program
+            Lihat Katalog Program
           </Link>
         </div>
       </section>
@@ -810,8 +827,8 @@ export default function StartupConceptPage() {
         <div data-reveal className="max-w-6xl mx-auto px-5">
           <SectionHeading
             eyebrow="Testimoni"
-            title="Dipercaya HR, L&D & Training Manager"
-            sub="Cerita dari tim yang sudah menjalankan pelatihan terukur bersama Skillary."
+            title="Yang dibutuhkan HR, L&D, dan peserta profesional"
+            sub="Beberapa kebutuhan yang sering muncul saat organisasi dan peserta mengikuti program pembelajaran terstruktur."
           />
         </div>
         <div className="mt-12">
@@ -831,7 +848,7 @@ export default function StartupConceptPage() {
             </p>
             <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">Paket yang mengikuti skala Anda</h2>
             <p className="text-white/50 mt-4 leading-relaxed">
-              Mulai dari satu batch, berkembang ke program tahunan — penawaran disusun sesuai kebutuhan dan budget.
+              Mulai dari satu batch, berkembang ke program tahunan — penawaran disusun sesuai kebutuhan dan budget. Untuk jadwal webinar berbayar, lihat bagian Events.
             </p>
           </div>
 
@@ -940,17 +957,23 @@ export default function StartupConceptPage() {
         {/* CTA content */}
         <div data-reveal className="relative max-w-2xl mx-auto text-center text-white">
           <h2 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mb-6">
-            Mulai skalakan pelatihan hari ini
+            Mulai dari event terdekat atau susun program untuk tim Anda
           </h2>
           <p className="text-white/85 mb-9 leading-relaxed max-w-xl mx-auto">
-            Ceritakan kebutuhan tim Anda — kami bantu susun program, format, dan timeline yang paling sesuai. Respon dalam 1 hari kerja.
+            Ikuti Events Skillary atau ceritakan kebutuhan training tim Anda. Kami bantu rekomendasikan topik, format, durasi, dan timeline yang paling sesuai.
           </p>
           <Link
-            href="/v2/proposal"
-            className="inline-block text-sm font-bold px-9 py-4 rounded-full text-white transition-colors shadow-xl hover:bg-black"
+            href="#events"
+            className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full text-white transition-colors shadow-xl hover:bg-black"
             style={{ background: "#0B0A12" }}
           >
-            Mulai Sekarang
+            Lihat Events
+          </Link>
+          <Link
+            href="/v2/proposal"
+            className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors shadow-xl"
+          >
+            Konsultasi Program
           </Link>
           <p className="text-sm text-white/85 mt-6 font-medium">
             Konsultasi gratis <span className="mx-1.5 opacity-70">✦</span> Tanpa komitmen <span className="mx-1.5 opacity-70">✦</span> Respon 1 hari kerja
@@ -967,9 +990,9 @@ export default function StartupConceptPage() {
                 <span className="text-xl font-bold tracking-tight">Skillary</span>
               </div>
               <p className="text-sm text-white/45 leading-relaxed">
-                Dibangun untuk pelatihan organisasi.
+                Dibangun untuk pembelajaran profesional.
                 <br />
-                Dirancang untuk hasil terukur.
+                Dirancang untuk hasil yang terukur.
               </p>
             </div>
 
@@ -1109,7 +1132,7 @@ function MarqueeGroup({ ariaHidden = false }: { ariaHidden?: boolean }) {
           <svg className="w-9 h-9" fill="currentColor" viewBox="0 0 24 24"><path d="M13 2L4.5 12.5h5L11 22l8.5-10.5h-5L13 2z" /></svg>
           <div>
             <p className="text-lg font-bold leading-snug">AI Productivity untuk Tim</p>
-            <p className="text-xs text-white/75 mt-1">Program paling diminati 2026</p>
+            <p className="text-xs text-white/75 mt-1">Live Webinar · Paid Event</p>
           </div>
         </div>
         {T(1)}
