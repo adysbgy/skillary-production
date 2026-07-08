@@ -56,7 +56,7 @@ export function FooterV2() {
   const pathname = usePathname();
 
   const hiddenPaths = ["/lp", "/skillary-campus", "/admin", "/dashboard", "/learn", "/login", "/register"];
-  if (hiddenPaths.some((p) => pathname.startsWith(p))) return null;
+  if (pathname === "/" || hiddenPaths.some((p) => pathname.startsWith(p))) return null;
 
   return (
     <footer style={{ background: "rgb(17, 24, 39)" }} className="text-white">

@@ -1,0 +1,55 @@
+<svg viewBox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="gTop" gradientUnits="userSpaceOnUse" cx="800" cy="330" r="560">
+      <stop offset="0%" stop-color="#FFD9B8" stop-opacity="0.8"/>
+      <stop offset="45%" stop-color="#FFE9DA" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gCore" gradientUnits="userSpaceOnUse" cx="800" cy="512" r="300">
+      <stop offset="0%" stop-color="#FFB877" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#FFC9A0" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gPlane" gradientUnits="userSpaceOnUse" x1="0" y1="522" x2="0" y2="1000">
+      <stop offset="0%" stop-color="#FF7A3C" stop-opacity="0.45"/>
+      <stop offset="30%" stop-color="#FF5A5F" stop-opacity="0.16"/>
+      <stop offset="75%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gLine" gradientUnits="userSpaceOnUse" x1="0" y1="522" x2="0" y2="1000">
+      <stop offset="0%" stop-color="#FF8A00" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#FF5A5F" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#FF5A5F" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gHorizon" gradientUnits="userSpaceOnUse" x1="200" y1="0" x2="1400" y2="0">
+      <stop offset="0%" stop-color="#FF9E66" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FF8A00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF9E66" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="mGrad" gradientUnits="userSpaceOnUse" cx="800" cy="560" r="720">
+      <stop offset="0%" stop-color="white"/>
+      <stop offset="70%" stop-color="white" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="fog"><ellipse cx="800" cy="580" rx="780" ry="440" fill="url(#mGrad)"/></mask>
+    <filter id="blurS" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="blurM" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="32"/></filter>
+  </defs>
+
+  <ellipse cx="800" cy="330" rx="560" ry="330" fill="url(#gTop)"/>
+
+  <g filter="url(#blurM)">
+    <ellipse cx="330" cy="524" rx="330" ry="24" fill="#FFB1A6" opacity="0.5"/>
+    <ellipse cx="1270" cy="524" rx="330" ry="24" fill="#FFC59E" opacity="0.5"/>
+  </g>
+
+  <g mask="url(#fog)">
+    <path d="M600 522 L1000 522 L1900 1000 L-300 1000 Z" fill="url(#gPlane)" filter="url(#blurS)"/>
+    <g stroke="url(#gLine)" stroke-width="1.1" fill="none">
+      <path d="M800 522 L-760 1000"/><path d="M800 522 L-630 1000"/><path d="M800 522 L-500 1000"/><path d="M800 522 L-370 1000"/><path d="M800 522 L-240 1000"/><path d="M800 522 L-110 1000"/><path d="M800 522 L20 1000"/><path d="M800 522 L150 1000"/><path d="M800 522 L280 1000"/><path d="M800 522 L410 1000"/><path d="M800 522 L540 1000"/><path d="M800 522 L670 1000"/><path d="M800 522 L800 1000"/><path d="M800 522 L930 1000"/><path d="M800 522 L1060 1000"/><path d="M800 522 L1190 1000"/><path d="M800 522 L1320 1000"/><path d="M800 522 L1450 1000"/><path d="M800 522 L1580 1000"/><path d="M800 522 L1710 1000"/><path d="M800 522 L1840 1000"/><path d="M800 522 L1970 1000"/><path d="M800 522 L2100 1000"/><path d="M800 522 L2230 1000"/><path d="M800 522 L2360 1000"/>
+      <path d="M-300 527 L1900 527"/><path d="M-300 536 L1900 536"/><path d="M-300 547 L1900 547"/><path d="M-300 562 L1900 562"/><path d="M-300 581 L1900 581"/><path d="M-300 605 L1900 605"/><path d="M-300 636 L1900 636"/><path d="M-300 675 L1900 675"/><path d="M-300 726 L1900 726"/><path d="M-300 790 L1900 790"/><path d="M-300 873 L1900 873"/><path d="M-300 979 L1900 979"/>
+    </g>
+  </g>
+
+  <ellipse cx="800" cy="512" rx="300" ry="130" fill="url(#gCore)"/>
+  <rect x="200" y="519" width="1200" height="3" fill="url(#gHorizon)" filter="url(#blurS)"/>
+</svg>

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Skillary — Platform Pelatihan Terukur untuk Organisasi",
     description: "Skillary membantu organisasi mengelola pelatihan internal dari materi pembelajaran, assessment, sertifikat digital, hingga laporan peserta dalam satu platform.",
-    url: "https://skillary.id",
+    url: "https://skillary.my.id",
     siteName: "Skillary",
     type: "website",
     locale: "id_ID",

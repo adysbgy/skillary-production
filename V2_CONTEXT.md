@@ -335,3 +335,12 @@ termasuk `/v2/*`, karena `v2/layout.tsx` nested di dalam `<main>` root layout �
 header & footer tampil dobel (v1 + v2). Fix: tambahkan `"/v2"` ke `hiddenPaths` di
 `src/components/layout/Header.tsx` dan `src/components/layout/Footer.tsx` (pola yang sama
 dipakai untuk `/lp` dan `/skillary-campus`). Halaman v1 tidak terdampak.
+
+---
+
+## 14. Homepage Switch ke Startup Concept (Update: 2026-07-08)
+
+- **Root `/` sekarang me-render halaman startup-concept** (`src/app/lp/startup/page.tsx`, di-import oleh `src/app/page.tsx`). Desain: Aimfox-inspired (header morph bar→pill, dark canvas + white mega-container, pricing aurora dark band, liquid-glass button, CTA gradient + footer hitam) × sistem animasi LottieFiles (scroll-reveal, marquee testimoni, count-up, float tiles, hover lift). Font: Manrope (di-bundle di page). Aset SVG custom: `public/images/lp-startup-{grid-bg,aurora-1,aurora-2,cta-bg}.svg`.
+- HeaderV2/FooterV2 disembunyikan di `/` (exact match, halaman punya chrome sendiri). Komposisi homepage V2 lama tetap di `/v2`.
+- `/lp/startup` dipertahankan sebagai alias preview ber-`noindex` (canonical = `/`).
+- LP ads Meta: `/lp/training-organisasi` (noindex, form → /api/leads).
