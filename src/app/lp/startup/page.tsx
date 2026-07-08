@@ -47,12 +47,12 @@ const BATCH_CARDS = [
 // drop an approved file into /public/images/logos and set logoSrc to use it.
 type PortfolioRef = { name: string; category: string; logoSrc: string | null; fallbackLabel: string; alt: string };
 const PORTFOLIO_REFS: PortfolioRef[] = [
-  { name: "Erlangga", category: "Pendidikan & Knowledge Institution", logoSrc: null, fallbackLabel: "Erlangga", alt: "Erlangga logo" },
-  { name: "PPM", category: "Pendidikan & Knowledge Institution", logoSrc: null, fallbackLabel: "PPM", alt: "PPM logo" },
-  { name: "Bank Indonesia", category: "Regulator & Institusi Publik", logoSrc: "/images/logos/bank-indonesia.svg", fallbackLabel: "Bank Indonesia", alt: "Bank Indonesia logo" },
+  { name: "Erlangga", category: "Pendidikan & Knowledge Institution", logoSrc: "/images/logos/erlangga.png", fallbackLabel: "Erlangga", alt: "Erlangga logo" },
+  { name: "PPM", category: "Pendidikan & Knowledge Institution", logoSrc: "/images/logos/ppm.png", fallbackLabel: "PPM", alt: "PPM logo" },
+  { name: "Bank Indonesia", category: "Regulator & Institusi Publik", logoSrc: "/images/logos/bank-indonesia.png", fallbackLabel: "Bank Indonesia", alt: "Bank Indonesia logo" },
   { name: "Bank Indonesia Institute", category: "Regulator & Institusi Publik", logoSrc: null, fallbackLabel: "Bank Indonesia Institute", alt: "Bank Indonesia Institute logo" },
-  { name: "Gunung Sewu Kencana", category: "Korporasi & Industri", logoSrc: null, fallbackLabel: "Gunung Sewu Kencana", alt: "Gunung Sewu Kencana logo" },
-  { name: "PT Gapura Angkasa", category: "Korporasi & Industri", logoSrc: null, fallbackLabel: "PT Gapura Angkasa", alt: "PT Gapura Angkasa logo" },
+  { name: "Gunung Sewu Kencana", category: "Korporasi & Industri", logoSrc: "/images/logos/gunung-sewu.png", fallbackLabel: "Gunung Sewu Kencana", alt: "Gunung Sewu Kencana logo" },
+  { name: "PT Gapura Angkasa", category: "Korporasi & Industri", logoSrc: "/images/logos/gapura-angkasa.png", fallbackLabel: "PT Gapura Angkasa", alt: "PT Gapura Angkasa logo" },
   { name: "BNI", category: "Perbankan & Corporate University", logoSrc: "/images/logos/bni.svg", fallbackLabel: "BNI", alt: "BNI logo" },
   { name: "KPPU", category: "Regulator & Institusi Publik", logoSrc: "/images/logos/kppu.svg", fallbackLabel: "KPPU", alt: "KPPU logo" },
   { name: "Otoritas Jasa Keuangan", category: "Regulator & Institusi Publik", logoSrc: "/images/logos/ojk.png", fallbackLabel: "Otoritas Jasa Keuangan", alt: "Otoritas Jasa Keuangan logo" },
