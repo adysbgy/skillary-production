@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
-import { GradientButton, GhostWarmButton } from "@/components/ui/Button";
+import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
+import { SectionHeading, GradientText } from "@/components/v2/marketing/MarketingUI";
 
 export const metadata: Metadata = {
   title: "Pelatihan In-House untuk Organisasi — Skillary",
-  description: "Solusi pelatihan korporat terstruktur: LMS khusus batch, instruktur berpengalaman, sertifikat resmi, laporan otomatis.",
+  description:
+    "Solusi pelatihan korporat terstruktur: LMS khusus batch, instruktur berpengalaman, sertifikat resmi, laporan otomatis.",
 };
 
 const PAINS = [
@@ -45,159 +46,146 @@ const PERSONAS = [
   { title: "Komunitas", desc: "Jalankan program pelatihan untuk anggota dengan alur terstruktur.", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
 ];
 
+const CARD = { border: "1px solid rgb(234, 237, 243)", boxShadow: "0 1px 3px rgba(15,23,42,0.04)" } as const;
+const BAND = { backgroundImage: "url(/images/lp-startup-band.svg)", backgroundSize: "100% 100%" } as const;
+
 export default function UntukOrganisasiPage() {
   return (
-    <div className="bg-[#FFFDF9] min-h-screen">
+    <MarketingShell>
       {/* ── Hero ── */}
-      <section className="pt-16 pb-16 px-5 md:px-6 lg:px-8 relative overflow-hidden" style={{ borderBottom: "1.5px solid rgb(240, 217, 200)" }}>
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20" style={{ background: "radial-gradient(circle, rgb(255,138,0) 0%, transparent 70%)" }} />
-        <Container className="relative z-10 max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full" style={{ background: "rgb(255, 244, 232)", border: "1.5px solid rgb(255, 214, 165)" }}>
-            <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: "rgb(255, 138, 0)" }} />
-            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "rgb(255, 138, 0)" }}>Solusi B2B untuk HR &amp; L&amp;D</span>
+      <section className="relative overflow-hidden px-5 pt-16 md:pt-24 pb-14 md:pb-20">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[520px] pointer-events-none" style={{ background: "radial-gradient(ellipse at center top, rgba(255,138,0,0.13) 0%, rgba(255,90,95,0.06) 40%, transparent 70%)" }} />
+        <div data-reveal className="relative max-w-3xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-1.5 rounded-full mb-7 text-[#64748B] bg-white" style={{ border: "1px solid rgb(234, 222, 210)", boxShadow: "0 1px 3px rgba(15,23,42,0.06)" }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "rgb(255,138,0)" }} />
+            Solusi B2B untuk HR &amp; L&amp;D
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight leading-[1.1] text-[#181818] mb-5">
-            Platform Pelatihan In-House untuk Tim Anda
+          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mb-6">
+            Platform pelatihan <GradientText>in-house</GradientText>{" "}untuk tim Anda
           </h1>
-          <p className="text-lg text-black/60 leading-relaxed mb-8 max-w-2xl mx-auto">
-            Dari kebutuhan sampai laporan peserta, Skillary handle semuanya — sehingga tim HR &amp; L&amp;D
-            Anda bisa fokus pada dampak, bukan administrasi.
+          <p className="text-base md:text-lg text-[#64748B] max-w-2xl mx-auto leading-relaxed mb-8">
+            Dari kebutuhan sampai laporan peserta, Skillary handle semuanya — sehingga tim HR &amp; L&amp;D Anda bisa fokus pada dampak, bukan administrasi.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/v2/proposal"><GradientButton className="px-7 py-3.5">Diskusikan Kebutuhan Tim →</GradientButton></Link>
-            <Link href="/v2/catalog"><GhostWarmButton className="px-7 py-3.5">Lihat Katalog Program</GhostWarmButton></Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link href="/v2/proposal" className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
+              Diskusikan Kebutuhan Tim →
+            </Link>
+            <Link href="/v2/catalog" className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-[#0F172A] bg-white hover:bg-gray-50 transition-colors" style={{ border: "1.5px solid rgb(226, 232, 240)" }}>
+              Lihat Katalog Program
+            </Link>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* ── Pain points (semantic colors) ── */}
-      <section className="py-20 px-5 md:px-6 lg:px-8 bg-white">
-        <Container>
-          <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-[#181818] mb-3">Tantangan yang Sering Dihadapi Tim L&amp;D</h2>
-            <p className="text-black/60 max-w-xl mx-auto">Tiga masalah yang membuat program pelatihan terasa sia-sia.</p>
+      {/* ── Pain points (semantic red) ── */}
+      <section className="px-5 py-16 md:py-24" style={BAND}>
+        <div className="max-w-6xl mx-auto">
+          <div data-reveal>
+            <SectionHeading eyebrow="Tantangan" title="Yang sering dihadapi tim L&D" sub="Tiga masalah yang membuat program pelatihan terasa sia-sia." />
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div data-reveal className="grid md:grid-cols-3 gap-4 mt-12">
             {PAINS.map((p) => (
-              <div key={p.title} className="p-7 rounded-2xl" style={{ background: "rgb(254, 242, 242)", border: "1.5px solid rgb(254, 202, 202)" }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: "white", color: "rgb(220, 38, 38)", border: "1.5px solid rgb(254, 202, 202)" }}>
+              <div key={p.title} className="lp-lift p-7 rounded-2xl" style={{ background: "rgb(254, 242, 242)", border: "1px solid rgb(254, 202, 202)" }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: "white", color: "rgb(220, 38, 38)", border: "1px solid rgb(254, 202, 202)" }}>
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d={p.icon} /></svg>
                 </div>
-                <h3 className="font-bold text-[#181818] mb-2">{p.title}</h3>
-                <p className="text-sm text-black/55 leading-relaxed">{p.desc}</p>
+                <h3 className="font-bold text-[#0F172A] mb-2">{p.title}</h3>
+                <p className="text-sm text-[#64748B] leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* ── Features ── */}
-      <section className="py-20 px-5 md:px-6 lg:px-8" style={{ background: "rgb(255, 248, 241)", borderTop: "1.5px solid rgb(240, 217, 200)", borderBottom: "1.5px solid rgb(240, 217, 200)" }}>
-        <Container>
-          <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-[#181818] mb-3">Yang Skillary Tangani untuk Anda</h2>
-            <p className="text-black/60 max-w-xl mx-auto">Lima hal yang membuat pelatihan in-house jadi terukur dan terdokumentasi.</p>
+      <section className="px-5 py-16 md:py-24">
+        <div className="max-w-6xl mx-auto">
+          <div data-reveal>
+            <SectionHeading eyebrow="Solusi" title="Yang Skillary tangani untuk Anda" sub="Lima hal yang membuat pelatihan in-house jadi terukur dan terdokumentasi." />
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div data-reveal className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
             {FEATURES.map((f) => (
-              <div key={f.title} className="bg-white rounded-2xl p-7" style={{ border: "1.5px solid rgb(240, 217, 200)" }}>
+              <div key={f.title} className="lp-lift bg-white rounded-2xl p-7" style={CARD}>
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 text-white" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d={f.icon} /></svg>
                 </div>
-                <h3 className="font-bold text-[#181818] mb-2">{f.title}</h3>
-                <p className="text-sm text-black/55 leading-relaxed">{f.desc}</p>
+                <h3 className="font-bold text-[#0F172A] mb-2">{f.title}</h3>
+                <p className="text-sm text-[#64748B] leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* ── Comparison table ── */}
-      <section className="py-20 px-5 md:px-6 lg:px-8 bg-white">
-        <Container className="max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#181818] mb-3">Training Konvensional vs Skillary</h2>
-            <p className="text-black/60 max-w-xl mx-auto">Perbedaan yang terasa langsung di hasil dan dokumentasi.</p>
+      <section className="px-5 py-16 md:py-24" style={BAND}>
+        <div className="max-w-4xl mx-auto">
+          <div data-reveal>
+            <SectionHeading eyebrow="Perbandingan" title="Training konvensional vs Skillary" sub="Perbedaan yang terasa langsung di hasil dan dokumentasi." />
           </div>
-          <div className="rounded-2xl overflow-hidden" style={{ border: "1.5px solid rgb(240, 217, 200)" }}>
-            <div className="grid grid-cols-3" style={{ background: "rgb(255, 248, 241)", borderBottom: "1.5px solid rgb(240, 217, 200)" }}>
-              <div className="p-4 text-xs font-bold uppercase tracking-widest text-black/45">Aspek</div>
-              <div className="p-4 text-xs font-bold uppercase tracking-widest text-black/45 text-center" style={{ borderLeft: "1.5px solid rgb(240, 217, 200)" }}>Konvensional</div>
+          <div data-reveal className="rounded-2xl overflow-hidden mt-12 bg-white" style={CARD}>
+            <div className="grid grid-cols-3" style={{ background: "rgb(255, 248, 241)", borderBottom: "1px solid rgb(240, 217, 200)" }}>
+              <div className="p-4 text-xs font-bold uppercase tracking-widest text-[#94A3B8]">Aspek</div>
+              <div className="p-4 text-xs font-bold uppercase tracking-widest text-[#94A3B8] text-center" style={{ borderLeft: "1px solid rgb(240, 217, 200)" }}>Konvensional</div>
               <div className="p-4 text-xs font-bold uppercase tracking-widest text-center text-white" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>Skillary</div>
             </div>
             {COMPARISON.map((row, i) => (
               <div key={row.aspect} className="grid grid-cols-3 text-sm" style={{ borderTop: i === 0 ? "none" : "1px solid rgb(240, 217, 200)", background: i % 2 === 0 ? "white" : "rgb(255, 251, 245)" }}>
-                <div className="p-4 font-semibold text-[#181818]">{row.aspect}</div>
-                <div className="p-4 text-black/55 flex items-center gap-2" style={{ borderLeft: "1.5px solid rgb(240, 217, 200)" }}>
+                <div className="p-4 font-semibold text-[#0F172A]">{row.aspect}</div>
+                <div className="p-4 text-[#64748B] flex items-center gap-2" style={{ borderLeft: "1px solid rgb(240, 217, 200)" }}>
                   <svg className="w-4 h-4 shrink-0 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                   {row.conv}
                 </div>
-                <div className="p-4 font-medium text-[#181818] flex items-center gap-2" style={{ borderLeft: "1.5px solid rgb(240, 217, 200)", background: "rgb(255, 251, 245)" }}>
+                <div className="p-4 font-medium text-[#0F172A] flex items-center gap-2" style={{ borderLeft: "1px solid rgb(240, 217, 200)", background: "rgb(255, 251, 245)" }}>
                   <svg className="w-4 h-4 shrink-0" style={{ color: "rgb(5,150,105)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                   {row.skillary}
                 </div>
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* ── Workflow ── */}
-      <section className="py-20 px-5 md:px-6 lg:px-8" style={{ background: "rgb(255, 248, 241)", borderTop: "1.5px solid rgb(240, 217, 200)", borderBottom: "1.5px solid rgb(240, 217, 200)" }}>
-        <Container>
-          <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-[#181818] mb-3">Bagaimana Cara Kerjanya</h2>
-            <p className="text-black/60 max-w-xl mx-auto">Empat langkah dari kebutuhan hingga laporan.</p>
+      <section className="px-5 py-16 md:py-24">
+        <div className="max-w-6xl mx-auto">
+          <div data-reveal>
+            <SectionHeading eyebrow="Cara Kerja" title="Empat langkah dari kebutuhan ke laporan" sub="" />
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div data-reveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
             {STEPS.map((s, i) => (
-              <div key={s.step} className="bg-white rounded-2xl p-6 relative" style={{ border: "1.5px solid rgb(240, 217, 200)" }}>
+              <div key={s.step} className="lp-lift bg-white rounded-2xl p-6 relative" style={CARD}>
                 <div className="text-3xl font-extrabold mb-3" style={{ color: "rgb(255, 138, 0)" }}>{s.step}</div>
-                <h3 className="font-bold text-[#181818] text-sm mb-2">{s.title}</h3>
-                <p className="text-xs text-black/55 leading-relaxed">{s.desc}</p>
+                <h3 className="font-bold text-[#0F172A] text-sm mb-2">{s.title}</h3>
+                <p className="text-xs text-[#64748B] leading-relaxed">{s.desc}</p>
                 {i < STEPS.length - 1 && (
                   <svg className="hidden lg:block absolute top-1/2 -right-3.5 w-5 h-5 text-[rgb(255,138,0)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                 )}
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* ── Personas ── */}
-      <section className="py-20 px-5 md:px-6 lg:px-8 bg-white">
-        <Container>
-          <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-[#181818] mb-3">Untuk Siapa Skillary?</h2>
-            <p className="text-black/60 max-w-xl mx-auto">Solusi yang sudah dipercaya berbagai jenis organisasi.</p>
+      <section className="px-5 py-16 md:py-24" style={BAND}>
+        <div className="max-w-6xl mx-auto">
+          <div data-reveal>
+            <SectionHeading eyebrow="Untuk Siapa" title="Dipercaya berbagai jenis organisasi" sub="" />
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div data-reveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
             {PERSONAS.map((p) => (
-              <div key={p.title} className="p-7 rounded-2xl text-center" style={{ background: "rgb(255, 251, 245)", border: "1.5px solid rgb(240, 217, 200)" }}>
+              <div key={p.title} className="lp-lift p-7 rounded-2xl text-center bg-white" style={CARD}>
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4" style={{ background: "rgb(255, 244, 232)", color: "rgb(255, 138, 0)" }}>
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d={p.icon} /></svg>
                 </div>
-                <h3 className="font-bold text-[#181818] mb-2">{p.title}</h3>
-                <p className="text-sm text-black/55 leading-relaxed">{p.desc}</p>
+                <h3 className="font-bold text-[#0F172A] mb-2">{p.title}</h3>
+                <p className="text-sm text-[#64748B] leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
-
-      {/* ── CTA ── */}
-      <section className="py-20 px-5 md:px-6 lg:px-8 text-center" style={{ background: "rgb(255, 248, 241)", borderTop: "1.5px solid rgb(240, 217, 200)" }}>
-        <Container className="max-w-2xl">
-          <div className="bg-white rounded-3xl p-10 shadow-sm" style={{ border: "1.5px solid rgb(240, 217, 200)" }}>
-            <h2 className="text-2xl font-bold tracking-tight text-[#181818] mb-3">Siap Membuat Pelatihan Tim Lebih Terukur?</h2>
-            <p className="text-base text-black/60 mb-8 leading-relaxed">Konsultasi gratis dengan tim kami — respon dalam 1 hari kerja. Kami bantu rancang program yang sesuai kebutuhan organisasi Anda.</p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link href="/v2/proposal"><GradientButton className="px-7 py-3.5 text-sm">Diskusikan Kebutuhan Training →</GradientButton></Link>
-              <Link href="/v2/portfolio"><GhostWarmButton className="px-7 py-3.5 text-sm">Lihat Portofolio Klien</GhostWarmButton></Link>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </div>
+    </MarketingShell>
   );
 }

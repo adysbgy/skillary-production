@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import { STARTUP_HEADER_ROUTES } from "@/components/v2/layout/StartupHeader";
 
 // ─── Program Catalog dropdown items ───────────────────────────
 const PROGRAM_CATEGORIES = [
@@ -123,7 +124,7 @@ export function HeaderV2() {
 
   // Hide marketing chrome on standalone landing pages and authed app/auth routes
   const hiddenPaths = ["/lp", "/skillary-campus", "/admin", "/dashboard", "/learn", "/login", "/register"];
-  if (pathname === "/" || hiddenPaths.some(p => pathname.startsWith(p))) return null;
+  if (pathname === "/" || STARTUP_HEADER_ROUTES.includes(pathname) || hiddenPaths.some(p => pathname.startsWith(p))) return null;
 
   return (
     <>
@@ -150,7 +151,7 @@ export function HeaderV2() {
           <div className="flex items-center justify-between h-16">
 
             {/* Logo */}
-            <Link href="/v2" className="flex items-center gap-2.5 shrink-0">
+            <Link href="/" className="flex items-center gap-2.5 shrink-0">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
                 <span className="text-white font-black text-sm">S</span>
               </div>

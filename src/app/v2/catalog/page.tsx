@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { slugify } from "@/data/v2-programs";
+import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
+import { GradientText } from "@/components/v2/marketing/MarketingUI";
 
 // ─── Category visual system (gradient + SVG icon, no emoji) ──────────────
 const CATEGORY_STYLE: Record<string, { gradient: string; icon: React.ReactNode }> = {
@@ -105,19 +107,19 @@ export default function CatalogPage() {
   const resetVisible = () => setVisible(PAGE_SIZE);
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen">
+    <MarketingShell>
       {/* ── Hero + search ── */}
-      <section className="bg-white pt-16 pb-12 px-5 md:px-6 lg:px-8 relative overflow-hidden" style={{ borderBottom: "1.5px solid rgb(240, 217, 200)" }}>
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20" style={{ background: "radial-gradient(circle, rgb(255,138,0) 0%, transparent 70%)" }} />
+      <section className="pt-16 md:pt-24 pb-12 px-5 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[520px] pointer-events-none" style={{ background: "radial-gradient(ellipse at center top, rgba(255,138,0,0.13) 0%, rgba(255,90,95,0.06) 40%, transparent 70%)" }} />
         <div className="relative max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full" style={{ background: "rgb(255, 244, 232)", border: "1.5px solid rgb(255, 214, 165)" }}>
-            <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: "rgb(255, 138, 0)" }} />
-            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "rgb(255, 138, 0)" }}>Katalog Program Pelatihan</span>
+          <div className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-1.5 rounded-full mb-7 text-[#64748B] bg-white" style={{ border: "1px solid rgb(234, 222, 210)", boxShadow: "0 1px 3px rgba(15,23,42,0.06)" }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "rgb(255,138,0)" }} />
+            Katalog Program Pelatihan
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#0F172A] mb-4">
-            Temukan Program untuk Tim Anda
+          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mb-6">
+            Temukan <GradientText>program</GradientText>{" "}untuk tim Anda
           </h1>
-          <p className="text-[#64748B] text-base md:text-lg mb-8 max-w-xl mx-auto">
+          <p className="text-[#64748B] text-base md:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
             Jelajahi program pelatihan yang dapat disesuaikan topik, durasi, dan formatnya sesuai kebutuhan organisasi.
           </p>
 
@@ -264,7 +266,7 @@ export default function CatalogPage() {
           </div>
         </div>
       </section>
-    </div>
+    </MarketingShell>
   );
 }
 

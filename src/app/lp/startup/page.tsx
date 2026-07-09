@@ -9,6 +9,9 @@ import { Manrope } from "next/font/google";
 // (both / and /lp/startup) gets the face without extra layout wiring.
 const manrope = Manrope({ subsets: ["latin"] });
 import { EMAIL_GENERAL, INSTAGRAM_URL, whatsappLink } from "@/data/config";
+import { StartupHeader } from "@/components/v2/layout/StartupHeader";
+import { StartupFooter } from "@/components/v2/marketing/StartupFooter";
+import { Check, SectionHeading, GlassButton } from "@/components/v2/marketing/MarketingUI";
 
 // ============================================================
 // Skillary "startup" concept page — Aimfox-inspired:
@@ -22,12 +25,12 @@ const GRADIENT_SIMPLE = "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))
 const DARK = "rgb(13, 16, 28)";
 
 const NAV = [
+  { label: "Programs", href: "/v2/catalog" },
+  { label: "Free Workshops", href: "/v2/resources" },
   { label: "Events", href: "#events" },
-  { label: "Program", href: "#program" },
-  { label: "Platform", href: "#platform" },
-  { label: "Testimoni", href: "#testimoni" },
-  { label: "Paket", href: "#paket" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Services", href: "/v2/untuk-organisasi" },
+  { label: "About", href: "/v2/about" },
+  { label: "Request Proposal", href: "/v2/proposal" },
 ];
 
 // Staggered "Your Accounts"-style participant cards (hero visual)
@@ -297,18 +300,7 @@ const FAQS = [
 
 export default function StartupConceptPage() {
   const [tab, setTab] = useState<TabId>("peserta");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const activeTab = TABS.find((t) => t.id === tab)!;
-
-  // Aimfox-style header morph: full-width dark bar at top of page,
-  // collapses into a floating centered pill once the user scrolls.
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // LottieFiles-style scroll reveal: fade-up section content the first time
   // it enters the viewport. Reduced-motion users get everything instantly
@@ -356,119 +348,8 @@ export default function StartupConceptPage() {
           .lp-lift, .lp-lift:hover { transition: none; transform: none; }
         }
       `}</style>
-      {/* ── Morphing header: full-width bar at top → floating pill on scroll ── */}
-      <header className="fixed top-0 left-0 right-0 z-50">
-        {/* Announcement bar — collapses away on scroll */}
-        <div
-          className={`overflow-hidden transition-all duration-300 ${scrolled ? "max-h-0 opacity-0" : "max-h-11 opacity-100"}`}
-          style={{
-            background:
-              "radial-gradient(ellipse 55% 220% at 50% 0%, rgba(255,120,30,0.85) 0%, rgba(150,55,10,0.55) 40%, rgb(13,16,28) 100%)",
-          }}
-        >
-          <div className="h-11 flex items-center justify-center gap-3 px-4 text-white">
-            <p className="text-[11px] md:text-xs font-semibold truncate">
-              ✦ BARU: Events Skillary — webinar praktis dan kelas singkat untuk skill kerja profesional
-            </p>
-            <Link
-              href="#events"
-              className="shrink-0 text-[11px] md:text-xs font-bold px-3.5 py-1 rounded-full transition-colors hover:bg-white/20"
-              style={{ border: "1px solid rgba(255,255,255,0.35)", background: "rgba(255,255,255,0.12)" }}
-            >
-              Lihat Events
-            </Link>
-          </div>
-        </div>
-
-        {/* Nav bar — morphs between full-width and centered pill */}
-        <div className={`transition-all duration-300 ${scrolled ? "px-3 md:px-4 pt-3" : "px-0 pt-0"}`}>
-          <div
-            className={`flex items-center justify-between h-14 md:h-16 mx-auto transition-all duration-300 ${
-              scrolled
-                ? "max-w-5xl rounded-full shadow-xl pl-4 pr-2 md:pl-6 md:pr-2.5"
-                : "max-w-[120rem] rounded-none pl-4 pr-3 md:pl-8 md:pr-6"
-            }`}
-            style={{ background: DARK }}
-          >
-          {/* Logo */}
-          <Link href="#" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5 shrink-0">
-            <Image src="/logo.png" alt="Skillary" width={44} height={24} priority className="h-6 w-auto object-contain" />
-            <span className="text-white text-base font-bold tracking-tight">Skillary</span>
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {NAV.map((n) => (
-              <a key={n.href} href={n.href} className="text-sm font-medium text-white/60 hover:text-white transition-colors">
-                {n.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Desktop right cluster */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link href="/v2/proposal" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">
-              Jadwalkan Konsultasi
-            </Link>
-            <span className="w-px h-5 bg-white/20" />
-            <Link href="/login" className="text-sm font-semibold text-white/80 hover:text-white transition-colors">
-              Masuk
-            </Link>
-            <Link
-              href="/v2/proposal"
-              className="text-sm font-bold px-5 py-2.5 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors"
-            >
-              Konsultasi Gratis
-            </Link>
-          </div>
-
-          {/* Mobile right cluster */}
-          <div className="flex lg:hidden items-center gap-2">
-            <Link href="/v2/proposal" className="text-xs font-bold px-4 py-2 rounded-full bg-white text-[#0F172A]">
-              Konsultasi Gratis
-            </Link>
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
-              className="w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors"
-            >
-              {menuOpen ? (
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
-              )}
-            </button>
-          </div>
-          </div>
-
-          {/* Mobile dropdown */}
-          {menuOpen && (
-            <div className={`lg:hidden mt-2 rounded-3xl p-5 shadow-xl ${scrolled ? "" : "mx-3"}`} style={{ background: DARK }}>
-            <nav className="flex flex-col">
-              {NAV.map((n) => (
-                <a
-                  key={n.href}
-                  href={n.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="py-3 text-sm font-semibold text-white/80 hover:text-white transition-colors"
-                  style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
-                >
-                  {n.label}
-                </a>
-              ))}
-              <div className="flex items-center gap-3 pt-4">
-                <Link href="/login" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full text-white" style={{ border: "1px solid rgba(255,255,255,0.25)" }}>
-                  Masuk
-                </Link>
-                <Link href="/v2/proposal" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full bg-white text-[#0F172A]">
-                  Konsultasi Gratis
-                </Link>
-              </div>
-            </nav>
-            </div>
-          )}
-        </div>
-      </header>
+      {/* ── Morphing header (shared with primary marketing sub-pages) ── */}
+      <StartupHeader />
 
       {/* ── White mega-container on dark canvas (Aimfox `rounded-8xl` structure) ── */}
       <div className="pt-[100px] md:pt-[108px]">
@@ -996,96 +877,8 @@ export default function StartupConceptPage() {
       {/* ── Close white container B — final CTA + footer live on the dark canvas ── */}
       </main>
 
-      {/* ── Final CTA + footer — saturated warm gradient section (Aimfox "Start scaling") ── */}
-      <section className="relative overflow-hidden px-3 md:px-5 pt-20 md:pt-28 pb-3 md:pb-5">
-        {/* Gradient + grid + chevron + grain background asset */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/lp-startup-cta-bg.svg" alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
-
-        {/* CTA content */}
-        <div data-reveal className="relative max-w-2xl mx-auto text-center text-white">
-          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mb-6">
-            Mulai dari event terdekat atau susun program untuk tim Anda
-          </h2>
-          <p className="text-white/85 mb-9 leading-relaxed max-w-xl mx-auto">
-            Ikuti Events Skillary atau ceritakan kebutuhan training tim Anda. Kami bantu rekomendasikan topik, format, durasi, dan timeline yang paling sesuai.
-          </p>
-          <Link
-            href="#events"
-            className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full text-white transition-colors shadow-xl hover:bg-black"
-            style={{ background: "#0B0A12" }}
-          >
-            Lihat Events
-          </Link>
-          <Link
-            href="/v2/proposal"
-            className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors shadow-xl"
-          >
-            Konsultasi Program
-          </Link>
-          <p className="text-sm text-white/85 mt-6 font-medium">
-            Konsultasi gratis <span className="mx-1.5 opacity-70">✦</span> Tanpa komitmen <span className="mx-1.5 opacity-70">✦</span> Respon 1 hari kerja
-          </p>
-        </div>
-
-        {/* ── Black rounded footer floating inside the gradient ── */}
-        <footer className="relative max-w-6xl mx-auto mt-16 md:mt-24 rounded-[2rem] md:rounded-[2.75rem] px-7 md:px-14 pt-10 md:pt-14 pb-8 text-white" style={{ background: "#0B0A12" }}>
-          <div className="flex flex-col lg:flex-row lg:justify-between gap-10">
-            {/* Brand */}
-            <div className="max-w-xs">
-              <div className="flex items-center gap-3 mb-4">
-                <Image src="/logo.png" alt="Skillary" width={58} height={32} className="h-8 w-auto object-contain" />
-                <span className="text-xl font-bold tracking-tight">Skillary</span>
-              </div>
-              <p className="text-sm text-white/45 leading-relaxed">
-                Dibangun untuk pembelajaran profesional.
-                <br />
-                Dirancang untuk hasil yang terukur.
-              </p>
-            </div>
-
-            {/* Link columns + socials */}
-            <div className="flex flex-wrap gap-x-16 gap-y-8">
-              <ul className="space-y-3 text-sm text-white/60">
-                {NAV.map((n) => (
-                  <li key={n.href}>
-                    <a href={n.href} className="hover:text-white transition-colors">{n.label}</a>
-                  </li>
-                ))}
-              </ul>
-              <ul className="space-y-3 text-sm text-white/60">
-                <li><Link href="/v2/catalog" className="hover:text-white transition-colors">Katalog Program</Link></li>
-                <li><Link href="/v2/untuk-organisasi" className="hover:text-white transition-colors">Untuk Organisasi</Link></li>
-                <li><Link href="/v2/portfolio" className="hover:text-white transition-colors">Portofolio</Link></li>
-                <li><Link href="/v2/about" className="hover:text-white transition-colors">Tentang</Link></li>
-                <li><Link href="/v2/proposal" className="hover:text-white transition-colors">Kontak</Link></li>
-              </ul>
-
-              {/* Socials */}
-              <div className="flex items-start gap-3">
-                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.41.6.22 1 .48 1.4.9.4.4.7.9.9 1.4.16.4.35 1 .41 2.2.07 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 1.8-.41 2.2-.22.6-.48 1-.9 1.4-.4.4-.9.7-1.4.9-.4.16-1 .35-2.2.41-1.3.07-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-1.8-.25-2.2-.41-.6-.22-1-.48-1.4-.9-.4-.4-.7-.9-.9-1.4-.16-.4-.35-1-.41-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-1.8.41-2.2.22-.6.48-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.16 1-.35 2.2-.41C8.4 2.2 8.8 2.2 12 2.2m0 2.3c-3.1 0-3.5 0-4.7.07-1.1.05-1.7.24-2.1.4-.5.2-.9.44-1.3.83-.4.4-.63.76-.83 1.3-.16.4-.35 1-.4 2.1-.07 1.2-.07 1.6-.07 4.7s0 3.5.07 4.7c.05 1.1.24 1.7.4 2.1.2.5.44.9.83 1.3.4.4.76.63 1.3.83.4.16 1 .35 2.1.4 1.2.07 1.6.07 4.7.07s3.5 0 4.7-.07c1.1-.05 1.7-.24 2.1-.4.5-.2.9-.44 1.3-.83.4-.4.63-.76.83-1.3.16-.4.35-1 .4-2.1.07-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.05-1.1-.24-1.7-.4-2.1-.2-.5-.44-.9-.83-1.3-.4-.4-.76-.63-1.3-.83-.4-.16-1-.35-2.1-.4-1.2-.07-1.6-.07-4.7-.07M12 7.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4m0 2.3a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.9-2.6a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0"/></svg>
-                </a>
-                <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.488-1.087z"/></svg>
-                </a>
-                <a href={`mailto:${EMAIL_GENERAL}`} aria-label="Email" className="w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom row */}
-          <div className="mt-12 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-xs text-white/40" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-            <span>© 2026 PT Skillary Generasi Cerdas. All rights reserved.</span>
-            <span className="flex gap-6">
-              <Link href="/privacy" className="hover:text-white/70 transition-colors">Kebijakan Privasi</Link>
-              <Link href="/terms" className="hover:text-white/70 transition-colors">Syarat &amp; Ketentuan</Link>
-            </span>
-          </div>
-        </footer>
-      </section>
+      {/* ── Final CTA + footer (shared component) ── */}
+      <StartupFooter />
     </div>
   );
 }
@@ -1123,22 +916,6 @@ function CountUp({ end, prefix = "", suffix = "", duration = 1200 }: { end: numb
     return () => { io.disconnect(); cancelAnimationFrame(raf); };
   }, [end, prefix, suffix, duration]);
   return <span ref={ref}>{prefix}0{suffix}</span>;
-}
-
-/**
- * Aimfox "View Integrations" liquid-glass button, re-skinned warm.
- * Default: translucent dark pill + white inset rim. Hover: an ::after layer
- * fades in carrying 2 outer halos + 5 stacked warm inset glows (backlit glass).
- */
-function GlassButton({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      className="relative inline-flex items-center justify-center h-12 px-7 rounded-full text-sm font-semibold text-white bg-black/20 shadow-[0_0_16.8px_0_rgba(255,255,255,0.40)_inset] after:absolute after:inset-0 after:rounded-full after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-100 after:shadow-[0_0_4.2px_0_rgba(255,170,100,0.30),0_0_35px_0_rgba(255,150,70,0.30),0_-6.3px_7px_-5.6px_#FFE4CC_inset,0_-14px_16px_-11.2px_#FFEDDC_inset,0_0_7px_1.4px_#FFD2A8_inset,0_0_16px_0_#FFA14D_inset,0_0_42px_0_#FF8A00_inset]"
-    >
-      <span className="relative z-10">{children}</span>
-    </Link>
-  );
 }
 
 /** One pass of the sliding testimonial/media wall (duplicated for the loop). */
@@ -1231,26 +1008,6 @@ function MarqueeGroup({ ariaHidden = false }: { ariaHidden?: boolean }) {
       </div>
 
       <div className={col}>{T(5)}</div>
-    </div>
-  );
-}
-
-function Check() {
-  return (
-    <svg className="w-4 h-4 shrink-0 mt-0.5" style={{ color: "rgb(255,138,0)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  );
-}
-
-function SectionHeading({ eyebrow, title, sub }: { eyebrow: string; title: React.ReactNode; sub: string }) {
-  return (
-    <div className="text-center max-w-2xl mx-auto">
-      <p className="text-xs font-bold tracking-[0.2em] uppercase mb-3" style={{ color: "rgb(255,138,0)" }}>
-        {eyebrow}
-      </p>
-      <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">{title}</h2>
-      {sub && <p className="text-[#64748B] mt-4 leading-relaxed">{sub}</p>}
     </div>
   );
 }

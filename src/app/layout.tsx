@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { HeaderV2 } from "@/components/v2/layout/HeaderV2";
 import { FooterV2 } from "@/components/v2/layout/FooterV2";
+import { MarketingHeaderGate } from "@/components/v2/layout/MarketingHeaderGate";
 import { Providers } from "@/components/Providers";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -53,6 +54,7 @@ export default function RootLayout({
       <body className="flex flex-col text-[#181818] font-sans">
         <Providers>
           <HeaderV2 />
+          <MarketingHeaderGate />
           <main className="flex-1">
             {children}
           </main>

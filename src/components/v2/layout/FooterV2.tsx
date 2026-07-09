@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MARKETING_SHELL_ROUTES } from "@/components/v2/layout/StartupHeader";
 import { Logo } from "@/components/ui/Logo";
 import { EMAIL_GENERAL, EMAIL_TEAMS, INSTAGRAM_URL, whatsappLink } from "@/data/config";
 
@@ -56,7 +57,7 @@ export function FooterV2() {
   const pathname = usePathname();
 
   const hiddenPaths = ["/lp", "/skillary-campus", "/admin", "/dashboard", "/learn", "/login", "/register"];
-  if (pathname === "/" || hiddenPaths.some((p) => pathname.startsWith(p))) return null;
+  if (pathname === "/" || MARKETING_SHELL_ROUTES.includes(pathname) || hiddenPaths.some((p) => pathname.startsWith(p))) return null;
 
   return (
     <footer style={{ background: "rgb(17, 24, 39)" }} className="text-white">
