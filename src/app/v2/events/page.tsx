@@ -10,10 +10,13 @@ import { EVENTS, EVENT_FILTERS, formatEventPrice, type EventItem } from "@/data/
 
 const CARD = { border: "1px solid rgb(234, 237, 243)", boxShadow: "0 1px 3px rgba(15,23,42,0.04)" } as const;
 
-const STATUS_STYLE: Record<EventItem["status"], { bg: string; color: string }> = {
-  Mendatang: { bg: "rgba(255,255,255,0.9)", color: "#0F172A" },
-  "Hampir Penuh": { bg: "rgb(255, 244, 232)", color: "rgb(220, 110, 0)" },
-  Selesai: { bg: "rgb(241, 245, 249)", color: "#64748B" },
+// Semantic status colours — green = kursi tersedia, red = urgency (hampir
+// penuh), grey = sudah lewat. Mirrors the Available/Fully Booked/Coming Soon
+// signalling in the reference so scarcity reads at a glance.
+const STATUS_STYLE: Record<EventItem["status"], { bg: string; color: string; dot: string }> = {
+  Mendatang: { bg: "rgb(220, 252, 231)", color: "rgb(21, 128, 61)", dot: "rgb(34,197,94)" },
+  "Hampir Penuh": { bg: "rgb(254, 226, 226)", color: "rgb(185, 28, 28)", dot: "rgb(239,68,68)" },
+  Selesai: { bg: "rgb(241, 245, 249)", color: "rgb(100, 116, 139)", dot: "rgb(148,163,184)" },
 };
 
 export default function EventsV2Page() {
@@ -102,52 +105,56 @@ export default function EventsV2Page() {
 function EventCard({ event }: { event: EventItem }) {
   const st = STATUS_STYLE[event.status];
   const detailHref = `/v2/events/${event.slug}`;
+  const free = event.price === 0;
 
   return (
     <div data-reveal className="lp-lift rounded-2xl overflow-hidden bg-white flex flex-col" style={CARD}>
-      <Link href={detailHref} className="relative h-32 flex items-end p-4 block" style={{ backgroundImage: event.gradient }}>
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-          <span className="text-[11px] font-bold px-2.5 py-1 rounded-full" style={{ background: st.bg, color: st.color }}>
-            {event.status}
-          </span>
-          <span className="text-[11px] font-bold px-2.5 py-1 rounded-full text-white" style={{ background: "rgba(0,0,0,0.25)" }}>
-            {event.kind}
-          </span>
-        </div>
+      {/* Header — instructor portrait tinted with the category gradient */}
+      <Link href={detailHref} className="relative h-44 block overflow-hidden" style={{ backgroundImage: event.gradient }}>
+        <Image src={event.host.avatar} alt={event.host.name} width={176} height={176} className="absolute -right-3 bottom-0 w-40 h-40 object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.25)]" />
+        <span className="absolute top-3.5 left-3.5 text-[11px] font-bold px-2.5 py-1 rounded-full text-white" style={{ background: "rgba(0,0,0,0.28)" }}>
+          {event.kind}
+        </span>
       </Link>
 
       <div className="p-5 flex flex-col flex-1">
-        <p className="text-xs font-bold text-[#94A3B8] mb-1.5 flex items-center gap-1.5">
-          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-          {event.dateLabel} · {event.time}
-        </p>
+        {/* Category + semantic status */}
+        <div className="flex items-center justify-between gap-2 mb-2">
+          <span className="text-[11px] font-bold tracking-wider uppercase" style={{ color: "rgb(255,138,0)" }}>{event.category}</span>
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full" style={{ background: st.bg, color: st.color }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: st.dot }} />
+            {event.status}
+          </span>
+        </div>
+
+        {/* Title → detail page */}
         <Link href={detailHref} className="hover:underline decoration-2 underline-offset-2">
           <h3 className="text-lg font-bold mb-2 leading-snug">{event.title}</h3>
         </Link>
-        <p className="text-sm text-[#64748B] leading-relaxed mb-4 flex-1">{event.desc}</p>
 
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgb(255, 244, 232)", color: "rgb(220, 110, 0)", border: "1px solid rgb(255, 214, 165)" }}>
-            {event.category}
-          </span>
-          <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full text-[#475569]" style={{ border: "1px solid rgb(226, 232, 240)" }}>
-            {event.format} · {event.durationMin}m
-          </span>
-        </div>
+        {/* Description */}
+        <p className="text-sm text-[#64748B] leading-relaxed mb-3 flex-1">{event.desc}</p>
 
-        <div className="flex items-center gap-2.5 mb-5 pt-4" style={{ borderTop: "1px solid rgb(241, 245, 249)" }}>
-          <Image src={event.host.avatar} alt={event.host.name} width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
-          <div className="leading-tight">
-            <p className="text-xs font-bold text-[#0F172A]">{event.host.name}</p>
-            <p className="text-[11px] text-[#94A3B8]">{event.host.role}</p>
+        {/* Host as trust line (institution-equivalent) */}
+        <p className="text-xs font-semibold text-[#475569] mb-4">{event.host.name} · {event.host.role}</p>
+
+        <div className="pt-4" style={{ borderTop: "1px solid rgb(241, 245, 249)" }}>
+          {/* Date */}
+          <p className="text-xs font-medium text-[#94A3B8] mb-3 flex items-center gap-1.5">
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+            {event.dateLabel} · {event.time}
+          </p>
+
+          {/* Price prominent + format */}
+          <div className="flex items-end justify-between mb-4">
+            <span className="text-xl font-bold" style={{ color: free ? "rgb(21,128,61)" : "#0F172A" }}>{formatEventPrice(event.price)}</span>
+            <span className="text-[11px] font-semibold text-[#94A3B8]">{event.format} · {event.durationMin} menit</span>
           </div>
-        </div>
 
-        <div className="flex items-center justify-between gap-3 mt-auto">
-          <span className="text-base font-bold text-[#0F172A]">{formatEventPrice(event.price)}</span>
+          {/* Full-width direct CTA */}
           <EventRegisterButton
             event={event}
-            className="text-xs font-bold px-4 py-2.5 rounded-full text-white hover:opacity-90 transition-opacity"
+            className="w-full text-center text-sm font-bold py-3 rounded-full text-white hover:opacity-90 transition-opacity"
             style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}
           />
         </div>
