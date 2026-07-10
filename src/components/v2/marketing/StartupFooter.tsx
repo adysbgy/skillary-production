@@ -7,7 +7,7 @@ import { EMAIL_GENERAL, INSTAGRAM_URL, whatsappLink } from "@/data/config";
 const FOOTER_NAV = [
   { label: "Programs", href: "/v2/catalog" },
   { label: "Free Workshops", href: "/v2/resources" },
-  { label: "Events", href: "/#events" },
+  { label: "Events", href: "/v2/events" },
   { label: "Services", href: "/v2/untuk-organisasi" },
   { label: "About", href: "/v2/about" },
   { label: "Request Proposal", href: "/v2/proposal" },
@@ -27,7 +27,7 @@ export function StartupFooter() {
         <p className="text-white/85 mb-9 leading-relaxed max-w-xl mx-auto">
           Ikuti Events Skillary atau ceritakan kebutuhan training tim Anda. Kami bantu rekomendasikan topik, format, durasi, dan timeline yang paling sesuai.
         </p>
-        <Link href="/#events" className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full text-white transition-colors shadow-xl hover:bg-black" style={{ background: "#0B0A12" }}>
+        <Link href="/v2/events" className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full text-white transition-colors shadow-xl hover:bg-black" style={{ background: "#0B0A12" }}>
           Lihat Events
         </Link>
         <Link href="/v2/proposal" className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors shadow-xl">

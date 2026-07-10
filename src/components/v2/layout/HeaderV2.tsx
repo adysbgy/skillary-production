@@ -124,7 +124,7 @@ export function HeaderV2() {
 
   // Hide marketing chrome on standalone landing pages and authed app/auth routes
   const hiddenPaths = ["/lp", "/skillary-campus", "/admin", "/dashboard", "/learn", "/login", "/register"];
-  if (pathname === "/" || STARTUP_HEADER_ROUTES.includes(pathname) || hiddenPaths.some(p => pathname.startsWith(p))) return null;
+  if (pathname === "/" || STARTUP_HEADER_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`)) || hiddenPaths.some(p => pathname.startsWith(p))) return null;
 
   return (
     <>

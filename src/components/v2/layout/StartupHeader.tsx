@@ -13,6 +13,7 @@ const DARK = "rgb(13, 16, 28)";
 export const STARTUP_HEADER_ROUTES = [
   "/v2/catalog",
   "/v2/resources",
+  "/v2/events",
   "/v2/untuk-organisasi",
   "/v2/about",
   "/v2/proposal",
@@ -21,14 +22,12 @@ export const STARTUP_HEADER_ROUTES = [
 // Subset of the above already rebuilt with the landing MarketingShell (dark
 // canvas + own footer + own top padding). These get no external spacer and
 // hide FooterV2. Grows as each page is restyled.
-export const MARKETING_SHELL_ROUTES = ["/v2/about", "/v2/untuk-organisasi", "/v2/catalog", "/v2/resources", "/v2/proposal"];
+export const MARKETING_SHELL_ROUTES = ["/v2/about", "/v2/untuk-organisasi", "/v2/catalog", "/v2/resources", "/v2/events", "/v2/proposal"];
 
-// Events is an on-page anchor; use an absolute "/#events" so it also works
-// when clicked from a sub-page (navigates home, then scrolls).
 const NAV = [
   { label: "Programs", href: "/v2/catalog" },
   { label: "Free Workshops", href: "/v2/resources" },
-  { label: "Events", href: "/#events" },
+  { label: "Events", href: "/v2/events" },
   { label: "Services", href: "/v2/untuk-organisasi" },
   { label: "About", href: "/v2/about" },
   { label: "Request Proposal", href: "/v2/proposal" },
@@ -60,7 +59,7 @@ export function StartupHeader() {
             ✦ BARU: Events Skillary — webinar praktis dan kelas singkat untuk skill kerja profesional
           </p>
           <Link
-            href="/#events"
+            href="/v2/events"
             className="shrink-0 text-[11px] md:text-xs font-bold px-3.5 py-1 rounded-full transition-colors hover:bg-white/20"
             style={{ border: "1px solid rgba(255,255,255,0.35)", background: "rgba(255,255,255,0.12)" }}
           >

@@ -9,9 +9,10 @@ import { StartupHeader, STARTUP_HEADER_ROUTES, MARKETING_SHELL_ROUTES } from "./
 // the not-yet-restyled ones.
 export function MarketingHeaderGate() {
   const pathname = usePathname();
-  if (!STARTUP_HEADER_ROUTES.includes(pathname)) return null;
+  const matches = (routes: string[]) => routes.some((r) => pathname === r || pathname.startsWith(`${r}/`));
+  if (!matches(STARTUP_HEADER_ROUTES)) return null;
 
-  const needsSpacer = !MARKETING_SHELL_ROUTES.includes(pathname);
+  const needsSpacer = !matches(MARKETING_SHELL_ROUTES);
 
   return (
     <>

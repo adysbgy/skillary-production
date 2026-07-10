@@ -383,7 +383,7 @@ export default function StartupConceptPage() {
 
           <div data-reveal style={{ transitionDelay: "0.3s" }} className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
             <Link
-              href="#events"
+              href="/v2/events"
               className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg"
               style={{ background: GRADIENT_SIMPLE }}
             >
