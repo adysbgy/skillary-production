@@ -21,11 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const CLIENT_LOGOS = [
-  { name: "BNI", color: "rgb(29, 78, 216)" },
-  { name: "Bank Indonesia", color: "rgb(220, 38, 38)" },
-  { name: "Indofood", color: "rgb(234, 88, 12)" },
-];
+// Safe social-proof framing — industry sectors, not unapproved client names.
+// Matches the treatment already used on /v2/about and /v2/proposal.
+const INDUSTRY_CHIPS = ["Perbankan", "Regulator", "FMCG", "Energi", "Pendidikan"];
 
 export default async function ProgramDetailPage({ params }: Props) {
   const { slug } = await params;
@@ -203,13 +201,12 @@ export default async function ProgramDetailPage({ params }: Props) {
           </Link>
 
           <div className="mt-10 pt-8" style={{ borderTop: "1px solid rgb(31, 41, 55)" }}>
-            <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Dipercaya oleh organisasi terkemuka</p>
-            <div className="flex items-center justify-center gap-3">
-              {CLIENT_LOGOS.map((c) => (
-                <div key={c.name} className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: "rgb(31, 41, 55)", border: "1px solid rgb(55, 65, 81)" }}>
-                  <div className="w-6 h-6 rounded-md flex items-center justify-center text-white text-[10px] font-black shrink-0" style={{ background: c.color }}>{c.name.charAt(0)}</div>
-                  <span className="text-xs font-semibold text-gray-300">{c.name}</span>
-                </div>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4">Berangkat dari arsip pengalaman pelatihan korporat sejak 1998</p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {INDUSTRY_CHIPS.map((c) => (
+                <span key={c} className="text-xs font-semibold px-3 py-1.5 rounded-full text-gray-300" style={{ border: "1px solid rgb(55, 65, 81)" }}>
+                  {c}
+                </span>
               ))}
             </div>
           </div>

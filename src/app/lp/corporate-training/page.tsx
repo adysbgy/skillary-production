@@ -860,19 +860,20 @@ function WhySkillarySection() {
 // ─────────────────────────────────────────────
 // CLIENT MARQUEE (DUMMY)
 // ─────────────────────────────────────────────
-const DUMMY_CLIENTS = [
-  "TECH NUSANTARA", "BANK SYARIAH", "KEMENTERIAN X", "UNIVERSITAS Y", "CORP GLOBAL", "STARTUP HUB"
+// Industry sectors (not fabricated client names) — honest trust framing.
+const SECTOR_STRIP = [
+  "PERBANKAN", "REGULATOR", "FMCG", "ENERGI", "TELEKOMUNIKASI", "PENDIDIKAN"
 ];
 
 function ClientMarqueeSection() {
   return (
     <section className="py-8 bg-white border-b border-[#F0D9C8]">
       <div className="max-w-6xl mx-auto px-5 md:px-8 text-center">
-        <p className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-widest mb-4">Dipercaya oleh organisasi terkemuka</p>
+        <p className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-widest mb-4">Pengalaman pelatihan lintas sektor industri</p>
         <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 opacity-60 grayscale">
-          {DUMMY_CLIENTS.map((client) => (
-            <div key={client} className="text-sm md:text-base font-extrabold text-[#334155] tracking-tighter">
-              {client}
+          {SECTOR_STRIP.map((sector) => (
+            <div key={sector} className="text-sm md:text-base font-extrabold text-[#334155] tracking-tighter">
+              {sector}
             </div>
           ))}
         </div>

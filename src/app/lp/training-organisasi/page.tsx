@@ -139,8 +139,8 @@ export default function TrainingOrganisasiLpPage() {
 
           {/* Social proof strip */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-7">
-            <span className="text-xs font-semibold text-[#94A3B8] mr-1">Dipercaya oleh:</span>
-            {["Bank Indonesia", "BNI", "OJK", "Indofood"].map((c) => (
+            <span className="text-xs font-semibold text-[#94A3B8] mr-1">Pengalaman lintas sektor:</span>
+            {["Perbankan", "Regulator", "FMCG", "Energi"].map((c) => (
               <span
                 key={c}
                 className="text-xs font-bold px-3 py-1.5 rounded-full"

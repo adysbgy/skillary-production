@@ -16,15 +16,18 @@ const IMPACT_STATS = [
   { value: "500", suffix: "+", label: "Peserta tersertifikasi" },
 ];
 
+// Client names + sectors are kept (curated track-record), but per-client
+// engagement descriptions are softened to a neutral, sector-framed archive
+// note so no specific unverifiable claim about the work delivered is made.
 const CLIENTS = [
-  { name: "Bank Indonesia", abbr: "BI", color: "rgb(220, 38, 38)", sector: "Perbankan & Regulasi", context: "Program pengembangan kompetensi pegawai di lingkungan bank sentral." },
-  { name: "BNI (Bank Negara Indonesia)", abbr: "BNI", color: "rgb(29, 78, 216)", sector: "Perbankan", context: "Pelatihan keterampilan digital dan analitik untuk tim internal." },
-  { name: "OJK (Otoritas Jasa Keuangan)", abbr: "OJK", color: "rgb(21, 128, 61)", sector: "Regulasi Keuangan", context: "Penguatan kapasitas SDM di sektor pengawasan jasa keuangan." },
-  { name: "Indofood", abbr: "IF", color: "rgb(234, 88, 12)", sector: "FMCG & Manufaktur", context: "Pelatihan produktivitas dan proses bisnis untuk tim operasional." },
-  { name: "Freeport Indonesia", abbr: "FCX", color: "rgb(139, 92, 246)", sector: "Pertambangan & Energi", context: "Program peningkatan kompetensi teknis dan manajerial karyawan." },
-  { name: "Mandiri University", abbr: "MU", color: "rgb(5, 150, 105)", sector: "Perbankan", context: "Kolaborasi pengembangan materi pembelajaran korporat." },
-  { name: "Indosat Ooredoo", abbr: "IO", color: "rgb(220, 38, 38)", sector: "Telekomunikasi", context: "Pelatihan transformasi digital untuk berbagai divisi." },
-  { name: "PPM Manajemen", abbr: "PPM", color: "rgb(37, 99, 235)", sector: "Pendidikan & Konsultansi", context: "Kemitraan penyelenggaraan program manajemen profesional." },
+  { name: "Bank Indonesia", abbr: "BI", color: "rgb(220, 38, 38)", sector: "Perbankan & Regulasi", context: "Bagian dari arsip pengalaman pelatihan korporat lintas sektor." },
+  { name: "BNI (Bank Negara Indonesia)", abbr: "BNI", color: "rgb(29, 78, 216)", sector: "Perbankan", context: "Bagian dari arsip pengalaman pelatihan korporat lintas sektor." },
+  { name: "OJK (Otoritas Jasa Keuangan)", abbr: "OJK", color: "rgb(21, 128, 61)", sector: "Regulasi Keuangan", context: "Bagian dari arsip pengalaman pelatihan korporat lintas sektor." },
+  { name: "Indofood", abbr: "IF", color: "rgb(234, 88, 12)", sector: "FMCG & Manufaktur", context: "Bagian dari arsip pengalaman pelatihan korporat lintas sektor." },
+  { name: "Freeport Indonesia", abbr: "FCX", color: "rgb(139, 92, 246)", sector: "Pertambangan & Energi", context: "Bagian dari arsip pengalaman pelatihan korporat lintas sektor." },
+  { name: "Mandiri University", abbr: "MU", color: "rgb(5, 150, 105)", sector: "Perbankan", context: "Bagian dari arsip pengalaman pelatihan korporat lintas sektor." },
+  { name: "Indosat Ooredoo", abbr: "IO", color: "rgb(220, 38, 38)", sector: "Telekomunikasi", context: "Bagian dari arsip pengalaman pelatihan korporat lintas sektor." },
+  { name: "PPM Manajemen", abbr: "PPM", color: "rgb(37, 99, 235)", sector: "Pendidikan & Konsultansi", context: "Bagian dari arsip pengalaman pelatihan korporat lintas sektor." },
 ];
 
 const PLACEHOLDER_COUNT = 4;

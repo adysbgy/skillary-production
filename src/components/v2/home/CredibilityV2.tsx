@@ -7,15 +7,15 @@ const IMPACT_STATS = [
   { value: "6", label: "Sektor industri", suffix: "+" },
 ];
 
-const CLIENT_LOGOS = [
-  { name: "Bank Indonesia", abbr: "BI", color: "rgb(220, 38, 38)" },
-  { name: "BNI", abbr: "BNI", color: "rgb(29, 78, 216)" },
-  { name: "OJK", abbr: "OJK", color: "rgb(21, 128, 61)" },
-  { name: "Indofood", abbr: "IF", color: "rgb(234, 88, 12)" },
-  { name: "Freeport", abbr: "FCX", color: "rgb(139, 92, 246)" },
-  { name: "Mandiri Univ.", abbr: "MU", color: "rgb(5, 150, 105)" },
-  { name: "Indosat", abbr: "IO", color: "rgb(220, 38, 38)" },
-  { name: "PPM Mgmt", abbr: "PPM", color: "rgb(37, 99, 235)" },
+// Softened to industry sectors (no unapproved client-name claims), matching
+// the framing used on /v2/about and /v2/proposal.
+const SECTORS = [
+  "Perbankan",
+  "Regulator Keuangan",
+  "FMCG & Manufaktur",
+  "Pertambangan & Energi",
+  "Telekomunikasi",
+  "Pendidikan & Konsultansi",
 ];
 
 export function CredibilityV2() {
@@ -40,34 +40,21 @@ export function CredibilityV2() {
       <div style={{ borderTop: "1px solid rgb(31, 41, 55)" }} className="py-6">
         <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8">
           <p className="text-center text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-5">
-            Klien & Organisasi yang Pernah Dilayani
+            Pengalaman Pelatihan Lintas Sektor Industri
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {CLIENT_LOGOS.map((client) => (
+            {SECTORS.map((sector) => (
               <div
-                key={client.name}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-lg"
+                key={sector}
+                className="flex items-center px-4 py-2.5 rounded-lg"
                 style={{ background: "rgb(31, 41, 55)", border: "1px solid rgb(55, 65, 81)" }}
               >
-                {/* Avatar initial badge */}
-                <div
-                  className="w-6 h-6 rounded-md flex items-center justify-center text-white text-[10px] font-black shrink-0"
-                  style={{ background: client.color }}
-                >
-                  {client.abbr.charAt(0)}
-                </div>
-                <span className="text-xs font-semibold text-gray-300">{client.name}</span>
+                <span className="text-xs font-semibold text-gray-300">{sector}</span>
               </div>
             ))}
-            <div
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg"
-              style={{ background: "rgb(31, 41, 55)", border: "1px solid rgb(55, 65, 81)" }}
-            >
-              <span className="text-xs font-semibold text-gray-500">+13 lainnya</span>
-            </div>
           </div>
           <p className="text-center text-[10px] text-gray-600 mt-4">
-            Nama klien merujuk pada arsip dokumentasi pelatihan korporat sejak 1998 yang menjadi fondasi Skillary.
+            Berangkat dari arsip dokumentasi pelatihan korporat sejak 1998 yang menjadi fondasi Skillary.
           </p>
         </div>
       </div>

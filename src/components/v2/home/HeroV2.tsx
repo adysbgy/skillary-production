@@ -89,7 +89,7 @@ export function HeroV2() {
                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <p className="leading-relaxed">
-                Dipercaya oleh <span className="font-bold text-[#0F172A]">BNI, Bank Indonesia, Indofood, OJK</span> dan 17+ organisasi lainnya
+                Berangkat dari <span className="font-bold text-[#0F172A]">arsip pengalaman pelatihan korporat sejak 1998</span> — lintas perbankan, regulator, FMCG, dan energi
               </p>
             </div>
           </div>
