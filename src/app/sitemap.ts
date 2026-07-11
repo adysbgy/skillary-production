@@ -1,21 +1,29 @@
 import { PROGRAMS, BLOG_POSTS } from "@/data/content";
+import { EVENTS } from "@/data/v2-events";
 import type { MetadataRoute } from "next";
 
 const BASE_URL = "https://skillary.my.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    // NOTE: routes redirected to their /v2 equivalents in next.config.ts
-    // (/about, /services, /program-catalog, /proposal, /contact, /resources,
-    // /portfolio, /certificates, /demo) are intentionally omitted so the
-    // sitemap only advertises live, non-redirecting URLs.
+    // Only live, non-redirecting URLs are advertised. Legacy V1 pages
+    // redirected to their /v2 equivalents in next.config.ts (/about, /services,
+    // /teams, /platform, /reports, /program-catalog, /proposal, /contact,
+    // /resources, /portfolio, /certificates, /case-studies, /training-brief,
+    // /demo) are omitted. The canonical /v2 marketing pages are the primary
+    // surface and listed first.
     const staticRoutes = [
         "",
-        "/teams",
-        "/platform",
-        "/reports",
+        // Canonical V2 marketing surface
+        "/v2/catalog",
+        "/v2/events",
+        "/v2/resources",
+        "/v2/untuk-organisasi",
+        "/v2/about",
+        "/v2/proposal",
+        "/v2/portfolio",
+        "/v2/certificates",
+        // Live V1 pages kept (functional / no V2 equivalent yet)
         "/learning-paths",
-        "/training-brief",
-        "/case-studies",
         "/expert-partner",
         "/explore",
         "/community",
@@ -44,5 +52,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
     }));
 
-    return [...staticRoutes, ...programRoutes, ...blogRoutes];
+    const eventRoutes = EVENTS.map((event) => ({
+        url: `${BASE_URL}/v2/events/${event.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+    }));
+
+    return [...staticRoutes, ...programRoutes, ...blogRoutes, ...eventRoutes];
 }
