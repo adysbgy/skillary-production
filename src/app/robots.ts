@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: "/",
             disallow: ['/dashboard/', '/admin/', '/api/', '/checkout/', '/thank-you', '/login', '/register', '/forgot-password', '/reset-password', '/resources/sales-deck', '/resources/company-profile', '/resources/corporate-proposal'],
         },
-        sitemap: "https://skillary.id/sitemap.xml",
+        sitemap: "https://skillary.my.id/sitemap.xml",
     };
 }

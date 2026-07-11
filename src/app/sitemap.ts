@@ -1,7 +1,7 @@
 import { PROGRAMS, BLOG_POSTS } from "@/data/content";
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://skillary.id";
+const BASE_URL = "https://skillary.my.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
     // NOTE: routes redirected to their /v2 equivalents in next.config.ts
