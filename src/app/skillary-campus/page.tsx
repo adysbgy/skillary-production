@@ -606,9 +606,9 @@ export default function SkillaryCampusDeepRedesign() {
             <div>
               <h4 className="text-base font-bold mb-6">Tentang Kita</h4>
               <ul className="space-y-4">
-                <li><a href="#" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Profil Skillary</a></li>
-                <li><a href="#" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Layanan Konsultasi</a></li>
-                <li><a href="#" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Verifikasi Sertifikat</a></li>
+                <li><a href="/v2/about" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Profil Skillary</a></li>
+                <li><a href="/v2/untuk-organisasi" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Layanan Konsultasi</a></li>
+                <li><a href="/v2/certificates" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Verifikasi Sertifikat</a></li>
                 <li><button onClick={() => scrollTo("#faq")} className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Frequently Asked Questions</button></li>
               </ul>
             </div>
@@ -638,8 +638,8 @@ export default function SkillaryCampusDeepRedesign() {
               © {new Date().getFullYear()} PT Skillary. All Rights Reserved.
             </p>
             <div className="flex gap-6">
-              <a href="#" className="text-xs text-white/40 hover:text-white transition-colors">Kebijakan Privasi</a>
-              <a href="#" className="text-xs text-white/40 hover:text-white transition-colors">Syarat & Ketentuan</a>
+              <a href="/privacy" className="text-xs text-white/40 hover:text-white transition-colors">Kebijakan Privasi</a>
+              <a href="/terms" className="text-xs text-white/40 hover:text-white transition-colors">Syarat &amp; Ketentuan</a>
             </div>
           </div>
         </div>

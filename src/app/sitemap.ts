@@ -4,23 +4,19 @@ import type { MetadataRoute } from "next";
 const BASE_URL = "https://skillary.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+    // NOTE: routes redirected to their /v2 equivalents in next.config.ts
+    // (/about, /services, /program-catalog, /proposal, /contact, /resources,
+    // /portfolio, /certificates, /demo) are intentionally omitted so the
+    // sitemap only advertises live, non-redirecting URLs.
     const staticRoutes = [
         "",
-        "/about",
         "/teams",
         "/platform",
-        "/services",
-        "/program-catalog",
         "/reports",
         "/learning-paths",
         "/training-brief",
-        "/proposal",
-        "/contact",
-        "/resources",
-        "/portfolio",
         "/case-studies",
         "/expert-partner",
-        "/certificates",
         "/explore",
         "/community",
         "/path",
