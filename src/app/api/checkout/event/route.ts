@@ -9,6 +9,15 @@ import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
 // the endpoint is safe to ship before credentials are set.
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://skillary.my.id";
 
+// Map the on-page method choice to Midtrans Snap `enabled_payments` codes so the
+// popup opens straight to the selected channel. Unknown/absent → all methods.
+const PAYMENT_MAP: Record<string, string[]> = {
+  qris: ["other_qris"],
+  gopay: ["gopay"],
+  shopeepay: ["shopeepay"],
+  va: ["bank_transfer", "echannel"],
+};
+
 export async function POST(req: Request) {
   try {
     // Rate limit: 10 attempts / 10 min per IP
@@ -17,7 +26,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { eventSlug, name, email, whatsapp, _honeypot } = body ?? {};
+    const { eventSlug, name, email, whatsapp, method, _honeypot } = body ?? {};
 
     // Honeypot — silently accept bots without creating an order
     if (_honeypot) return NextResponse.json({ ok: true, orderId: "received" }, { status: 201 });
@@ -68,6 +77,7 @@ export async function POST(req: Request) {
           transaction_details: { order_id: order.id, gross_amount: amount },
           item_details: [{ id: event.slug, price: amount, quantity: 1, name: event.title.slice(0, 50) }],
           customer_details: { first_name: String(name), email: String(email), phone: String(whatsapp) },
+          ...(PAYMENT_MAP[String(method)] ? { enabled_payments: PAYMENT_MAP[String(method)] } : {}),
           callbacks: { finish: `${APP_URL}/checkout/${order.id}` },
         }),
       });

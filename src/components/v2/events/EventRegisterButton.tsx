@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { formatEventPrice, type EventItem } from "@/data/v2-events";
 
 const FIELD = { border: "1.5px solid rgb(240, 217, 200)" } as const;
@@ -12,6 +13,17 @@ export function eventCtaLabel(event: EventItem) {
 
 export function EventRegisterButton({ event, className, style }: { event: EventItem; className: string; style?: React.CSSProperties }) {
   const [open, setOpen] = useState(false);
+
+  // Paid upcoming events go through the checkout page (payment); free events
+  // and recordings use the lightweight registration modal.
+  const isPaid = event.price > 0 && event.status !== "Selesai";
+  if (isPaid) {
+    return (
+      <Link href={`/v2/events/${event.slug}/checkout`} className={`inline-block ${className}`} style={style}>
+        {eventCtaLabel(event)}
+      </Link>
+    );
+  }
 
   return (
     <>
