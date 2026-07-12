@@ -27,6 +27,7 @@ export type EventItem = {
   gradient: string;
   agenda: string[];
   benefits: string[];
+  zoomMeetingId?: string; // set per real webinar; enables unique registrant links
 };
 
 const GOLD = "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))";

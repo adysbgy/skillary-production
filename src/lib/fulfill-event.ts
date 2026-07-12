@@ -8,6 +8,7 @@
 import { prisma } from "./prisma";
 import { getEventBySlug, formatEventPrice } from "@/data/v2-events";
 import { sendEmail, sendWhatsApp } from "./notify";
+import { createMeetingRegistrant } from "./zoom";
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://skillary.my.id";
 
@@ -23,15 +24,26 @@ export async function fulfillEventOrder(orderId: string): Promise<void> {
     create: { email: order.email, name: order.name, role: "LEARNER" },
   });
 
+  // If the event has a real Zoom meeting configured, register this buyer for a
+  // unique join link (basis for automated attendance later). Fails soft.
+  const event = getEventBySlug(order.eventSlug);
+  let joinUrl: string | null = null;
+  if (event?.zoomMeetingId) {
+    const reg = await createMeetingRegistrant(event.zoomMeetingId, { email: order.email, name: order.name });
+    joinUrl = reg?.joinUrl ?? null;
+  }
+
   await prisma.eventOrder.update({
     where: { id: order.id },
-    data: { userId: user.id, fulfilledAt: new Date() },
+    data: { userId: user.id, fulfilledAt: new Date(), joinUrl },
   });
 
   // Notify buyer (fire-and-forget; failures never block fulfillment).
-  const event = getEventBySlug(order.eventSlug);
   const when = event ? `${event.dateLabel} · ${event.time}` : "";
   const dashUrl = `${APP_URL}/dashboard`;
+  const joinLine = joinUrl
+    ? `<p style="margin:0 0 16px"><strong>Link Zoom Anda:</strong> <a href="${joinUrl}">${joinUrl}</a></p>`
+    : "";
 
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:520px;margin:auto;color:#0F172A">
@@ -42,9 +54,10 @@ export async function fulfillEventOrder(orderId: string): Promise<void> {
         <span style="color:#64748B">${when}</span><br/>
         <span style="color:#64748B">Total dibayar: ${formatEventPrice(order.amount)}</span>
       </div>
+      ${joinLine}
       <p style="margin:0 0 8px">Yang berikutnya:</p>
       <ul style="color:#334155;padding-left:18px;margin:0 0 16px">
-        <li>Link Zoom + pengingat dikirim menjelang acara.</li>
+        <li>${joinUrl ? "Simpan link Zoom di atas — pengingat dikirim menjelang acara." : "Link Zoom + pengingat dikirim menjelang acara."}</li>
         <li>Rekaman & e-sertifikat muncul di dashboard Anda setelah acara.</li>
       </ul>
       <a href="${dashUrl}" style="display:inline-block;background:linear-gradient(135deg,#FF8A00,#FF5A5F);color:#fff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:999px">Buka Dashboard</a>
@@ -53,7 +66,8 @@ export async function fulfillEventOrder(orderId: string): Promise<void> {
 
   const waMsg =
     `*Pembayaran diterima ✅*\n\nHalo ${order.name}, kursi Anda di *${order.eventTitle}* (${when}) sudah aman.\n\n` +
-    `Link Zoom & pengingat dikirim menjelang acara. Rekaman & e-sertifikat tersedia di dashboard setelah acara:\n${dashUrl}\n\nTerima kasih — Skillary`;
+    (joinUrl ? `Link Zoom Anda:\n${joinUrl}\n\n` : `Link Zoom & pengingat dikirim menjelang acara.\n\n`) +
+    `Rekaman & e-sertifikat tersedia di dashboard setelah acara:\n${dashUrl}\n\nTerima kasih — Skillary`;
 
   await Promise.allSettled([
     sendEmail({ to: order.email, subject: `Pembayaran diterima — ${order.eventTitle}`, html }),

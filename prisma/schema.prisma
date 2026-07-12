@@ -215,6 +215,7 @@ model EventOrder {
   whatsapp    String
   userId      String? // linked to the passwordless auto-account on fulfillment
   fulfilledAt DateTime? // set once access is granted + buyer notified
+  joinUrl     String? // unique Zoom registrant join link for this buyer
   remindersSent String[] @default([]) // reminder tags already sent (e.g. "H-1")
   gatewayRef  String? // Midtrans Snap token / transaction id
   gatewayData String? // raw gateway payload (JSON)

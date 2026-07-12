@@ -23,10 +23,12 @@ function gcalLink(event: EventItem): string {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-async function sendReminder(order: { name: string; email: string; whatsapp: string; eventTitle: string }, event: EventItem, tag: string) {
+async function sendReminder(order: { name: string; email: string; whatsapp: string; eventTitle: string; joinUrl: string | null }, event: EventItem, tag: string) {
   const soon = tag === "H-1jam" ? "dalam 1 jam" : "besok";
   const cal = gcalLink(event);
   const dash = `${APP_URL}/dashboard`;
+  const join = order.joinUrl || dash; // per-buyer Zoom link when available
+  const joinBtn = `<a href="${join}" style="display:inline-block;background:linear-gradient(135deg,#FF8A00,#FF5A5F);color:#fff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:999px;margin-right:8px">${order.joinUrl ? "Join Webinar" : "Buka Dashboard"}</a>`;
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:520px;margin:auto;color:#0F172A">
       <h2 style="margin:0 0 4px">Webinar Anda dimulai ${soon} ⏰</h2>
@@ -35,13 +37,14 @@ async function sendReminder(order: { name: string; email: string; whatsapp: stri
         <strong>${event.title}</strong><br/>
         <span style="color:#64748B">${event.dateLabel} · ${event.time} · ${event.format}</span>
       </div>
-      <a href="${dash}" style="display:inline-block;background:linear-gradient(135deg,#FF8A00,#FF5A5F);color:#fff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:999px;margin-right:8px">Buka Dashboard</a>
+      ${joinBtn}
       <a href="${cal}" style="display:inline-block;color:#FF8A00;text-decoration:none;font-weight:bold;padding:12px 4px">+ Tambah ke Kalender</a>
       <p style="color:#94A3B8;font-size:12px;margin-top:20px">Skillary</p>
     </div>`;
   const wa =
     `*Webinar dimulai ${soon} ⏰*\n\nHalo ${order.name}, *${event.title}* (${event.dateLabel} · ${event.time}).\n\n` +
-    `Link Zoom ada di dashboard Anda: ${dash}\nTambah ke kalender: ${cal}\n\n— Skillary`;
+    (order.joinUrl ? `Join Zoom:\n${join}\n` : `Link Zoom ada di dashboard: ${dash}\n`) +
+    `Tambah ke kalender: ${cal}\n\n— Skillary`;
 
   await Promise.allSettled([
     sendEmail({ to: order.email, subject: `Pengingat: ${event.title} dimulai ${soon}`, html }),
