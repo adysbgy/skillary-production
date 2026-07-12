@@ -4,6 +4,8 @@
 // and should be swapped for real schedule data once events are confirmed.
 // ─────────────────────────────────────────────────────────────────────────
 
+import { TRAINERS, type Trainer } from "./v2-trainers";
+
 export type EventFormat = "Online" | "Hybrid" | "Offline";
 export type EventKind = "Live Webinar" | "Free Workshop";
 export type EventStatus = "Mendatang" | "Hampir Penuh" | "Selesai";
@@ -21,7 +23,7 @@ export type EventItem = {
   durationMin: number;
   format: EventFormat;
   price: number; // 0 = gratis
-  host: { name: string; role: string; avatar: string; bio: string };
+  host: Trainer; // sourced from the shared trainer registry
   gradient: string;
   agenda: string[];
   benefits: string[];
@@ -46,12 +48,7 @@ export const EVENTS: EventItem[] = [
     durationMin: 90,
     format: "Online",
     price: 149000,
-    host: {
-      name: "Dimas Aditya",
-      role: "AI & Digital Trainer",
-      avatar: "/images/avatars/av3.svg",
-      bio: "10+ tahun membantu tim korporat mengadopsi tools digital, kini fokus pada penerapan AI assistant untuk produktivitas kerja sehari-hari.",
-    },
+    host: TRAINERS["dimas-aditya"],
     gradient: GOLD,
     agenda: [
       "Pemetaan pekerjaan harian yang bisa dipercepat dengan AI",
@@ -79,12 +76,7 @@ export const EVENTS: EventItem[] = [
     durationMin: 60,
     format: "Online",
     price: 0,
-    host: {
-      name: "Anisa Putri",
-      role: "Data Analytics Trainer",
-      avatar: "/images/avatars/av5.svg",
-      bio: "Praktisi data analytics yang sering membantu tim HR & operasional menyusun laporan berbasis data tanpa perlu tools yang rumit.",
-    },
+    host: TRAINERS["anisa-putri"],
     gradient: BLUE,
     agenda: [
       "Struktur data mentah yang siap diolah",
@@ -111,12 +103,7 @@ export const EVENTS: EventItem[] = [
     durationMin: 120,
     format: "Hybrid",
     price: 199000,
-    host: {
-      name: "Rangga Prasetyo",
-      role: "Communication Coach",
-      avatar: "/images/avatars/av7.svg",
-      bio: "Melatih ratusan profesional dan eksekutif membawakan presentasi bisnis yang jelas, ringkas, dan persuasif.",
-    },
+    host: TRAINERS["rangga-prasetyo"],
     gradient: PURPLE,
     agenda: [
       "Struktur presentasi bisnis yang persuasif",
@@ -144,12 +131,7 @@ export const EVENTS: EventItem[] = [
     durationMin: 90,
     format: "Online",
     price: 179000,
-    host: {
-      name: "Siti Rahmawati",
-      role: "Leadership Trainer",
-      avatar: "/images/avatars/av2.svg",
-      bio: "Membimbing manajer baru di berbagai industri membangun fondasi kepemimpinan sejak masa transisi awal jabatan.",
-    },
+    host: TRAINERS["siti-rahmawati"],
     gradient: GREEN,
     agenda: [
       "Transisi dari individual contributor ke manajer",
@@ -177,12 +159,7 @@ export const EVENTS: EventItem[] = [
     durationMin: 60,
     format: "Online",
     price: 0,
-    host: {
-      name: "Dimas Aditya",
-      role: "AI & Digital Trainer",
-      avatar: "/images/avatars/av3.svg",
-      bio: "10+ tahun membantu tim korporat mengadopsi tools digital, kini fokus pada penerapan AI assistant untuk produktivitas kerja sehari-hari.",
-    },
+    host: TRAINERS["dimas-aditya"],
     gradient: GOLD,
     agenda: [
       "Dasar cara kerja large language model",

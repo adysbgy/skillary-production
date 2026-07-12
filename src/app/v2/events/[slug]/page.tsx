@@ -123,15 +123,46 @@ export default async function EventDetailPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Host card */}
+        {/* Trainer reveal — the premium, contextual moment: who's teaching */}
         <div data-reveal className="max-w-3xl mx-auto mt-5">
-          <div className="rounded-2xl p-7 bg-white flex items-start gap-4" style={CARD}>
-            <Image src={event.host.avatar} alt={event.host.name} width={56} height={56} className="w-14 h-14 rounded-full object-cover shrink-0" />
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-widest text-[#94A3B8] mb-1">Pembawa Sesi</p>
-              <h3 className="text-base font-bold text-[#0F172A] mb-0.5">{event.host.name}</h3>
-              <p className="text-xs font-semibold mb-2" style={{ color: "rgb(255,138,0)" }}>{event.host.role}</p>
-              <p className="text-sm text-[#64748B] leading-relaxed">{event.host.bio}</p>
+          <div className="rounded-2xl p-7 md:p-9 bg-white" style={CARD}>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-[#94A3B8] mb-5">Pembawa Sesi</p>
+            <div className="flex flex-col sm:flex-row sm:items-start gap-5">
+              <Image
+                src={event.host.avatar}
+                alt={event.host.name}
+                width={88}
+                height={88}
+                className="w-20 h-20 rounded-full object-cover shrink-0"
+                style={{ boxShadow: "0 0 0 3px rgba(255,138,0,0.15)" }}
+              />
+              <div className="flex-1 min-w-0">
+                <h3 className="text-xl font-bold text-[#0F172A] leading-tight">{event.host.name}</h3>
+                <p className="text-sm font-semibold mb-3" style={{ color: "rgb(255,138,0)" }}>{event.host.role}</p>
+
+                {/* Credibility stats */}
+                <div className="flex flex-wrap gap-x-7 gap-y-2 mb-4">
+                  <div className="leading-tight">
+                    <span className="text-lg font-bold text-[#0F172A]">{event.host.experience}</span>
+                    <span className="text-xs text-[#94A3B8] ml-1.5">pengalaman</span>
+                  </div>
+                  <div className="leading-tight">
+                    <span className="text-lg font-bold text-[#0F172A]">{event.host.participants}</span>
+                    <span className="text-xs text-[#94A3B8] ml-1.5">dilatih</span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-[#64748B] leading-relaxed mb-4">{event.host.bio}</p>
+
+                {/* Expertise */}
+                <div className="flex flex-wrap gap-1.5">
+                  {event.host.expertise.map((tag) => (
+                    <span key={tag} className="text-[11px] font-semibold px-2.5 py-1 rounded-full text-[#475569]" style={{ border: "1px solid rgb(226, 232, 240)" }}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
