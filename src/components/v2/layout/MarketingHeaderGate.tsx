@@ -9,6 +9,9 @@ import { StartupHeader, STARTUP_HEADER_ROUTES, MARKETING_SHELL_ROUTES } from "./
 // the not-yet-restyled ones.
 export function MarketingHeaderGate() {
   const pathname = usePathname();
+  // Checkout is a distraction-free flow with its own minimal chrome — never
+  // inject the marketing header there.
+  if (pathname.endsWith("/checkout")) return null;
   const matches = (routes: string[]) => routes.some((r) => pathname === r || pathname.startsWith(`${r}/`));
   if (!matches(STARTUP_HEADER_ROUTES)) return null;
 
