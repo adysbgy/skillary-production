@@ -185,6 +185,15 @@ export function getEventBySlug(slug: string): EventItem | undefined {
   return EVENTS.find((e) => e.slug === slug);
 }
 
+// Precise start timestamp derived from date + time (WIB / UTC+7), used for
+// scheduled reminders and calendar links.
+export function getEventStart(event: EventItem): Date {
+  const m = event.time.match(/(\d{1,2}):(\d{2})/);
+  const hh = (m ? m[1] : "0").padStart(2, "0");
+  const mm = m ? m[2] : "00";
+  return new Date(`${event.date}T${hh}:${mm}:00+07:00`);
+}
+
 export function getAllEventSlugs(): string[] {
   return EVENTS.map((e) => e.slug);
 }
