@@ -24,13 +24,15 @@ export const STARTUP_HEADER_ROUTES = [
 // hide FooterV2. Grows as each page is restyled.
 export const MARKETING_SHELL_ROUTES = ["/v2/about", "/v2/untuk-organisasi", "/v2/catalog", "/v2/resources", "/v2/events", "/v2/proposal"];
 
+// B2C-first order: Events (hero webinar product) leads. B2B lives inside
+// "Services"; "Request Proposal" is not a top-level item — its CTA lives on
+// the Services page.
 const NAV = [
+  { label: "Events", href: "/v2/events" },
   { label: "Programs", href: "/v2/catalog" },
   { label: "Free Workshops", href: "/v2/resources" },
-  { label: "Events", href: "/v2/events" },
   { label: "Services", href: "/v2/untuk-organisasi" },
   { label: "About", href: "/v2/about" },
-  { label: "Request Proposal", href: "/v2/proposal" },
 ];
 
 export function StartupHeader() {
@@ -99,17 +101,17 @@ export function StartupHeader() {
               Masuk
             </Link>
             <Link
-              href="/v2/proposal"
+              href="/v2/events"
               className="text-sm font-bold px-5 py-2.5 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors"
             >
-              Konsultasi Gratis
+              Mulai
             </Link>
           </div>
 
           {/* Mobile right cluster */}
           <div className="flex lg:hidden items-center gap-2">
-            <Link href="/v2/proposal" className="text-xs font-bold px-4 py-2 rounded-full bg-white text-[#0F172A]">
-              Konsultasi Gratis
+            <Link href="/v2/events" className="text-xs font-bold px-4 py-2 rounded-full bg-white text-[#0F172A]">
+              Mulai
             </Link>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -144,8 +146,8 @@ export function StartupHeader() {
                 <Link href="/login" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full text-white" style={{ border: "1px solid rgba(255,255,255,0.25)" }}>
                   Masuk
                 </Link>
-                <Link href="/v2/proposal" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full bg-white text-[#0F172A]">
-                  Konsultasi Gratis
+                <Link href="/v2/events" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full bg-white text-[#0F172A]">
+                  Mulai
                 </Link>
               </div>
             </nav>

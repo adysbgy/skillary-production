@@ -24,15 +24,6 @@ const GRADIENT = "linear-gradient(111deg, rgb(255,138,0) 0%, rgb(255,90,95) 60%,
 const GRADIENT_SIMPLE = "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))";
 const DARK = "rgb(13, 16, 28)";
 
-const NAV = [
-  { label: "Programs", href: "/v2/catalog" },
-  { label: "Free Workshops", href: "/v2/resources" },
-  { label: "Events", href: "#events" },
-  { label: "Services", href: "/v2/untuk-organisasi" },
-  { label: "About", href: "/v2/about" },
-  { label: "Request Proposal", href: "/v2/proposal" },
-];
-
 // Staggered "Your Accounts"-style participant cards (hero visual)
 const BATCH_CARDS = [
   { av: 1, initial: "DA", name: "Dian A.", org: "Nusantara Corp", role: "Business Analyst", badge: "active" },

@@ -5,12 +5,11 @@ import { EMAIL_GENERAL, INSTAGRAM_URL, whatsappLink } from "@/data/config";
 // Shared final CTA + dark footer used on the homepage and marketing sub-pages
 // so the page ending is identical everywhere.
 const FOOTER_NAV = [
+  { label: "Events", href: "/v2/events" },
   { label: "Programs", href: "/v2/catalog" },
   { label: "Free Workshops", href: "/v2/resources" },
-  { label: "Events", href: "/v2/events" },
   { label: "Services", href: "/v2/untuk-organisasi" },
   { label: "About", href: "/v2/about" },
-  { label: "Request Proposal", href: "/v2/proposal" },
 ];
 
 export function StartupFooter() {
