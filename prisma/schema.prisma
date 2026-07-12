@@ -201,6 +201,28 @@ model PaymentOrder {
   @@index([userId, courseId])
 }
 
+// Guest-native ticket order for paid webinars/events (B2C funnel from ads).
+// No User/Course FK required — cold traffic buys with just name/email/WA and
+// receives access (Zoom link, recording, e-certificate) at those contacts.
+model EventOrder {
+  id          String   @id @default(cuid())
+  eventSlug   String
+  eventTitle  String
+  amount      Float
+  status      String   @default("PENDING") // PENDING | PAID | FAILED | EXPIRED
+  name        String
+  email       String
+  whatsapp    String
+  gatewayRef  String? // Midtrans Snap token / transaction id
+  gatewayData String? // raw gateway payload (JSON)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status])
+  @@index([email])
+  @@index([eventSlug])
+}
+
 model QuizAttempt {
   id             String   @id @default(cuid())
   userId         String
