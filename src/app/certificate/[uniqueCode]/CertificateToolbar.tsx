@@ -6,10 +6,11 @@ import { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
 
 interface ToolbarProps {
     uniqueCode: string;
-    courseSlug: string;
+    courseSlug?: string | null;
+    eventSlug?: string | null;
 }
 
-export default function CertificateToolbar({ uniqueCode, courseSlug }: ToolbarProps) {
+export default function CertificateToolbar({ uniqueCode, courseSlug, eventSlug }: ToolbarProps) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = () => {
@@ -37,13 +38,15 @@ export default function CertificateToolbar({ uniqueCode, courseSlug }: ToolbarPr
                     )}
                 </button>
             </div>
-            <div className="w-full sm:w-auto flex items-center gap-3">
-                <Link href={`/program/${courseSlug}`} className="w-full sm:w-auto">
-                    <PrimaryButton className="w-full sm:w-auto px-6 py-2.5 shadow-sm text-sm">
-                        View Course Details →
-                    </PrimaryButton>
-                </Link>
-            </div>
+            {(courseSlug || eventSlug) && (
+                <div className="w-full sm:w-auto flex items-center gap-3">
+                    <Link href={courseSlug ? `/program/${courseSlug}` : `/v2/events/${eventSlug}`} className="w-full sm:w-auto">
+                        <PrimaryButton className="w-full sm:w-auto px-6 py-2.5 shadow-sm text-sm">
+                            {courseSlug ? "View Course Details →" : "View Event Details →"}
+                        </PrimaryButton>
+                    </Link>
+                </div>
+            )}
         </div>
     );
 }

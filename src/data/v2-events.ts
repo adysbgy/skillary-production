@@ -199,6 +199,10 @@ export function getAllEventSlugs(): string[] {
   return EVENTS.map((e) => e.slug);
 }
 
+export function getEventByZoomMeetingId(meetingId: string): EventItem | undefined {
+  return EVENTS.find((e) => e.zoomMeetingId === meetingId);
+}
+
 export function formatEventPrice(price: number): string {
   if (price === 0) return "Gratis";
   return `Rp ${price.toLocaleString("id-ID")}`;

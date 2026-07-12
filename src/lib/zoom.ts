@@ -27,6 +27,37 @@ async function getToken(): Promise<string | null> {
   }
 }
 
+// Attendance record from Zoom's post-meeting Report API.
+export type ZoomParticipant = { email: string; duration: number }; // duration in seconds
+
+export async function getMeetingParticipants(meetingId: string): Promise<ZoomParticipant[] | null> {
+  const token = await getToken();
+  if (!token) return null;
+  try {
+    const participants: ZoomParticipant[] = [];
+    let nextPageToken = "";
+    do {
+      const url = new URL(`https://api.zoom.us/v2/report/meetings/${meetingId}/participants`);
+      url.searchParams.set("page_size", "300");
+      if (nextPageToken) url.searchParams.set("next_page_token", nextPageToken);
+      const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+      if (!res.ok) {
+        console.warn("Zoom participants report failed:", res.status);
+        return participants.length ? participants : null;
+      }
+      const data = await res.json();
+      for (const p of data.participants ?? []) {
+        if (p.user_email) participants.push({ email: String(p.user_email).toLowerCase(), duration: Number(p.duration) || 0 });
+      }
+      nextPageToken = data.next_page_token || "";
+    } while (nextPageToken);
+    return participants;
+  } catch (err) {
+    console.warn("Zoom participants report error:", err);
+    return null;
+  }
+}
+
 export async function createMeetingRegistrant(
   meetingId: string,
   buyer: { email: string; name: string }

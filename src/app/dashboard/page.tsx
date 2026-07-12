@@ -135,8 +135,12 @@ export default async function LearnerDashboardPage() {
     const remainingInProgress = inProgress.length > 0 ? inProgress.slice(1) : [];
     const totalCompletedLessons = completedSet.size;
 
+    // Course-based certificates only (excludes event/webinar certificates,
+    // which have no `course` and are surfaced in the "Webinar Saya" section).
+    const courseCertificates = certificates.filter((c: any) => c.courseId && c.course);
+
     // Certificate lookup by courseId for inline badge on completed cards
-    const certByCourseId = new Map(certificates.map((c: any) => [c.courseId, c]));
+    const certByCourseId = new Map(courseCertificates.map((c: any) => [c.courseId, c]));
 
     // Compute Path Progress
     const pathsWithProgress = pathEnrollments.map((pe: any) => {
@@ -234,13 +238,13 @@ export default async function LearnerDashboardPage() {
                                 </Link>
                             </div>
                         </Card>
-                    ) : completed.length > 0 && certificates.length > 0 ? (
-                        /* Completed-all: show latest cert as hero */
+                    ) : completed.length > 0 && courseCertificates.length > 0 ? (
+                        /* Completed-all: show latest course cert as hero */
                         <Card className="p-8 border-2 border-green-500/30 flex flex-col rounded-3xl bg-green-50/50 transition-all">
                             <span className="text-[10px] font-bold px-2.5 py-1 rounded-md bg-green-500/10 text-green-700 uppercase tracking-wider mb-4 inline-block w-fit">Latest Achievement</span>
-                            <h2 className="text-xl font-semibold tracking-[-0.02em] leading-snug line-clamp-2">{certificates[0].course.title}</h2>
+                            <h2 className="text-xl font-semibold tracking-[-0.02em] leading-snug line-clamp-2">{courseCertificates[0].course!.title}</h2>
                             <div className="mt-auto pt-6">
-                                <Link href={`/certificate/${certificates[0].uniqueCode}`} className="block w-full">
+                                <Link href={`/certificate/${courseCertificates[0].uniqueCode}`} className="block w-full">
                                     <button className="w-full py-3.5 text-sm font-semibold rounded-2xl bg-green-600 text-white hover:bg-green-700 transition-colors">
                                         🎓 View Certificate
                                     </button>
@@ -260,7 +264,7 @@ export default async function LearnerDashboardPage() {
                         inProgressUnsorted={inProgressUnsorted}
                         remainingInProgress={remainingInProgress}
                         completed={completed}
-                        certificates={certificates}
+                        certificates={courseCertificates}
                         certByCourseIdMap={Object.fromEntries(certByCourseId)}
                     />
                 </div>

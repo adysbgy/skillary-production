@@ -176,12 +176,15 @@ model Certificate {
   id         String   @id @default(cuid())
   uniqueCode String   @unique @default(cuid())
   userId     String
-  courseId   String
+  courseId   String? // null for event-based certificates
+  eventSlug  String? // null for course-based certificates; set for webinar attendance certs
+  eventTitle String? // snapshot, since events are static data, not a DB relation
   issuedAt   DateTime @default(now())
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course     Course?  @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@unique([userId, courseId])
+  @@unique([userId, eventSlug])
 }
 
 model PaymentOrder {
@@ -216,6 +219,7 @@ model EventOrder {
   userId      String? // linked to the passwordless auto-account on fulfillment
   fulfilledAt DateTime? // set once access is granted + buyer notified
   joinUrl     String? // unique Zoom registrant join link for this buyer
+  attendedAt  DateTime? // set once Zoom attendance meets the certificate threshold
   remindersSent String[] @default([]) // reminder tags already sent (e.g. "H-1")
   gatewayRef  String? // Midtrans Snap token / transaction id
   gatewayData String? // raw gateway payload (JSON)

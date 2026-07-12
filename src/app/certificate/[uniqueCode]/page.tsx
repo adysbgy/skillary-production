@@ -62,7 +62,7 @@ export default async function CertificateVerificationPage({ params }: { params: 
 
                         <div>
                             <p className="text-xs font-semibold text-black/50 uppercase tracking-wider mb-1">Program</p>
-                            <p className="text-lg font-medium text-black line-clamp-2">{certificate.course.title}</p>
+                            <p className="text-lg font-medium text-black line-clamp-2">{certificate.course?.title ?? certificate.eventTitle}</p>
                         </div>
 
                         <div>
@@ -84,7 +84,7 @@ export default async function CertificateVerificationPage({ params }: { params: 
                     </div>
                 </div>
 
-                <CertificateToolbar uniqueCode={certificate.uniqueCode} courseSlug={certificate.course.slug} />
+                <CertificateToolbar uniqueCode={certificate.uniqueCode} courseSlug={certificate.course?.slug} eventSlug={certificate.eventSlug} />
 
                 <div className="text-center mt-2">
                     <p className="text-xs text-black/40">
