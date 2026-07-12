@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
+import { fulfillEventOrder } from "@/lib/fulfill-event";
 
 // POST /api/checkout/event/callback — Midtrans payment notification for event
 // ticket orders. Verifies the signature, then maps the gateway status onto the
@@ -44,8 +45,10 @@ export async function POST(req: Request) {
       data: { status, gatewayData: JSON.stringify(body) },
     });
 
-    // TODO (next increment): when status becomes PAID, deliver access
-    // (Zoom link + recording + e-certificate) to the buyer via email/WhatsApp.
+    // On first transition to PAID: fulfill (auto-account + notify). Idempotent.
+    if (status === "PAID" && order.status !== "PAID") {
+      await fulfillEventOrder(order.id);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {
