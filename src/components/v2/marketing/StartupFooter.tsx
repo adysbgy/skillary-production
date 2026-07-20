@@ -9,6 +9,7 @@ const FOOTER_NAV = [
   { label: "Programs", href: "/v2/catalog" },
   { label: "Free Workshops", href: "/v2/resources" },
   { label: "Services", href: "/v2/untuk-organisasi" },
+  { label: "Trainers", href: "/trainers" },
   { label: "About", href: "/v2/about" },
 ];
 
@@ -65,7 +66,9 @@ export function StartupFooter() {
             <ul className="space-y-3 text-sm text-white/60">
               <li><Link href="/v2/catalog" className="hover:text-white transition-colors">Katalog Program</Link></li>
               <li><Link href="/v2/untuk-organisasi" className="hover:text-white transition-colors">Untuk Organisasi</Link></li>
-              <li><Link href="/v2/portfolio" className="hover:text-white transition-colors">Portofolio</Link></li>
+              <li><Link href="/portofolio" className="hover:text-white transition-colors">Portofolio</Link></li>
+              <li><Link href="/trainer-verification" className="hover:text-white transition-colors">Standar Trainer</Link></li>
+              <li><Link href="/trainers/apply" className="hover:text-white transition-colors">Jadi Trainer</Link></li>
               <li><Link href="/v2/about" className="hover:text-white transition-colors">Tentang</Link></li>
               <li><Link href="/v2/proposal" className="hover:text-white transition-colors">Kontak</Link></li>
             </ul>

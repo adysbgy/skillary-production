@@ -1,0 +1,13 @@
+"use client";
+import { useMemo, useState } from "react"; import type { SkillaryTrainer } from "@/types/trainer-types"; import { TrainerCard } from "./TrainerCard";
+export function TrainerFilters({ trainers }: { trainers: SkillaryTrainer[] }) {
+ const [query,setQuery]=useState(""); const [mode,setMode]=useState("");
+ const filtered=useMemo(()=>trainers.filter(t=>`${t.name} ${t.headline} ${t.expertise.join(" ")}`.toLowerCase().includes(query.toLowerCase())&&(!mode||t.deliveryModes.includes(mode as never))),[trainers,query,mode]);
+ return <div><div className="mb-8 grid gap-3 rounded-[1.5rem] border border-[#eadfd5] bg-[#fffdf9] p-4 md:grid-cols-[1fr_220px_auto]">
+  <label className="sr-only" htmlFor="trainer-search">Cari trainer</label><input id="trainer-search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Cari nama, topik, atau keahlian" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-base outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100"/>
+  <label className="sr-only" htmlFor="delivery-mode">Format pembelajaran</label><select id="delivery-mode" value={mode} onChange={e=>setMode(e.target.value)} className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-base outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100"><option value="">Semua format</option><option value="online">Online</option><option value="onsite">Onsite</option><option value="hybrid">Hybrid</option></select>
+  <button type="button" onClick={()=>{setQuery("");setMode("")}} className="min-h-12 rounded-xl px-5 text-sm font-bold text-slate-600 hover:bg-white">Reset</button></div>
+  <p aria-live="polite" className="mb-5 text-sm font-semibold text-slate-500">{filtered.length} trainer ditemukan</p>
+  {filtered.length?<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{filtered.map(t=><TrainerCard key={t.slug} trainer={t}/>)}</div>:<div className="rounded-[2rem] border border-dashed border-orange-200 bg-orange-50/50 px-6 py-16 text-center"><div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-orange-600 shadow-sm"><svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2m7-10a4 4 0 100-8 4 4 0 000 8zm8 0 2 2 4-4"/></svg></div><h3 className="mt-5 text-xl font-extrabold text-slate-950">Profil sedang dikurasi</h3><p className="mx-auto mt-2 max-w-lg text-base leading-7 text-slate-600">Skillary hanya mempublikasikan trainer setelah identitas, pengalaman, bukti, dan izin publikasi selesai ditinjau. Profil pertama akan hadir segera.</p></div>}
+ </div>
+}

@@ -1,5 +1,6 @@
 import { PROGRAMS, BLOG_POSTS } from "@/data/content";
 import { EVENTS } from "@/data/v2-events";
+import { TRAINERS } from "@/data/trainers";
 import type { MetadataRoute } from "next";
 
 const BASE_URL = "https://skillary.my.id";
@@ -20,8 +21,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/v2/untuk-organisasi",
         "/v2/about",
         "/v2/proposal",
-        "/v2/portfolio",
+        "/portofolio",
         "/v2/certificates",
+        "/trainers",
+        "/trainers/apply",
+        "/trainer-verification",
         // Live V1 pages kept (functional / no V2 equivalent yet)
         "/learning-paths",
         "/expert-partner",
@@ -59,5 +63,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
     }));
 
-    return [...staticRoutes, ...programRoutes, ...blogRoutes, ...eventRoutes];
+    const trainerRoutes = TRAINERS.map((trainer) => ({
+        url: `${BASE_URL}/trainers/${trainer.slug}`,
+        lastModified: new Date(trainer.updatedAt),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+    }));
+
+    return [...staticRoutes, ...programRoutes, ...blogRoutes, ...eventRoutes, ...trainerRoutes];
 }
