@@ -13,7 +13,7 @@ const manrope = Manrope({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Portofolio Pelatihan & Dokumentasi Event | Skillary",
   description: "Jelajahi arsip program pelatihan lintas industri yang menjadi fondasi pengalaman Skillary, lengkap dengan dokumentasi autentik di Instagram.",
-  alternates: { canonical: "/portfolio-arsip" },
+  alternates: { canonical: "/portofolio" },
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
