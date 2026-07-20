@@ -16,6 +16,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         { label: "Revenue", href: "/admin/revenue" },
         ...(role === "ADMIN" ? [
             { label: "Leads", href: "/admin/leads" },
+            { label: "Trainers", href: "/admin/trainers" },
             { label: "Organizations", href: "/admin/organizations" },
             { label: "Batches", href: "/admin/batches" },
             { label: "Paths", href: "/admin/paths" },

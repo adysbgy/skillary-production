@@ -9,40 +9,40 @@ generator client {
 }
 
 model User {
-  id             String           @id @default(cuid())
-  name           String
-  email          String           @unique
-  emailVerified  DateTime?
-  image          String?
-  passwordHash   String?
-  role           String           @default("LEARNER")
-  createdAt      DateTime         @default(now())
-  
-  accounts       Account[]
-  sessions       Session[]
-  enrollments    Enrollment[]
-  pathEnrollments PathEnrollment[]
-  lessonProgress LessonProgress[]
-  certificates   Certificate[]
-  courses        Course[]         @relation("CourseInstructor")
-  paymentOrders  PaymentOrder[]
-  quizAttempts   QuizAttempt[]
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String?
+  role          String    @default("LEARNER")
+  createdAt     DateTime  @default(now())
+
+  accounts          Account[]
+  sessions          Session[]
+  enrollments       Enrollment[]
+  pathEnrollments   PathEnrollment[]
+  lessonProgress    LessonProgress[]
+  certificates      Certificate[]
+  courses           Course[]           @relation("CourseInstructor")
+  paymentOrders     PaymentOrder[]
+  quizAttempts      QuizAttempt[]
   batchParticipants BatchParticipant[]
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -66,31 +66,31 @@ model VerificationToken {
 }
 
 model Course {
-  id                      String        @id @default(cuid())
-  slug                    String        @unique
+  id                      String               @id @default(cuid())
+  slug                    String               @unique
   title                   String
   description             String
   level                   String
   duration                String
   category                String
-  price                   Float         @default(0)
-  status                  String        @default("DRAFT")
+  price                   Float                @default(0)
+  status                  String               @default("DRAFT")
   thumbnailUrl            String?
-  certificateMode         String        @default("INCLUDED") // "INCLUDED" | "PAID_DIGITAL" | "DISABLED"
-  digitalCertificatePrice Int?          // Price in IDR for PAID_DIGITAL mode, null otherwise
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  instructorId String?
-  instructor   User?         @relation("CourseInstructor", fields: [instructorId], references: [id])
-  modules      Module[]
-  enrollments  Enrollment[]
-  certificates   Certificate[]
-  paymentOrders  PaymentOrder[]
-  outcomesData      String?
-  audienceData      String?
-  prerequisitesData String?
-  learningPaths     LearningPathCourse[]
-  batchCourses      BatchCourse[]
+  certificateMode         String               @default("INCLUDED") // "INCLUDED" | "PAID_DIGITAL" | "DISABLED"
+  digitalCertificatePrice Int? // Price in IDR for PAID_DIGITAL mode, null otherwise
+  createdAt               DateTime             @default(now())
+  updatedAt               DateTime             @updatedAt
+  instructorId            String?
+  instructor              User?                @relation("CourseInstructor", fields: [instructorId], references: [id])
+  modules                 Module[]
+  enrollments             Enrollment[]
+  certificates            Certificate[]
+  paymentOrders           PaymentOrder[]
+  outcomesData            String?
+  audienceData            String?
+  prerequisitesData       String?
+  learningPaths           LearningPathCourse[]
+  batchCourses            BatchCourse[]
 }
 
 model Module {
@@ -103,19 +103,19 @@ model Module {
 }
 
 model Lesson {
-  id        String           @id @default(cuid())
-  moduleId  String
-  title     String
-  slug      String
-  type      String           @default("TEXT")
-  content   String           @default("")
-  videoUrl  String?
-  quizData  String?
-  sortOrder Int              @default(0)
-  module    Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
-  progress  LessonProgress[]
+  id           String           @id @default(cuid())
+  moduleId     String
+  title        String
+  slug         String
+  type         String           @default("TEXT")
+  content      String           @default("")
+  videoUrl     String?
+  quizData     String?
+  sortOrder    Int              @default(0)
+  module       Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  progress     LessonProgress[]
   quizAttempts QuizAttempt[]
-  resources Resource[]
+  resources    Resource[]
 }
 
 model Resource {
@@ -149,12 +149,12 @@ model Enrollment {
 }
 
 model PathEnrollment {
-  id               String       @id @default(cuid())
-  userId           String
-  learningPathId   String
-  enrolledAt       DateTime     @default(now())
-  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  learningPath     LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  id             String       @id @default(cuid())
+  userId         String
+  learningPathId String
+  enrolledAt     DateTime     @default(now())
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  learningPath   LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
 
   @@unique([userId, learningPathId])
   @@index([userId])
@@ -188,18 +188,18 @@ model Certificate {
 }
 
 model PaymentOrder {
-  id            String   @id @default(cuid())
-  userId        String
-  courseId      String
-  productType   String   @default("COURSE") // "COURSE" | "DIGITAL_CERTIFICATE"
-  amount        Float
-  status        String   @default("PENDING")
-  gatewayRef    String?
-  gatewayData   String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  userId      String
+  courseId    String
+  productType String   @default("COURSE") // "COURSE" | "DIGITAL_CERTIFICATE"
+  amount      Float
+  status      String   @default("PENDING")
+  gatewayRef  String?
+  gatewayData String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@index([userId, courseId])
 }
@@ -208,23 +208,23 @@ model PaymentOrder {
 // No User/Course FK required — cold traffic buys with just name/email/WA and
 // receives access (Zoom link, recording, e-certificate) at those contacts.
 model EventOrder {
-  id          String   @id @default(cuid())
-  eventSlug   String
-  eventTitle  String
-  amount      Float
-  status      String   @default("PENDING") // PENDING | PAID | FAILED | EXPIRED
-  name        String
-  email       String
-  whatsapp    String
-  userId      String? // linked to the passwordless auto-account on fulfillment
-  fulfilledAt DateTime? // set once access is granted + buyer notified
-  joinUrl     String? // unique Zoom registrant join link for this buyer
-  attendedAt  DateTime? // set once Zoom attendance meets the certificate threshold
-  remindersSent String[] @default([]) // reminder tags already sent (e.g. "H-1")
-  gatewayRef  String? // Midtrans Snap token / transaction id
-  gatewayData String? // raw gateway payload (JSON)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String    @id @default(cuid())
+  eventSlug     String
+  eventTitle    String
+  amount        Float
+  status        String    @default("PENDING") // PENDING | PAID | FAILED | EXPIRED
+  name          String
+  email         String
+  whatsapp      String
+  userId        String? // linked to the passwordless auto-account on fulfillment
+  fulfilledAt   DateTime? // set once access is granted + buyer notified
+  joinUrl       String? // unique Zoom registrant join link for this buyer
+  attendedAt    DateTime? // set once Zoom attendance meets the certificate threshold
+  remindersSent String[]  @default([]) // reminder tags already sent (e.g. "H-1")
+  gatewayRef    String? // Midtrans Snap token / transaction id
+  gatewayData   String? // raw gateway payload (JSON)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   @@index([status])
   @@index([email])
@@ -249,10 +249,10 @@ model QuizAttempt {
 
 model AuditLog {
   id        String   @id @default(cuid())
-  action    String   // ROLE_CHANGE, COURSE_REASSIGN, PUBLISH_CHANGE
+  action    String // ROLE_CHANGE, COURSE_REASSIGN, PUBLISH_CHANGE
   actorId   String
   targetId  String?
-  meta      String?  // JSON string for extra context
+  meta      String? // JSON string for extra context
   createdAt DateTime @default(now())
 
   @@index([action])
@@ -322,37 +322,37 @@ model Lead {
 }
 
 model Organization {
-  id              String          @id @default(cuid())
+  id              String   @id @default(cuid())
   name            String
   sector          String?
   contactName     String?
   contactEmail    String?
   contactWhatsapp String?
   notes           String?
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
-  batches         TrainingBatch[]
+  batches TrainingBatch[]
 
   @@index([name])
 }
 
 model TrainingBatch {
-  id             String             @id @default(cuid())
+  id             String    @id @default(cuid())
   organizationId String
   title          String
   description    String?
-  format         String             @default("ONLINE")
-  status         String             @default("DRAFT")
+  format         String    @default("ONLINE")
+  status         String    @default("DRAFT")
   startDate      DateTime?
   endDate        DateTime?
   notes          String?
-  createdAt      DateTime           @default(now())
-  updatedAt      DateTime           @updatedAt
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
-  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  participants   BatchParticipant[]
-  courses        BatchCourse[]
+  organization Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  participants BatchParticipant[]
+  courses      BatchCourse[]
 
   @@index([organizationId])
   @@index([status])
@@ -374,8 +374,8 @@ model BatchParticipant {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  batch     TrainingBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
-  user      User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  batch TrainingBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  user  User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@unique([batchId, email])
   @@index([batchId])
@@ -384,17 +384,112 @@ model BatchParticipant {
 }
 
 model BatchCourse {
-  id        String        @id @default(cuid())
+  id        String   @id @default(cuid())
   batchId   String
-  courseId   String
-  required  Boolean       @default(true)
-  sortOrder Int           @default(0)
-  createdAt DateTime      @default(now())
+  courseId  String
+  required  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
 
-  batch     TrainingBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
-  course    Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  batch  TrainingBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  course Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@unique([batchId, courseId])
   @@index([batchId])
   @@index([courseId])
+}
+
+model TrainerProfile {
+  id               String               @id @default(cuid())
+  slug             String               @unique
+  status           String               @default("DRAFT_RESEARCH")
+  verification     String               @default("SELECTED")
+  name             String
+  email            String
+  linkedinUrl      String?
+  websiteUrl       String?
+  headline         String               @default("")
+  shortBio         String               @default("")
+  fullBio          String               @default("")
+  portraitUrl      String?
+  actionPhotoUrl   String?
+  photoRights      String?
+  location         String?
+  languages        String[]             @default([])
+  deliveryModes    String[]             @default([])
+  expertise        String[]             @default([])
+  audiences        String[]             @default([])
+  outcomes         String[]             @default([])
+  teachingApproach Json?
+  experience       Json?
+  credentials      Json?
+  programs         Json?
+  evidence         Json?
+  metrics          Json?
+  consentedAt      DateTime?
+  verifiedAt       DateTime?
+  publishedAt      DateTime?
+  reviewDueAt      DateTime?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  sources          TrainerSource[]
+  claims           TrainerClaim[]
+  reviewTokens     TrainerReviewToken[]
+  auditEvents      TrainerAuditEvent[]
+
+  @@index([status])
+  @@index([verification])
+}
+
+model TrainerSource {
+  id        String         @id @default(cuid())
+  trainerId String
+  url       String
+  title     String?
+  type      String         @default("PUBLIC_WEB")
+  notes     String?
+  checkedAt DateTime?
+  createdAt DateTime       @default(now())
+  trainer   TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  @@index([trainerId])
+}
+
+model TrainerClaim {
+  id         String         @id @default(cuid())
+  trainerId  String
+  field      String
+  value      String
+  status     String         @default("UNVERIFIED")
+  sourceId   String?
+  notes      String?
+  reviewedAt DateTime?
+  createdAt  DateTime       @default(now())
+  trainer    TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  @@index([trainerId, status])
+}
+
+model TrainerReviewToken {
+  id        String         @id @default(cuid())
+  trainerId String
+  tokenHash String         @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime       @default(now())
+  trainer   TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  @@index([trainerId])
+}
+
+model TrainerAuditEvent {
+  id        String         @id @default(cuid())
+  trainerId String
+  actorId   String?
+  action    String
+  metadata  Json?
+  createdAt DateTime       @default(now())
+  trainer   TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  @@index([trainerId, createdAt])
 }
