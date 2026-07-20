@@ -15,7 +15,6 @@ const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
   { source: "/platform", destination: "/v2/untuk-organisasi" },
   { source: "/reports", destination: "/v2/untuk-organisasi" },
   { source: "/about", destination: "/v2/about" },
-  { source: "/portfolio", destination: "/v2/portfolio" },
   { source: "/case-studies", destination: "/v2/portfolio" },
   { source: "/resources", destination: "/v2/resources" },
   { source: "/certificates", destination: "/v2/certificates" },
