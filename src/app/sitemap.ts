@@ -24,7 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/portofolio",
         "/v2/certificates",
         "/trainers",
-        "/trainers/apply",
         "/trainer-verification",
         // Live V1 pages kept (functional / no V2 equivalent yet)
         "/learning-paths",

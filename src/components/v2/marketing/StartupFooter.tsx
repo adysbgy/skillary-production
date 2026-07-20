@@ -67,8 +67,7 @@ export function StartupFooter() {
               <li><Link href="/v2/catalog" className="hover:text-white transition-colors">Katalog Program</Link></li>
               <li><Link href="/v2/untuk-organisasi" className="hover:text-white transition-colors">Untuk Organisasi</Link></li>
               <li><Link href="/portofolio" className="hover:text-white transition-colors">Portofolio</Link></li>
-              <li><Link href="/trainer-verification" className="hover:text-white transition-colors">Standar Trainer</Link></li>
-              <li><Link href="/trainers/apply" className="hover:text-white transition-colors">Jadi Trainer</Link></li>
+              <li><Link href="/trainer-verification" className="hover:text-white transition-colors">Faculty Standards</Link></li>
               <li><Link href="/v2/about" className="hover:text-white transition-colors">Tentang</Link></li>
               <li><Link href="/v2/proposal" className="hover:text-white transition-colors">Kontak</Link></li>
             </ul>
