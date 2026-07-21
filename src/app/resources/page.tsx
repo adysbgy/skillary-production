@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ResourcesPage from "@/app/v2/resources/page";
+import ResourcesPage from "@/features/marketing/pages/ResourcesPage";
 
 export const metadata: Metadata = {
   title: "Resources untuk HR dan L&D",

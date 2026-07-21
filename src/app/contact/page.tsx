@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ContactPage from "@/app/v2/proposal/page";
+import ContactPage from "@/features/marketing/pages/ContactPage";
 
 export const metadata: Metadata = {
   title: "Diskusikan Kebutuhan Pelatihan",
