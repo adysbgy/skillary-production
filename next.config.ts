@@ -22,21 +22,35 @@ const LEGACY_HOST_REDIRECTS = [
 ];
 
 const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
-  // Lead-capture funnel → single canonical proposal form
-  { source: "/proposal", destination: "/v2/proposal" },
-  // Duplicated marketing pages → their V2 counterparts
-  { source: "/demo", destination: "/v2/untuk-organisasi" },
-  { source: "/services", destination: "/v2/untuk-organisasi" },
-  { source: "/teams", destination: "/v2/untuk-organisasi" },
-  { source: "/platform", destination: "/v2/untuk-organisasi" },
-  { source: "/reports", destination: "/v2/untuk-organisasi" },
+  // Replaced V2 route families → clean canonical paths. Put the most-specific
+  // checkout/detail patterns before their collection routes.
+  { source: "/v2/events/:slug/checkout", destination: "/events/:slug/checkout" },
+  { source: "/v2/events/:slug", destination: "/events/:slug" },
+  { source: "/v2/events", destination: "/events" },
+  { source: "/v2/program/:slug", destination: "/programs/:slug" },
+  { source: "/v2/catalog", destination: "/programs" },
+  { source: "/v2/untuk-organisasi", destination: "/untuk-organisasi" },
+  { source: "/v2/about", destination: "/about" },
+  { source: "/v2/resources", destination: "/resources" },
+  { source: "/v2/proposal", destination: "/contact" },
+  { source: "/v2/portfolio", destination: "/portofolio" },
+
+  // Older duplicate routes → their final clean destinations (no redirect
+  // chains through /v2).
+  { source: "/proposal", destination: "/contact" },
+  { source: "/demo", destination: "/untuk-organisasi" },
+  { source: "/services", destination: "/untuk-organisasi" },
+  { source: "/teams", destination: "/untuk-organisasi" },
+  { source: "/platform", destination: "/untuk-organisasi" },
+  { source: "/reports", destination: "/untuk-organisasi" },
   { source: "/portfolio", destination: "/portofolio" },
   { source: "/portfolio-arsip", destination: "/portofolio" },
   { source: "/case-studies", destination: "/portofolio" },
-  { source: "/v2/portfolio", destination: "/portofolio" },
+  { source: "/program-catalog", destination: "/programs" },
+  { source: "/training-brief", destination: "/contact" },
+
+  // No clean replacement has been approved for this route yet.
   { source: "/certificates", destination: "/v2/certificates" },
-  { source: "/program-catalog", destination: "/v2/catalog" },
-  { source: "/training-brief", destination: "/v2/proposal" },
 ];
 
 const nextConfig: NextConfig = {
