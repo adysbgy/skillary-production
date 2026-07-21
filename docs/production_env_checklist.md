@@ -9,15 +9,23 @@ This checklist defines the environment variables required to safely deploy Skill
 - **Format:** `postgres://user:password@host:port/database`
 - **Failure Behavior:** Build will fail during Prisma client generation, or the application will crash on any database read/write.
 
-### `AUTH_SECRET` / `NEXTAUTH_SECRET` (Required)
-- **Purpose:** Cryptographic key used by NextAuth to encrypt session cookies and tokens.
+### `AUTH_SECRET` (Required)
+- **Purpose:** Cryptographic key used by Auth.js to encrypt session cookies and tokens.
 - **Format:** Random 32-byte string (Generate via `npx auth secret` or `openssl rand -base64 32`).
+- **Compatibility:** `NEXTAUTH_SECRET` may remain temporarily during migration, but it must match `AUTH_SECRET`. New environments should use `AUTH_SECRET`.
 - **Failure Behavior:** Login flows will fail or throw server errors.
 
-### `NEXTAUTH_URL` / `AUTH_URL` (Required / Recommended)
-- **Purpose:** The canonical URL of the application. Required by NextAuth for proper redirect and callback routing.
-- **Format:** `https://skillary.id` (or the specific production domain).
-- **Failure Behavior:** OAuth callbacks and email sign-in links may redirect to `localhost` or fail entirely. Note: Vercel often infers this automatically, but explicitly setting it is safer.
+### `AUTH_URL` / canonical host (Recommended)
+- **Purpose:** Canonical application origin for redirects and OAuth callbacks. Vercel can infer the production host, but the intended origin must be documented.
+- **Production origin:** `https://skillary.my.id`
+- **Google redirect URI:** `https://skillary.my.id/api/auth/callback/google`
+- **Compatibility:** If `NEXTAUTH_URL` remains during migration, it must equal the canonical production origin.
+- **Failure Behavior:** OAuth callbacks may use an old domain or fail provider validation.
+
+### `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` (Required for Google login)
+- **Google authorized origin:** `https://skillary.my.id`
+- **Google authorized redirect URI:** `https://skillary.my.id/api/auth/callback/google`
+- **Security:** Never expose either value to browser bundles or logs.
 
 ## Integrations
 

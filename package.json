@@ -13,7 +13,8 @@
     "seed": "npx -y tsx prisma/seed.ts",
     "seed:corporate-demo": "npx -y tsx scripts/seed_corporate_training_demo.ts",
     "validate:proof-links": "npx -y tsx scripts/validate_legacy_proof_links.ts",
-    "generate:proof-tracker": "npx -y tsx scripts/generate_manual_proof_tracker.ts"
+    "generate:proof-tracker": "npx -y tsx scripts/generate_manual_proof_tracker.ts",
+    "security:test-auth": "node scripts/security/test-auth-helpers.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",

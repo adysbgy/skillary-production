@@ -8,16 +8,20 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { PrimaryButton } from "@/components/ui/Button";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
+import { safeInternalRedirect } from "@/lib/safe-redirect";
 
 function LoginForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const redirect = searchParams.get("redirect") || "/dashboard";
+    const redirect = safeInternalRedirect(searchParams.get("redirect"));
+    const callbackError = getAuthErrorMessage(searchParams.get("error"));
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [googleLoading, setGoogleLoading] = useState(false);
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -78,8 +82,8 @@ function LoginForm() {
                     </Link>
                 </div>
 
-                {error && (
-                    <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+                {(error || callbackError) && (
+                    <p role="alert" aria-live="polite" className="text-sm text-red-700 bg-red-50 rounded-lg px-3 py-2">{error || callbackError}</p>
                 )}
 
                 <PrimaryButton className="w-full" disabled={loading}>
@@ -95,7 +99,12 @@ function LoginForm() {
 
             <button
                 type="button"
-                onClick={() => signIn("google", { callbackUrl: redirect })}
+                onClick={() => {
+                    setGoogleLoading(true);
+                    void signIn("google", { callbackUrl: redirect }).catch(() => setGoogleLoading(false));
+                }}
+                disabled={googleLoading}
+                aria-busy={googleLoading}
                 className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-black/70 shadow-sm transition hover:bg-black/5"
             >
                 <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
@@ -116,7 +125,7 @@ function LoginForm() {
                         fill="#34A853"
                     />
                 </svg>
-                Continue with Google
+                {googleLoading ? "Connecting to Google…" : "Continue with Google"}
             </button>
 
             <p className="mt-6 text-center text-sm text-black/55">

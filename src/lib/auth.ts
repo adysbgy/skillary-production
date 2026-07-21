@@ -5,6 +5,13 @@ import Google from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+if (!googleClientId || !googleClientSecret) {
+    console.warn("[auth] Google provider credentials are not configured.");
+}
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: PrismaAdapter(prisma),
     session: { strategy: "jwt" },
@@ -43,13 +50,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
         }),
         Google({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientId: googleClientId,
+            clientSecret: googleClientSecret,
             allowDangerousEmailAccountLinking: true,
         }),
     ],
+    logger: {
+        error(error) {
+            // Auth.js errors are structured and do not require logging tokens or cookies.
+            console.error("[auth]", error.name, error.message);
+        },
+        warn(code) {
+            console.warn("[auth]", code);
+        },
+    },
     callbacks: {
-        async jwt({ token, user, account }) {
+        async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
                 token.role = user.role;
