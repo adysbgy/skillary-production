@@ -1,0 +1,2 @@
+export interface SafeError {name:string;code?:string;category:string;}
+export function normalizeError(error:unknown):SafeError{if(!(error instanceof Error))return{name:"UnknownError",category:"UNKNOWN"};const code=typeof(error as Error&{code?:unknown}).code==="string"?(error as Error&{code:string}).code:undefined;let category="INTERNAL";if(code==="P2002")category="CONFLICT";else if(code?.startsWith("P"))category="DATABASE";return{name:error.name||"Error",...(code?{code}:{}),category}}

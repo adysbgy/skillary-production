@@ -14,6 +14,9 @@
   "include": [
     "src/lib/payments/*.ts",
     "src/lib/observability/redaction.ts",
-    "src/lib/authorization/*.ts"
+    "src/lib/authorization/*.ts",
+    "src/lib/observability/error-normalization.ts",
+    "src/lib/observability/request-context.ts",
+    "src/lib/observability/events.ts"
   ]
 }

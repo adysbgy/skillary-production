@@ -23,7 +23,9 @@
     "test:integrity-policies": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/integrity/*.test.mjs",
     "test:authorization-policies": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/authorization/*.test.mjs",
     "security:audit-entitlement-boundaries": "node scripts/security/audit-entitlement-boundaries.mjs",
-    "quality:gate:core": "npm run test:integrity-policies && npm run test:authorization-policies && npm run security:test-auth && npm run security:audit-admin-api && npm run security:audit-index-policy && npm run security:audit-clean-routes && npm run security:audit-route-redirects && npm run security:audit-retirement-manifest && npm run security:audit-route-module-dependencies && npm run security:audit-entitlement-boundaries && tsc --noEmit && eslint src/lib/payments src/lib/authorization src/lib/observability/redaction.ts scripts/security"
+    "quality:gate:core": "npm run test:integrity-policies && npm run test:authorization-policies && npm run security:test-auth && npm run security:audit-admin-api && npm run security:audit-index-policy && npm run security:audit-clean-routes && npm run security:audit-route-redirects && npm run security:audit-retirement-manifest && npm run security:audit-route-module-dependencies && npm run security:audit-entitlement-boundaries && npm run test:observability && npm run security:audit-observability-boundaries && tsc --noEmit && eslint src/lib/payments src/lib/authorization src/lib/observability/redaction.ts scripts/security",
+    "test:observability": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/observability.test.mjs",
+    "security:audit-observability-boundaries": "node scripts/security/audit-observability-boundaries.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",

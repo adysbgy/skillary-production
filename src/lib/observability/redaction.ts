@@ -1,18 +1,9 @@
-const SENSITIVE_KEY = /password|secret|token|cookie|authorization|signature|serverkey|clientsecret|gatewaydata/i;
-const EMAIL = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
-const PHONE = /(?:\+?62|0)\d{8,13}/g;
-
-export function redactValue(key: string, value: unknown): unknown {
-  if (SENSITIVE_KEY.test(key)) return "[REDACTED]";
-  if (typeof value === "string") return value.replace(EMAIL, "[REDACTED_EMAIL]").replace(PHONE, "[REDACTED_PHONE]");
-  return value;
-}
-
-export function redactRecord(input: Record<string, unknown>): Record<string, unknown> {
-  return Object.fromEntries(Object.entries(input).map(([key, value]) => [
-    key,
-    value && typeof value === "object" && !Array.isArray(value)
-      ? redactRecord(value as Record<string, unknown>)
-      : redactValue(key, value),
-  ]));
-}
+const SENSITIVE_KEY=/password|secret|token|cookie|authorization|signature|server.?key|client.?secret|gateway.?data|review.?url/i;
+const EMAIL=/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
+const PHONE=/(?:\+?62|0)\d{8,13}/g;
+const BEARER=/Bearer\s+[A-Za-z0-9._~+\/-]+=*/gi;
+const MAX_DEPTH=5,MAX_KEYS=50,MAX_ARRAY=25,MAX_STRING=500;
+function redactString(value:string){let out=value.replace(EMAIL,"[REDACTED_EMAIL]").replace(PHONE,"[REDACTED_PHONE]").replace(BEARER,"Bearer [REDACTED]");try{const url=new URL(out);for(const key of[...url.searchParams.keys()])if(SENSITIVE_KEY.test(key)||/^(code)$/i.test(key))url.searchParams.set(key,"[REDACTED]");out=url.toString()}catch{}return out.length>MAX_STRING?`${out.slice(0,MAX_STRING)}[TRUNCATED]`:out}
+export function redactValue(key:string,value:unknown):unknown{if(SENSITIVE_KEY.test(key))return"[REDACTED]";if(typeof value==="string")return redactString(value);return value}
+export function redactRecord(input:Record<string,unknown>):Record<string,unknown>{return sanitize(input,new WeakSet(),0) as Record<string,unknown>}
+function sanitize(value:unknown,seen:WeakSet<object>,depth:number):unknown{if(depth>MAX_DEPTH)return"[MAX_DEPTH]";if(value===null||value===undefined||typeof value==="boolean"||typeof value==="number")return value;if(typeof value==="bigint")return value.toString();if(typeof value==="string")return redactString(value);if(value instanceof Date)return value.toISOString();if(value instanceof Error)return{name:value.name};if(typeof value!=="object")return String(value);if(seen.has(value))return"[CIRCULAR]";seen.add(value);if(Array.isArray(value))return value.slice(0,MAX_ARRAY).map(v=>sanitize(v,seen,depth+1));return Object.fromEntries(Object.entries(value).slice(0,MAX_KEYS).map(([key,item])=>[key,SENSITIVE_KEY.test(key)?"[REDACTED]":sanitize(item,seen,depth+1)]))}

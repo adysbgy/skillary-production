@@ -1,0 +1,5 @@
+import "server-only";
+import type{ObservabilityEvent}from"./events";import{redactRecord}from"./redaction";import{normalizeError}from"./error-normalization";
+type Level="info"|"warn"|"error";type Context=Record<string,unknown>&{error?:unknown};
+function emit(level:Level,event:ObservabilityEvent,context:Context={}){try{const{error,...rest}=context;const record=redactRecord({timestamp:new Date().toISOString(),level,event,environment:process.env.VERCEL_ENV||process.env.NODE_ENV||"unknown",service:"skillary-web",...rest,...(error!==undefined?{error:normalizeError(error)}:{})});console[level](JSON.stringify(record))}catch{console.error(JSON.stringify({timestamp:new Date().toISOString(),level:"error",event:"system.unhandled_error",service:"skillary-web",reason:"LOGGER_SERIALIZATION_FAILED"}))}}
+export const log={info:(event:ObservabilityEvent,context?:Context)=>emit("info",event,context),warn:(event:ObservabilityEvent,context?:Context)=>emit("warn",event,context),error:(event:ObservabilityEvent,context?:Context)=>emit("error",event,context)};
