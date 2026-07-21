@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function requireAdminOrInstructorAPI() {
     const session = await auth();
-    const role = (session?.user as any)?.role;
+    const role = session?.user?.role;
     if (!session || (role !== "ADMIN" && role !== "INSTRUCTOR")) {
         return { error: NextResponse.json({ error: "Unauthorized" }, { status: 401 }), session: null, role: null };
     }
@@ -12,7 +12,7 @@ export async function requireAdminOrInstructorAPI() {
 
 export async function requireAdminAPI() {
     const session = await auth();
-    const role = (session?.user as any)?.role;
+    const role = session?.user?.role;
     if (!session || role !== "ADMIN") {
         return { error: NextResponse.json({ error: "Unauthorized" }, { status: 401 }), session: null, role: null };
     }

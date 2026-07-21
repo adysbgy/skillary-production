@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && prisma db push --skip-generate --accept-data-loss && next build",
+    "build": "prisma generate && next build",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:status": "prisma migrate status",
+    "security:audit-admin-api": "node scripts/security/audit-admin-api-guards.mjs",
     "start": "next start",
     "lint": "eslint",
     "seed": "npx -y tsx prisma/seed.ts",
