@@ -4,12 +4,13 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { log } from "@/lib/observability/logger";
 
 const googleClientId = process.env.GOOGLE_CLIENT_ID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
 if (!googleClientId || !googleClientSecret) {
-    console.warn("[auth] Google provider credentials are not configured.");
+    log.warn("auth.provider.unavailable", { provider: "google", reason: "CREDENTIALS_NOT_CONFIGURED" });
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -58,10 +59,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     logger: {
         error(error) {
             // Auth.js errors are structured and do not require logging tokens or cookies.
-            console.error("[auth]", error.name, error.message);
+            log.error("auth.error", { error });
         },
         warn(code) {
-            console.warn("[auth]", code);
+            log.warn("auth.warning", { code: String(code).slice(0, 100) });
         },
     },
     callbacks: {
