@@ -2,8 +2,11 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { hasActiveEnrollment } from "@/lib/entitlements";
+import { log } from "@/lib/observability/logger";
+import { createRequestContext } from "@/lib/observability/request-context";
 
 export async function POST(req: Request) {
+    const context = createRequestContext(req, "/api/progress");
     try {
         const session = await auth();
         if (!session?.user?.id) {
@@ -30,6 +33,7 @@ export async function POST(req: Request) {
         // CRITICAL P0 FIX: Validate strict enrollment before mutating progress or issuing certificates
         const isEnrolled = await hasActiveEnrollment(session.user.id, courseId);
         if (!isEnrolled) {
+            log.warn("entitlement.progress.denied", { ...context, reason: "ACTIVE_ENROLLMENT_REQUIRED" });
             return NextResponse.json({ error: "Must be actively enrolled in course." }, { status: 403 });
         }
 
@@ -49,6 +53,7 @@ export async function POST(req: Request) {
                     orderBy: { score: "desc" },
                 });
                 if (!bestAttempt || !bestAttempt.passed) {
+                    log.info("entitlement.progress.quiz_blocked", { ...context, reason: "REQUIRED_QUIZ_NOT_PASSED" });
                     return NextResponse.json({ error: "Cannot complete lesson: You must pass the required quiz first." }, { status: 400 });
                 }
             }
@@ -89,7 +94,10 @@ export async function POST(req: Request) {
         const courseCompleted = completedLessons >= totalLessons;
         let certificateCode: string | null = null;
 
+        log.info("entitlement.progress.completed", { ...context });
+
         if (courseCompleted) {
+            log.info("entitlement.course.completed", { ...context });
             await prisma.enrollment.updateMany({
                 where: {
                     userId: session.user.id,
@@ -130,7 +138,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ ...progress, courseCompleted, certificateCode });
     } catch (error) {
-        console.error("Progress error:", error);
+        log.error("system.unhandled_error", { ...context, error, route: "/api/progress" });
         return NextResponse.json({ error: "Internal server error." }, { status: 500 });
     }
 }

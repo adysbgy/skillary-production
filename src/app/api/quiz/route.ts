@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { log } from "@/lib/observability/logger";
+import { createRequestContext } from "@/lib/observability/request-context";
 
 // POST /api/quiz — Submit a quiz attempt
 export async function POST(req: NextRequest) {
+    const context = createRequestContext(req, "/api/quiz");
     const session = await auth();
     if (!session?.user?.id) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -31,6 +34,7 @@ export async function POST(req: NextRequest) {
     const { hasActiveEnrollment } = await import("@/lib/entitlements");
     const isEnrolled = await hasActiveEnrollment(session.user.id, courseId);
     if (!isEnrolled) {
+        log.warn("entitlement.quiz.denied", { ...context, reason: "ACTIVE_ENROLLMENT_REQUIRED" });
         return NextResponse.json({ error: "Must be actively enrolled in course." }, { status: 403 });
     }
 
@@ -50,6 +54,7 @@ export async function POST(req: NextRequest) {
     if (maxAttempts !== null) {
         const attemptCount = await prisma.quizAttempt.count({ where: { userId: session.user.id, lessonId } });
         if (attemptCount >= maxAttempts) {
+            log.info("entitlement.quiz.denied", { ...context, reason: "MAX_ATTEMPTS_REACHED" });
             return NextResponse.json({ error: "Maximum attempts reached." }, { status: 403 });
         }
     }
@@ -57,6 +62,9 @@ export async function POST(req: NextRequest) {
     // Determine pass/fail based on dynamic threshold (e.g. 80%)
     const percentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
     const passed = percentage >= passingScoreThreshold;
+
+    log.info("entitlement.quiz.attempted", { ...context, passed });
+    if (passed) log.info("entitlement.quiz.passed", { ...context });
 
     const attempt = await prisma.quizAttempt.create({
         data: {
