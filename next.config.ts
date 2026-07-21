@@ -4,6 +4,23 @@ import type { NextConfig } from "next";
 // homepage + header now point to. Redirect the old URLs (all still indexed) to
 // their V2 equivalents so there is a single funnel and no duplicate content.
 // Permanent (308) so search engines drop the old URLs.
+const CANONICAL_ORIGIN = "https://skillary.my.id";
+
+const LEGACY_HOST_REDIRECTS = [
+  {
+    source: "/:path*",
+    has: [{ type: "host", value: "datacamp.id" }],
+    destination: `${CANONICAL_ORIGIN}/:path*`,
+    permanent: true,
+  },
+  {
+    source: "/:path*",
+    has: [{ type: "host", value: "www.datacamp.id" }],
+    destination: `${CANONICAL_ORIGIN}/:path*`,
+    permanent: true,
+  },
+];
+
 const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
   // Lead-capture funnel → single canonical proposal form
   { source: "/contact", destination: "/v2/proposal" },
@@ -27,7 +44,22 @@ const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return LEGACY_REDIRECTS.map((r) => ({ ...r, permanent: true }));
+    return [
+      ...LEGACY_HOST_REDIRECTS,
+      ...LEGACY_REDIRECTS.map((redirect) => ({ ...redirect, permanent: true })),
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: "/",
+        headers: [{ key: "Link", value: `<${CANONICAL_ORIGIN}/>; rel="canonical"` }],
+      },
+      {
+        source: "/:path+",
+        headers: [{ key: "Link", value: `<${CANONICAL_ORIGIN}/:path>; rel="canonical"` }],
+      },
+    ];
   },
 };
 
