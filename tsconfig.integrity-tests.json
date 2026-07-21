@@ -13,6 +13,7 @@
   },
   "include": [
     "src/lib/payments/*.ts",
-    "src/lib/observability/redaction.ts"
+    "src/lib/observability/redaction.ts",
+    "src/lib/authorization/*.ts"
   ]
 }

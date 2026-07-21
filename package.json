@@ -20,7 +20,10 @@
     "security:audit-route-redirects": "node scripts/security/audit-route-redirects.mjs",
     "security:audit-retirement-manifest": "node scripts/security/audit-retirement-manifest.mjs",
     "security:audit-route-module-dependencies": "node scripts/security/audit-route-module-dependencies.mjs",
-    "test:integrity-policies": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/integrity/*.test.mjs"
+    "test:integrity-policies": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/integrity/*.test.mjs",
+    "test:authorization-policies": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/authorization/*.test.mjs",
+    "security:audit-entitlement-boundaries": "node scripts/security/audit-entitlement-boundaries.mjs",
+    "quality:gate:core": "npm run test:integrity-policies && npm run test:authorization-policies && npm run security:test-auth && npm run security:audit-admin-api && npm run security:audit-index-policy && npm run security:audit-clean-routes && npm run security:audit-route-redirects && npm run security:audit-retirement-manifest && npm run security:audit-route-module-dependencies && npm run security:audit-entitlement-boundaries && tsc --noEmit && eslint src/lib/payments src/lib/authorization src/lib/observability/redaction.ts scripts/security"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
