@@ -7,27 +7,218 @@
     "requireExplicitDeletionApproval": true
   },
   "protectedDependencies": [
-    {"route":"/v2/catalog","sourceFile":"src/app/v2/catalog/page.tsx","consumers":["/programs"],"decision":"KEEP_DEPENDENCY"},
-    {"route":"/v2/program/[slug]","sourceFile":"src/app/v2/program/[slug]/page.tsx","consumers":["/programs/[slug]"],"decision":"KEEP_DEPENDENCY"},
-    {"route":"/v2/events","sourceFile":"src/app/v2/events/page.tsx","consumers":["/events"],"decision":"KEEP_DEPENDENCY"},
-    {"route":"/v2/events/[slug]","sourceFile":"src/app/v2/events/[slug]/page.tsx","consumers":["/events/[slug]"],"decision":"KEEP_DEPENDENCY"},
-    {"route":"/v2/events/[slug]/checkout","sourceFile":"src/app/v2/events/[slug]/checkout/page.tsx","consumers":["/events/[slug]/checkout"],"decision":"KEEP_DEPENDENCY"},
-    {"route":"/v2/about","sourceFile":"src/app/v2/about/page.tsx","consumers":["/about"],"decision":"KEEP_DEPENDENCY"},
-    {"route":"/v2/resources","sourceFile":"src/app/v2/resources/page.tsx","consumers":["/resources"],"decision":"KEEP_DEPENDENCY"},
-    {"route":"/v2/proposal","sourceFile":"src/app/v2/proposal/page.tsx","consumers":["/contact"],"decision":"KEEP_DEPENDENCY"},
-    {"route":"/v2/untuk-organisasi","sourceFile":"src/app/v2/untuk-organisasi/page.tsx","consumers":["/untuk-organisasi"],"decision":"KEEP_DEPENDENCY"}
+    {
+      "route": "/v2/catalog",
+      "sourceFile": "src/app/v2/catalog/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    },
+    {
+      "route": "/v2/program/[slug]",
+      "sourceFile": "src/app/v2/program/[slug]/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    },
+    {
+      "route": "/v2/events",
+      "sourceFile": "src/app/v2/events/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    },
+    {
+      "route": "/v2/events/[slug]",
+      "sourceFile": "src/app/v2/events/[slug]/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    },
+    {
+      "route": "/v2/events/[slug]/checkout",
+      "sourceFile": "src/app/v2/events/[slug]/checkout/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    },
+    {
+      "route": "/v2/about",
+      "sourceFile": "src/app/v2/about/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    },
+    {
+      "route": "/v2/resources",
+      "sourceFile": "src/app/v2/resources/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    },
+    {
+      "route": "/v2/proposal",
+      "sourceFile": "src/app/v2/proposal/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    },
+    {
+      "route": "/v2/untuk-organisasi",
+      "sourceFile": "src/app/v2/untuk-organisasi/page.tsx",
+      "consumers": [],
+      "decision": "KEEP_PENDING_REVIEW",
+      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+    }
   ],
   "candidates": [
-    {"route":"/proposal","sourceFile":"src/app/proposal/page.tsx","replacement":"/contact","bytes":10411,"directImportsFound":false,"uniqueSignals":["analytics/source tracking","legacy consultation content"],"confidence":"LOW","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/services","sourceFile":"src/app/services/page.tsx","replacement":"/untuk-organisasi","bytes":7258,"directImportsFound":false,"uniqueSignals":["service taxonomy","SEO metadata"],"confidence":"MEDIUM","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/teams","sourceFile":"src/app/teams/page.tsx","replacement":"/untuk-organisasi","bytes":1537,"directImportsFound":false,"uniqueSignals":["12 Teams-specific components"],"confidence":"LOW","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/platform","sourceFile":"src/app/platform/page.tsx","replacement":"/untuk-organisasi","bytes":22790,"directImportsFound":false,"uniqueSignals":["LMS capability copy","platform-specific CTAs","SEO metadata"],"confidence":"LOW","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/reports","sourceFile":"src/app/reports/page.tsx","replacement":"/untuk-organisasi","bytes":9682,"directImportsFound":false,"uniqueSignals":["reporting feature copy","assessment source attribution","SEO metadata"],"confidence":"LOW","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/portfolio","sourceFile":"src/app/portfolio/page.tsx","replacement":"/portofolio","bytes":8919,"directImportsFound":false,"uniqueSignals":["legacy portfolio data","PortfolioExplorer","archive evidence"],"confidence":"LOW","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/portfolio-arsip","sourceFile":"src/app/portfolio-arsip/page.tsx","replacement":"/portofolio","bytes":9657,"directImportsFound":false,"uniqueSignals":["legacy portfolio data","PortfolioExplorer","Instagram documentation provenance"],"confidence":"LOW","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/case-studies","sourceFile":"src/app/case-studies/page.tsx","replacement":"/portofolio","bytes":7195,"directImportsFound":false,"uniqueSignals":["CaseStudyExplorer","legacy portfolio data","curated evidence copy"],"confidence":"LOW","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/program-catalog","sourceFile":"src/app/program-catalog/page.tsx","replacement":"/programs","bytes":9591,"directImportsFound":false,"uniqueSignals":["six image assets","legacy program taxonomy","SEO metadata"],"confidence":"MEDIUM","decision":"KEEP_PENDING_REVIEW"},
-    {"route":"/training-brief","sourceFile":"src/app/training-brief/page.tsx","replacement":"/contact","bytes":6630,"directImportsFound":false,"uniqueSignals":["resource-template image","training intake guidance","SEO metadata"],"confidence":"LOW","decision":"KEEP_PENDING_REVIEW"}
+    {
+      "route": "/proposal",
+      "sourceFile": "src/app/proposal/page.tsx",
+      "replacement": "/contact",
+      "bytes": 10411,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "analytics/source tracking",
+        "legacy consultation content"
+      ],
+      "confidence": "LOW",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/services",
+      "sourceFile": "src/app/services/page.tsx",
+      "replacement": "/untuk-organisasi",
+      "bytes": 7258,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "service taxonomy",
+        "SEO metadata"
+      ],
+      "confidence": "MEDIUM",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/teams",
+      "sourceFile": "src/app/teams/page.tsx",
+      "replacement": "/untuk-organisasi",
+      "bytes": 1537,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "12 Teams-specific components"
+      ],
+      "confidence": "LOW",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/platform",
+      "sourceFile": "src/app/platform/page.tsx",
+      "replacement": "/untuk-organisasi",
+      "bytes": 22790,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "LMS capability copy",
+        "platform-specific CTAs",
+        "SEO metadata"
+      ],
+      "confidence": "LOW",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/reports",
+      "sourceFile": "src/app/reports/page.tsx",
+      "replacement": "/untuk-organisasi",
+      "bytes": 9682,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "reporting feature copy",
+        "assessment source attribution",
+        "SEO metadata"
+      ],
+      "confidence": "LOW",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/portfolio",
+      "sourceFile": "src/app/portfolio/page.tsx",
+      "replacement": "/portofolio",
+      "bytes": 8919,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "legacy portfolio data",
+        "PortfolioExplorer",
+        "archive evidence"
+      ],
+      "confidence": "LOW",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/portfolio-arsip",
+      "sourceFile": "src/app/portfolio-arsip/page.tsx",
+      "replacement": "/portofolio",
+      "bytes": 9657,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "legacy portfolio data",
+        "PortfolioExplorer",
+        "Instagram documentation provenance"
+      ],
+      "confidence": "LOW",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/case-studies",
+      "sourceFile": "src/app/case-studies/page.tsx",
+      "replacement": "/portofolio",
+      "bytes": 7195,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "CaseStudyExplorer",
+        "legacy portfolio data",
+        "curated evidence copy"
+      ],
+      "confidence": "LOW",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/program-catalog",
+      "sourceFile": "src/app/program-catalog/page.tsx",
+      "replacement": "/programs",
+      "bytes": 9591,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "six image assets",
+        "legacy program taxonomy",
+        "SEO metadata"
+      ],
+      "confidence": "MEDIUM",
+      "decision": "KEEP_PENDING_REVIEW"
+    },
+    {
+      "route": "/training-brief",
+      "sourceFile": "src/app/training-brief/page.tsx",
+      "replacement": "/contact",
+      "bytes": 6630,
+      "directImportsFound": false,
+      "uniqueSignals": [
+        "resource-template image",
+        "training intake guidance",
+        "SEO metadata"
+      ],
+      "confidence": "LOW",
+      "decision": "KEEP_PENDING_REVIEW"
+    }
   ],
-  "protectedRoutePrefixes": ["/admin","/dashboard","/learn","/checkout","/login","/register","/certificate","/trainer-review","/trainers"]
+  "protectedRoutePrefixes": [
+    "/admin",
+    "/dashboard",
+    "/learn",
+    "/checkout",
+    "/login",
+    "/register",
+    "/certificate",
+    "/trainer-review",
+    "/trainers"
+  ],
+  "extractionCompletedAt": "2026-07-21"
 }
