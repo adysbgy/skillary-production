@@ -3,8 +3,11 @@ import { prisma } from "@/lib/prisma";
 import { createLeadSchema, detectSpam } from "@/lib/lead-constants";
 import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
 import { notifyNewLead } from "@/lib/lead-notification";
+import { log } from "@/lib/observability/logger";
+import { createRequestContext } from "@/lib/observability/request-context";
 
 export async function POST(req: Request) {
+  const context = createRequestContext(req, "/api/leads");
   try {
     // Rate limiting: 5 submissions per 10 minutes per IP
     const clientKey = getClientKey(req);
@@ -45,13 +48,14 @@ export async function POST(req: Request) {
     });
 
     // Fire-and-forget email notification (never blocks response)
-    notifyNewLead(lead).catch((err) =>
-      console.warn("Lead notification fire-and-forget error:", err)
+    notifyNewLead(lead).catch((error) =>
+      log.warn("lead.notification.failed", { ...context, error })
     );
+    log.info("lead.created", { ...context });
 
     return NextResponse.json({ ok: true, leadId: lead.id }, { status: 201 });
   } catch (error) {
-    console.error("Lead creation failed:", error);
+    log.error("lead.creation_failed", { ...context, error });
     return NextResponse.json(
       { error: "Terjadi kesalahan. Silakan coba lagi." },
       { status: 500 }
