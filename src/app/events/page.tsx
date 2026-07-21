@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import EventsPage from "@/app/v2/events/page";
+import EventsPage from "@/features/events/pages/EventsPage";
 
 export const metadata: Metadata = {
   title: "Events dan Webinar Praktis",

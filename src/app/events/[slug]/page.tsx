@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import EventPage, { generateStaticParams } from "@/app/v2/events/[slug]/page";
+import EventPage, { generateStaticParams } from "@/features/events/pages/EventDetailPage";
 import { getEventBySlug } from "@/data/v2-events";
 
 export { generateStaticParams };
