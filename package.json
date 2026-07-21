@@ -19,7 +19,8 @@
     "security:audit-clean-routes": "node scripts/security/audit-clean-routes.mjs",
     "security:audit-route-redirects": "node scripts/security/audit-route-redirects.mjs",
     "security:audit-retirement-manifest": "node scripts/security/audit-retirement-manifest.mjs",
-    "security:audit-route-module-dependencies": "node scripts/security/audit-route-module-dependencies.mjs"
+    "security:audit-route-module-dependencies": "node scripts/security/audit-route-module-dependencies.mjs",
+    "test:integrity-policies": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/integrity/*.test.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
