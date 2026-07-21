@@ -144,7 +144,7 @@ export default function PortfolioV2Page() {
           <div className="rounded-3xl p-10 shadow-sm" style={{ background: "rgb(255, 251, 245)", border: "1.5px solid rgb(240, 217, 200)" }}>
             <h2 className="text-2xl font-bold tracking-tight text-[#181818] mb-3">Jadikan Organisasi Anda yang Berikutnya</h2>
             <p className="text-base text-black/60 mb-8 leading-relaxed">Diskusikan kebutuhan pelatihan tim Anda dengan tim kami — konsultasi gratis, respon dalam 1 hari kerja.</p>
-            <Link href="/v2/proposal"><GradientButton className="px-7 py-3.5 text-sm">Diskusikan Kebutuhan Training →</GradientButton></Link>
+            <Link href="/contact"><GradientButton className="px-7 py-3.5 text-sm">Diskusikan Kebutuhan Training →</GradientButton></Link>
           </div>
         </Container>
       </section>

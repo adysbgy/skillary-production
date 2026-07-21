@@ -35,7 +35,7 @@ export function FinalCtaV2() {
 
         <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
           <Link
-            href="/v2/proposal"
+            href="/contact"
             className="inline-flex items-center gap-2 text-white font-bold text-base px-8 py-4 rounded-full shadow-xl hover:opacity-90 hover:-translate-y-0.5 transition-all"
             style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}
           >

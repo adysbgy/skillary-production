@@ -11,12 +11,12 @@ const DARK = "rgb(13, 16, 28)";
 // Sub-pages that swap the default HeaderV2 for this dark header. Keep in sync
 // with HeaderV2 (hides itself here) and MarketingHeaderGate (renders here).
 export const STARTUP_HEADER_ROUTES = [
-  "/v2/catalog",
-  "/v2/resources",
-  "/v2/events",
-  "/v2/untuk-organisasi",
-  "/v2/about",
-  "/v2/proposal",
+  "/programs",
+  "/resources",
+  "/events",
+  "/untuk-organisasi",
+  "/about",
+  "/contact",
   "/portofolio",
   "/trainers",
   "/trainers/apply",
@@ -29,19 +29,19 @@ export const isStartupHeaderRoute = (pathname: string) =>
 // Subset of the above already rebuilt with the landing MarketingShell (dark
 // canvas + own footer + own top padding). These get no external spacer and
 // hide FooterV2. Grows as each page is restyled.
-export const MARKETING_SHELL_ROUTES = ["/v2/about", "/v2/untuk-organisasi", "/v2/catalog", "/v2/resources", "/v2/events", "/v2/proposal", "/portofolio", "/trainers", "/trainers/apply", "/trainer-verification"];
+export const MARKETING_SHELL_ROUTES = ["/about", "/untuk-organisasi", "/programs", "/resources", "/events", "/contact", "/portofolio", "/trainers", "/trainers/apply", "/trainer-verification"];
 
 // B2C-first order: Events (hero webinar product) leads. B2B lives inside
 // "Services"; "Request Proposal" is not a top-level item — its CTA lives on
 // the Services page.
 const NAV = [
-  { label: "Events", href: "/v2/events" },
-  { label: "Programs", href: "/v2/catalog" },
-  { label: "Free Workshops", href: "/v2/resources" },
-  { label: "Services", href: "/v2/untuk-organisasi" },
+  { label: "Events", href: "/events" },
+  { label: "Programs", href: "/programs" },
+  { label: "Free Workshops", href: "/resources" },
+  { label: "Services", href: "/untuk-organisasi" },
   { label: "Trainers", href: "/trainers" },
   { label: "Portfolio", href: "/portofolio" },
-  { label: "About", href: "/v2/about" },
+  { label: "About", href: "/about" },
 ];
 
 export function StartupHeader() {
@@ -70,7 +70,7 @@ export function StartupHeader() {
             ✦ BARU: Events Skillary — webinar praktis dan kelas singkat untuk skill kerja profesional
           </p>
           <Link
-            href="/v2/events"
+            href="/events"
             className="shrink-0 text-[11px] md:text-xs font-bold px-3.5 py-1 rounded-full transition-colors hover:bg-white/20"
             style={{ border: "1px solid rgba(255,255,255,0.35)", background: "rgba(255,255,255,0.12)" }}
           >
@@ -110,7 +110,7 @@ export function StartupHeader() {
               Masuk
             </Link>
             <Link
-              href="/v2/events"
+              href="/events"
               className="text-sm font-bold px-5 py-2.5 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors"
             >
               Mulai
@@ -119,7 +119,7 @@ export function StartupHeader() {
 
           {/* Mobile right cluster */}
           <div className="flex lg:hidden items-center gap-2">
-            <Link href="/v2/events" className="text-xs font-bold px-4 py-2 rounded-full bg-white text-[#0F172A]">
+            <Link href="/events" className="text-xs font-bold px-4 py-2 rounded-full bg-white text-[#0F172A]">
               Mulai
             </Link>
             <button
@@ -155,7 +155,7 @@ export function StartupHeader() {
                 <Link href="/login" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full text-white" style={{ border: "1px solid rgba(255,255,255,0.25)" }}>
                   Masuk
                 </Link>
-                <Link href="/v2/events" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full bg-white text-[#0F172A]">
+                <Link href="/events" onClick={() => setMenuOpen(false)} className="flex-1 text-center text-sm font-bold py-3 rounded-full bg-white text-[#0F172A]">
                   Mulai
                 </Link>
               </div>

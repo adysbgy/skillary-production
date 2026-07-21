@@ -190,7 +190,7 @@ export default function AboutV2Page() {
           <div data-reveal className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-[#94A3B8] mt-10">
             <span className="flex items-center gap-1.5"><Check /> Konsultasi gratis</span>
             <span className="flex items-center gap-1.5"><Check /> Tanpa komitmen</span>
-            <Link href="/v2/proposal" className="font-semibold" style={{ color: "rgb(255,138,0)" }}>
+            <Link href="/contact" className="font-semibold" style={{ color: "rgb(255,138,0)" }}>
               Diskusikan kebutuhan training →
             </Link>
           </div>

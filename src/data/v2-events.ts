@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────
-// V2 Events — mock data for the dedicated /v2/events listing page.
+// V2 Events — mock data for the dedicated /events listing page.
 // Dates are illustrative (upcoming live webinars + one past/recorded item)
 // and should be swapped for real schedule data once events are confirmed.
 // ─────────────────────────────────────────────────────────────────────────

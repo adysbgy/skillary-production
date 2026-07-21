@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${event.title} — Events Skillary`,
     description: event.desc,
-    alternates: { canonical: `/v2/events/${event.slug}` },
+    alternates: { canonical: `/events/${event.slug}` },
   };
 }
 
@@ -53,7 +53,7 @@ export default async function EventDetailPage({ params }: Props) {
           <p className="text-xs font-semibold text-[#94A3B8] mb-6">
             <Link href="/" className="hover:text-[#0F172A] transition-colors">Beranda</Link>
             <span className="mx-2">/</span>
-            <Link href="/v2/events" className="hover:text-[#0F172A] transition-colors">Events</Link>
+            <Link href="/events" className="hover:text-[#0F172A] transition-colors">Events</Link>
             <span className="mx-2">/</span>
             <span className="text-[#0F172A]">{event.title}</span>
           </p>
@@ -72,7 +72,7 @@ export default async function EventDetailPage({ params }: Props) {
               className="text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg"
               style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}
             />
-            <Link href="/v2/events" className="text-sm font-bold px-8 py-4 rounded-full text-[#0F172A] bg-white hover:bg-gray-50 transition-colors" style={{ border: "1.5px solid rgb(226, 232, 240)" }}>
+            <Link href="/events" className="text-sm font-bold px-8 py-4 rounded-full text-[#0F172A] bg-white hover:bg-gray-50 transition-colors" style={{ border: "1.5px solid rgb(226, 232, 240)" }}>
               Lihat Events Lain
             </Link>
           </div>

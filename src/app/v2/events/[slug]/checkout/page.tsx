@@ -50,7 +50,7 @@ export default function EventCheckoutPage() {
       <Shell>
         <div className="max-w-md mx-auto text-center py-24">
           <h1 className="text-2xl font-bold mb-2">Event tidak ditemukan</h1>
-          <Link href="/v2/events" className="text-sm font-bold" style={{ color: "rgb(255,138,0)" }}>← Kembali ke Events</Link>
+          <Link href="/events" className="text-sm font-bold" style={{ color: "rgb(255,138,0)" }}>← Kembali ke Events</Link>
         </div>
       </Shell>
     );
@@ -62,7 +62,7 @@ export default function EventCheckoutPage() {
         <div className="max-w-md mx-auto text-center py-24">
           <h1 className="text-2xl font-bold mb-2">Checkout tidak tersedia</h1>
           <p className="text-[#64748B] mb-6">Event ini gratis atau sudah selesai — tidak memerlukan pembayaran.</p>
-          <Link href={`/v2/events/${event.slug}`} className="text-sm font-bold" style={{ color: "rgb(255,138,0)" }}>← Lihat detail event</Link>
+          <Link href={`/events/${event.slug}`} className="text-sm font-bold" style={{ color: "rgb(255,138,0)" }}>← Lihat detail event</Link>
         </div>
       </Shell>
     );
@@ -122,7 +122,7 @@ export default function EventCheckoutPage() {
               ? "Terima kasih. Link akses webinar, rekaman, dan e-sertifikat akan dikirim ke email & WhatsApp Anda."
               : "Selesaikan pembayaran sesuai instruksi. Akses dikirim otomatis setelah pembayaran terkonfirmasi."}
           </p>
-          <Link href="/v2/events" className="inline-block mt-6 text-sm font-bold" style={{ color: "rgb(255,138,0)" }}>← Kembali ke Events</Link>
+          <Link href="/events" className="inline-block mt-6 text-sm font-bold" style={{ color: "rgb(255,138,0)" }}>← Kembali ke Events</Link>
         </div>
       </Shell>
     );

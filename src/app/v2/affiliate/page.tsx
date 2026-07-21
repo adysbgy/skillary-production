@@ -279,7 +279,7 @@ function PartnerForm() {
                 {isLoading ? "Mengirim..." : "Kirim Pendaftaran Mitra"}
               </button>
               <p className="text-[11px] text-[#94A3B8] text-center">
-                Atau hubungi tim kami langsung melalui <Link href="/v2/proposal" className="font-semibold hover:underline" style={{ color: "rgb(255,138,0)" }}>halaman konsultasi</Link>.
+                Atau hubungi tim kami langsung melalui <Link href="/contact" className="font-semibold hover:underline" style={{ color: "rgb(255,138,0)" }}>halaman konsultasi</Link>.
               </p>
             </form>
           ) : (

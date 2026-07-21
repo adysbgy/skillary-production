@@ -5,12 +5,12 @@ import { EMAIL_GENERAL, INSTAGRAM_URL, whatsappLink } from "@/data/config";
 // Shared final CTA + dark footer used on the homepage and marketing sub-pages
 // so the page ending is identical everywhere.
 const FOOTER_NAV = [
-  { label: "Events", href: "/v2/events" },
-  { label: "Programs", href: "/v2/catalog" },
-  { label: "Free Workshops", href: "/v2/resources" },
-  { label: "Services", href: "/v2/untuk-organisasi" },
+  { label: "Events", href: "/events" },
+  { label: "Programs", href: "/programs" },
+  { label: "Free Workshops", href: "/resources" },
+  { label: "Services", href: "/untuk-organisasi" },
   { label: "Trainers", href: "/trainers" },
-  { label: "About", href: "/v2/about" },
+  { label: "About", href: "/about" },
 ];
 
 export function StartupFooter() {
@@ -27,10 +27,10 @@ export function StartupFooter() {
         <p className="text-white/85 mb-9 leading-relaxed max-w-xl mx-auto">
           Ikuti Events Skillary atau ceritakan kebutuhan training tim Anda. Kami bantu rekomendasikan topik, format, durasi, dan timeline yang paling sesuai.
         </p>
-        <Link href="/v2/events" className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full text-white transition-colors shadow-xl hover:bg-black" style={{ background: "#0B0A12" }}>
+        <Link href="/events" className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full text-white transition-colors shadow-xl hover:bg-black" style={{ background: "#0B0A12" }}>
           Lihat Events
         </Link>
-        <Link href="/v2/proposal" className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors shadow-xl">
+        <Link href="/contact" className="inline-block m-1.5 text-sm font-bold px-9 py-4 rounded-full bg-white text-[#0F172A] hover:bg-white/90 transition-colors shadow-xl">
           Konsultasi Program
         </Link>
         <p className="text-sm text-white/85 mt-6 font-medium">
@@ -64,12 +64,12 @@ export function StartupFooter() {
               ))}
             </ul>
             <ul className="space-y-3 text-sm text-white/60">
-              <li><Link href="/v2/catalog" className="hover:text-white transition-colors">Katalog Program</Link></li>
-              <li><Link href="/v2/untuk-organisasi" className="hover:text-white transition-colors">Untuk Organisasi</Link></li>
+              <li><Link href="/programs" className="hover:text-white transition-colors">Katalog Program</Link></li>
+              <li><Link href="/untuk-organisasi" className="hover:text-white transition-colors">Untuk Organisasi</Link></li>
               <li><Link href="/portofolio" className="hover:text-white transition-colors">Portofolio</Link></li>
               <li><Link href="/trainer-verification" className="hover:text-white transition-colors">Faculty Standards</Link></li>
-              <li><Link href="/v2/about" className="hover:text-white transition-colors">Tentang</Link></li>
-              <li><Link href="/v2/proposal" className="hover:text-white transition-colors">Kontak</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">Tentang</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Kontak</Link></li>
             </ul>
 
             {/* Socials */}

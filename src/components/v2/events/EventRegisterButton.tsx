@@ -19,7 +19,7 @@ export function EventRegisterButton({ event, className, style }: { event: EventI
   const isPaid = event.price > 0 && event.status !== "Selesai";
   if (isPaid) {
     return (
-      <Link href={`/v2/events/${event.slug}/checkout`} className={`inline-block ${className}`} style={style}>
+      <Link href={`/events/${event.slug}/checkout`} className={`inline-block ${className}`} style={style}>
         {eventCtaLabel(event)}
       </Link>
     );
@@ -58,7 +58,7 @@ function RegisterModal({ event, onClose }: { event: EventItem; onClose: () => vo
           organization: fd.get("organization"),
           inquiryType: "Event Registration",
           programInterest: event.title,
-          sourcePage: "/v2/events",
+          sourcePage: "/events",
           message: `Pendaftaran event: ${event.title} (${event.dateLabel}, ${event.time})`,
           _honeypot: fd.get("_honeypot") || "",
         }),

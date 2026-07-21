@@ -75,8 +75,8 @@ export default function CertificatesV2Page() {
                 pembelajaran dan assessment — setiap dokumen dapat diverifikasi online dengan ID unik.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/v2/proposal"><GradientButton className="px-7 py-3.5">Sertifikat untuk Organisasi →</GradientButton></Link>
-                <Link href="/v2/catalog"><GhostWarmButton className="px-7 py-3.5">Jelajahi Program</GhostWarmButton></Link>
+                <Link href="/contact"><GradientButton className="px-7 py-3.5">Sertifikat untuk Organisasi →</GradientButton></Link>
+                <Link href="/programs"><GhostWarmButton className="px-7 py-3.5">Jelajahi Program</GhostWarmButton></Link>
               </div>
             </div>
 
@@ -178,8 +178,8 @@ export default function CertificatesV2Page() {
             <h2 className="text-2xl font-bold tracking-tight text-[#181818] mb-3">Ingin Sertifikat untuk Program Internal Anda?</h2>
             <p className="text-base text-black/60 mb-8 leading-relaxed">Kami membantu menyusun alur assessment, kriteria kelulusan, format sertifikat digital, dan laporan peserta sesuai kebutuhan organisasi.</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link href="/v2/proposal"><GradientButton className="px-7 py-3.5 text-sm">Diskusikan Sertifikat B2B →</GradientButton></Link>
-              <Link href="/v2/catalog"><GhostWarmButton className="px-7 py-3.5 text-sm">Sertifikat Individual</GhostWarmButton></Link>
+              <Link href="/contact"><GradientButton className="px-7 py-3.5 text-sm">Diskusikan Sertifikat B2B →</GradientButton></Link>
+              <Link href="/programs"><GhostWarmButton className="px-7 py-3.5 text-sm">Sertifikat Individual</GhostWarmButton></Link>
             </div>
           </div>
         </Container>

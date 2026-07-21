@@ -92,9 +92,9 @@ export default function EventsV2Page() {
             Jelajahi Lainnya
           </p>
           <div data-reveal className="grid sm:grid-cols-3 gap-4">
-            <ExploreCard href="/v2/catalog" title="Program Terstruktur" desc="Lihat katalog training multi-sesi lengkap dengan sertifikat." />
-            <ExploreCard href="/v2/resources" title="Free Workshops" desc="Template & materi gratis untuk HR dan L&D." />
-            <ExploreCard href="/v2/untuk-organisasi" title="Untuk Organisasi" desc="Susun program in-house khusus tim Anda." />
+            <ExploreCard href="/programs" title="Program Terstruktur" desc="Lihat katalog training multi-sesi lengkap dengan sertifikat." />
+            <ExploreCard href="/resources" title="Free Workshops" desc="Template & materi gratis untuk HR dan L&D." />
+            <ExploreCard href="/untuk-organisasi" title="Untuk Organisasi" desc="Susun program in-house khusus tim Anda." />
           </div>
         </div>
       </section>
@@ -104,7 +104,7 @@ export default function EventsV2Page() {
 
 function EventCard({ event }: { event: EventItem }) {
   const st = STATUS_STYLE[event.status];
-  const detailHref = `/v2/events/${event.slug}`;
+  const detailHref = `/events/${event.slug}`;
   const free = event.price === 0;
 
   return (

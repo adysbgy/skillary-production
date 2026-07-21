@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // Safe social-proof framing — industry sectors, not unapproved client names.
-// Matches the treatment already used on /v2/about and /v2/proposal.
+// Matches the treatment already used on /about and /contact.
 const INDUSTRY_CHIPS = ["Perbankan", "Regulator", "FMCG", "Energi", "Pendidikan"];
 
 export default async function ProgramDetailPage({ params }: Props) {
@@ -30,7 +30,7 @@ export default async function ProgramDetailPage({ params }: Props) {
   const program = getProgramBySlug(slug);
   if (!program) notFound();
 
-  const proposalHref = `/v2/proposal?program=${encodeURIComponent(program.title)}`;
+  const proposalHref = `/contact?program=${encodeURIComponent(program.title)}`;
   const techInfo = [
     { label: "Durasi", value: program.duration, icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
     { label: "Format", value: program.formats.join(", "), icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
@@ -46,7 +46,7 @@ export default async function ProgramDetailPage({ params }: Props) {
         <div className="relative max-w-4xl mx-auto px-5 md:px-6 lg:px-8 pt-10 pb-14">
           {/* Breadcrumb */}
           <nav className="flex flex-wrap items-center gap-2 text-xs font-medium text-white/80 mb-8">
-            <Link href="/v2/catalog" className="hover:text-white transition-colors">Katalog</Link>
+            <Link href="/programs" className="hover:text-white transition-colors">Katalog</Link>
             <span className="text-white/50">/</span>
             <span>{program.category}</span>
             <span className="text-white/50">/</span>
@@ -73,7 +73,7 @@ export default async function ProgramDetailPage({ params }: Props) {
             <Link href={proposalHref} className="inline-flex items-center gap-2 bg-white text-sm font-bold px-7 py-3.5 rounded-full shadow-md hover:opacity-90 hover:-translate-y-0.5 transition-all" style={{ color: "rgb(255, 90, 95)" }}>
               Diskusikan Program Ini →
             </Link>
-            <Link href="/v2/catalog" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-full transition-colors hover:bg-white/10" style={{ border: "1.5px solid rgba(255,255,255,0.5)", color: "white" }}>
+            <Link href="/programs" className="inline-flex items-center gap-2 text-sm font-bold px-7 py-3.5 rounded-full transition-colors hover:bg-white/10" style={{ border: "1.5px solid rgba(255,255,255,0.5)", color: "white" }}>
               Lihat Katalog
             </Link>
           </div>

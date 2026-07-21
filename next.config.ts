@@ -23,7 +23,6 @@ const LEGACY_HOST_REDIRECTS = [
 
 const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
   // Lead-capture funnel → single canonical proposal form
-  { source: "/contact", destination: "/v2/proposal" },
   { source: "/proposal", destination: "/v2/proposal" },
   // Duplicated marketing pages → their V2 counterparts
   { source: "/demo", destination: "/v2/untuk-organisasi" },
@@ -31,12 +30,10 @@ const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
   { source: "/teams", destination: "/v2/untuk-organisasi" },
   { source: "/platform", destination: "/v2/untuk-organisasi" },
   { source: "/reports", destination: "/v2/untuk-organisasi" },
-  { source: "/about", destination: "/v2/about" },
   { source: "/portfolio", destination: "/portofolio" },
   { source: "/portfolio-arsip", destination: "/portofolio" },
   { source: "/case-studies", destination: "/portofolio" },
   { source: "/v2/portfolio", destination: "/portofolio" },
-  { source: "/resources", destination: "/v2/resources" },
   { source: "/certificates", destination: "/v2/certificates" },
   { source: "/program-catalog", destination: "/v2/catalog" },
   { source: "/training-brief", destination: "/v2/proposal" },

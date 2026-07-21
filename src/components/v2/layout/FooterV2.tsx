@@ -12,7 +12,7 @@ const LINK_COLUMNS = [
     title: "Platform",
     links: [
       { label: "Platform", href: "/platform" },
-      { label: "Katalog Program", href: "/v2/catalog" },
+      { label: "Katalog Program", href: "/programs" },
       { label: "Sertifikat", href: "/v2/certificates" },
       { label: "Sertifikasi Badge", href: "/v2/badge-programs" },
       { label: "Laporan", href: "/reports" },
@@ -21,26 +21,26 @@ const LINK_COLUMNS = [
   {
     title: "Program",
     links: [
-      { label: "Jelajahi Program", href: "/v2/catalog" },
+      { label: "Jelajahi Program", href: "/programs" },
       { label: "Presentasi & Storytelling", href: "/v2/presentation" },
       { label: "Brief Training", href: "/training-brief" },
-      { label: "Resources Gratis", href: "/v2/resources" },
+      { label: "Resources Gratis", href: "/resources" },
     ],
   },
   {
     title: "Untuk Organisasi",
     links: [
-      { label: "Solusi Organisasi", href: "/v2/untuk-organisasi" },
-      { label: "Diskusikan Kebutuhan", href: "/v2/proposal" },
+      { label: "Solusi Organisasi", href: "/untuk-organisasi" },
+      { label: "Diskusikan Kebutuhan", href: "/contact" },
       { label: "Program Afiliasi", href: "/v2/affiliate" },
-      { label: "Portofolio", href: "/v2/portfolio" },
+      { label: "Portofolio", href: "/portofolio" },
     ],
   },
   {
     title: "Perusahaan",
     links: [
-      { label: "Tentang Kami", href: "/v2/about" },
-      { label: "Kontak", href: "/v2/proposal" },
+      { label: "Tentang Kami", href: "/about" },
+      { label: "Kontak", href: "/contact" },
       { label: "Kebijakan Privasi", href: "/privacy" },
       { label: "Syarat & Ketentuan", href: "/terms" },
     ],

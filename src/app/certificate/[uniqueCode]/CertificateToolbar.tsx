@@ -40,7 +40,7 @@ export default function CertificateToolbar({ uniqueCode, courseSlug, eventSlug }
             </div>
             {(courseSlug || eventSlug) && (
                 <div className="w-full sm:w-auto flex items-center gap-3">
-                    <Link href={courseSlug ? `/program/${courseSlug}` : `/v2/events/${eventSlug}`} className="w-full sm:w-auto">
+                    <Link href={courseSlug ? `/program/${courseSlug}` : `/events/${eventSlug}`} className="w-full sm:w-auto">
                         <PrimaryButton className="w-full sm:w-auto px-6 py-2.5 shadow-sm text-sm">
                             {courseSlug ? "View Course Details →" : "View Event Details →"}
                         </PrimaryButton>

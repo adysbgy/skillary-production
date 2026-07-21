@@ -606,8 +606,8 @@ export default function SkillaryCampusDeepRedesign() {
             <div>
               <h4 className="text-base font-bold mb-6">Tentang Kita</h4>
               <ul className="space-y-4">
-                <li><a href="/v2/about" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Profil Skillary</a></li>
-                <li><a href="/v2/untuk-organisasi" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Layanan Konsultasi</a></li>
+                <li><a href="/about" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Profil Skillary</a></li>
+                <li><a href="/untuk-organisasi" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Layanan Konsultasi</a></li>
                 <li><a href="/v2/certificates" className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Verifikasi Sertifikat</a></li>
                 <li><button onClick={() => scrollTo("#faq")} className="text-sm text-white/60 hover:text-[#F97316] transition-colors">Frequently Asked Questions</button></li>
               </ul>

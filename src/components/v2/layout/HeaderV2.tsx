@@ -11,7 +11,7 @@ const PROGRAM_CATEGORIES = [
   {
     label: "Data & Dashboard",
     desc: "Power BI, Excel, Data Analytics",
-    href: "/v2/catalog",
+    href: "/programs",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -31,7 +31,7 @@ const PROGRAM_CATEGORIES = [
   {
     label: "AI & Digital Mindset",
     desc: "AI Productivity, Digital Transformation",
-    href: "/v2/catalog",
+    href: "/programs",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -41,7 +41,7 @@ const PROGRAM_CATEGORIES = [
   {
     label: "Leadership & Problem Solving",
     desc: "Creative Problem Solving, Decision Making",
-    href: "/v2/catalog",
+    href: "/programs",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -61,7 +61,7 @@ const PROGRAM_CATEGORIES = [
   {
     label: "Infographics & Visual Comm",
     desc: "Infographics, Data Visualization",
-    href: "/v2/catalog",
+    href: "/programs",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -71,11 +71,11 @@ const PROGRAM_CATEGORIES = [
 ];
 
 const NAV_LINKS = [
-  { label: "Untuk Organisasi", href: "/v2/untuk-organisasi" },
-  { label: "Portofolio", href: "/v2/portfolio" },
-  { label: "Tentang", href: "/v2/about" },
-  { label: "Resources", href: "/v2/resources" },
-  { label: "Kontak", href: "/v2/proposal" },
+  { label: "Untuk Organisasi", href: "/untuk-organisasi" },
+  { label: "Portofolio", href: "/portofolio" },
+  { label: "Tentang", href: "/about" },
+  { label: "Resources", href: "/resources" },
+  { label: "Kontak", href: "/contact" },
 ];
 
 export function HeaderV2() {
@@ -133,7 +133,7 @@ export function HeaderV2() {
         <span style={{ color: "rgb(255, 138, 0)" }}>✦</span>
         <span>Platform pelatihan terukur untuk HR, L&D, dan organisasi Indonesia</span>
         <span className="mx-2 opacity-30">|</span>
-        <Link href="/v2/proposal" className="hover:text-white transition-colors underline underline-offset-2">
+        <Link href="/contact" className="hover:text-white transition-colors underline underline-offset-2">
           Konsultasi gratis — Jadwalkan sekarang →
         </Link>
       </div>
@@ -201,7 +201,7 @@ export function HeaderV2() {
                     </div>
                     <div className="px-4 py-3 flex items-center justify-between" style={{ background: "rgb(255, 251, 245)", borderTop: "1.5px solid rgb(240, 217, 200)" }}>
                       <span className="text-xs text-black/40 font-medium">Semua program dapat disesuaikan untuk tim Anda</span>
-                      <Link href="/v2/catalog" className="text-xs font-bold hover:underline" style={{ color: "rgb(255, 138, 0)" }}>
+                      <Link href="/programs" className="text-xs font-bold hover:underline" style={{ color: "rgb(255, 138, 0)" }}>
                         Lihat Katalog →
                       </Link>
                     </div>
@@ -268,7 +268,7 @@ export function HeaderV2() {
               )}
 
               <Link
-                href="/v2/proposal"
+                href="/contact"
                 className="text-white text-sm font-bold px-5 py-2.5 rounded-full transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-md"
                 style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}
               >
@@ -321,7 +321,7 @@ export function HeaderV2() {
                 <Link href="/login" className="block px-3 py-3 rounded-xl text-sm font-semibold text-[#334155] hover:bg-orange-50">Masuk</Link>
               )}
               <div className="pt-2">
-                <Link href="/v2/proposal" className="block w-full text-center text-white text-sm font-bold px-5 py-3.5 rounded-2xl" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
+                <Link href="/contact" className="block w-full text-center text-white text-sm font-bold px-5 py-3.5 rounded-2xl" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
                   Diskusikan Kebutuhan Training →
                 </Link>
               </div>

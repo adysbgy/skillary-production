@@ -75,7 +75,7 @@ export default function ProposalV2Page() {
           role: fd.get("role"),
           inquiryType: "B2B Training Consultation",
           programInterest: selectedTopics.join(", "),
-          sourcePage: "/v2/proposal",
+          sourcePage: "/contact",
           message,
           _honeypot: fd.get("_honeypot") || "",
         }),

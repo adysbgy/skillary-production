@@ -15,12 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const staticRoutes = [
         "",
         // Canonical V2 marketing surface
-        "/v2/catalog",
-        "/v2/events",
-        "/v2/resources",
-        "/v2/untuk-organisasi",
-        "/v2/about",
-        "/v2/proposal",
+        "/programs",
+        "/events",
+        "/resources",
+        "/untuk-organisasi",
+        "/about",
+        "/contact",
         "/portofolio",
         "/v2/certificates",
         "/trainers",
@@ -56,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
 
     const eventRoutes = EVENTS.map((event) => ({
-        url: `${BASE_URL}/v2/events/${event.slug}`,
+        url: `${BASE_URL}/events/${event.slug}`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.6,

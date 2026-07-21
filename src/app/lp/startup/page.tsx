@@ -374,14 +374,14 @@ export default function StartupConceptPage() {
 
           <div data-reveal style={{ transitionDelay: "0.3s" }} className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
             <Link
-              href="/v2/events"
+              href="/events"
               className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg"
               style={{ background: GRADIENT_SIMPLE }}
             >
               Lihat Events →
             </Link>
             <Link
-              href="/v2/proposal"
+              href="/contact"
               className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-[#0F172A] bg-white hover:bg-gray-50 transition-colors"
               style={{ border: "1.5px solid rgb(226, 232, 240)" }}
             >
@@ -734,7 +734,7 @@ export default function StartupConceptPage() {
             Dari events singkat sampai corporate batch, Skillary menyiapkan topik yang relevan untuk pekerjaan, tim, dan organisasi.
           </p>
           <Link
-            href="/v2/catalog"
+            href="/programs"
             className="inline-block text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg"
             style={{ background: GRADIENT_SIMPLE }}
           >
@@ -816,7 +816,7 @@ export default function StartupConceptPage() {
 
                   {/* Glass CTA */}
                   <Link
-                    href="/v2/proposal"
+                    href="/contact"
                     className="block text-center text-sm font-bold py-3.5 rounded-full transition-colors hover:bg-white/20"
                     style={{ background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.22)", backdropFilter: "blur(8px)" }}
                   >
@@ -840,7 +840,7 @@ export default function StartupConceptPage() {
 
           {/* Liquid-glass CTA (Aimfox "View Integrations") — glows on hover */}
           <div className="mt-12 flex justify-center">
-            <GlassButton href="/v2/catalog">Lihat Katalog Program</GlassButton>
+            <GlassButton href="/programs">Lihat Katalog Program</GlassButton>
           </div>
         </div>
       </section>

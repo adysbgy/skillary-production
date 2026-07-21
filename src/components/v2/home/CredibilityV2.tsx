@@ -8,7 +8,7 @@ const IMPACT_STATS = [
 ];
 
 // Softened to industry sectors (no unapproved client-name claims), matching
-// the framing used on /v2/about and /v2/proposal.
+// the framing used on /about and /contact.
 const SECTORS = [
   "Perbankan",
   "Regulator Keuangan",

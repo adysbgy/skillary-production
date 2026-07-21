@@ -67,10 +67,10 @@ export default function UntukOrganisasiPage() {
             Dari kebutuhan sampai laporan peserta, Skillary handle semuanya — sehingga tim HR &amp; L&amp;D Anda bisa fokus pada dampak, bukan administrasi.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link href="/v2/proposal" className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
+            <Link href="/contact" className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
               Diskusikan Kebutuhan Tim →
             </Link>
-            <Link href="/v2/catalog" className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-[#0F172A] bg-white hover:bg-gray-50 transition-colors" style={{ border: "1.5px solid rgb(226, 232, 240)" }}>
+            <Link href="/programs" className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-[#0F172A] bg-white hover:bg-gray-50 transition-colors" style={{ border: "1.5px solid rgb(226, 232, 240)" }}>
               Lihat Katalog Program
             </Link>
           </div>
