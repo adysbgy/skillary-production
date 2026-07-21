@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${event.title} — Events Skillary`,
     description: event.desc,
+    alternates: { canonical: `/v2/events/${event.slug}` },
   };
 }
 

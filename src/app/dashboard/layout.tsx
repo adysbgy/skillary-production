@@ -1,7 +1,10 @@
+import { PRIVATE_ROUTE_METADATA } from "@/lib/private-route-metadata";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Container } from "@/components/ui/Container";
+
+export const metadata = PRIVATE_ROUTE_METADATA;
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
     const session = await auth();

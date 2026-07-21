@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const slug = (await params).slug;
     const path = await prisma.learningPath.findUnique({ where: { slug, status: "PUBLISHED" } });
     if (!path) return { title: "Path Not Found" };
-    return { title: `${path.title} | Learning Path | Skillary`, description: path.description };
+    return { title: `${path.title} | Learning Path | Skillary`, description: path.description, alternates: { canonical: `/path/${path.slug}` } };
 }
 
 export default async function PathDetailPage({ params }: { params: Promise<{ slug: string }> }) {

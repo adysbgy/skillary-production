@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: `${program.title} | Skillary`,
         description: program.description,
+        alternates: { canonical: `/program/${program.slug}` },
     };
 }
 

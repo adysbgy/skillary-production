@@ -49,18 +49,7 @@ const nextConfig: NextConfig = {
       ...LEGACY_REDIRECTS.map((redirect) => ({ ...redirect, permanent: true })),
     ];
   },
-  async headers() {
-    return [
-      {
-        source: "/",
-        headers: [{ key: "Link", value: `<${CANONICAL_ORIGIN}/>; rel="canonical"` }],
-      },
-      {
-        source: "/:path+",
-        headers: [{ key: "Link", value: `<${CANONICAL_ORIGIN}/:path>; rel="canonical"` }],
-      },
-    ];
-  },
+
 };
 
 export default nextConfig;
