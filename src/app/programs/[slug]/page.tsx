@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ProgramPage, { generateStaticParams } from "@/app/v2/program/[slug]/page";
+import ProgramPage, { generateStaticParams } from "@/features/programs/pages/ProgramDetailPage";
 import { getProgramBySlug } from "@/data/v2-programs";
 
 export { generateStaticParams };

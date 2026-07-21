@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ProgramsPage from "@/app/v2/catalog/page";
+import ProgramsPage from "@/features/programs/pages/ProgramsPage";
 
 export const metadata: Metadata = {
   title: "Katalog Program Pelatihan",
