@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AboutPage from "@/app/v2/about/page";
+import AboutPage from "@/features/marketing/pages/AboutPage";
 
 export const metadata: Metadata = {
   title: "Tentang Skillary",

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import OrganizationPage from "@/app/v2/untuk-organisasi/page";
+import OrganizationPage from "@/features/marketing/pages/OrganizationPage";
 
 export const metadata: Metadata = {
   title: "Pelatihan In-House untuk Organisasi",
