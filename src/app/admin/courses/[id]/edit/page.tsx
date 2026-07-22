@@ -2,6 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
@@ -175,18 +176,11 @@ export default function EditCoursePage({ params }: { params: Promise<{ id: strin
     const [csvPreview, setCsvPreview] = useState<{ valid: number; errors: CsvValidationError[]; total: number; mappedQuestions: any[] } | null>(null);
     const [csvFileName, setCsvFileName] = useState("");
 
-    // Role awareness for authority-appropriate UI
-    const [sessionRole, setSessionRole] = useState<string | null>(null);
+    // Role awareness for authority-appropriate UI. Missing/loading/error states
+    // deliberately derive to null so privileged controls remain fail-closed.
+    const { data: session } = useSession();
+    const sessionRole = session?.user?.role ?? null;
     const [instructors, setInstructors] = useState<InstructorOption[]>([]);
-
-    useEffect(() => {
-        fetch("/api/auth/session")
-            .then(res => res.json())
-            .then(data => {
-                if (data.role) setSessionRole(data.role);
-            })
-            .catch(() => { });
-    }, []);
 
     // Fetch instructors list for ADMIN ownership assignment
     useEffect(() => {
