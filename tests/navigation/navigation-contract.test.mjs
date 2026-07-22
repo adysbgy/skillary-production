@@ -29,7 +29,7 @@ test("panel labels, groups, and destinations match approved IA", () => {
     assert.equal(panel.groups.length, 2, panel.id);
     assert.deepEqual(panel.groups.flatMap((group) => group.links.map((link) => [link.label, link.href])), expectedPanelDestinations[panel.id], panel.id);
   }
-  assert.deepEqual(DIRECT_NAV.map(({ label, href }) => [label, href]), [["Events", "/events"], ["Free Workshops", "/events"], ["Trainers", "/trainers"], ["Portfolio", "/portofolio"], ["About", "/about"]]);
+  assert.deepEqual(DIRECT_NAV.map(({ label, href }) => [label, href]), [["Events", "/events"], ["Trainers", "/trainers"], ["Portfolio", "/portofolio"], ["About", "/about"]]);
 });
 
 test("contract invariant validator reports no violations", () => {

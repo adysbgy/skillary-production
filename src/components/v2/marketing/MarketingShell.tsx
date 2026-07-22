@@ -9,7 +9,7 @@ import { StartupFooter } from "./StartupFooter";
 // own top padding so the fixed StartupHeader clears the content.
 const manrope = Manrope({ subsets: ["latin"] });
 
-export function MarketingShell({ children }: { children: React.ReactNode }) {
+export function MarketingShell({ children, showFooter = true }: { children: React.ReactNode; showFooter?: boolean }) {
   useEffect(() => {
     const els = document.querySelectorAll("[data-reveal]");
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -51,7 +51,7 @@ export function MarketingShell({ children }: { children: React.ReactNode }) {
         </main>
       </div>
 
-      <StartupFooter />
+      {showFooter && <StartupFooter />}
     </div>
   );
 }

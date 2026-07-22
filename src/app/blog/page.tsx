@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { BLOG_POSTS } from "@/data/content";
 import type { Metadata } from "next";
+import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
 
 export const metadata: Metadata = {
     title: "Blog | Skillary",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
     return (
-        <>
+        <MarketingShell showFooter={false}>
             <PageHero
                 eyebrow="Blog"
                 title="Insight untuk HR & L&D"
@@ -55,6 +56,6 @@ export default function BlogPage() {
                     </Link>
                 </div>
             </Container>
-        </>
+        </MarketingShell>
     );
 }

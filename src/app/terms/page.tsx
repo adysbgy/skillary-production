@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
+import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
     return (
-        <>
+        <MarketingShell showFooter={false}>
             <PageHero
                 eyebrow="Legal"
                 title="Terms of Service"
@@ -64,6 +65,6 @@ export default function TermsPage() {
 
                 </div>
             </Container>
-        </>
+        </MarketingShell>
     );
 }

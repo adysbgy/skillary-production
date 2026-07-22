@@ -17,7 +17,7 @@ export function PageHero({ eyebrow, title, description, actions, children }: Pag
             <div className="absolute left-0 top-0 h-72 w-72 rounded-full blur-3xl opacity-40" style={{ background: 'rgb(255, 138, 0, 0.12)' }} />
             <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full blur-3xl opacity-30" style={{ background: 'rgb(255, 90, 95, 0.10)' }} />
             <Container className="relative py-4 lg:py-8 animate-fade-in-up">
-                <SectionTitle eyebrow={eyebrow} title={title} description={description} actions={actions} />
+                <SectionTitle eyebrow={eyebrow} title={title} description={description} actions={actions} headingLevel="h1" />
                 {children}
             </Container>
         </section>

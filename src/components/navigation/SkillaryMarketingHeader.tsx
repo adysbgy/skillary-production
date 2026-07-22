@@ -265,7 +265,6 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
               {[
                 { kind: "direct" as const, item: DIRECT_NAV.find((link) => link.id === "events")! },
                 { kind: "panel" as const, item: NAV_PANELS.find((panel) => panel.id === "programs")! },
-                { kind: "direct" as const, item: DIRECT_NAV.find((link) => link.id === "free-workshops")! },
                 { kind: "panel" as const, item: NAV_PANELS.find((panel) => panel.id === "services")! },
                 ...DIRECT_NAV.filter((link) => ["trainers", "portfolio", "about"].includes(link.id)).map((item) => ({ kind: "direct" as const, item })),
               ].map((entry) => {

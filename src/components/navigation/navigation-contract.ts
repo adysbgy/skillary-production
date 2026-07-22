@@ -11,7 +11,7 @@ export type NavigationGroup = Readonly<{
 }>;
 
 export const NAV_PANEL_IDS = ["programs", "services"] as const;
-export const DIRECT_NAV_IDS = ["events", "free-workshops", "trainers", "portfolio", "about"] as const;
+export const DIRECT_NAV_IDS = ["events", "trainers", "portfolio", "about"] as const;
 
 export type NavigationPanelId = (typeof NAV_PANEL_IDS)[number];
 export type DirectNavigationId = (typeof DIRECT_NAV_IDS)[number];
@@ -89,7 +89,6 @@ export const TYPED_NAV_PANELS: readonly NavigationPanel[] = NAV_PANELS;
 
 export const DIRECT_NAV = [
   { id: "events", label: "Events", href: "/events" },
-  { id: "free-workshops", label: "Free Workshops", href: "/events" },
   { id: "trainers", label: "Trainers", href: "/trainers" },
   { id: "portfolio", label: "Portfolio", href: "/portofolio" },
   { id: "about", label: "About", href: "/about" },

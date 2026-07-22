@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
 
 export const metadata: Metadata = {
   title: "Learning Path untuk Organisasi | Skillary",
@@ -41,7 +42,8 @@ const paths = [
 
 export default function LearningPathsPage() {
   return (
-    <div className="bg-[#FFFDF9] min-h-screen pt-24 pb-32">
+    <MarketingShell showFooter={false}>
+      <div className="bg-[#FFFDF9] min-h-screen pt-24 pb-32">
       <section className="pt-10 pb-20 border-b border-[#E7DDD4]">
         <Container className="max-w-4xl text-center">
           <div className="inline-flex rounded-full bg-[#FFF7ED] px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-[#C2410C] border border-[#FED7AA] mb-6">Learning Path</div>
@@ -136,6 +138,7 @@ export default function LearningPathsPage() {
           </div>
         </Container>
       </section>
-    </div>
+      </div>
+    </MarketingShell>
   );
 }

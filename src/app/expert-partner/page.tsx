@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
 
 export const metadata: Metadata = {
   title: "Kolaborasi dengan Expert Terpilih | Skillary",
@@ -35,7 +36,7 @@ export default function ExpertPartnerPage() {
   ];
 
   return (
-    <>
+    <MarketingShell showFooter={false}>
       <div className="bg-[#FFFDF9] min-h-screen pt-24 pb-32">
         {/* Hero Section */}
         <section className="pt-10 pb-20" style={{ borderBottom: '1.5px solid rgb(240, 217, 200)' }}>
@@ -135,6 +136,6 @@ export default function ExpertPartnerPage() {
           </Container>
         </section>
       </div>
-    </>
+    </MarketingShell>
   );
 }
