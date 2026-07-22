@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { STARTUP_HEADER_ROUTES } from "@/components/v2/layout/StartupHeader";
+import { resolveHeaderMode } from "@/components/navigation/marketing-header-policy";
 
 // ─── Program Catalog dropdown items ───────────────────────────
 const PROGRAM_CATEGORIES = [
@@ -122,9 +122,9 @@ export function HeaderV2() {
   const role = session?.user?.role as string | undefined;
   const userInitial = session?.user?.name?.charAt(0)?.toUpperCase() || "U";
 
-  // Hide marketing chrome on standalone landing pages and authed app/auth routes
-  const hiddenPaths = ["/lp", "/skillary-campus", "/admin", "/dashboard", "/learn", "/login", "/register"];
-  if (pathname === "/" || STARTUP_HEADER_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`)) || hiddenPaths.some(p => pathname.startsWith(p))) return null;
+  // The centralized route policy guarantees exactly one global header owner.
+  // HeaderV2 remains the fallback for public routes outside the marketing shell.
+  if (resolveHeaderMode(pathname) !== "fallback") return null;
 
   return (
     <>

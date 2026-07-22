@@ -1,25 +1,21 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { StartupHeader, STARTUP_HEADER_ROUTES, MARKETING_SHELL_ROUTES } from "./StartupHeader";
+import { SkillaryMarketingHeader } from "@/components/navigation/SkillaryMarketingHeader";
+import { needsMarketingHeaderSpacer, resolveHeaderMode } from "@/components/navigation/marketing-header-policy";
 
-// Renders the shared dark StartupHeader on the primary marketing sub-pages
-// (where HeaderV2 hides itself). Pages already rebuilt with MarketingShell
-// provide their own top padding, so the external spacer is only emitted for
-// the not-yet-restyled ones.
+// Renders the production Skillary marketing header on centralized marketing
+// routes. Pages rebuilt with MarketingShell provide their own top padding, so
+// the external spacer is only emitted for not-yet-restyled routes.
 export function MarketingHeaderGate() {
   const pathname = usePathname();
-  // Checkout is a distraction-free flow with its own minimal chrome — never
-  // inject the marketing header there.
-  if (pathname.endsWith("/checkout")) return null;
-  const matches = (routes: string[]) => routes.some((r) => pathname === r || pathname.startsWith(`${r}/`));
-  if (!matches(STARTUP_HEADER_ROUTES)) return null;
+  if (resolveHeaderMode(pathname) !== "marketing") return null;
 
-  const needsSpacer = !matches(MARKETING_SHELL_ROUTES);
+  const needsSpacer = needsMarketingHeaderSpacer(pathname);
 
   return (
     <>
-      <StartupHeader />
+      <SkillaryMarketingHeader />
       {needsSpacer && <div className="h-[104px] md:h-[112px]" aria-hidden />}
     </>
   );
