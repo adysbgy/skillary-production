@@ -13,10 +13,9 @@ import {
 } from "../../.navigation-test-build/components/navigation/navigation-contract.js";
 
 const expectedPanelDestinations = {
-  programs: [["Semua Program", "/programs"], ["Events & Kelas Singkat", "/events"], ["Learning Paths", "/learning-paths"], ["Resource Gratis", "/resources"], ["Kenali Faculty", "/trainers"], ["Standar Faculty", "/trainer-verification"], ["Program untuk Organisasi", "/untuk-organisasi"]],
-  organizations: [["Pelatihan In-House", "/untuk-organisasi"], ["Katalog Program", "/programs"], ["Learning Path Tim", "/learning-paths"], ["Pilih Faculty", "/trainers"], ["Portofolio", "/portofolio"], ["Standar Faculty", "/trainer-verification"], ["Tentang Skillary", "/about"]],
-  about: [["Tentang Kami", "/about"], ["Standar Faculty", "/trainer-verification"], ["Hubungi Kami", "/contact"], ["Kebijakan Privasi", "/privacy"], ["Syarat & Ketentuan", "/terms"]],
-};
+  programs: [["Semua Program", "/programs"], ["Events & Kelas Singkat", "/events"], ["Learning Paths", "/learning-paths"], ["Resource Gratis", "/resources"], ["Kenali Trainers", "/trainers"], ["Standar Trainers", "/trainer-verification"], ["Services untuk Organisasi", "/untuk-organisasi"]],
+  services: [["Pelatihan In-House", "/untuk-organisasi"], ["Katalog Program", "/programs"], ["Learning Path Tim", "/learning-paths"], ["Pilih Trainers", "/trainers"], ["Portfolio", "/portofolio"], ["Standar Trainers", "/trainer-verification"], ["About Skillary", "/about"]],
+  };
 
 test("exact panel and direct-link unions remain stable", () => {
   assert.deepEqual(NAV_PANELS.map((panel) => panel.id), [...NAV_PANEL_IDS]);
@@ -25,12 +24,12 @@ test("exact panel and direct-link unions remain stable", () => {
 });
 
 test("panel labels, groups, and destinations match approved IA", () => {
-  assert.deepEqual(NAV_PANELS.map((panel) => panel.label), ["Program", "Untuk Organisasi", "Tentang"]);
+  assert.deepEqual(NAV_PANELS.map((panel) => panel.label), ["Programs", "Services"]);
   for (const panel of NAV_PANELS) {
     assert.equal(panel.groups.length, 2, panel.id);
     assert.deepEqual(panel.groups.flatMap((group) => group.links.map((link) => [link.label, link.href])), expectedPanelDestinations[panel.id], panel.id);
   }
-  assert.deepEqual(DIRECT_NAV.map(({ label, href }) => [label, href]), [["Faculty", "/trainers"], ["Portofolio", "/portofolio"]]);
+  assert.deepEqual(DIRECT_NAV.map(({ label, href }) => [label, href]), [["Events", "/events"], ["Free Workshops", "/events"], ["Trainers", "/trainers"], ["Portfolio", "/portofolio"], ["About", "/about"]]);
 });
 
 test("contract invariant validator reports no violations", () => {
@@ -49,7 +48,7 @@ test("all output hrefs are canonical and avoid forbidden route families", () => 
 
 test("only organization panel owns the consultation CTA", () => {
   const actions = NAV_PANELS.filter((panel) => panel.action).map((panel) => [panel.id, panel.action.href]);
-  assert.deepEqual(actions, [["organizations", "/contact"]]);
+  assert.deepEqual(actions, [["services", "/contact"]]);
 });
 
 test("rendered destination multiplicity never exceeds three", () => {

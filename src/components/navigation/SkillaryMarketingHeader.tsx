@@ -48,8 +48,7 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
   const rootRef = useRef<HTMLElement>(null);
   const triggerRefs = useRef<Record<PanelId, HTMLButtonElement | null>>({
     programs: null,
-    organizations: null,
-    about: null,
+    services: null,
   });
   const accountRef = useRef<HTMLDivElement>(null);
   const accountTriggerRef = useRef<HTMLButtonElement>(null);
@@ -262,37 +261,40 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
               <span className="text-base font-extrabold tracking-tight">Skillary</span>
             </Link>
 
-            <nav aria-label="Navigasi utama" className="hidden min-w-0 items-center gap-0.5 lg:flex xl:gap-1">
-              {NAV_PANELS.map((panel) => {
-                const expanded = openPanel === panel.id;
-                return (
-                  <div
-                    key={panel.id}
-                    className="relative"
-                    onPointerEnter={() => scheduleOpen(panel.id)}
-                    onPointerLeave={scheduleClose}
-                  >
-                    <button
-                      ref={(element) => { triggerRefs.current[panel.id] = element; }}
-                      id={`marketing-nav-trigger-${panel.id}`}
-                      type="button"
-                      aria-expanded={expanded}
-                      aria-controls={`marketing-mega-${panel.id}`}
-                      onClick={(event) => togglePanel(panel.id, event.detail === 0)}
-                      className={`relative flex min-h-11 items-center gap-1.5 px-3 text-sm font-semibold outline-none transition after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:origin-left after:bg-[#f0b65b] after:transition-transform focus-visible:ring-2 focus-visible:ring-[#f0b65b] motion-reduce:transition-none ${
-                        expanded || getActiveNavigationItem(pathname) === panel.id
-                          ? "text-white after:scale-x-100"
-                          : "text-white/65 after:scale-x-0 hover:text-white"
-                      }`}
-                    >
-                      {panel.label}
-                      <Chevron open={expanded} />
-                    </button>
-                  </div>
-                );
-              })}
+            <nav aria-label="Navigasi utama" className="hidden min-w-0 items-center gap-0 lg:flex xl:gap-0.5">
+              {[
+                { kind: "direct" as const, item: DIRECT_NAV.find((link) => link.id === "events")! },
+                { kind: "panel" as const, item: NAV_PANELS.find((panel) => panel.id === "programs")! },
+                { kind: "direct" as const, item: DIRECT_NAV.find((link) => link.id === "free-workshops")! },
+                { kind: "panel" as const, item: NAV_PANELS.find((panel) => panel.id === "services")! },
+                ...DIRECT_NAV.filter((link) => ["trainers", "portfolio", "about"].includes(link.id)).map((item) => ({ kind: "direct" as const, item })),
+              ].map((entry) => {
+                if (entry.kind === "panel") {
+                  const panel = entry.item;
+                  const expanded = openPanel === panel.id;
+                  return (
+                    <div key={panel.id} className="relative" onPointerEnter={() => scheduleOpen(panel.id)} onPointerLeave={scheduleClose}>
+                      <button
+                        ref={(element) => { triggerRefs.current[panel.id] = element; }}
+                        id={`marketing-nav-trigger-${panel.id}`}
+                        type="button"
+                        aria-expanded={expanded}
+                        aria-controls={`marketing-mega-${panel.id}`}
+                        onClick={(event) => togglePanel(panel.id, event.detail === 0)}
+                        className={`relative flex min-h-11 items-center gap-1 px-2 text-xs font-semibold outline-none transition after:absolute after:inset-x-2 after:bottom-0 after:h-0.5 after:origin-left after:bg-[#f0b65b] after:transition-transform focus-visible:ring-2 focus-visible:ring-[#f0b65b] motion-reduce:transition-none xl:px-2.5 xl:text-sm ${
+                          expanded || getActiveNavigationItem(pathname) === panel.id
+                            ? "text-white after:scale-x-100"
+                            : "text-white/65 after:scale-x-0 hover:text-white"
+                        }`}
+                      >
+                        {panel.label}
+                        <Chevron open={expanded} />
+                      </button>
+                    </div>
+                  );
+                }
 
-              {DIRECT_NAV.map((link) => {
+                const link = entry.item;
                 const active = getActiveNavigationItem(pathname) === link.id;
                 return (
                   <Link
@@ -300,9 +302,7 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
                     href={link.href}
                     aria-current={active ? "page" : undefined}
                     onClick={() => closePanel()}
-                    className={`flex min-h-11 items-center rounded-full px-3 text-sm font-semibold outline-none transition hover:text-white focus-visible:ring-2 focus-visible:ring-[#f0b65b] motion-reduce:transition-none ${
-                      active ? "bg-white/10 text-white" : "text-white/65"
-                    }`}
+                    className={`flex min-h-11 items-center whitespace-nowrap px-2 text-xs font-semibold outline-none transition hover:text-white focus-visible:ring-2 focus-visible:ring-[#f0b65b] motion-reduce:transition-none xl:px-2.5 xl:text-sm ${active ? "text-white" : "text-white/65"}`}
                   >
                     {link.label}
                   </Link>

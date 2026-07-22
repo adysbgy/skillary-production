@@ -343,7 +343,7 @@ export default function StartupConceptPage({ standaloneHeader = true }: { standa
       {standaloneHeader && <StartupHeader />}
 
       {/* ── White mega-container on dark canvas (Aimfox `rounded-8xl` structure) ── */}
-      <div className="pt-[100px] md:pt-[108px]">
+      <div className={standaloneHeader ? "pt-[100px] md:pt-[108px]" : undefined}>
       <main className="bg-white rounded-[2rem] md:rounded-[2.75rem] overflow-hidden">
 
       {/* ── Hero ── */}

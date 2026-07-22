@@ -10,8 +10,8 @@ export type NavigationGroup = Readonly<{
   links: readonly NavigationLink[];
 }>;
 
-export const NAV_PANEL_IDS = ["programs", "organizations", "about"] as const;
-export const DIRECT_NAV_IDS = ["faculty", "portfolio"] as const;
+export const NAV_PANEL_IDS = ["programs", "services"] as const;
+export const DIRECT_NAV_IDS = ["events", "free-workshops", "trainers", "portfolio", "about"] as const;
 
 export type NavigationPanelId = (typeof NAV_PANEL_IDS)[number];
 export type DirectNavigationId = (typeof DIRECT_NAV_IDS)[number];
@@ -57,7 +57,7 @@ export const NAV_UTILITY_LINKS = [
 ] as const satisfies readonly UtilityNavigationLink[];
 
 export const NAV_PANELS = [
-  { id: "programs", label: "Program", eyebrow: "Belajar bersama Skillary", title: "Program untuk skill kerja yang nyata.", description: "Temukan program terstruktur, kelas singkat, resource, dan faculty untuk langkah berikutnya.", href: "/programs", groups: [
+  { id: "programs", label: "Programs", eyebrow: "Belajar bersama Skillary", title: "Program untuk skill kerja yang nyata.", description: "Temukan program terstruktur, kelas singkat, resource, dan faculty untuk langkah berikutnya.", href: "/programs", groups: [
     { title: "Format", links: [
       { id: "programs-all", label: "Semua Program", href: "/programs", description: "Program terstruktur untuk individu dan tim." },
       { id: "programs-events", label: "Events & Kelas Singkat", href: "/events", description: "Webinar praktis dan sesi berdurasi ringkas." },
@@ -65,42 +65,34 @@ export const NAV_PANELS = [
       { id: "programs-resources", label: "Resource Gratis", href: "/resources", description: "Materi praktis yang dapat langsung digunakan." },
     ]},
     { title: "Pilih dengan percaya diri", links: [
-      { id: "programs-faculty", label: "Kenali Faculty", href: "/trainers", description: "Praktisi terpilih untuk pembelajaran relevan." },
-      { id: "programs-standards", label: "Standar Faculty", href: "/trainer-verification", description: "Cara profil, bukti, dan designation ditinjau." },
-      { id: "programs-organizations", label: "Program untuk Organisasi", href: "/untuk-organisasi", description: "Program yang disesuaikan dengan konteks tim." },
+      { id: "programs-faculty", label: "Kenali Trainers", href: "/trainers", description: "Praktisi terpilih untuk pembelajaran relevan." },
+      { id: "programs-standards", label: "Standar Trainers", href: "/trainer-verification", description: "Cara profil, bukti, dan designation ditinjau." },
+      { id: "programs-organizations", label: "Services untuk Organisasi", href: "/untuk-organisasi", description: "Program yang disesuaikan dengan konteks tim." },
     ]},
   ]},
-  { id: "organizations", label: "Untuk Organisasi", eyebrow: "Capability partner", title: "Program yang dirancang untuk konteks tim Anda.", description: "Mulai dari kebutuhan bisnis, pilih faculty dan format, lalu susun hasil belajar yang dapat dipertanggungjawabkan.", href: "/untuk-organisasi", groups: [
+  { id: "services", label: "Services", eyebrow: "Capability partner", title: "Program yang dirancang untuk konteks tim Anda.", description: "Mulai dari kebutuhan bisnis, pilih faculty dan format, lalu susun hasil belajar yang dapat dipertanggungjawabkan.", href: "/untuk-organisasi", groups: [
     { title: "Solusi", links: [
       { id: "org-training", label: "Pelatihan In-House", href: "/untuk-organisasi", description: "Solusi organisasi yang dapat disesuaikan." },
       { id: "org-programs", label: "Katalog Program", href: "/programs", description: "Lihat cakupan topik dan format." },
       { id: "org-paths", label: "Learning Path Tim", href: "/learning-paths", description: "Susun urutan belajar yang lebih terarah." },
-      { id: "org-faculty", label: "Pilih Faculty", href: "/trainers", description: "Kenali praktisi dan fokus pembelajarannya." },
+      { id: "org-faculty", label: "Pilih Trainers", href: "/trainers", description: "Kenali praktisi dan fokus pembelajarannya." },
     ]},
     { title: "Bukti & kepercayaan", links: [
-      { id: "org-portfolio", label: "Portofolio", href: "/portofolio", description: "Lihat pekerjaan dan program terpilih." },
-      { id: "org-standards", label: "Standar Faculty", href: "/trainer-verification", description: "Pahami designation dan proses review." },
-      { id: "org-about", label: "Tentang Skillary", href: "/about", description: "Misi dan pendekatan kami." },
+      { id: "org-portfolio", label: "Portfolio", href: "/portofolio", description: "Lihat pekerjaan dan program terpilih." },
+      { id: "org-standards", label: "Standar Trainers", href: "/trainer-verification", description: "Pahami designation dan proses review." },
+      { id: "org-about", label: "About Skillary", href: "/about", description: "Misi dan pendekatan kami." },
     ]},
   ], action: { id: "org-contact", label: "Diskusikan kebutuhan", href: "/contact", description: "Mulai percakapan dengan tim Skillary." } },
-  { id: "about", label: "Tentang", eyebrow: "Tentang Skillary", title: "Pembelajaran yang terhubung dengan pekerjaan nyata.", description: "Kenali pendekatan Skillary, standar faculty, dan cara menghubungi tim kami.", href: "/about", groups: [
-    { title: "Skillary", links: [
-      { id: "about-company", label: "Tentang Kami", href: "/about", description: "Misi dan pendekatan Skillary." },
-      { id: "about-standards", label: "Standar Faculty", href: "/trainer-verification", description: "Cara profil dan bukti faculty ditinjau." },
-      { id: "about-contact", label: "Hubungi Kami", href: "/contact", description: "Pertanyaan, kebutuhan program, dan dukungan." },
-    ]},
-    { title: "Legal & dukungan", links: [
-      { id: "about-privacy", label: "Kebijakan Privasi", href: "/privacy", description: "Cara data dan privasi dikelola." },
-      { id: "about-terms", label: "Syarat & Ketentuan", href: "/terms", description: "Ketentuan penggunaan layanan Skillary." },
-    ]},
-  ]},
 ] as const satisfies readonly NavigationPanel[];
 
 export const TYPED_NAV_PANELS: readonly NavigationPanel[] = NAV_PANELS;
 
 export const DIRECT_NAV = [
-  { id: "faculty", label: "Faculty", href: "/trainers" },
-  { id: "portfolio", label: "Portofolio", href: "/portofolio" },
+  { id: "events", label: "Events", href: "/events" },
+  { id: "free-workshops", label: "Free Workshops", href: "/events" },
+  { id: "trainers", label: "Trainers", href: "/trainers" },
+  { id: "portfolio", label: "Portfolio", href: "/portofolio" },
+  { id: "about", label: "About", href: "/about" },
 ] as const satisfies readonly DirectNavigationLink[];
 
 export const TYPED_DIRECT_NAV: readonly DirectNavigationLink[] = DIRECT_NAV;
@@ -187,9 +179,9 @@ export function getNavigationContractViolations() {
     if (!panel.groups.some((group) => group.links.some((link) => link.href === panel.href))) {
       violations.push(`missing-featured-destination:${panel.id}`);
     }
-    if (panel.action && panel.id !== "organizations") violations.push(`unexpected-panel-action:${panel.id}`);
+    if (panel.action && panel.id !== "services") violations.push(`unexpected-panel-action:${panel.id}`);
   }
-  const organizationPanel = TYPED_NAV_PANELS.find((panel) => panel.id === "organizations");
+  const organizationPanel = TYPED_NAV_PANELS.find((panel) => panel.id === "services");
   if (organizationPanel?.action?.href !== "/contact") violations.push("organization-contact-action");
 
   const hrefOccurrences = new Map<string, number>();

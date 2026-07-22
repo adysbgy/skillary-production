@@ -3,10 +3,11 @@ import type { DirectNavigationId, NavigationPanelId } from "./navigation-contrac
 export type ActiveNavigationItem = NavigationPanelId | DirectNavigationId | null;
 
 const ROUTE_OWNERS: ReadonlyArray<Readonly<{ id: Exclude<ActiveNavigationItem, null>; roots: readonly string[] }>> = [
-  { id: "faculty", roots: ["/trainers"] },
+  { id: "trainers", roots: ["/trainers"] },
   { id: "portfolio", roots: ["/portofolio"] },
-  { id: "programs", roots: ["/programs", "/events", "/resources", "/learning-paths"] },
-  { id: "organizations", roots: ["/untuk-organisasi"] },
+  { id: "events", roots: ["/events"] },
+  { id: "programs", roots: ["/programs", "/resources", "/learning-paths"] },
+  { id: "services", roots: ["/untuk-organisasi"] },
   { id: "about", roots: ["/about", "/contact", "/privacy", "/terms", "/trainer-verification"] },
 ];
 
