@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Homepage() {
-  return <StartupHomepage />;
+  return <StartupHomepage standaloneHeader={false} />;
 }

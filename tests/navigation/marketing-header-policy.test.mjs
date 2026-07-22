@@ -10,7 +10,7 @@ import {
 } from "../../.navigation-test-build/components/navigation/marketing-header-policy.js";
 
 const cases = [
-  ["/", "hidden", false],
+  ["/", "marketing", true],
   ["/programs", "marketing", false],
   ["/programs/", "marketing", false],
   ["/resources?tab=free", "marketing", false],

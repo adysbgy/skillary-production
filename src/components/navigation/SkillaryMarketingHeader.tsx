@@ -279,8 +279,10 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
                       aria-expanded={expanded}
                       aria-controls={`marketing-mega-${panel.id}`}
                       onClick={(event) => togglePanel(panel.id, event.detail === 0)}
-                      className={`flex min-h-11 items-center gap-1.5 rounded-full px-3 text-sm font-semibold outline-none transition focus-visible:ring-2 focus-visible:ring-[#f0b65b] motion-reduce:transition-none ${
-                        expanded || getActiveNavigationItem(pathname) === panel.id ? "bg-white/10 text-white" : "text-white/65 hover:text-white"
+                      className={`relative flex min-h-11 items-center gap-1.5 px-3 text-sm font-semibold outline-none transition after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:origin-left after:bg-[#f0b65b] after:transition-transform focus-visible:ring-2 focus-visible:ring-[#f0b65b] motion-reduce:transition-none ${
+                        expanded || getActiveNavigationItem(pathname) === panel.id
+                          ? "text-white after:scale-x-100"
+                          : "text-white/65 after:scale-x-0 hover:text-white"
                       }`}
                     >
                       {panel.label}
@@ -420,6 +422,11 @@ function MegaPanel({
   onPointerLeave: () => void;
   onClose: () => void;
 }) {
+  const links = panel.groups.flatMap((group) => group.links);
+  const columns = Array.from({ length: 3 }, (_, columnIndex) =>
+    links.filter((_, linkIndex) => linkIndex % 3 === columnIndex),
+  );
+
   return (
     <div
       id={`marketing-mega-${panel.id}`}
@@ -428,60 +435,49 @@ function MegaPanel({
       inert={!visible}
       onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
-      className={`absolute left-1/2 top-full hidden w-[min(1200px,calc(100vw-32px))] -translate-x-1/2 pt-1 transition duration-200 motion-reduce:transition-none lg:block ${
-        visible ? "visible translate-y-0 opacity-100" : "pointer-events-none invisible -translate-y-2 opacity-0"
+      className={`absolute left-1/2 top-full hidden w-[min(1200px,calc(100vw-32px))] -translate-x-1/2 transition-[opacity,transform,visibility] duration-150 motion-reduce:transition-none lg:block ${
+        visible ? "visible translate-y-0 opacity-100" : "pointer-events-none invisible -translate-y-1 opacity-0"
       }`}
     >
-      <div className="min-h-[25rem] overflow-hidden rounded-b-[24px] rounded-t-xl border border-[#eadfd2] bg-[#fffaf4] text-[#182230] shadow-[0_30px_80px_rgba(7,10,18,.28)]">
-        <div className="grid min-h-[25rem] grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)_minmax(0,1fr)] gap-7 p-7 xl:gap-9 xl:p-8">
+      <div className="min-h-[10rem] overflow-hidden rounded-b-[4px] border border-t-0 border-slate-200 bg-white text-[#182230] shadow-[0_16px_34px_rgba(15,23,42,.14)]">
+        <div className="grid min-h-[10rem] grid-cols-[140px_repeat(3,minmax(0,1fr))] gap-x-8 px-5 py-4 xl:gap-x-10">
           <Link
             href={panel.href}
             onClick={onClose}
-            className="group relative overflow-hidden rounded-2xl bg-[#151f2b] p-7 text-white outline-none focus-visible:ring-2 focus-visible:ring-[#d99335]"
+            className="group relative flex min-h-[8rem] flex-col justify-end overflow-hidden rounded-[4px] bg-[#111a2e] p-4 text-white outline-none focus-visible:ring-2 focus-visible:ring-[#d99335]"
           >
-            <div className="absolute inset-0 opacity-30 [background:radial-gradient(circle_at_95%_0%,#f59e0b,transparent_46%)]" />
-            <p className="relative text-[11px] font-extrabold uppercase tracking-[.17em] text-[#efb75c]">{panel.eyebrow}</p>
-            <h2 className="relative mt-5 text-2xl font-extrabold leading-tight tracking-[-.03em]">{panel.title}</h2>
-            <p className="relative mt-4 text-sm leading-6 text-white/60">{panel.description}</p>
-            <span className="relative mt-8 inline-flex text-sm font-extrabold text-[#f3c273]">
-              Jelajahi sekarang <span className="ml-2 transition group-hover:translate-x-1 motion-reduce:transition-none">→</span>
-            </span>
+            <div className="absolute inset-0 opacity-40 [background:linear-gradient(135deg,transparent_45%,#d99335_46%,transparent_47%),radial-gradient(circle_at_90%_10%,#d99335,transparent_42%)]" />
+            <p className="relative text-[9px] font-extrabold uppercase tracking-[.14em] text-[#efb75c]">{panel.eyebrow}</p>
+            <h2 className="relative mt-2 text-base font-extrabold leading-tight tracking-[-.02em]">{panel.label}</h2>
+            <span className="relative mt-3 text-[11px] font-bold text-white/75 group-hover:text-white">Lihat semua →</span>
           </Link>
 
-          {panel.groups.map((group) => {
-            const headingId = `marketing-${panel.id}-${group.title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`;
-            return (
-              <section key={group.title} aria-labelledby={headingId}>
-                <h2 id={headingId} className="text-[11px] font-extrabold uppercase tracking-[.16em] text-[#9a6a39]">{group.title}</h2>
-                <ul className="mt-4 space-y-1">
-                  {group.links.map((link) => (
-                    <li key={link.id}>
-                      <Link
-                        href={link.href}
-                        onClick={onClose}
-                        className="group block rounded-xl px-3 py-3 outline-none hover:bg-[#f4eadc] focus-visible:ring-2 focus-visible:ring-[#d99335]"
-                      >
-                        <span className="flex items-center justify-between text-sm font-extrabold">
-                          {link.label}
-                          <span className="text-[#bc7837] opacity-0 transition group-hover:translate-x-1 group-hover:opacity-100 motion-reduce:transition-none">→</span>
-                        </span>
-                        <span className="mt-1 block text-xs leading-5 text-slate-500">{link.description}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                {panel.action && group === panel.groups.at(-1) && (
+          {columns.map((column, columnIndex) => (
+            <ul key={`${panel.id}-column-${columnIndex}`} className="space-y-1 py-0.5">
+              {column.map((link) => (
+                <li key={link.id}>
+                  <Link
+                    href={link.href}
+                    onClick={onClose}
+                    className="block rounded-[3px] px-2 py-1.5 text-[13px] font-medium leading-5 text-slate-700 outline-none transition hover:bg-slate-100 hover:text-slate-950 focus-visible:ring-2 focus-visible:ring-[#d99335] motion-reduce:transition-none"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              {panel.action && columnIndex === 2 && (
+                <li>
                   <Link
                     href={panel.action.href}
                     onClick={onClose}
-                    className="mt-4 inline-flex rounded-full bg-[#17212d] px-5 py-3 text-sm font-extrabold text-white outline-none transition hover:bg-[#293a4d] focus-visible:ring-2 focus-visible:ring-[#d99335] motion-reduce:transition-none"
+                    className="mt-1 block rounded-[3px] px-2 py-1.5 text-[13px] font-bold text-[#9a5b18] outline-none transition hover:bg-amber-50 focus-visible:ring-2 focus-visible:ring-[#d99335] motion-reduce:transition-none"
                   >
                     {panel.action.label} →
                   </Link>
-                )}
-              </section>
-            );
-          })}
+                </li>
+              )}
+            </ul>
+          ))}
         </div>
       </div>
     </div>

@@ -289,7 +289,7 @@ const FAQS = [
   },
 ];
 
-export default function StartupConceptPage() {
+export default function StartupConceptPage({ standaloneHeader = true }: { standaloneHeader?: boolean } = {}) {
   const [tab, setTab] = useState<TabId>("peserta");
   const activeTab = TABS.find((t) => t.id === tab)!;
 
@@ -340,7 +340,7 @@ export default function StartupConceptPage() {
         }
       `}</style>
       {/* ── Morphing header (shared with primary marketing sub-pages) ── */}
-      <StartupHeader />
+      {standaloneHeader && <StartupHeader />}
 
       {/* ── White mega-container on dark canvas (Aimfox `rounded-8xl` structure) ── */}
       <div className="pt-[100px] md:pt-[108px]">

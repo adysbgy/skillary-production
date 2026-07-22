@@ -29,7 +29,7 @@ export const MARKETING_SHELL_ROUTES = [
   "/trainer-verification",
 ] as const;
 
-export const HIDDEN_HEADER_EXACT_ROUTES = ["/"] as const;
+export const HIDDEN_HEADER_EXACT_ROUTES = [] as const;
 
 export const HIDDEN_HEADER_PREFIXES = [
   "/lp",

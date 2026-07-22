@@ -33,14 +33,19 @@ test("interaction timing and explicit E2 integration remain source-owned", () =>
   ]);
 });
 
-test("desktop panels are inert, stable, and use exact geometry contract", () => {
+test("desktop panels are inert, attached, compact, and use stable geometry", () => {
   includesAll(header, [
     "inert={!visible}",
     "w-[min(1200px,calc(100vw-32px))]",
-    "pt-1",
-    "min-h-[25rem]",
-    "grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)_minmax(0,1fr)]",
+    "top-full",
+    "border-t-0",
+    "bg-white",
+    "min-h-[10rem]",
+    "grid-cols-[140px_repeat(3,minmax(0,1fr))]",
+    "Array.from({ length: 3 }",
   ]);
+  assert.equal(header.includes("min-h-[25rem]"), false);
+  assert.equal(header.includes("pt-1 transition duration-200"), false);
 });
 
 test("direct links close desktop panel and active ownership is centralized", () => {
