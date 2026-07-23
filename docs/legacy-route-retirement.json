@@ -87,6 +87,23 @@
       "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
       "deletedAt": "2026-07-23",
       "replacement": "/untuk-organisasi"
+    },
+    {
+      "route": "/v2",
+      "sourceFile": "src/app/v2/page.tsx",
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "replacement": "/",
+      "note": "Alternate homepage deleted after approval; permanent exact-route redirect retained.",
+      "deletedDependencies": [
+        "src/components/v2/home/HeroV2.tsx",
+        "src/components/v2/home/CredibilityV2.tsx",
+        "src/components/v2/home/ProgramsV2.tsx",
+        "src/components/v2/home/HowItWorksV2.tsx",
+        "src/components/v2/home/SocialProofV2.tsx",
+        "src/components/v2/home/AffiliateCtaV2.tsx",
+        "src/components/v2/home/FinalCtaV2.tsx"
+      ]
     }
   ],
   "candidates": [

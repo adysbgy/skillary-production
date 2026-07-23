@@ -58,6 +58,7 @@ const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
   { source: "/v2/resources", destination: "/resources" },
   { source: "/v2/proposal", destination: "/contact" },
   { source: "/v2/portfolio", destination: "/portofolio" },
+  { source: "/v2", destination: "/" },
 
   // Older duplicate routes → their final clean destinations (no redirect
   // chains through /v2).

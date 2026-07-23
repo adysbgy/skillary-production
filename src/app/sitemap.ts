@@ -1,4 +1,5 @@
-import { PROGRAMS, BLOG_POSTS } from "@/data/content";
+import { BLOG_POSTS } from "@/data/content";
+import { PROGRAM_INDEX, slugify } from "@/data/v2-programs";
 import { EVENTS } from "@/data/v2-events";
 import { TRAINERS } from "@/data/trainers";
 import type { MetadataRoute } from "next";
@@ -6,15 +7,12 @@ import type { MetadataRoute } from "next";
 const BASE_URL = "https://skillary.my.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    // Only live, non-redirecting URLs are advertised. Legacy V1 pages
-    // redirected to their /v2 equivalents in next.config.ts (/about, /services,
-    // /teams, /platform, /reports, /program-catalog, /proposal, /contact,
-    // /resources, /portfolio, /certificates, /case-studies, /training-brief,
-    // /demo) are omitted. The canonical /v2 marketing pages are the primary
-    // surface and listed first.
+    const now = new Date();
+
+    // Primary canonical marketing routes. Legacy `/v2/**` variants are
+    // preserved through permanent redirects and intentionally excluded here.
     const staticRoutes = [
         "",
-        // Canonical V2 marketing surface
         "/programs",
         "/events",
         "/resources",
@@ -25,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/v2/certificates",
         "/trainers",
         "/trainer-verification",
-        // Live V1 pages kept (functional / no V2 equivalent yet)
         "/learning-paths",
         "/expert-partner",
         "/explore",
@@ -36,14 +33,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/terms",
     ].map((route) => ({
         url: `${BASE_URL}${route}`,
-        lastModified: new Date(),
+        lastModified: now,
         changeFrequency: "weekly" as const,
         priority: route === "" ? 1.0 : 0.8,
     }));
 
-    const programRoutes = PROGRAMS.map((program) => ({
-        url: `${BASE_URL}/program/${program.slug}`,
-        lastModified: new Date(),
+    const programRoutes = PROGRAM_INDEX.map((program) => ({
+        url: `${BASE_URL}/programs/${slugify(program.title)}`,
+        lastModified: now,
         changeFrequency: "monthly" as const,
         priority: 0.7,
     }));
