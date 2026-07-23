@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getEventBySlug } from "@/data/v2-events";
-import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
+import { checkRateLimit, getClientKey, rateLimitHeaders } from "@/lib/rate-limit";
 
 // POST /api/checkout/event — guest checkout for a paid webinar/event ticket.
 // Creates an EventOrder and, when Midtrans is configured, a Snap transaction.
@@ -21,8 +21,12 @@ const PAYMENT_MAP: Record<string, string[]> = {
 export async function POST(req: Request) {
   try {
     // Rate limit: 10 attempts / 10 min per IP
-    if (!checkRateLimit(getClientKey(req), 10, 10 * 60 * 1000)) {
-      return NextResponse.json({ error: "Terlalu banyak percobaan. Coba lagi nanti." }, { status: 429 });
+    const limit = await checkRateLimit(`event-checkout:${getClientKey(req)}`, 10, 10 * 60 * 1000);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: "Terlalu banyak percobaan. Coba lagi nanti." },
+        { status: 429, headers: rateLimitHeaders(limit) }
+      );
     }
 
     const body = await req.json();

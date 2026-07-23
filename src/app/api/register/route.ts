@@ -1,27 +1,33 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit, getClientKey, rateLimitHeaders } from "@/lib/rate-limit";
+
+const registrationSchema = z.object({
+    name: z.string().trim().min(2).max(100),
+    email: z.string().trim().email().max(254),
+    password: z.string().min(10).max(128),
+});
 
 export async function POST(req: Request) {
     try {
-        const { name, email, password } = await req.json();
-
-        if (!name || !email || !password) {
+        const limit = await checkRateLimit(`register:${getClientKey(req)}`, 5, 60 * 60 * 1000);
+        if (!limit.allowed) {
+            return NextResponse.json({ error: "Too many registration attempts." }, { status: 429, headers: rateLimitHeaders(limit) });
+        }
+        const parsed = registrationSchema.safeParse(await req.json());
+        if (!parsed.success) {
             return NextResponse.json(
-                { error: "Name, email, and password are required." },
+                { error: "Provide a valid name, email, and password of 10–128 characters." },
                 { status: 400 }
             );
         }
-
-        if (password.length < 6) {
-            return NextResponse.json(
-                { error: "Password must be at least 6 characters." },
-                { status: 400 }
-            );
-        }
+        const { name, password } = parsed.data;
+        const email = parsed.data.email.toLowerCase();
 
         const existing = await prisma.user.findUnique({
-            where: { email: email.toLowerCase() },
+            where: { email: email },
         });
 
         if (existing) {
@@ -36,7 +42,7 @@ export async function POST(req: Request) {
         const user = await prisma.user.create({
             data: {
                 name,
-                email: email.toLowerCase(),
+                email: email,
                 passwordHash,
             },
         });

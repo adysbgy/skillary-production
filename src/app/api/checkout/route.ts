@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit, rateLimitHeaders } from "@/lib/rate-limit";
 
 // POST /api/checkout — Create a payment order for a paid course
 export async function POST(req: NextRequest) {
     const session = await auth();
     if (!session?.user?.id) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const limit = await checkRateLimit(`checkout-user:${session.user.id}`, 10, 10 * 60 * 1000);
+    if (!limit.allowed) {
+        return NextResponse.json({ error: "Too many checkout attempts" }, { status: 429, headers: rateLimitHeaders(limit) });
     }
 
     const { courseId } = await req.json();
@@ -20,7 +26,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Free courses should use direct enrollment, not checkout
-    if ((course as any).price <= 0) {
+    if (course.price <= 0) {
         return NextResponse.json({ error: "This course is free. Use direct enrollment." }, { status: 400 });
     }
 
@@ -33,7 +39,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Check for existing PENDING order
-    const pendingOrder = await (prisma as any).paymentOrder.findFirst({
+    const pendingOrder = await prisma.paymentOrder.findFirst({
         where: { userId: session.user.id, courseId, status: "PENDING" },
         orderBy: { createdAt: "desc" },
     });
@@ -43,12 +49,12 @@ export async function POST(req: NextRequest) {
     }
 
     // Create new payment order
-    const order = await (prisma as any).paymentOrder.create({
+    const order = await prisma.paymentOrder.create({
         data: {
             userId: session.user.id,
             courseId,
             productType: "COURSE",
-            amount: (course as any).price,
+            amount: course.price,
             status: "PENDING",
         },
     });
@@ -68,7 +74,7 @@ export async function POST(req: NextRequest) {
             }),
         });
         const snapData = await snapResponse.json();
-        await (prisma as any).paymentOrder.update({
+        await prisma.paymentOrder.update({
             where: { id: order.id },
             data: { gatewayRef: snapData.token, gatewayData: JSON.stringify(snapData) },
         });

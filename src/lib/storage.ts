@@ -38,6 +38,31 @@ const ALLOWED_RESOURCE_TYPES = [
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;      // 5 MB
 const MAX_RESOURCE_SIZE = 20 * 1024 * 1024;   // 20 MB
 
+const MIME_EXTENSIONS: Record<string, string[]> = {
+    "image/jpeg": [".jpg", ".jpeg"], "image/png": [".png"],
+    "image/webp": [".webp"], "image/gif": [".gif"],
+    "application/pdf": [".pdf"], "application/zip": [".zip"],
+    "application/msword": [".doc"],
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
+    "application/vnd.ms-excel": [".xls"],
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"],
+    "application/vnd.ms-powerpoint": [".ppt"],
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation": [".pptx"],
+    "text/plain": [".txt"], "text/csv": [".csv"],
+};
+
+function hasExpectedSignature(buffer: Buffer, mimeType: string): boolean {
+    if (mimeType === "image/jpeg") return buffer.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]));
+    if (mimeType === "image/png") return buffer.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
+    if (mimeType === "image/gif") return ["GIF87a", "GIF89a"].includes(buffer.subarray(0, 6).toString("ascii"));
+    if (mimeType === "image/webp") return buffer.subarray(0, 4).toString("ascii") === "RIFF" && buffer.subarray(8, 12).toString("ascii") === "WEBP";
+    if (mimeType === "application/pdf") return buffer.subarray(0, 5).toString("ascii") === "%PDF-";
+    if (mimeType === "application/zip" || mimeType.includes("openxmlformats")) {
+        return buffer.subarray(0, 2).toString("ascii") === "PK";
+    }
+    return true;
+}
+
 function sanitizeFilename(original: string): string {
     const ext = path.extname(original).toLowerCase();
     const base = path.basename(original, ext)
@@ -78,14 +103,23 @@ export async function uploadFile(
     const isImage = category === "thumbnails" || category === "images";
     const allowed = isImage ? ALLOWED_IMAGE_TYPES : ALLOWED_RESOURCE_TYPES;
     if (!allowed.includes(mimeType)) {
-        throw new Error(`File type "${mimeType}" is not allowed for ${category}. Allowed: ${allowed.join(", ")}`);
+        throw new Error(`File type "${mimeType}" is not allowed for ${category}.`);
     }
 
-    // Validate size
+    const extension = path.extname(originalName).toLowerCase();
+    const expectedExtensions = MIME_EXTENSIONS[mimeType];
+    if (!extension || !expectedExtensions?.includes(extension)) {
+        throw new Error(`Filename extension does not match file type "${mimeType}".`);
+    }
+
+    // Validate size before any write.
     const maxSize = isImage ? MAX_IMAGE_SIZE : MAX_RESOURCE_SIZE;
     if (buffer.length > maxSize) {
         const maxMB = (maxSize / (1024 * 1024)).toFixed(0);
         throw new Error(`File exceeds maximum size of ${maxMB} MB.`);
+    }
+    if (!hasExpectedSignature(buffer, mimeType)) {
+        throw new Error(`File content does not match file type "${mimeType}".`);
     }
 
     // Ensure directory exists

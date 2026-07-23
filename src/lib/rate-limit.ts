@@ -1,67 +1,57 @@
-/**
- * Simple in-memory rate limiter for MVP.
- *
- * Production note: Replace with Redis/Upstash or platform-level
- * rate limiting (e.g. Vercel Edge Middleware, Cloudflare) for
- * durability across server restarts and multi-instance deployments.
- */
+import { createHash } from "crypto";
+import { prisma } from "@/lib/prisma";
 
-interface RateLimitEntry {
-  count: number;
-  resetAt: number;
+export interface RateLimitResult {
+  allowed: boolean;
+  retryAfterSeconds: number;
 }
 
-const store = new Map<string, RateLimitEntry>();
-
-// Periodically clean expired entries to prevent memory leak
-const CLEANUP_INTERVAL = 60_000; // 1 minute
-let lastCleanup = Date.now();
-
-function cleanup() {
-  const now = Date.now();
-  if (now - lastCleanup < CLEANUP_INTERVAL) return;
-  lastCleanup = now;
-  for (const [key, entry] of store) {
-    if (now > entry.resetAt) store.delete(key);
-  }
+export function hashRateLimitKey(key: string): string {
+  return createHash("sha256").update(key).digest("hex");
 }
 
-/**
- * Check if a key has exceeded the rate limit.
- * @returns `true` if the request should be allowed, `false` if rate-limited.
- */
-export function checkRateLimit(
+/** Durable fixed-window limiter shared by all application instances. */
+export async function checkRateLimit(
   key: string,
-  maxRequests: number = 5,
-  windowMs: number = 10 * 60 * 1000 // 10 minutes
-): boolean {
-  cleanup();
-  const now = Date.now();
-  const entry = store.get(key);
+  maxRequests = 5,
+  windowMs = 10 * 60 * 1000
+): Promise<RateLimitResult> {
+  const keyHash = hashRateLimitKey(key);
+  const now = new Date();
+  const resetAt = new Date(now.getTime() + windowMs);
 
-  if (!entry || now > entry.resetAt) {
-    store.set(key, { count: 1, resetAt: now + windowMs });
-    return true;
-  }
+  const rows = await prisma.$queryRaw<Array<{ count: number; resetAt: Date }>>`
+    INSERT INTO "RateLimitBucket" ("keyHash", "count", "resetAt", "updatedAt")
+    VALUES (${keyHash}, 1, ${resetAt}, ${now})
+    ON CONFLICT ("keyHash") DO UPDATE SET
+      "count" = CASE
+        WHEN "RateLimitBucket"."resetAt" <= ${now} THEN 1
+        ELSE "RateLimitBucket"."count" + 1
+      END,
+      "resetAt" = CASE
+        WHEN "RateLimitBucket"."resetAt" <= ${now} THEN ${resetAt}
+        ELSE "RateLimitBucket"."resetAt"
+      END,
+      "updatedAt" = ${now}
+    RETURNING "count", "resetAt"
+  `;
 
-  if (entry.count >= maxRequests) {
-    return false;
-  }
-
-  entry.count++;
-  return true;
+  const bucket = rows[0];
+  if (!bucket) throw new Error("Rate limiter did not return a bucket");
+  return {
+    allowed: bucket.count <= maxRequests,
+    retryAfterSeconds: Math.max(1, Math.ceil((bucket.resetAt.getTime() - now.getTime()) / 1000)),
+  };
 }
 
-/**
- * Extract a best-effort client identifier from a request.
- * Falls back to a generic key if IP headers are unavailable.
- */
 export function getClientKey(req: Request): string {
   const forwarded = req.headers.get("x-forwarded-for");
   if (forwarded) return `ip:${forwarded.split(",")[0].trim()}`;
-
   const realIp = req.headers.get("x-real-ip");
   if (realIp) return `ip:${realIp.trim()}`;
-
   return "ip:unknown";
+}
+
+export function rateLimitHeaders(result: RateLimitResult): HeadersInit {
+  return { "Retry-After": String(result.retryAfterSeconds), "Cache-Control": "no-store" };
 }

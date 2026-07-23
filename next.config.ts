@@ -6,6 +6,30 @@ import type { NextConfig } from "next";
 // Permanent (308) so search engines drop the old URLs.
 const CANONICAL_ORIGIN = "https://skillary.my.id";
 
+const CONTENT_SECURITY_POLICY = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "frame-ancestors 'none'",
+  "object-src 'none'",
+  "form-action 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.sandbox.midtrans.com https://app.midtrans.com https://accounts.google.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "img-src 'self' data: blob: https:",
+  "connect-src 'self' https://api.midtrans.com https://api.sandbox.midtrans.com https://app.midtrans.com https://app.sandbox.midtrans.com",
+  "frame-src https://app.midtrans.com https://app.sandbox.midtrans.com https://accounts.google.com",
+  "upgrade-insecure-requests",
+].join("; ");
+
+const SECURITY_HEADERS = [
+  { key: "Content-Security-Policy-Report-Only", value: CONTENT_SECURITY_POLICY },
+  { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(self)" },
+];
+
 const LEGACY_HOST_REDIRECTS = [
   {
     source: "/:path*",
@@ -54,6 +78,9 @@ const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
 ];
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [{ source: "/:path*", headers: SECURITY_HEADERS }];
+  },
   async redirects() {
     return [
       ...LEGACY_HOST_REDIRECTS,

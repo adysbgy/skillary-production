@@ -47,6 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     name: user.name,
                     email: user.email,
                     role: user.role as "ADMIN" | "INSTRUCTOR" | "LEARNER",
+                    passwordChangedAt: user.passwordChangedAt?.getTime() ?? 0,
                 };
             },
         }),
@@ -70,10 +71,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             if (user) {
                 token.id = user.id;
                 token.role = user.role;
+                token.passwordChangedAt = "passwordChangedAt" in user ? user.passwordChangedAt : 0;
+            } else if (token.id) {
+                const current = await prisma.user.findUnique({
+                    where: { id: token.id as string },
+                    select: { passwordChangedAt: true },
+                });
+                const changedAt = current?.passwordChangedAt?.getTime() ?? 0;
+                if (changedAt > Number(token.passwordChangedAt ?? 0)) {
+                    return null;
+                }
             }
-            if (!token.role) {
-                token.role = "LEARNER";
-            }
+            if (!token.role) token.role = "LEARNER";
             return token;
         },
         async session({ session, token }) {
