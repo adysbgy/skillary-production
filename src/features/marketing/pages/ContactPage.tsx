@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { whatsappLink, EMAIL_TEAMS } from "@/data/config";
 import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
 import { GradientText } from "@/components/v2/marketing/MarketingUI";
@@ -32,6 +32,10 @@ const WHY_POINTS = [
 ];
 
 export default function ProposalV2Page() {
+  const searchParams = useSearchParams();
+  const requestType = searchParams.get("type");
+  const requestSource = searchParams.get("source");
+  const isProposalRequest = requestType === "proposal" || requestSource === "proposal";
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -73,9 +77,9 @@ export default function ProposalV2Page() {
           whatsapp: fd.get("whatsapp"),
           organization: fd.get("organization"),
           role: fd.get("role"),
-          inquiryType: "B2B Training Consultation",
+          inquiryType: isProposalRequest ? "B2B Training Proposal" : "B2B Training Consultation",
           programInterest: selectedTopics.join(", "),
-          sourcePage: "/contact",
+          sourcePage: requestSource || (isProposalRequest ? "proposal" : "/contact"),
           message,
           _honeypot: fd.get("_honeypot") || "",
         }),
@@ -163,10 +167,23 @@ export default function ProposalV2Page() {
                   </div>
                 </div>
 
+                {/* Proposal brief guidance */}
+                {isProposalRequest && (
+                  <div className="rounded-xl p-4 text-sm" style={{ background: "rgb(255, 247, 237)", border: "1.5px solid rgb(254, 215, 170)", color: "rgb(124, 45, 18)" }}>
+                    <p className="font-bold mb-2">Agar proposal lebih tepat, sertakan brief singkat:</p>
+                    <ul className="grid gap-1.5 pl-5 list-disc">
+                      <li>Tujuan dan tantangan yang ingin diselesaikan.</li>
+                      <li>Profil serta perkiraan jumlah peserta.</li>
+                      <li>Topik, format, durasi, dan target waktu.</li>
+                      <li>Output yang dibutuhkan: assessment, sertifikat, atau laporan.</li>
+                    </ul>
+                  </div>
+                )}
+
                 {/* Topic textarea */}
                 <div>
                   <label className="block text-sm font-semibold text-[#334155] mb-1.5">Topik pelatihan yang dibutuhkan</label>
-                  <textarea name="topic" rows={3} required minLength={10} placeholder="Ceritakan singkat topik atau skill yang ingin ditingkatkan timnya..." className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2 resize-none" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }} />
+                  <textarea name="topic" rows={3} required minLength={10} defaultValue={isProposalRequest ? "Kami membutuhkan proposal pelatihan dengan tujuan dan kebutuhan berikut: " : ""} placeholder="Ceritakan singkat topik atau skill yang ingin ditingkatkan timnya..." className="w-full px-4 py-3 rounded-xl text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:ring-2 resize-none" style={{ border: "1.5px solid rgb(240, 217, 200)", ["--tw-ring-color" as string]: "rgb(255,138,0)" }} />
                 </div>
 
                 {/* Interactive topic chips */}
