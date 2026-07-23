@@ -340,10 +340,13 @@ export default function StartupConceptPage({ standaloneHeader = true }: { standa
 
       {/* ── White mega-container on dark canvas (Aimfox `rounded-8xl` structure) ── */}
       <div className={standaloneHeader ? "pt-[100px] md:pt-[108px]" : undefined}>
-      <main className="bg-white rounded-[2rem] md:rounded-[2.75rem] overflow-hidden">
+      <main className={standaloneHeader
+        ? "overflow-hidden rounded-[2rem] bg-white md:rounded-[2.75rem]"
+        : "overflow-hidden rounded-b-[2rem] bg-white md:rounded-b-[2.75rem]"
+      }>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden px-5 pt-12 md:pt-20 pb-10 md:pb-14">
+      <section className={`relative overflow-hidden px-5 pb-10 md:pb-14 ${standaloneHeader ? "pt-12 md:pt-20" : "pt-8 md:pt-12"}`}>
         {/* Soft warm glow (Aimfox lavender → Skillary peach) */}
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[600px] pointer-events-none"
