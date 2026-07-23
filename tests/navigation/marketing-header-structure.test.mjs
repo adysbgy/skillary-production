@@ -43,6 +43,7 @@ test("desktop panels are inert, attached, compact, and use stable geometry", () 
     "min-h-[10rem]",
     "grid-cols-[140px_repeat(3,minmax(0,1fr))]",
     "Array.from({ length: 3 }",
+    '["services", "trainers", "portfolio", "about"].includes(link.id)',
   ]);
   assert.equal(header.includes("min-h-[25rem]"), false);
   assert.equal(header.includes("pt-1 transition duration-200"), false);
@@ -64,6 +65,7 @@ test("mobile accordion and hidden panel semantics remain deterministic", () => {
     "inert={!expanded}",
     "href={panel.href}",
     "{panel.title} →",
+    "{DIRECT_NAV.map((link) =>",
   ]);
 });
 

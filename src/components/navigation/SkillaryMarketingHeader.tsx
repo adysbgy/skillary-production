@@ -48,7 +48,6 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
   const rootRef = useRef<HTMLElement>(null);
   const triggerRefs = useRef<Record<PanelId, HTMLButtonElement | null>>({
     programs: null,
-    services: null,
   });
   const accountRef = useRef<HTMLDivElement>(null);
   const accountTriggerRef = useRef<HTMLButtonElement>(null);
@@ -265,8 +264,7 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
               {[
                 { kind: "direct" as const, item: DIRECT_NAV.find((link) => link.id === "events")! },
                 { kind: "panel" as const, item: NAV_PANELS.find((panel) => panel.id === "programs")! },
-                { kind: "panel" as const, item: NAV_PANELS.find((panel) => panel.id === "services")! },
-                ...DIRECT_NAV.filter((link) => ["trainers", "portfolio", "about"].includes(link.id)).map((item) => ({ kind: "direct" as const, item })),
+                ...DIRECT_NAV.filter((link) => ["services", "trainers", "portfolio", "about"].includes(link.id)).map((item) => ({ kind: "direct" as const, item })),
               ].map((entry) => {
                 if (entry.kind === "panel") {
                   const panel = entry.item;
@@ -567,11 +565,6 @@ function MobileNavigation({
                         </div>
                       </section>
                     ))}
-                    {panel.action && (
-                      <Link href={panel.action.href} onClick={onClose} className="mt-3 inline-flex rounded-full border border-white/20 px-4 py-2.5 text-sm font-bold outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b]">
-                        {panel.action.label}
-                      </Link>
-                    )}
                   </div>
                 </div>
               </div>

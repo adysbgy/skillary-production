@@ -6,9 +6,9 @@ const ROUTE_OWNERS: ReadonlyArray<Readonly<{ id: Exclude<ActiveNavigationItem, n
   { id: "trainers", roots: ["/trainers"] },
   { id: "portfolio", roots: ["/portofolio"] },
   { id: "events", roots: ["/events"] },
-  { id: "programs", roots: ["/programs", "/resources", "/learning-paths"] },
+  { id: "programs", roots: ["/programs", "/resources", "/learning-paths", "/trainer-verification"] },
   { id: "services", roots: ["/untuk-organisasi"] },
-  { id: "about", roots: ["/about", "/contact", "/privacy", "/terms", "/trainer-verification"] },
+  { id: "about", roots: ["/about", "/contact", "/privacy", "/terms"] },
 ];
 
 function normalizePathname(pathname: string) {

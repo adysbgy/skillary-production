@@ -5,7 +5,7 @@ import { getActiveNavigationItem } from "../../.navigation-test-build/components
 const cases = [
   ["/programs", "programs"], ["/programs/", "programs"], ["/events", "events"], ["/resources?tab=free", "programs"], ["/learning-paths#data", "programs"],
   ["/untuk-organisasi", "services"],
-  ["/about", "about"], ["/contact", "about"], ["/privacy", "about"], ["/terms", "about"], ["/trainer-verification", "about"],
+  ["/about", "about"], ["/contact", "about"], ["/privacy", "about"], ["/terms", "about"], ["/trainer-verification", "programs"],
   ["/trainers", "trainers"], ["/trainers/person", "trainers"],
   ["/portofolio", "portfolio"],
   ["/", null], ["/program-catalog", null], ["/trainer", null], ["/trainers-old", null], ["/contact-us", null],

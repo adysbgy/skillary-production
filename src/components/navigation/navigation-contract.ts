@@ -10,8 +10,8 @@ export type NavigationGroup = Readonly<{
   links: readonly NavigationLink[];
 }>;
 
-export const NAV_PANEL_IDS = ["programs", "services"] as const;
-export const DIRECT_NAV_IDS = ["events", "trainers", "portfolio", "about"] as const;
+export const NAV_PANEL_IDS = ["programs"] as const;
+export const DIRECT_NAV_IDS = ["events", "services", "trainers", "portfolio", "about"] as const;
 
 export type NavigationPanelId = (typeof NAV_PANEL_IDS)[number];
 export type DirectNavigationId = (typeof DIRECT_NAV_IDS)[number];
@@ -33,11 +33,6 @@ export type DirectNavigationLink = Readonly<{
   href: string;
 }>;
 
-export type UtilityNavigationLink = Readonly<{
-  id: "find-program" | "business";
-  label: string;
-  href: string;
-}>;
 
 export const NAV_ANNOUNCEMENT = {
   message: "✦ BARU: Skillary Events — kelas singkat untuk skill kerja profesional",
@@ -51,44 +46,24 @@ export const NAV_PRIMARY_ACTION = {
   href: "/events",
 } as const;
 
-export const NAV_UTILITY_LINKS = [
-  { id: "find-program", label: "Cari program", href: "/programs" },
-  { id: "business", label: "Untuk Bisnis", href: "/untuk-organisasi" },
-] as const satisfies readonly UtilityNavigationLink[];
 
 export const NAV_PANELS = [
-  { id: "programs", label: "Programs", eyebrow: "Belajar bersama Skillary", title: "Program untuk skill kerja yang nyata.", description: "Temukan program terstruktur, kelas singkat, resource, dan faculty untuk langkah berikutnya.", href: "/programs", groups: [
-    { title: "Format", links: [
-      { id: "programs-all", label: "Semua Program", href: "/programs", description: "Program terstruktur untuk individu dan tim." },
-      { id: "programs-events", label: "Events & Kelas Singkat", href: "/events", description: "Webinar praktis dan sesi berdurasi ringkas." },
+  { id: "programs", label: "Programs", eyebrow: "Belajar bersama Skillary", title: "Program untuk skill kerja yang nyata.", description: "Temukan program terstruktur, learning path, resource, dan standar faculty untuk langkah berikutnya.", href: "/programs", groups: [
+    { title: "Jalur belajar", links: [
       { id: "programs-paths", label: "Learning Paths", href: "/learning-paths", description: "Urutan belajar untuk tujuan yang jelas." },
       { id: "programs-resources", label: "Resource Gratis", href: "/resources", description: "Materi praktis yang dapat langsung digunakan." },
     ]},
-    { title: "Pilih dengan percaya diri", links: [
-      { id: "programs-faculty", label: "Kenali Trainers", href: "/trainers", description: "Praktisi terpilih untuk pembelajaran relevan." },
+    { title: "Kualitas pembelajaran", links: [
       { id: "programs-standards", label: "Standar Trainers", href: "/trainer-verification", description: "Cara profil, bukti, dan designation ditinjau." },
-      { id: "programs-organizations", label: "Services untuk Organisasi", href: "/untuk-organisasi", description: "Program yang disesuaikan dengan konteks tim." },
     ]},
   ]},
-  { id: "services", label: "Services", eyebrow: "Capability partner", title: "Program yang dirancang untuk konteks tim Anda.", description: "Mulai dari kebutuhan bisnis, pilih faculty dan format, lalu susun hasil belajar yang dapat dipertanggungjawabkan.", href: "/untuk-organisasi", groups: [
-    { title: "Solusi", links: [
-      { id: "org-training", label: "Pelatihan In-House", href: "/untuk-organisasi", description: "Solusi organisasi yang dapat disesuaikan." },
-      { id: "org-programs", label: "Katalog Program", href: "/programs", description: "Lihat cakupan topik dan format." },
-      { id: "org-paths", label: "Learning Path Tim", href: "/learning-paths", description: "Susun urutan belajar yang lebih terarah." },
-      { id: "org-faculty", label: "Pilih Trainers", href: "/trainers", description: "Kenali praktisi dan fokus pembelajarannya." },
-    ]},
-    { title: "Bukti & kepercayaan", links: [
-      { id: "org-portfolio", label: "Portfolio", href: "/portofolio", description: "Lihat pekerjaan dan program terpilih." },
-      { id: "org-standards", label: "Standar Trainers", href: "/trainer-verification", description: "Pahami designation dan proses review." },
-      { id: "org-about", label: "About Skillary", href: "/about", description: "Misi dan pendekatan kami." },
-    ]},
-  ], action: { id: "org-contact", label: "Diskusikan kebutuhan", href: "/contact", description: "Mulai percakapan dengan tim Skillary." } },
 ] as const satisfies readonly NavigationPanel[];
 
 export const TYPED_NAV_PANELS: readonly NavigationPanel[] = NAV_PANELS;
 
 export const DIRECT_NAV = [
   { id: "events", label: "Events", href: "/events" },
+  { id: "services", label: "Services", href: "/untuk-organisasi" },
   { id: "trainers", label: "Trainers", href: "/trainers" },
   { id: "portfolio", label: "Portfolio", href: "/portofolio" },
   { id: "about", label: "About", href: "/about" },
@@ -133,7 +108,6 @@ export function getCanonicalNavigationHrefs() {
     "/login",
     NAV_ANNOUNCEMENT.href,
     NAV_PRIMARY_ACTION.href,
-    ...NAV_UTILITY_LINKS.map((link) => link.href),
     ...TYPED_DIRECT_NAV.map((link) => link.href),
     ...TYPED_NAV_PANELS.flatMap((panel) => [
       panel.href,
@@ -148,7 +122,6 @@ export function getCanonicalNavigationHrefs() {
 export function getNavigationContractViolations() {
   const violations: string[] = [];
   const allLinks = [
-    ...NAV_UTILITY_LINKS,
     ...TYPED_DIRECT_NAV,
     ...TYPED_NAV_PANELS.flatMap((panel) => [
       ...panel.groups.flatMap((group) => group.links),
@@ -156,11 +129,9 @@ export function getNavigationContractViolations() {
     ]),
   ];
   const allIds = [
-    ...NAV_UTILITY_LINKS.map((link) => link.id),
     ...TYPED_DIRECT_NAV.map((link) => link.id),
     ...TYPED_NAV_PANELS.map((panel) => panel.id),
     ...allLinks
-      .filter((link) => !("id" in link && NAV_UTILITY_LINKS.some((utility) => utility.id === link.id)))
       .filter((link) => !("id" in link && TYPED_DIRECT_NAV.some((direct) => direct.id === link.id)))
       .map((link) => link.id),
   ];
@@ -175,19 +146,20 @@ export function getNavigationContractViolations() {
 
   for (const panel of TYPED_NAV_PANELS) {
     if (panel.groups.length !== 2) violations.push(`panel-group-count:${panel.id}`);
-    if (!panel.groups.some((group) => group.links.some((link) => link.href === panel.href))) {
-      violations.push(`missing-featured-destination:${panel.id}`);
+    if (panel.groups.some((group) => group.links.some((link) => link.href === panel.href))) {
+      violations.push(`duplicate-featured-destination:${panel.id}`);
     }
-    if (panel.action && panel.id !== "services") violations.push(`unexpected-panel-action:${panel.id}`);
+    if (panel.action) violations.push(`unexpected-panel-action:${panel.id}`);
   }
-  const organizationPanel = TYPED_NAV_PANELS.find((panel) => panel.id === "services");
-  if (organizationPanel?.action?.href !== "/contact") violations.push("organization-contact-action");
 
-  const hrefOccurrences = new Map<string, number>();
-  for (const link of allLinks) hrefOccurrences.set(link.href, (hrefOccurrences.get(link.href) ?? 0) + 1);
-  for (const [href, count] of hrefOccurrences) {
-    if (count > 3) violations.push(`href-multiplicity:${href}:${count}`);
+  const directHrefs = new Set(TYPED_DIRECT_NAV.map((link) => link.href));
+  const panelLinkHrefs = TYPED_NAV_PANELS.flatMap((panel) =>
+    panel.groups.flatMap((group) => group.links.map((link) => link.href)),
+  );
+  for (const href of panelLinkHrefs) {
+    if (directHrefs.has(href)) violations.push(`direct-panel-overlap:${href}`);
   }
+  if (new Set(panelLinkHrefs).size !== panelLinkHrefs.length) violations.push("duplicate-panel-destination");
 
   const canonical = new Set<string>(CANONICAL_NAVIGATION_HREFS);
   for (const href of getCanonicalNavigationHrefs()) {
