@@ -276,6 +276,7 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
                         type="button"
                         aria-expanded={expanded}
                         aria-controls={`marketing-mega-${panel.id}`}
+                        aria-current={getActiveNavigationItem(pathname) === panel.id ? "page" : undefined}
                         onClick={(event) => togglePanel(panel.id, event.detail === 0)}
                         className={`relative flex min-h-11 items-center gap-1 px-2 text-xs font-semibold outline-none transition after:absolute after:inset-x-2 after:bottom-0 after:h-0.5 after:origin-left after:bg-[#f0b65b] after:transition-transform focus-visible:ring-2 focus-visible:ring-[#f0b65b] motion-reduce:transition-none xl:px-2.5 xl:text-sm ${
                           expanded || getActiveNavigationItem(pathname) === panel.id
@@ -531,6 +532,7 @@ function MobileNavigation({
                   type="button"
                   aria-expanded={expanded}
                   aria-controls={`marketing-mobile-${panel.id}`}
+                  aria-current={active ? "page" : undefined}
                   onClick={() => onToggleSection(panel.id)}
                   className={`flex min-h-14 w-full items-center justify-between rounded-lg text-left text-base font-bold outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b] ${active ? "text-[#f3c273]" : "text-white"}`}
                 >

@@ -48,12 +48,13 @@ test("desktop panels are inert, attached, compact, and use stable geometry", () 
   assert.equal(header.includes("pt-1 transition duration-200"), false);
 });
 
-test("direct links close desktop panel and active ownership is centralized", () => {
+test("direct links and panel triggers expose centralized active ownership", () => {
   includesAll(header, [
-    'import { getActiveNavigationItem } from "./navigation-active-state"',
-    "getActiveNavigationItem(pathname) === panel.id",
-    "getActiveNavigationItem(pathname) === link.id",
     "onClick={() => closePanel()}",
+    "getActiveNavigationItem(pathname) === link.id",
+    'aria-current={active ? "page" : undefined}',
+    'aria-current={getActiveNavigationItem(pathname) === panel.id ? "page" : undefined}',
+    "after:scale-x-100",
   ]);
 });
 
