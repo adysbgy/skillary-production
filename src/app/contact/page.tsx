@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ContactPage from "@/features/marketing/pages/ContactPage";
 
 export const metadata: Metadata = {
@@ -7,4 +8,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export default ContactPage;
+export default function ContactRoute() {
+  return (
+    <Suspense fallback={null}>
+      <ContactPage />
+    </Suspense>
+  );
+}
