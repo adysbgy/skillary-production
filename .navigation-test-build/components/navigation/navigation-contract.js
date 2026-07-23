@@ -1,0 +1,161 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FORBIDDEN_NAVIGATION_PREFIXES = exports.CANONICAL_NAVIGATION_HREFS = exports.TYPED_DIRECT_NAV = exports.DIRECT_NAV = exports.TYPED_NAV_PANELS = exports.NAV_PANELS = exports.NAV_UTILITY_LINKS = exports.NAV_PRIMARY_ACTION = exports.NAV_ANNOUNCEMENT = exports.DIRECT_NAV_IDS = exports.NAV_PANEL_IDS = void 0;
+exports.getCanonicalNavigationHrefs = getCanonicalNavigationHrefs;
+exports.getNavigationContractViolations = getNavigationContractViolations;
+exports.NAV_PANEL_IDS = ["programs", "services"];
+exports.DIRECT_NAV_IDS = ["events", "trainers", "portfolio", "about"];
+exports.NAV_ANNOUNCEMENT = {
+    message: "✦ BARU: Skillary Events — kelas singkat untuk skill kerja profesional",
+    label: "Lihat Events",
+    href: "/events",
+};
+exports.NAV_PRIMARY_ACTION = {
+    label: "Lihat Events",
+    compactLabel: "Events",
+    href: "/events",
+};
+exports.NAV_UTILITY_LINKS = [
+    { id: "find-program", label: "Cari program", href: "/programs" },
+    { id: "business", label: "Untuk Bisnis", href: "/untuk-organisasi" },
+];
+exports.NAV_PANELS = [
+    { id: "programs", label: "Programs", eyebrow: "Belajar bersama Skillary", title: "Program untuk skill kerja yang nyata.", description: "Temukan program terstruktur, kelas singkat, resource, dan faculty untuk langkah berikutnya.", href: "/programs", groups: [
+            { title: "Format", links: [
+                    { id: "programs-all", label: "Semua Program", href: "/programs", description: "Program terstruktur untuk individu dan tim." },
+                    { id: "programs-events", label: "Events & Kelas Singkat", href: "/events", description: "Webinar praktis dan sesi berdurasi ringkas." },
+                    { id: "programs-paths", label: "Learning Paths", href: "/learning-paths", description: "Urutan belajar untuk tujuan yang jelas." },
+                    { id: "programs-resources", label: "Resource Gratis", href: "/resources", description: "Materi praktis yang dapat langsung digunakan." },
+                ] },
+            { title: "Pilih dengan percaya diri", links: [
+                    { id: "programs-faculty", label: "Kenali Trainers", href: "/trainers", description: "Praktisi terpilih untuk pembelajaran relevan." },
+                    { id: "programs-standards", label: "Standar Trainers", href: "/trainer-verification", description: "Cara profil, bukti, dan designation ditinjau." },
+                    { id: "programs-organizations", label: "Services untuk Organisasi", href: "/untuk-organisasi", description: "Program yang disesuaikan dengan konteks tim." },
+                ] },
+        ] },
+    { id: "services", label: "Services", eyebrow: "Capability partner", title: "Program yang dirancang untuk konteks tim Anda.", description: "Mulai dari kebutuhan bisnis, pilih faculty dan format, lalu susun hasil belajar yang dapat dipertanggungjawabkan.", href: "/untuk-organisasi", groups: [
+            { title: "Solusi", links: [
+                    { id: "org-training", label: "Pelatihan In-House", href: "/untuk-organisasi", description: "Solusi organisasi yang dapat disesuaikan." },
+                    { id: "org-programs", label: "Katalog Program", href: "/programs", description: "Lihat cakupan topik dan format." },
+                    { id: "org-paths", label: "Learning Path Tim", href: "/learning-paths", description: "Susun urutan belajar yang lebih terarah." },
+                    { id: "org-faculty", label: "Pilih Trainers", href: "/trainers", description: "Kenali praktisi dan fokus pembelajarannya." },
+                ] },
+            { title: "Bukti & kepercayaan", links: [
+                    { id: "org-portfolio", label: "Portfolio", href: "/portofolio", description: "Lihat pekerjaan dan program terpilih." },
+                    { id: "org-standards", label: "Standar Trainers", href: "/trainer-verification", description: "Pahami designation dan proses review." },
+                    { id: "org-about", label: "About Skillary", href: "/about", description: "Misi dan pendekatan kami." },
+                ] },
+        ], action: { id: "org-contact", label: "Diskusikan kebutuhan", href: "/contact", description: "Mulai percakapan dengan tim Skillary." } },
+];
+exports.TYPED_NAV_PANELS = exports.NAV_PANELS;
+exports.DIRECT_NAV = [
+    { id: "events", label: "Events", href: "/events" },
+    { id: "trainers", label: "Trainers", href: "/trainers" },
+    { id: "portfolio", label: "Portfolio", href: "/portofolio" },
+    { id: "about", label: "About", href: "/about" },
+];
+exports.TYPED_DIRECT_NAV = exports.DIRECT_NAV;
+exports.CANONICAL_NAVIGATION_HREFS = [
+    "/",
+    "/about",
+    "/contact",
+    "/events",
+    "/learning-paths",
+    "/login",
+    "/portofolio",
+    "/privacy",
+    "/programs",
+    "/resources",
+    "/terms",
+    "/trainer-verification",
+    "/trainers",
+    "/untuk-organisasi",
+];
+exports.FORBIDDEN_NAVIGATION_PREFIXES = [
+    "/admin",
+    "/blog",
+    "/case-studies",
+    "/checkout",
+    "/community",
+    "/dashboard",
+    "/explore",
+    "/learn",
+    "/lp",
+    "/skillary-campus",
+    "/v2",
+];
+function getCanonicalNavigationHrefs() {
+    const hrefs = [
+        "/",
+        "/login",
+        exports.NAV_ANNOUNCEMENT.href,
+        exports.NAV_PRIMARY_ACTION.href,
+        ...exports.NAV_UTILITY_LINKS.map((link) => link.href),
+        ...exports.TYPED_DIRECT_NAV.map((link) => link.href),
+        ...exports.TYPED_NAV_PANELS.flatMap((panel) => [
+            panel.href,
+            ...panel.groups.flatMap((group) => group.links.map((link) => link.href)),
+            ...(panel.action ? [panel.action.href] : []),
+        ]),
+    ];
+    return [...new Set(hrefs)].sort();
+}
+function getNavigationContractViolations() {
+    const violations = [];
+    const allLinks = [
+        ...exports.NAV_UTILITY_LINKS,
+        ...exports.TYPED_DIRECT_NAV,
+        ...exports.TYPED_NAV_PANELS.flatMap((panel) => [
+            ...panel.groups.flatMap((group) => group.links),
+            ...(panel.action ? [panel.action] : []),
+        ]),
+    ];
+    const allIds = [
+        ...exports.NAV_UTILITY_LINKS.map((link) => link.id),
+        ...exports.TYPED_DIRECT_NAV.map((link) => link.id),
+        ...exports.TYPED_NAV_PANELS.map((panel) => panel.id),
+        ...allLinks
+            .filter((link) => !("id" in link && exports.NAV_UTILITY_LINKS.some((utility) => utility.id === link.id)))
+            .filter((link) => !("id" in link && exports.TYPED_DIRECT_NAV.some((direct) => direct.id === link.id)))
+            .map((link) => link.id),
+    ];
+    if (exports.TYPED_NAV_PANELS.map((panel) => panel.id).join(",") !== exports.NAV_PANEL_IDS.join(",")) {
+        violations.push("panel-id-order");
+    }
+    if (exports.TYPED_DIRECT_NAV.map((link) => link.id).join(",") !== exports.DIRECT_NAV_IDS.join(",")) {
+        violations.push("direct-id-order");
+    }
+    if (new Set(allIds).size !== allIds.length)
+        violations.push("duplicate-id");
+    for (const panel of exports.TYPED_NAV_PANELS) {
+        if (panel.groups.length !== 2)
+            violations.push(`panel-group-count:${panel.id}`);
+        if (!panel.groups.some((group) => group.links.some((link) => link.href === panel.href))) {
+            violations.push(`missing-featured-destination:${panel.id}`);
+        }
+        if (panel.action && panel.id !== "services")
+            violations.push(`unexpected-panel-action:${panel.id}`);
+    }
+    const organizationPanel = exports.TYPED_NAV_PANELS.find((panel) => panel.id === "services");
+    if (organizationPanel?.action?.href !== "/contact")
+        violations.push("organization-contact-action");
+    const hrefOccurrences = new Map();
+    for (const link of allLinks)
+        hrefOccurrences.set(link.href, (hrefOccurrences.get(link.href) ?? 0) + 1);
+    for (const [href, count] of hrefOccurrences) {
+        if (count > 3)
+            violations.push(`href-multiplicity:${href}:${count}`);
+    }
+    const canonical = new Set(exports.CANONICAL_NAVIGATION_HREFS);
+    for (const href of getCanonicalNavigationHrefs()) {
+        if (!href.startsWith("/") || href.includes("?") || href.includes("#") || href.includes("//")) {
+            violations.push(`unsafe-href:${href}`);
+        }
+        if (!canonical.has(href))
+            violations.push(`noncanonical-href:${href}`);
+        if (exports.FORBIDDEN_NAVIGATION_PREFIXES.some((prefix) => href === prefix || href.startsWith(`${prefix}/`))) {
+            violations.push(`forbidden-href:${href}`);
+        }
+    }
+    return violations;
+}

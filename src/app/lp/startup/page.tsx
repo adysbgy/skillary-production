@@ -3,11 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Manrope } from "next/font/google";
 
-// Aimfox uses Manrope — bundled with the page so every route rendering it
-// (both / and /lp/startup) gets the face without extra layout wiring.
-const manrope = Manrope({ subsets: ["latin"] });
 import { EMAIL_GENERAL, INSTAGRAM_URL, whatsappLink } from "@/data/config";
 import { StartupHeader } from "@/components/v2/layout/StartupHeader";
 import { StartupFooter } from "@/components/v2/marketing/StartupFooter";
@@ -318,7 +314,7 @@ export default function StartupConceptPage({ standaloneHeader = true }: { standa
   }, []);
 
   return (
-    <div className={`${manrope.className} min-h-screen text-[#0F172A] antialiased`} style={{ background: DARK }}>
+    <div className="min-h-screen font-sans text-[#0F172A] antialiased" style={{ background: DARK }}>
       <style>{`
         @keyframes lp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .lp-marquee { animation: lp-marquee 55s linear infinite; }

@@ -12,6 +12,12 @@ export const MARKETING_HEADER_EXACT_ROUTES = [
   "/trainers",
   "/trainers/apply",
   "/trainer-verification",
+  "/privacy",
+  "/terms",
+  "/learning-paths",
+  "/expert-partner",
+  "/community",
+  "/blog",
 ] as const;
 
 export const MARKETING_HEADER_DESCENDANT_ROOTS = ["/trainers"] as const;
@@ -27,6 +33,12 @@ export const MARKETING_SHELL_ROUTES = [
   "/trainers",
   "/trainers/apply",
   "/trainer-verification",
+  "/privacy",
+  "/terms",
+  "/learning-paths",
+  "/expert-partner",
+  "/community",
+  "/blog",
 ] as const;
 
 export const HIDDEN_HEADER_EXACT_ROUTES = [] as const;

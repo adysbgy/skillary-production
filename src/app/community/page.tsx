@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { PageHero } from "@/components/sections/PageHero";
 import { EVENTS, MENTORS } from "@/data/content";
 import type { Metadata } from "next";
 import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
+import { GradientText } from "@/components/v2/marketing/MarketingUI";
 
 export const metadata: Metadata = {
     title: "Komunitas | Skillary",
@@ -12,12 +12,23 @@ export const metadata: Metadata = {
 
 export default function CommunityPage() {
     return (
-        <MarketingShell showFooter={false}>
-            <PageHero
-                eyebrow="Komunitas"
-                title="Tumbuh bersama praktisi, bukan hanya konten"
-                description="Skillary menggabungkan pembelajaran platform dengan sesi praktis, mentor, dan momen komunitas yang menjaga pertumbuhan tetap hidup."
-            />
+        <MarketingShell>
+            {/* Hero */}
+            <section className="relative overflow-hidden px-5 pt-16 md:pt-24 pb-12 md:pb-16 text-center">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[480px] pointer-events-none" style={{ background: "radial-gradient(ellipse at center top, rgba(255,138,0,0.13) 0%, rgba(255,90,95,0.06) 40%, transparent 70%)" }} />
+                <div data-reveal className="relative max-w-3xl mx-auto">
+                    <div className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-1.5 rounded-full mb-7 text-[#64748B] bg-white" style={{ border: "1px solid rgb(234, 222, 210)", boxShadow: "0 1px 3px rgba(15,23,42,0.06)" }}>
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: "rgb(255,138,0)" }} />
+                        Komunitas
+                    </div>
+                    <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mb-6">
+                        Tumbuh bersama <GradientText>praktisi nyata</GradientText>
+                    </h1>
+                    <p className="text-base md:text-lg text-[#64748B] max-w-2xl mx-auto leading-relaxed">
+                        Skillary menggabungkan pembelajaran platform dengan sesi praktis, mentor, dan momen komunitas yang menjaga pertumbuhan tetap hidup.
+                    </p>
+                </div>
+            </section>
 
             <Container className="py-16 lg:py-24">
                 <div className="mb-8">

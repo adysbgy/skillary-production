@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { HeaderV2 } from "@/components/v2/layout/HeaderV2";
 import { FooterV2 } from "@/components/v2/layout/FooterV2";
 import { MarketingHeaderGate } from "@/components/v2/layout/MarketingHeaderGate";
 import { Providers } from "@/components/Providers";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
@@ -50,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${plusJakarta.variable} ${jbMono.variable} antialiased`}>
+    <html lang="id" className={`${manrope.variable} ${jbMono.variable} antialiased`}>
       <body className="flex flex-col text-[#181818] font-sans">
         <Providers>
           <HeaderV2 />
