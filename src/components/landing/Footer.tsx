@@ -71,7 +71,7 @@ export const Footer = () => {
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/resources">Brief Training</Link></li>
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/contact?type=proposal&source=proposal">Diskusikan Kebutuhan Training</Link></li>
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/contact">Kontak</Link></li>
-<li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/portfolio">Portofolio</Link></li>
+<li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/portofolio">Portofolio</Link></li>
 <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/about">Tentang Kami</Link></li>
 </ul>
 </div>

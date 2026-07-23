@@ -104,6 +104,15 @@
         "src/components/v2/home/AffiliateCtaV2.tsx",
         "src/components/v2/home/FinalCtaV2.tsx"
       ]
+    },
+    {
+      "route": "/v2/portfolio",
+      "sourceFile": "src/app/v2/portfolio/page.tsx",
+      "consumers": [],
+      "decision": "DELETED",
+      "note": "Unsupported client/impact marketing source retired after evidence audit; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/portofolio"
     }
   ],
   "candidates": [
@@ -193,7 +202,9 @@
         "archive evidence"
       ],
       "confidence": "LOW",
-      "decision": "KEEP_PENDING_REVIEW"
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "note": "Evidence-safe content salvaged into canonical /portofolio; only non-conflicting records with unique public proof are published; permanent redirect retained."
     },
     {
       "route": "/portfolio-arsip",
@@ -207,7 +218,9 @@
         "Instagram documentation provenance"
       ],
       "confidence": "LOW",
-      "decision": "KEEP_PENDING_REVIEW"
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "note": "Evidence-safe content salvaged into canonical /portofolio; only non-conflicting records with unique public proof are published; permanent redirect retained."
     },
     {
       "route": "/case-studies",
@@ -221,7 +234,9 @@
         "curated evidence copy"
       ],
       "confidence": "LOW",
-      "decision": "KEEP_PENDING_REVIEW"
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "note": "Evidence-safe content salvaged into canonical /portofolio; only non-conflicting records with unique public proof are published; permanent redirect retained."
     },
     {
       "route": "/program-catalog",

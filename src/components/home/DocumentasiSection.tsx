@@ -178,7 +178,7 @@ export function DocumentasiSection() {
 
         {/* CTAs */}
         <div className="flex flex-wrap justify-center gap-3">
-          <Link href="/portfolio">
+          <Link href="/portofolio">
             <button
               className="px-7 py-3.5 rounded-full font-bold text-sm text-white shadow-lg hover:opacity-90 hover:-translate-y-0.5 transition-all"
               style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}

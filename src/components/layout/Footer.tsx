@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
@@ -73,8 +72,8 @@ export function Footer() {
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/untuk-organisasi">Solusi Organisasi</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/contact?type=proposal&source=proposal">Diskusikan Kebutuhan Training</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/contact">Kontak</Link></li>
-                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/portfolio">Portofolio</Link></li>
-                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/case-studies">Studi Kasus</Link></li>
+                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/portofolio">Portofolio</Link></li>
+                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/portofolio">Studi Kasus</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/about">Tentang Kami</Link></li>
                         </ul>
                     </div>

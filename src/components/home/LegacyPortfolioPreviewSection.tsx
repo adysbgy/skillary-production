@@ -36,12 +36,12 @@ export function LegacyPortfolioPreviewSection() {
 
         {/* CTAs */}
         <div className="motion-fade-up motion-delay-300 flex flex-wrap justify-center gap-3 mb-8">
-          <Link href="/portfolio">
+          <Link href="/portofolio">
             <button className="motion-btn bg-[#172554] hover:bg-[#1E3A8A] text-white px-7 py-3.5 shadow-lg shadow-[#172554]/15 font-semibold rounded-xl text-sm">
               Lihat Portofolio
             </button>
           </Link>
-          <Link href="/case-studies">
+          <Link href="/portofolio">
             <button className="motion-btn px-7 py-3.5 hover:bg-[#FFF8F1] font-semibold rounded-xl border border-[#E7DDD4] text-[#334155] bg-white text-sm">
               Lihat Highlight Studi Kasus
             </button>

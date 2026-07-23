@@ -33,7 +33,7 @@ export function HeroSection() {
                 Diskusikan Kebutuhan Training
               </button>
             </Link>
-            <Link href="/portfolio">
+            <Link href="/portofolio">
               <button className="motion-btn px-7 py-3.5 hover:bg-[#FFF8F1] font-semibold rounded-xl border border-[#E7DDD4] text-[#334155] bg-white text-sm">
                 Lihat Portofolio
               </button>

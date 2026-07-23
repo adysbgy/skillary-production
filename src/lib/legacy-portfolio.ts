@@ -184,74 +184,20 @@ export const legacyPortfolioCards: PortfolioCard[] = [
   { id: 39, program: "Interactive Dashboard with Microsoft Excel", category: "Data Analytics, Dashboard & Storytelling", client: "Bank DKI", sector: "Banking", training_date: null, venue: null, city: null, supporting_posts: 1, proof_urls: ["https://www.instagram.com/p/C7iMLKnh4nz/"], short_copy: "Interactive Dashboard with Microsoft Excel untuk Bank DKI", status: "portfolio" },
 ];
 
-// ──────────────────────────────────────────────
-// CASE STUDY DERIVATION
-// ──────────────────────────────────────────────
-
-const TRAINING_FOCUS: Record<string, string> = {
-  "Data Analytics, Dashboard & Storytelling":
-    "Membaca data, membangun dashboard, menemukan insight, dan menyampaikan rekomendasi bisnis melalui storytelling with data.",
-  "Infographics & Visual Communication":
-    "Mengubah informasi kompleks menjadi visual infografis yang jelas, menarik, dan mudah dipahami oleh berbagai audiens.",
-  "Presentation, Reporting & Business Communication":
-    "Menyusun laporan dan presentasi bisnis yang lebih ringkas, strategis, dan berdampak bagi pengambil keputusan.",
-  "Leadership & Problem Solving":
-    "Membangun keterampilan problem solving, pengambilan keputusan, dan komunikasi tim yang lebih adaptif.",
-  "Process Improvement, SOP & Quality":
-    "Merapikan proses bisnis, menyusun SOP, dan meningkatkan kualitas kerja melalui pendekatan improvement.",
-  "AI & Digital Mindset":
-    "Mengenalkan literasi digital dan pemanfaatan teknologi AI untuk meningkatkan produktivitas kerja sehari-hari.",
-};
-
-export interface CaseStudy {
-  id: number;
-  program: string;
-  category: string;
-  client: string;
-  sector: string;
-  trainingDate: string | null;
-  city: string | null;
-  venue: string | null;
-  proofUrls: string[];
-  supportingPosts: number;
-  sourceBrand: "Allman";
-  caseContext: string;
-  trainingFocus: string;
-  skillaryRelevance: string;
-}
-
-function deriveCaseStudy(card: PortfolioCard): CaseStudy {
-  return {
-    id: card.id,
-    program: card.program,
-    category: card.category,
-    client: card.client,
-    sector: card.sector,
-    trainingDate: card.training_date,
-    city: card.city,
-    venue: card.venue,
-    proofUrls: card.proof_urls,
-    supportingPosts: card.supporting_posts,
-    sourceBrand: "Allman",
-    caseContext: `Program ini merepresentasikan pengalaman pelatihan Allman dalam bidang ${card.category} untuk organisasi dari sektor ${card.sector}.`,
-    trainingFocus: TRAINING_FOCUS[card.category] || "Pengembangan kompetensi peserta melalui pendekatan pelatihan terstruktur.",
-    skillaryRelevance:
-      "Pengalaman seperti ini menjadi relevan dengan Skillary karena kini dapat didukung oleh alur digital: materi, assessment, sertifikat, progress peserta, dan laporan pelatihan.",
-  };
-}
 
 /**
- * Curated case study IDs — selected for:
- * 1. Proof URL availability (all have proof)
- * 2. Supporting posts count (higher = more evidence)
- * 3. Sector diversity (Banking, Government, FMCG, etc.)
- * 4. Category diversity (covers 5 of 6 categories)
- * 5. Complete date/location data where possible
- * 6. No excessive repetition of the same client consecutively
+ * Public archive policy: only records whose retained proof URLs are present and
+ * not reused by a materially different registry record are publishable.
+ * Records excluded here remain in the internal registry for documentary review.
  */
-const CURATED_CASE_IDS = [14, 12, 20, 21, 15, 23, 3, 13, 11, 17, 36, 28];
+export const PUBLIC_ARCHIVE_IDS = [1, 2, 3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 15, 18, 20, 25, 26, 27, 30, 31, 32, 33, 35, 37] as const;
 
-export const legacyCaseStudies: CaseStudy[] = CURATED_CASE_IDS
-  .map((id) => legacyPortfolioCards.find((c) => c.id === id))
-  .filter((c): c is PortfolioCard => c !== undefined)
-  .map(deriveCaseStudy);
+export const publicPortfolioCards = legacyPortfolioCards.filter((card) =>
+  (PUBLIC_ARCHIVE_IDS as readonly number[]).includes(card.id),
+);
+
+export const publicPortfolioMetrics = {
+  documentedPrograms: publicPortfolioCards.length,
+  documentedOrganizations: new Set(publicPortfolioCards.map((card) => card.client)).size,
+  documentedCategories: new Set(publicPortfolioCards.map((card) => card.category)).size,
+};

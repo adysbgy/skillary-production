@@ -5,7 +5,11 @@
  * These functions operate on local data only — no network calls.
  */
 
-import { legacyPortfolioCards, legacyCaseStudies, type PortfolioCard } from "./legacy-portfolio";
+import {
+  legacyPortfolioCards,
+  publicPortfolioCards,
+  type PortfolioCard,
+} from "./legacy-portfolio";
 
 /** Returns all proof URLs across all portfolio cards (may contain duplicates). */
 export function getAllLegacyProofUrls(): { url: string; cardId: number; program: string; client: string }[] {
@@ -41,11 +45,9 @@ export function getPortfolioCardsWithMultipleProof(): PortfolioCard[] {
   return legacyPortfolioCards.filter((c) => c.proof_urls.length > 1);
 }
 
-/** Returns case study records that rely on proof URLs. */
-export function getCaseStudiesUsingProof(): { id: number; program: string; client: string; proofCount: number }[] {
-  return legacyCaseStudies
-    .filter((cs) => cs.proofUrls.length > 0)
-    .map((cs) => ({ id: cs.id, program: cs.program, client: cs.client, proofCount: cs.proofUrls.length }));
+/** Returns proof URLs assigned to more than one registry record. */
+export function getConflictingProofUrls(): Map<string, number[]> {
+  return new Map([...getUniqueProofUrls()].filter(([, cardIds]) => cardIds.length > 1));
 }
 
 /** Basic URL shape validation — checks protocol and domain structure. */
@@ -71,18 +73,19 @@ export function getProofAuditSummary() {
   const unique = getUniqueProofUrls();
   const missing = getPortfolioCardsMissingProof();
   const multi = getPortfolioCardsWithMultipleProof();
-  const csProof = getCaseStudiesUsingProof();
-
+  const conflicts = getConflictingProofUrls();
   const malformed = [...unique.keys()].filter((u) => !validateProofUrlShape(u).valid);
 
   return {
     totalCards: legacyPortfolioCards.length,
+    publicCards: publicPortfolioCards.length,
     totalProofUrlReferences: allUrls.length,
     uniqueProofUrls: unique.size,
+    conflictingProofUrls: conflicts.size,
+    conflictingCardIds: [...new Set([...conflicts.values()].flat())],
     cardsMissingProof: missing.length,
     cardsMissingProofIds: missing.map((c) => c.id),
     cardsWithMultipleProof: multi.length,
-    caseStudiesUsingProof: csProof.length,
     malformedUrls: malformed,
   };
 }

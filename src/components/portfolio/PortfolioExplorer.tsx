@@ -81,7 +81,7 @@ export function PortfolioExplorer({ cards }: { cards: PortfolioCard[] }) {
                     {SHORT_LABELS[card.category] || card.category}
                   </span>
                   <span className="text-[9px] font-bold uppercase tracking-widest text-[#C2410C] bg-[#FFF7ED] px-2.5 py-1 rounded-full border border-[#FED7AA]">
-                    Arsip terkurasi
+                    Arsip publik
                   </span>
                 </div>
 
@@ -106,7 +106,7 @@ export function PortfolioExplorer({ cards }: { cards: PortfolioCard[] }) {
 
               <div className="px-5 py-4 bg-[#FAFAF8] border-t border-[#F1EDE8] flex items-center justify-between gap-3">
                 <span className="text-[10px] font-semibold text-[#94A3B8]">
-                  {card.supporting_posts} dokumentasi
+                  Bukti publik tersedia
                 </span>
                 {hasProof ? (
                   <a
@@ -123,7 +123,7 @@ export function PortfolioExplorer({ cards }: { cards: PortfolioCard[] }) {
                   </a>
                 ) : (
                   <span className="text-[10px] font-medium text-[#C2410C] bg-[#FFF8F1] border border-[#E7DDD4] px-2.5 py-1 rounded-full">
-                    Dokumentasi belum tersedia
+                    Tidak dipublikasikan
                   </span>
                 )}
               </div>
