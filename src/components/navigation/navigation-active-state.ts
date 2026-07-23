@@ -3,12 +3,12 @@ import type { DirectNavigationId, NavigationPanelId } from "./navigation-contrac
 export type ActiveNavigationItem = NavigationPanelId | DirectNavigationId | null;
 
 const ROUTE_OWNERS: ReadonlyArray<Readonly<{ id: Exclude<ActiveNavigationItem, null>; roots: readonly string[] }>> = [
-  { id: "trainers", roots: ["/trainers"] },
+  { id: "trainers", roots: ["/trainers", "/expert-partner"] },
   { id: "portfolio", roots: ["/portofolio"] },
   { id: "events", roots: ["/events"] },
   { id: "programs", roots: ["/programs", "/resources", "/learning-paths", "/trainer-verification"] },
   { id: "services", roots: ["/untuk-organisasi"] },
-  { id: "about", roots: ["/about", "/contact", "/privacy", "/terms"] },
+  { id: "about", roots: ["/about"] },
 ];
 
 function normalizePathname(pathname: string) {

@@ -9,6 +9,7 @@ import {
   DIRECT_NAV,
   NAV_ANNOUNCEMENT,
   NAV_PRIMARY_ACTION,
+  PRIMARY_NAV_ORDER,
   TYPED_NAV_PANELS as NAV_PANELS,
   type NavigationPanel,
 } from "./navigation-contract";
@@ -32,6 +33,14 @@ const SWITCH_OPEN_DELAY_MS = 150;
 const CLOSE_DELAY_MS = 320;
 const SCROLL_THRESHOLD_PX = 52;
 const PANEL_SCROLL_CLOSE_DISTANCE_PX = 16;
+
+const PRIMARY_NAV_ENTRIES = PRIMARY_NAV_ORDER.map((id) => {
+  const panel = NAV_PANELS.find((item) => item.id === id);
+  if (panel) return { kind: "panel" as const, item: panel };
+  const direct = DIRECT_NAV.find((item) => item.id === id);
+  if (!direct) throw new Error(`Missing primary navigation entry: ${id}`);
+  return { kind: "direct" as const, item: direct };
+});
 
 export function SkillaryMarketingHeader({ authOverride }: { authOverride?: MarketingHeaderAuthOverride } = {}) {
   const pathname = usePathname();
@@ -233,14 +242,8 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
               "radial-gradient(ellipse 55% 220% at 50% 0%, rgba(255,120,30,.85), rgba(150,55,10,.55) 40%, #0d101c 100%)",
           }}
         >
-          <div className="mx-auto flex h-11 max-w-7xl items-center justify-center gap-3 px-4 text-xs font-semibold">
+          <div className="mx-auto flex h-11 max-w-7xl items-center justify-center px-4 text-xs font-semibold">
             <span className="truncate">{NAV_ANNOUNCEMENT.message}</span>
-            <Link
-              href={NAV_ANNOUNCEMENT.href}
-              className="shrink-0 rounded-full border border-white/30 bg-white/10 px-3 py-1 font-bold outline-none transition hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-[#f0b65b] motion-reduce:transition-none"
-            >
-              {NAV_ANNOUNCEMENT.label}
-            </Link>
           </div>
         </div>
 
@@ -261,11 +264,7 @@ export function SkillaryMarketingHeader({ authOverride }: { authOverride?: Marke
             </Link>
 
             <nav aria-label="Navigasi utama" className="hidden min-w-0 items-center gap-0 lg:flex xl:gap-0.5">
-              {[
-                { kind: "direct" as const, item: DIRECT_NAV.find((link) => link.id === "events")! },
-                { kind: "panel" as const, item: NAV_PANELS.find((panel) => panel.id === "programs")! },
-                ...DIRECT_NAV.filter((link) => ["services", "trainers", "portfolio", "about"].includes(link.id)).map((item) => ({ kind: "direct" as const, item })),
-              ].map((entry) => {
+              {PRIMARY_NAV_ENTRIES.map((entry) => {
                 if (entry.kind === "panel") {
                   const panel = entry.item;
                   const expanded = openPanel === panel.id;
@@ -521,58 +520,60 @@ function MobileNavigation({
     >
       <nav aria-label="Tautan navigasi seluler" className="mx-auto flex h-full min-w-0 max-w-xl flex-col overflow-x-hidden overflow-y-auto overscroll-contain pr-1 [scrollbar-width:thin]">
         <div className="shrink-0 pb-2 text-[11px] font-extrabold uppercase tracking-[.18em] text-[#f0b65b]">Jelajahi Skillary</div>
-        {NAV_PANELS.map((panel) => {
-          const expanded = openSection === panel.id;
-          const active = isPanelActive(pathname, panel);
-          return (
-            <div key={panel.id} className="border-b border-white/10">
-              <button
-                type="button"
-                aria-expanded={expanded}
-                aria-controls={`marketing-mobile-${panel.id}`}
-                onClick={() => onToggleSection(panel.id)}
-                className={`flex min-h-14 w-full items-center justify-between rounded-lg text-left text-base font-bold outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b] ${active ? "text-[#f3c273]" : "text-white"}`}
-              >
-                {panel.label}
-                <Chevron open={expanded} />
-              </button>
-              <div
-                id={`marketing-mobile-${panel.id}`}
-                aria-hidden={!expanded}
-                inert={!expanded}
-                className={`grid transition-[grid-template-rows,opacity] duration-200 motion-reduce:transition-none ${expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
-              >
-                <div className="overflow-hidden">
-                  <div className="pb-4">
-                    <Link href={panel.href} onClick={onClose} className="block rounded-lg py-2 text-sm font-extrabold text-[#f0b65b] outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b]">
-                      {panel.title} →
-                    </Link>
-                    {panel.groups.map((group) => (
-                      <section key={group.title} className="mt-3">
-                        <h2 className="text-[10px] font-extrabold uppercase tracking-[.16em] text-white/40">{group.title}</h2>
-                        <div className="mt-1 grid gap-0.5">
-                          {group.links.map((link) => (
-                            <Link
-                              key={link.id}
-                              href={link.href}
-                              onClick={onClose}
-                              aria-current={matchesRouteBoundary(pathname, link.href) ? "page" : undefined}
-                              className={`rounded-lg py-2.5 text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b] ${matchesRouteBoundary(pathname, link.href) ? "text-[#f3c273]" : "text-white/75"}`}
-                            >
-                              {link.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </section>
-                    ))}
+        {PRIMARY_NAV_ENTRIES.map((entry) => {
+          if (entry.kind === "panel") {
+            const panel = entry.item;
+            const expanded = openSection === panel.id;
+            const active = isPanelActive(pathname, panel);
+            return (
+              <div key={panel.id} className="border-b border-white/10">
+                <button
+                  type="button"
+                  aria-expanded={expanded}
+                  aria-controls={`marketing-mobile-${panel.id}`}
+                  onClick={() => onToggleSection(panel.id)}
+                  className={`flex min-h-14 w-full items-center justify-between rounded-lg text-left text-base font-bold outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b] ${active ? "text-[#f3c273]" : "text-white"}`}
+                >
+                  {panel.label}
+                  <Chevron open={expanded} />
+                </button>
+                <div
+                  id={`marketing-mobile-${panel.id}`}
+                  aria-hidden={!expanded}
+                  inert={!expanded}
+                  className={`grid transition-[grid-template-rows,opacity] duration-200 motion-reduce:transition-none ${expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pb-4">
+                      <Link href={panel.href} onClick={onClose} className="block rounded-lg py-2 text-sm font-extrabold text-[#f0b65b] outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b]">
+                        {panel.title} →
+                      </Link>
+                      {panel.groups.map((group) => (
+                        <section key={group.title} className="mt-3">
+                          <h2 className="text-[10px] font-extrabold uppercase tracking-[.16em] text-white/40">{group.title}</h2>
+                          <div className="mt-1 grid gap-0.5">
+                            {group.links.map((link) => (
+                              <Link
+                                key={link.id}
+                                href={link.href}
+                                onClick={onClose}
+                                aria-current={matchesRouteBoundary(pathname, link.href) ? "page" : undefined}
+                                className={`rounded-lg py-2.5 text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b] ${matchesRouteBoundary(pathname, link.href) ? "text-[#f3c273]" : "text-white/75"}`}
+                              >
+                                {link.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </section>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
 
-        {DIRECT_NAV.map((link) => {
+          const link = entry.item;
           const active = getActiveNavigationItem(pathname) === link.id;
           return (
             <Link
@@ -595,9 +596,7 @@ function MobileNavigation({
           onClose={onClose}
           onSignOut={onSignOut}
         />
-        <div className="grid shrink-0 grid-cols-2 gap-2 pt-3 max-[340px]:grid-cols-1">
-          <Link href={NAV_PRIMARY_ACTION.href} onClick={onClose} className="col-span-full rounded-full bg-white px-3 py-3 text-center text-sm font-extrabold text-[#0f172a] outline-none focus-visible:ring-2 focus-visible:ring-[#f0b65b]">{NAV_PRIMARY_ACTION.label}</Link>
-        </div>
+
       </nav>
     </div>
   );

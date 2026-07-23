@@ -43,7 +43,6 @@ test("desktop panels are inert, attached, compact, and use stable geometry", () 
     "min-h-[10rem]",
     "grid-cols-[140px_repeat(3,minmax(0,1fr))]",
     "Array.from({ length: 3 }",
-    '["services", "trainers", "portfolio", "about"].includes(link.id)',
   ]);
   assert.equal(header.includes("min-h-[25rem]"), false);
   assert.equal(header.includes("pt-1 transition duration-200"), false);
@@ -65,7 +64,7 @@ test("mobile accordion and hidden panel semantics remain deterministic", () => {
     "inert={!expanded}",
     "href={panel.href}",
     "{panel.title} →",
-    "{DIRECT_NAV.map((link) =>",
+    "PRIMARY_NAV_ENTRIES.map((entry) =>",
   ]);
 });
 
@@ -94,4 +93,17 @@ test("mobile narrow-width and auth geometry guards remain present", () => {
     'min-w-[15.5rem]',
     'min-w-[8.75rem]',
   ]);
+});
+
+
+test("announcement and mobile drawer do not repeat campaign or CTA links", () => {
+  assert.equal(header.includes("NAV_ANNOUNCEMENT.href"), false);
+  assert.equal(header.includes("NAV_ANNOUNCEMENT.label"), false);
+  assert.equal((header.match(/href=\{NAV_PRIMARY_ACTION\.href\}/g) ?? []).length, 2);
+  assert.equal(header.includes('onClick={onClose} className="col-span-full'), false);
+});
+
+test("desktop and mobile consume one primary navigation order", () => {
+  includesAll(header, ["PRIMARY_NAV_ORDER", "PRIMARY_NAV_ENTRIES.map((entry) =>"]);
+  assert.equal((header.match(/PRIMARY_NAV_ENTRIES\.map\(\(entry\) =>/g) ?? []).length, 2);
 });

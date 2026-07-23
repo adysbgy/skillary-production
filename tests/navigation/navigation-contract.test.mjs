@@ -6,6 +6,8 @@ import {
   DIRECT_NAV_IDS,
   FORBIDDEN_NAVIGATION_PREFIXES,
   NAV_PANEL_IDS,
+  NAV_PRIMARY_ACTION,
+  PRIMARY_NAV_ORDER,
   NAV_PANELS,
   getCanonicalNavigationHrefs,
   getNavigationContractViolations,
@@ -26,6 +28,7 @@ test("panel labels, groups, and destinations match approved IA", () => {
     assert.equal(panel.groups.length, 2, panel.id);
     assert.deepEqual(panel.groups.flatMap((group) => group.links.map((link) => [link.label, link.href])), expectedPanelDestinations[panel.id], panel.id);
   }
+  assert.deepEqual(PRIMARY_NAV_ORDER, ["events", "programs", "services", "trainers", "portfolio", "about"]);
   assert.deepEqual(DIRECT_NAV.map(({ label, href }) => [label, href]), [["Events", "/events"], ["Services", "/untuk-organisasi"], ["Trainers", "/trainers"], ["Portfolio", "/portofolio"], ["About", "/about"]]);
 });
 
@@ -55,4 +58,11 @@ test("every primary navigation destination has one owner", () => {
   for (const panel of NAV_PANELS) {
     assert.equal(panel.groups.some((group) => group.links.some((link) => link.href === panel.href)), false, panel.id);
   }
+});
+
+
+test("campaign CTA has a distinct conversion destination", () => {
+  const primaryHrefs = new Set([...DIRECT_NAV.map((link) => link.href), ...NAV_PANELS.map((panel) => panel.href)]);
+  assert.equal(NAV_PRIMARY_ACTION.href, "/contact");
+  assert.equal(primaryHrefs.has(NAV_PRIMARY_ACTION.href), false);
 });

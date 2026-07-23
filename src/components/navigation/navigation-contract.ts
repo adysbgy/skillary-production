@@ -36,15 +36,15 @@ export type DirectNavigationLink = Readonly<{
 
 export const NAV_ANNOUNCEMENT = {
   message: "✦ BARU: Skillary Events — kelas singkat untuk skill kerja profesional",
-  label: "Lihat Events",
-  href: "/events",
 } as const;
 
 export const NAV_PRIMARY_ACTION = {
-  label: "Lihat Events",
-  compactLabel: "Events",
-  href: "/events",
+  label: "Diskusikan kebutuhan",
+  compactLabel: "Konsultasi",
+  href: "/contact",
 } as const;
+
+export const PRIMARY_NAV_ORDER = ["events", "programs", "services", "trainers", "portfolio", "about"] as const;
 
 
 export const NAV_PANELS = [
@@ -106,7 +106,6 @@ export function getCanonicalNavigationHrefs() {
   const hrefs = [
     "/",
     "/login",
-    NAV_ANNOUNCEMENT.href,
     NAV_PRIMARY_ACTION.href,
     ...TYPED_DIRECT_NAV.map((link) => link.href),
     ...TYPED_NAV_PANELS.flatMap((panel) => [
@@ -141,6 +140,13 @@ export function getNavigationContractViolations() {
   }
   if (TYPED_DIRECT_NAV.map((link) => link.id).join(",") !== DIRECT_NAV_IDS.join(",")) {
     violations.push("direct-id-order");
+  }
+  const primaryIds = new Set([...NAV_PANEL_IDS, ...DIRECT_NAV_IDS]);
+  if (PRIMARY_NAV_ORDER.length !== primaryIds.size || PRIMARY_NAV_ORDER.some((id) => !primaryIds.has(id))) {
+    violations.push("primary-order-coverage");
+  }
+  if (TYPED_DIRECT_NAV.some((link) => link.href === NAV_PRIMARY_ACTION.href) || TYPED_NAV_PANELS.some((panel) => panel.href === NAV_PRIMARY_ACTION.href)) {
+    violations.push(`primary-action-navigation-overlap:${NAV_PRIMARY_ACTION.href}`);
   }
   if (new Set(allIds).size !== allIds.length) violations.push("duplicate-id");
 
