@@ -43,9 +43,9 @@ export function MarketingShell({ children, showFooter = true }: { children: Reac
         }
       `}</style>
 
-      {/* Clearance for the fixed StartupHeader (announcement + pill) */}
+      {/* Clearance for the fixed marketing header; the page surface starts flush beneath it. */}
       <div className="pt-[100px] md:pt-[108px]">
-        <main className="bg-white rounded-[2rem] md:rounded-[2.75rem] overflow-hidden">
+        <main className="overflow-hidden rounded-b-[2rem] bg-white md:rounded-b-[2.75rem]">
           {children}
         </main>
       </div>
