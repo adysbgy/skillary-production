@@ -11,64 +11,82 @@
       "route": "/v2/catalog",
       "sourceFile": "src/app/v2/catalog/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/programs"
     },
     {
       "route": "/v2/program/[slug]",
       "sourceFile": "src/app/v2/program/[slug]/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/programs/[slug]"
     },
     {
       "route": "/v2/events",
       "sourceFile": "src/app/v2/events/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/events"
     },
     {
       "route": "/v2/events/[slug]",
       "sourceFile": "src/app/v2/events/[slug]/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/events/[slug]"
     },
     {
       "route": "/v2/events/[slug]/checkout",
       "sourceFile": "src/app/v2/events/[slug]/checkout/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/events/[slug]/checkout"
     },
     {
       "route": "/v2/about",
       "sourceFile": "src/app/v2/about/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/about"
     },
     {
       "route": "/v2/resources",
       "sourceFile": "src/app/v2/resources/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/resources"
     },
     {
       "route": "/v2/proposal",
       "sourceFile": "src/app/v2/proposal/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/contact"
     },
     {
       "route": "/v2/untuk-organisasi",
       "sourceFile": "src/app/v2/untuk-organisasi/page.tsx",
       "consumers": [],
-      "decision": "KEEP_PENDING_REVIEW",
-      "note": "Route wrapper retained; implementation extracted to src/features. Deletion remains unapproved pending observation."
+      "decision": "DELETED",
+      "note": "Physical compatibility wrapper deleted after approval; permanent redirect retained.",
+      "deletedAt": "2026-07-23",
+      "replacement": "/untuk-organisasi"
     }
   ],
   "candidates": [
