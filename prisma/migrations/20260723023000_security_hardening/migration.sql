@@ -1,16 +1,18 @@
 -- Sprint 0 security hardening persistence.
-ALTER TABLE "User" ADD COLUMN "passwordChangedAt" TIMESTAMP(3);
+-- Idempotent because production may receive this additive SQL through the
+-- Supabase SQL Editor before Prisma records it in _prisma_migrations.
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "passwordChangedAt" TIMESTAMP(3);
 
-CREATE TABLE "RateLimitBucket" (
+CREATE TABLE IF NOT EXISTS "RateLimitBucket" (
     "keyHash" TEXT NOT NULL,
     "count" INTEGER NOT NULL DEFAULT 1,
     "resetAt" TIMESTAMP(3) NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "RateLimitBucket_pkey" PRIMARY KEY ("keyHash")
 );
-CREATE INDEX "RateLimitBucket_resetAt_idx" ON "RateLimitBucket"("resetAt");
+CREATE INDEX IF NOT EXISTS "RateLimitBucket_resetAt_idx" ON "RateLimitBucket"("resetAt");
 
-CREATE TABLE "WebhookEvent" (
+CREATE TABLE IF NOT EXISTS "WebhookEvent" (
     "id" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
     "eventKeyHash" TEXT NOT NULL,
@@ -18,9 +20,9 @@ CREATE TABLE "WebhookEvent" (
     "processedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "WebhookEvent_pkey" PRIMARY KEY ("id")
 );
-CREATE UNIQUE INDEX "WebhookEvent_provider_eventKeyHash_key"
+CREATE UNIQUE INDEX IF NOT EXISTS "WebhookEvent_provider_eventKeyHash_key"
     ON "WebhookEvent"("provider", "eventKeyHash");
-CREATE INDEX "WebhookEvent_processedAt_idx" ON "WebhookEvent"("processedAt");
+CREATE INDEX IF NOT EXISTS "WebhookEvent_processedAt_idx" ON "WebhookEvent"("processedAt");
 
-CREATE INDEX "PasswordResetToken_email_idx" ON "PasswordResetToken"("email");
-CREATE INDEX "PasswordResetToken_expires_idx" ON "PasswordResetToken"("expires");
+CREATE INDEX IF NOT EXISTS "PasswordResetToken_email_idx" ON "PasswordResetToken"("email");
+CREATE INDEX IF NOT EXISTS "PasswordResetToken_expires_idx" ON "PasswordResetToken"("expires");
