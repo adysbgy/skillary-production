@@ -164,7 +164,7 @@ export default function ProgramCatalogPage() {
                 Diskusi Kebutuhan Training
               </button>
             </Link>
-            <Link href="/teams">
+            <Link href="/untuk-organisasi">
               <button className="bg-white text-[#334155] font-bold px-8 py-4 rounded-full shadow-sm hover:bg-[#FFF8F1] hover:-translate-y-0.5 transition-all text-lg" style={{ border: '1.5px solid rgb(240, 217, 200)' }}>
                 Lihat Solusi Organisasi
               </button>

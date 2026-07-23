@@ -18,7 +18,7 @@ export function CorporateCTA() {
               Jadwalkan Diskusi
             </button>
           </Link>
-          <Link href="/proposal">
+          <Link href="/contact?type=proposal&source=proposal">
             <button className="bg-white border-2 border-[#E7DDD4] text-[#334155] font-bold px-8 py-4 rounded-lg shadow-sm hover:bg-[#FFF8F1] transition-all text-lg">
               Diskusikan Kebutuhan Training
             </button>

@@ -46,6 +46,19 @@ const PERSONAS = [
   { title: "Komunitas", desc: "Jalankan program pelatihan untuk anggota dengan alur terstruktur.", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
 ];
 
+const ENGAGEMENT_OPTIONS = [
+  { title: "Pelatihan In-House", desc: "Satu atau beberapa topik untuk satu tim, disesuaikan dengan konteks pekerjaan peserta." },
+  { title: "Program Berbasis Batch", desc: "Kelola peserta, materi, assessment, dan jadwal dalam kelompok belajar yang terstruktur." },
+  { title: "Managed Learning Program", desc: "Rangkaian program lintas topik dengan progress dan dokumentasi terpusat untuk HR & L&D." },
+];
+
+const REPORT_OUTPUTS = [
+  "Daftar peserta dan status kehadiran",
+  "Progress materi dan penyelesaian program",
+  "Nilai assessment serta status kelulusan",
+  "Rekap sertifikat yang diterbitkan",
+];
+
 const CARD = { border: "1px solid rgb(234, 237, 243)", boxShadow: "0 1px 3px rgba(15,23,42,0.04)" } as const;
 const BAND = { backgroundImage: "url(/images/lp-startup-band.svg)", backgroundSize: "100% 100%" } as const;
 
@@ -163,6 +176,39 @@ export default function UntukOrganisasiPage() {
                 )}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Engagement options and reporting outputs ── */}
+      <section className="px-5 py-16 md:py-24" style={BAND}>
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8">
+          <div data-reveal>
+            <SectionHeading eyebrow="Pilihan Kerja Sama" title="Format yang mengikuti kebutuhan organisasi" sub="Mulai dari satu pelatihan hingga rangkaian program terkelola." />
+            <div className="space-y-3 mt-8">
+              {ENGAGEMENT_OPTIONS.map((option) => (
+                <div key={option.title} className="bg-white rounded-2xl p-5" style={CARD}>
+                  <h3 className="font-bold text-[#0F172A] mb-1">{option.title}</h3>
+                  <p className="text-sm text-[#64748B] leading-relaxed">{option.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div data-reveal className="bg-white rounded-3xl p-7 md:p-9" style={CARD}>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#F97316] mb-3">Output untuk HR &amp; L&amp;D</p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0F172A] mb-3">Laporan yang siap ditindaklanjuti</h2>
+            <p className="text-sm text-[#64748B] leading-relaxed mb-7">Setiap program dapat dirangkum dalam output operasional yang membantu evaluasi peserta dan pelaporan internal.</p>
+            <div className="space-y-3">
+              {REPORT_OUTPUTS.map((output) => (
+                <div key={output} className="flex items-start gap-3 text-sm text-[#334155]">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white text-xs" style={{ background: "rgb(5,150,105)" }}>✓</span>
+                  <span>{output}</span>
+                </div>
+              ))}
+            </div>
+            <Link href="/contact?type=managed&source=organization-reporting" className="inline-flex mt-8 text-sm font-bold text-[#F97316] hover:underline">
+              Diskusikan kebutuhan laporan →
+            </Link>
           </div>
         </div>
       </section>

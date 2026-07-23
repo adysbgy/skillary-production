@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
 import { GradientText } from "@/components/v2/marketing/MarketingUI";
 
@@ -37,7 +38,8 @@ const ICONS: Record<ResourceType, React.ReactNode> = {
   ),
 };
 
-const RESOURCES: { type: ResourceType; title: string; desc: string; pages: string }[] = [
+const RESOURCES: { type: ResourceType; title: string; desc: string; pages: string; href?: string }[] = [
+  { type: "Checklist", title: "Checklist Brief Kebutuhan Training", desc: "Panduan singkat menyiapkan tujuan, profil peserta, format, timeline, serta output sebelum meminta proposal.", pages: "Panduan online", href: "/contact?type=proposal&source=proposal" },
   { type: "Template", title: "Template Silabus Pelatihan", desc: "Kerangka silabus siap pakai untuk menyusun program pelatihan internal yang terstruktur.", pages: "8 halaman" },
   { type: "E-book", title: "E-book Panduan L&D 2026", desc: "Panduan lengkap merancang strategi Learning & Development yang terukur untuk organisasi.", pages: "42 halaman" },
   { type: "Checklist", title: "Checklist Evaluasi Kirkpatrick", desc: "Daftar periksa 4 level evaluasi pelatihan: reaksi, pembelajaran, perilaku, dan hasil.", pages: "5 halaman" },
@@ -99,13 +101,19 @@ export default function ResourcesPage() {
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                       PDF · {r.pages}
                     </div>
-                    <button
-                      onClick={() => { setSelected(r.title); setSubmitted(false); }}
-                      className="w-full text-center text-sm font-bold py-2.5 rounded-xl transition-all hover:opacity-90"
-                      style={{ background: style.bg, color: style.color }}
-                    >
-                      Unduh Gratis
-                    </button>
+                    {r.href ? (
+                      <Link href={r.href} className="w-full text-center text-sm font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{ background: style.bg, color: style.color }}>
+                        Gunakan Panduan
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={() => { setSelected(r.title); setSubmitted(false); }}
+                        className="w-full text-center text-sm font-bold py-2.5 rounded-xl transition-all hover:opacity-90"
+                        style={{ background: style.bg, color: style.color }}
+                      >
+                        Unduh Gratis
+                      </button>
+                    )}
                   </div>
                 </div>
               );

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FORMSPREE_ID } from "@/data/config";
 
@@ -27,11 +28,14 @@ export function ContactForm() {
   const prefillType = searchParams.get("type");
   const prefillProgram = searchParams.get("program");
   const prefillSource = searchParams.get("source");
+  const isProposalRequest = prefillType === "proposal" || prefillSource === "proposal";
   const initialType = (prefillType && TYPE_MAP[prefillType]) || "In-House Training";
   const programName = prefillProgram ? PROGRAM_MAP[prefillProgram] : null;
   const initialMessage = programName
     ? `Saya tertarik berdiskusi tentang program ${programName}.`
-    : "";
+    : isProposalRequest
+      ? "Saya ingin mendapatkan rekomendasi dan proposal pelatihan untuk organisasi kami."
+      : "";
 
   const [formData, setFormData] = useState({
     name: "",
@@ -76,7 +80,7 @@ export function ContactForm() {
       inquiryType: formData.inquiryType,
       message: formData.message,
       programInterest: prefillProgram || "",
-      sourcePage: prefillSource || "direct",
+      sourcePage: prefillSource || (isProposalRequest ? "proposal" : "direct"),
       _honeypot: honeypot,
     };
 
@@ -88,7 +92,7 @@ export function ContactForm() {
       role: formData.role,
       inquiryType: formData.inquiryType,
       message: formData.message,
-      sourcePage: prefillSource || "direct",
+      sourcePage: prefillSource || (isProposalRequest ? "proposal" : "direct"),
     };
 
     try {
@@ -132,9 +136,9 @@ export function ContactForm() {
           Tim Skillary akan meninjau kebutuhan Anda dan menghubungi kembali pada hari kerja.
         </p>
         <div className="flex flex-col gap-2 mb-6">
-          <a href="/program-catalog" className="text-sm font-semibold text-[#C2410C] hover:underline">Lihat Area Program →</a>
-          <a href="/teams" className="text-sm font-semibold text-[#C2410C] hover:underline">Solusi untuk Organisasi →</a>
-          <a href="/about" className="text-sm font-semibold text-[#C2410C] hover:underline">Tentang Skillary →</a>
+          <Link href="/programs" className="text-sm font-semibold text-[#C2410C] hover:underline">Lihat Area Program →</Link>
+          <Link href="/untuk-organisasi" className="text-sm font-semibold text-[#C2410C] hover:underline">Solusi untuk Organisasi →</Link>
+          <Link href="/about" className="text-sm font-semibold text-[#C2410C] hover:underline">Tentang Skillary →</Link>
         </div>
         <button
           onClick={() => {
@@ -156,6 +160,17 @@ export function ContactForm() {
         <p className="text-sm text-[#475569]">
           Semakin jelas informasi yang Anda berikan, semakin mudah bagi tim Skillary untuk menyiapkan rekomendasi format pelatihan yang sesuai.
         </p>
+        {isProposalRequest && (
+          <div className="mt-5 rounded-xl border border-[#FED7AA] bg-[#FFF7ED] p-4 text-sm text-[#7C2D12]">
+            <p className="font-bold mb-2">Agar proposal lebih tepat, sertakan brief singkat:</p>
+            <ul className="grid gap-1.5 pl-5 list-disc">
+              <li>Tujuan dan tantangan yang ingin diselesaikan.</li>
+              <li>Profil serta perkiraan jumlah peserta.</li>
+              <li>Topik, format, durasi, dan target waktu.</li>
+              <li>Output yang dibutuhkan: assessment, sertifikat, atau laporan.</li>
+            </ul>
+          </div>
+        )}
       </div>
 
       <form onSubmit={handleSubmit}>

@@ -27,7 +27,7 @@ export const InsightSection = () => {
           <p className="text-skillary-muted text-base leading-relaxed mb-8 max-w-lg">
             Seringkali pelatihan gagal karena brief yang kurang jelas. Unduh template standar industri ini untuk membantu Anda dan tim HR/L&D merumuskan kebutuhan, metrik keberhasilan, dan ekspektasi pelatihan dengan presisi.
           </p>
-          <Link href="/training-brief" className="inline-flex items-center gap-2.5 text-white font-bold text-sm px-8 py-3.5 rounded-full hover:opacity-90 transition-transform hover:scale-105 shadow-banner w-full sm:w-auto justify-center" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>
+          <Link href="/resources" className="inline-flex items-center gap-2.5 text-white font-bold text-sm px-8 py-3.5 rounded-full hover:opacity-90 transition-transform hover:scale-105 shadow-banner w-full sm:w-auto justify-center" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>
             <svg aria-hidden="true" className="lucide lucide-download w-4 h-4" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 15V3" />
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />

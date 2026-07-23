@@ -31,8 +31,12 @@ for (const item of manifest.protectedDependencies) {
   }
 }
 for (const item of manifest.candidates) {
-  if (item.decision !== "KEEP_PENDING_REVIEW") throw new Error(`Candidate prematurely advanced: ${item.route}`);
+  if (!["KEEP_PENDING_REVIEW", "DELETED"].includes(item.decision)) throw new Error(`Invalid candidate decision: ${item.route}`);
   if (!item.uniqueSignals?.length) throw new Error(`Missing salvage evidence: ${item.route}`);
+  if (item.decision === "DELETED") {
+    if (!item.deletedAt) throw new Error(`Deleted candidate lacks deletion date: ${item.route}`);
+    if (!item.note?.includes("salvaged")) throw new Error(`Deleted candidate lacks salvage confirmation: ${item.route}`);
+  }
 }
 for (const prefix of manifest.protectedRoutePrefixes) {
   if (manifest.candidates.some((item) => item.route === prefix || item.route.startsWith(`${prefix}/`))) {
@@ -40,4 +44,5 @@ for (const prefix of manifest.protectedRoutePrefixes) {
   }
 }
 const deletedCount = all.filter((item) => item.decision === "DELETED").length;
-console.log(`Retirement manifest audit passed: ${deletedCount} approved wrappers deleted; ${manifest.candidates.length} content-bearing candidates retained for review.`);
+const retainedCount = manifest.candidates.filter((item) => item.decision === "KEEP_PENDING_REVIEW").length;
+console.log(`Retirement manifest audit passed: ${deletedCount} approved routes deleted; ${retainedCount} content-bearing candidates retained for review.`);

@@ -167,7 +167,7 @@ export function ReportsCertificateSection() {
 
             {/* CTAs */}
             <div className="motion-fade-up motion-delay-400 flex flex-col gap-2 mt-5">
-              <Link href="/reports">
+              <Link href="/untuk-organisasi">
                 <button className="motion-btn w-full bg-[#172554] hover:bg-[#1E3A8A] text-white px-5 py-3 shadow-lg shadow-[#172554]/15 font-semibold rounded-xl text-sm">
                   Lihat Fitur Laporan
                 </button>

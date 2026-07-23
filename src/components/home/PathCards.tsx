@@ -24,14 +24,14 @@ export function PathCards() {
       title: "Training untuk Tim",
       desc: "Kelola pelatihan internal dengan dashboard, assessment, sertifikat, dan laporan.",
       cta: "Lihat Solusi Tim",
-      href: "/teams",
+      href: "/untuk-organisasi",
       icon: "🏢",
     },
     {
       title: "Assessment In-House",
       desc: "Jalankan quiz atau evaluasi untuk satu kelas, batch, atau program pelatihan.",
       cta: "Pelajari Assessment",
-      href: "/teams",
+      href: "/untuk-organisasi",
       icon: "📝",
     },
   ];

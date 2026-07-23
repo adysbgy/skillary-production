@@ -51,7 +51,7 @@ export function Footer() {
                         <ul className="space-y-2.5">
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/platform">Platform</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/demo">Demo</Link></li>
-                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/reports">Laporan</Link></li>
+                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/untuk-organisasi">Laporan</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/certificates">Sertifikat</Link></li>
                         </ul>
                     </div>
@@ -62,7 +62,7 @@ export function Footer() {
                         <ul className="space-y-2.5">
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/program-catalog">Jelajahi Program</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/learning-paths">Training Path</Link></li>
-                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/training-brief">Brief Training</Link></li>
+                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/resources">Brief Training</Link></li>
                         </ul>
                     </div>
 
@@ -70,8 +70,8 @@ export function Footer() {
                     <div>
                         <h4 className="text-sm font-bold text-white mb-4">Untuk Organisasi</h4>
                         <ul className="space-y-2.5">
-                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/services">Solusi Organisasi</Link></li>
-                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/proposal">Diskusikan Kebutuhan Training</Link></li>
+                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/untuk-organisasi">Solusi Organisasi</Link></li>
+                            <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/contact?type=proposal&source=proposal">Diskusikan Kebutuhan Training</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/contact">Kontak</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/portfolio">Portofolio</Link></li>
                             <li><Link className="text-xs text-gray-400 hover:text-white transition-colors hover:underline" href="/case-studies">Studi Kasus</Link></li>

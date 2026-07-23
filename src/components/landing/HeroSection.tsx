@@ -58,7 +58,7 @@ export const HeroSection = () => {
               </svg>
             </Link>
             <Link
-              href="/services"
+              href="/untuk-organisasi"
               className="inline-flex items-center rounded-full px-7 py-3 text-sm font-semibold transition-all duration-200 hover:bg-[#FFF8F1] hover:-translate-y-0.5 border bg-white"
               style={{ borderColor: 'rgb(240, 217, 200)', color: '#334155' }}
             >

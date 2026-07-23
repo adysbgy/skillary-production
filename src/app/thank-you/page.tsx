@@ -36,7 +36,7 @@ export default function ThankYouPage() {
         <div className="grid sm:grid-cols-3 gap-4">
           {[
             { label: "Lihat Area Program", href: "/program-catalog", desc: "Topik pelatihan yang dapat dikembangkan." },
-            { label: "Solusi untuk Organisasi", href: "/teams", desc: "Pendekatan Skillary untuk organisasi." },
+            { label: "Solusi untuk Organisasi", href: "/untuk-organisasi", desc: "Pendekatan Skillary untuk organisasi." },
             { label: "Tentang Skillary", href: "/about", desc: "Perjalanan dan latar belakang Skillary." },
           ].map((card, idx) => (
             <Link key={idx} href={card.href} className="group bg-white border border-[#E7DDD4] rounded-xl p-5 text-left hover:shadow-md transition-shadow">

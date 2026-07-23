@@ -31,7 +31,7 @@ export function ContactHero() {
               Isi Form Inquiry
             </button>
           </a>
-          <Link href="/teams">
+          <Link href="/untuk-organisasi">
             <button className="px-8 py-3.5 transition-colors font-bold rounded-full bg-white hover:shadow-md" style={{ border: '1.5px solid rgb(240, 217, 200)', color: '#0F172A' }}>
               Lihat Solusi untuk Organisasi
             </button>

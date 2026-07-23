@@ -9,7 +9,7 @@ export function MobileBar() {
         ["home", "Home", "/"],
         ["explore", "Explore", "/explore"],
         ["path", "Paths", "/path"],
-        ["teams", "Teams", "/teams"],
+        ["teams", "Teams", "/untuk-organisasi"],
         ["contact", "Contact", "/contact"],
     ] as const;
 

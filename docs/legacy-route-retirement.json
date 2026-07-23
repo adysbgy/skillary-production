@@ -118,7 +118,9 @@
         "legacy consultation content"
       ],
       "confidence": "LOW",
-      "decision": "KEEP_PENDING_REVIEW"
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "note": "Unique content salvaged into canonical organization, contact, and resources surfaces; permanent redirect retained."
     },
     {
       "route": "/services",
@@ -131,7 +133,9 @@
         "SEO metadata"
       ],
       "confidence": "MEDIUM",
-      "decision": "KEEP_PENDING_REVIEW"
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "note": "Unique content salvaged into canonical organization, contact, and resources surfaces; permanent redirect retained."
     },
     {
       "route": "/teams",
@@ -143,7 +147,9 @@
         "12 Teams-specific components"
       ],
       "confidence": "LOW",
-      "decision": "KEEP_PENDING_REVIEW"
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "note": "Unique content salvaged into canonical organization, contact, and resources surfaces; permanent redirect retained."
     },
     {
       "route": "/platform",
@@ -171,7 +177,9 @@
         "SEO metadata"
       ],
       "confidence": "LOW",
-      "decision": "KEEP_PENDING_REVIEW"
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "note": "Unique content salvaged into canonical organization, contact, and resources surfaces; permanent redirect retained."
     },
     {
       "route": "/portfolio",
@@ -241,7 +249,9 @@
         "SEO metadata"
       ],
       "confidence": "LOW",
-      "decision": "KEEP_PENDING_REVIEW"
+      "decision": "DELETED",
+      "deletedAt": "2026-07-23",
+      "note": "Unique content salvaged into canonical organization, contact, and resources surfaces; permanent redirect retained."
     }
   ],
   "protectedRoutePrefixes": [
@@ -255,5 +265,6 @@
     "/trainer-review",
     "/trainers"
   ],
-  "extractionCompletedAt": "2026-07-21"
+  "extractionCompletedAt": "2026-07-21",
+  "lastReviewedAt": "2026-07-23"
 }

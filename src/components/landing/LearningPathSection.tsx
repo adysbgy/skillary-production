@@ -64,7 +64,7 @@ export const LearningPathSection = () => {
 <span>Output: Report &amp; Sertifikat</span>
 </div>
 </div>
-<Link href="/training-brief" className="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{'background': 'rgb(239, 246, 255)', 'color': 'rgb(59, 130, 246)', 'border': '1.5px solid rgb(191, 219, 254)'}}>
+<Link href="/resources" className="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{'background': 'rgb(239, 246, 255)', 'color': 'rgb(59, 130, 246)', 'border': '1.5px solid rgb(191, 219, 254)'}}>
           Susun Path Training
           <svg aria-hidden="true" className="lucide lucide-arrow-right w-3 h-3" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 12h14" />
@@ -110,7 +110,7 @@ export const LearningPathSection = () => {
 <span>Output: Report &amp; Sertifikat</span>
 </div>
 </div>
-<Link href="/training-brief" className="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{'background': 'rgb(245, 243, 255)', 'color': 'rgb(139, 92, 246)', 'border': '1.5px solid rgb(221, 214, 254)'}}>
+<Link href="/resources" className="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{'background': 'rgb(245, 243, 255)', 'color': 'rgb(139, 92, 246)', 'border': '1.5px solid rgb(221, 214, 254)'}}>
           Susun Path Training
           <svg aria-hidden="true" className="lucide lucide-arrow-right w-3 h-3" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 12h14" />
@@ -161,7 +161,7 @@ export const LearningPathSection = () => {
 <span>Output: Report &amp; Sertifikat</span>
 </div>
 </div>
-<Link href="/training-brief" className="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{'background': 'rgb(255, 241, 242)', 'color': 'rgb(255, 90, 95)', 'border': '1.5px solid rgb(254, 205, 211)'}}>
+<Link href="/resources" className="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{'background': 'rgb(255, 241, 242)', 'color': 'rgb(255, 90, 95)', 'border': '1.5px solid rgb(254, 205, 211)'}}>
           Susun Path Training
           <svg aria-hidden="true" className="lucide lucide-arrow-right w-3 h-3" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 12h14" />
@@ -207,7 +207,7 @@ export const LearningPathSection = () => {
 <span>Output: Report &amp; Sertifikat</span>
 </div>
 </div>
-<Link href="/training-brief" className="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{'background': 'rgb(255, 244, 232)', 'color': 'rgb(255, 138, 0)', 'border': '1.5px solid rgb(255, 214, 165)'}}>
+<Link href="/resources" className="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition-all hover:opacity-90" style={{'background': 'rgb(255, 244, 232)', 'color': 'rgb(255, 138, 0)', 'border': '1.5px solid rgb(255, 214, 165)'}}>
           Susun Path Training
           <svg aria-hidden="true" className="lucide lucide-arrow-right w-3 h-3" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 12h14" />

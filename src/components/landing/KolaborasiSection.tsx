@@ -24,7 +24,7 @@ export const KolaborasiSection = () => {
        Hubungi kami untuk mendiskusikan program pelatihan yang sesuai dengan kebutuhan organisasi Anda. Konsultasi gratis.
       </p>
 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-<Link href="/proposal" className="inline-flex items-center justify-center gap-2 font-bold text-sm px-7 py-3.5 rounded-full transition-all hover:scale-105" style={{'background': 'white', 'color': 'rgb(255, 90, 95)', 'boxShadow': 'rgba(0, 0, 0, 0.15) 0px 6px 20px'}}>
+<Link href="/contact?type=proposal&source=proposal" className="inline-flex items-center justify-center gap-2 font-bold text-sm px-7 py-3.5 rounded-full transition-all hover:scale-105" style={{'background': 'white', 'color': 'rgb(255, 90, 95)', 'boxShadow': 'rgba(0, 0, 0, 0.15) 0px 6px 20px'}}>
         Diskusikan Kebutuhan Training
         <svg aria-hidden="true" className="lucide lucide-arrow-right w-4 h-4" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 12h14" />

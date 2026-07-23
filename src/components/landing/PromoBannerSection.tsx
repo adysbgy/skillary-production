@@ -56,7 +56,7 @@ export const PromoBannerSection = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-3">
               <Link
-                href="/services"
+                href="/untuk-organisasi"
                 className="inline-block font-bold text-sm px-7 py-3 rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-1"
                 style={{
                   background: '#F97316',
@@ -67,7 +67,7 @@ export const PromoBannerSection = () => {
                 Lihat Solusi Organisasi
               </Link>
               <Link
-                href="/proposal"
+                href="/contact?type=proposal&source=proposal"
                 className="inline-block font-semibold text-sm px-6 py-3 rounded-full transition-all hover:scale-105 border border-white/40 text-white hover:bg-white/10"
               >
                 Jadwalkan Konsultasi

@@ -96,7 +96,7 @@ export const BeritaSection = () => {
                 <div className="px-2.5 py-1 rounded text-[9px] font-black" style={{'background': 'rgb(255, 244, 232)', 'color': 'rgb(255, 138, 0)'}}>
                   RESOURCE
                 </div>
-                <Link href="/training-brief" className="ml-auto text-skillary-orange text-[10px] font-semibold flex items-center gap-0.5 hover:underline">
+                <Link href="/resources" className="ml-auto text-skillary-orange text-[10px] font-semibold flex items-center gap-0.5 hover:underline">
                   Lihat
                   <svg aria-hidden="true" className="w-3 h-3" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 </Link>

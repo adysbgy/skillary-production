@@ -15,7 +15,7 @@ const LINK_COLUMNS = [
       { label: "Katalog Program", href: "/programs" },
       { label: "Sertifikat", href: "/v2/certificates" },
       { label: "Sertifikasi Badge", href: "/v2/badge-programs" },
-      { label: "Laporan", href: "/reports" },
+      { label: "Laporan", href: "/untuk-organisasi" },
     ],
   },
   {
@@ -23,7 +23,7 @@ const LINK_COLUMNS = [
     links: [
       { label: "Jelajahi Program", href: "/programs" },
       { label: "Presentasi & Storytelling", href: "/v2/presentation" },
-      { label: "Brief Training", href: "/training-brief" },
+      { label: "Brief Training", href: "/resources" },
       { label: "Resources Gratis", href: "/resources" },
     ],
   },

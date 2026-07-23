@@ -10,7 +10,7 @@ import { Container } from "@/components/ui/Container";
 
 const NAV_ITEMS = [
     ["programs", "Program", "/program-catalog"],
-    ["organizations", "Untuk Organisasi", "/services"],
+    ["organizations", "Untuk Organisasi", "/untuk-organisasi"],
     ["certificates", "Sertifikat", "/certificates"],
     ["portfolio", "Portofolio", "/portfolio"],
     ["contact", "Kontak", "/contact"],
@@ -165,7 +165,7 @@ export function Header() {
                                 <Link href="/login" className="hidden rounded-full px-4 py-2 text-sm font-medium text-black/70 transition hover:bg-black/5 lg:inline-flex">
                                     Masuk
                                 </Link>
-                                <Link href="/proposal" className="hidden sm:inline-flex">
+                                <Link href="/contact?type=proposal&source=proposal" className="hidden sm:inline-flex">
                                     <button className="px-5 py-2.5 text-sm font-bold text-white rounded-full shadow-md hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>Diskusikan Kebutuhan Training</button>
                                 </Link>
                             </>
@@ -265,7 +265,7 @@ export function Header() {
                         </>
                     ) : (
                         <>
-                            <Link href="/proposal" onClick={() => setMenuOpen(false)}>
+                            <Link href="/contact?type=proposal&source=proposal" onClick={() => setMenuOpen(false)}>
                                 <button className="w-full px-6 py-3 text-sm font-bold text-white rounded-full shadow-md hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>Diskusikan Kebutuhan Training</button>
                             </Link>
                             <Link
