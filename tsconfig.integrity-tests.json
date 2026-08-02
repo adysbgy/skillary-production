@@ -17,6 +17,9 @@
     "src/lib/authorization/*.ts",
     "src/lib/observability/error-normalization.ts",
     "src/lib/observability/request-context.ts",
-    "src/lib/observability/events.ts"
+    "src/lib/observability/events.ts",
+    "src/lib/quiz-integrity.ts",
+    "src/lib/offers/*.ts",
+    "src/lib/security/*.ts"
   ]
 }

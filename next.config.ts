@@ -6,6 +6,16 @@ import type { NextConfig } from "next";
 // Permanent (308) so search engines drop the old URLs.
 const CANONICAL_ORIGIN = "https://skillary.my.id";
 
+const GLOBAL_SECURITY_HEADERS = [
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
+  { key: "X-DNS-Prefetch-Control", value: "off" },
+  { key: "Cross-Origin-Resource-Policy", value: "same-site" },
+];
+
 const LEGACY_HOST_REDIRECTS = [
   {
     source: "/:path*",
@@ -54,6 +64,22 @@ const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
 ];
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  experimental: {
+    // Resource uploads are validated at 20 MB in src/lib/storage.ts. Proxy
+    // buffering must be slightly larger so valid multipart bodies are not cut.
+    proxyClientMaxBodySize: "21mb",
+  },
+  async headers() {
+    return [
+      { source: "/:path*", headers: GLOBAL_SECURITY_HEADERS },
+      { source: "/trainer-review/:path*", headers: [
+        { key: "Cache-Control", value: "private, no-store, max-age=0" },
+        { key: "Referrer-Policy", value: "no-referrer" },
+        { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+      ] },
+    ];
+  },
   async redirects() {
     return [
       ...LEGACY_HOST_REDIRECTS,

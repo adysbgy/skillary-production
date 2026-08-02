@@ -15,6 +15,7 @@
 
 # next.js
 /.next/
+/.next*/
 /out/
 
 # production
@@ -23,6 +24,8 @@
 # misc
 .DS_Store
 *.pem
+.claude/settings.local.json
+.claude/settings.local.json.backup*
 
 # debug
 npm-debug.log*
@@ -30,15 +33,23 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files — commit the template only
 .env*
+!.env.example
 
 # local database
 *.db
 *.db-journal
 
-# scratch files
+# local uploads are ephemeral development data
+/public/uploads/
+
+# scratch and generated preview/test artifacts
 /scratch/
+/.homepage-preview-test-build/
+/.navigation-test-build/
+/.preview-learning.html
+/.route-response.html
 
 # vercel
 .vercel

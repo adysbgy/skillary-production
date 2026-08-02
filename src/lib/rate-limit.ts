@@ -1,67 +1,60 @@
-/**
- * Simple in-memory rate limiter for MVP.
- *
- * Production note: Replace with Redis/Upstash or platform-level
- * rate limiting (e.g. Vercel Edge Middleware, Cloudflare) for
- * durability across server restarts and multi-instance deployments.
- */
+import { createHash } from "node:crypto";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
-interface RateLimitEntry {
-  count: number;
-  resetAt: number;
+export interface RateLimitResult {
+  success: boolean;
+  limit: number;
+  remaining: number;
+  reset: number;
+  configured: boolean;
 }
 
-const store = new Map<string, RateLimitEntry>();
+const redis = process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+  ? Redis.fromEnv()
+  : null;
+const limiters = new Map<string, Ratelimit>();
 
-// Periodically clean expired entries to prevent memory leak
-const CLEANUP_INTERVAL = 60_000; // 1 minute
-let lastCleanup = Date.now();
-
-function cleanup() {
-  const now = Date.now();
-  if (now - lastCleanup < CLEANUP_INTERVAL) return;
-  lastCleanup = now;
-  for (const [key, entry] of store) {
-    if (now > entry.resetAt) store.delete(key);
-  }
+function limiter(maxRequests: number, windowSeconds: number): Ratelimit | null {
+  if (!redis) return null;
+  const key = `${maxRequests}:${windowSeconds}`;
+  const existing = limiters.get(key);
+  if (existing) return existing;
+  const created = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(maxRequests, `${windowSeconds} s`),
+    analytics: true,
+    prefix: "skillary:rate-limit",
+  });
+  limiters.set(key, created);
+  return created;
 }
 
-/**
- * Check if a key has exceeded the rate limit.
- * @returns `true` if the request should be allowed, `false` if rate-limited.
- */
-export function checkRateLimit(
+export async function checkRateLimit(
   key: string,
-  maxRequests: number = 5,
-  windowMs: number = 10 * 60 * 1000 // 10 minutes
-): boolean {
-  cleanup();
-  const now = Date.now();
-  const entry = store.get(key);
-
-  if (!entry || now > entry.resetAt) {
-    store.set(key, { count: 1, resetAt: now + windowMs });
-    return true;
+  maxRequests = 5,
+  windowMs = 10 * 60 * 1000,
+): Promise<RateLimitResult> {
+  const distributed = limiter(maxRequests, Math.ceil(windowMs / 1000));
+  if (!distributed) {
+    return { success: false, limit: maxRequests, remaining: 0, reset: Date.now() + windowMs, configured: false };
   }
-
-  if (entry.count >= maxRequests) {
-    return false;
-  }
-
-  entry.count++;
-  return true;
+  const result = await distributed.limit(key);
+  return { ...result, configured: true };
 }
 
-/**
- * Extract a best-effort client identifier from a request.
- * Falls back to a generic key if IP headers are unavailable.
- */
-export function getClientKey(req: Request): string {
-  const forwarded = req.headers.get("x-forwarded-for");
-  if (forwarded) return `ip:${forwarded.split(",")[0].trim()}`;
+export function getClientKey(req: Request, namespace = "global"): string {
+  const forwarded = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  const ip = forwarded || req.headers.get("x-real-ip")?.trim() || "unknown";
+  const digest = createHash("sha256").update(ip).digest("hex").slice(0, 24);
+  return `${namespace}:ip:${digest}`;
+}
 
-  const realIp = req.headers.get("x-real-ip");
-  if (realIp) return `ip:${realIp.trim()}`;
-
-  return "ip:unknown";
+export function rateLimitHeaders(result: RateLimitResult): HeadersInit {
+  return {
+    "RateLimit-Limit": String(result.limit),
+    "RateLimit-Remaining": String(Math.max(0, result.remaining)),
+    "RateLimit-Reset": String(Math.ceil(result.reset / 1000)),
+    "Retry-After": String(Math.max(1, Math.ceil((result.reset - Date.now()) / 1000))),
+  };
 }

@@ -23,22 +23,28 @@
     "test:integrity-policies": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/integrity/*.test.mjs",
     "test:authorization-policies": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/authorization/*.test.mjs",
     "security:audit-entitlement-boundaries": "node scripts/security/audit-entitlement-boundaries.mjs",
-    "quality:gate:core": "npm run test:integrity-policies && npm run test:authorization-policies && npm run security:test-auth && npm run security:audit-admin-api && npm run security:audit-index-policy && npm run security:audit-clean-routes && npm run security:audit-route-redirects && npm run security:audit-retirement-manifest && npm run security:audit-route-module-dependencies && npm run security:audit-entitlement-boundaries && npm run test:observability && npm run security:audit-observability-boundaries && tsc --noEmit && eslint src/lib/payments src/lib/authorization src/lib/observability/redaction.ts scripts/security",
+    "quality:gate:core": "npm run test:integrity-policies && npm run test:authorization-policies && npm run security:test-auth && npm run security:audit-admin-api && npm run security:audit-index-policy && npm run security:audit-clean-routes && npm run security:audit-route-redirects && npm run security:audit-retirement-manifest && npm run security:audit-route-module-dependencies && npm run security:audit-entitlement-boundaries && npm run test:security-boundaries && npm run test:observability && npm run security:audit-observability-boundaries && tsc --noEmit && eslint src/lib/payments src/lib/authorization src/lib/observability/redaction.ts scripts/security",
     "test:observability": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/observability.test.mjs",
-    "security:audit-observability-boundaries": "node scripts/security/audit-observability-boundaries.mjs"
+    "security:audit-observability-boundaries": "node scripts/security/audit-observability-boundaries.mjs",
+    "test:security-boundaries": "rm -rf .integrity-test-build && tsc -p tsconfig.integrity-tests.json && node --test tests/security/request-signatures.test.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
     "@prisma/client": "^5.22.0",
+    "@sentry/nextjs": "^10.69.0",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.1",
     "bcryptjs": "^3.0.3",
-    "next": "16.2.3",
+    "file-type": "^21.3.4",
+    "next": "^16.2.12",
     "next-auth": "^5.0.0-beta.31",
     "pg": "^8.21.0",
+    "posthog-js": "^1.409.5",
     "prisma": "^5.22.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "resend": "^6.12.2",
-    "zod": "^4.3.6"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -50,5 +56,9 @@
     "eslint-config-next": "16.2.3",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.25",
+    "sharp": "0.35.3"
   }
 }
