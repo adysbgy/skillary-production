@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "lockedAt": "2026-08-01T00:00:00+07:00",
+  "policy": [
+    "third_party_reference_only",
+    "do_not_ship",
+    "do_not_import_assets",
+    "do_not_copy_code_or_copywriting"
+  ],
+  "sources": {
+    "homepage": "https://mavenanalytics.io/",
+    "workshops": "https://mavenanalytics.io/live-workshops/overview",
+    "localArchive": "/Users/aj/Downloads/saveweb2zip-com-mavenanalytics-io",
+    "founderScreenshot": "founder-reference-maven-marketplace-workshops.png"
+  },
+  "localArchive": {
+    "capturedAt": "2026-07-31T03:06:50+07:00",
+    "fileCount": 539,
+    "totalBytes": 46030700,
+    "indexSha256": "25d558c5009590c6d9fb7664f62ffde805347c8d6edd98b5d660e8be0bd0b652",
+    "treeDigestSha256": "ac126b4a6ad8d88c3521e9033d4bbe3fddafe3e8c018e8a7695c9a95e9b37024",
+    "selfContained": false,
+    "externalFramerModulePreloads": 106,
+    "missingInternalDestinations": 45
+  },
+  "captures": {
+    "count": 16,
+    "directory": "captures",
+    "manifest": "capture-manifest.sha256",
+    "fullPageCaptureAccepted": false,
+    "fullPageCaptureRejectionReason": "Sticky and lazy sections repeated in automated full-page output; verified section crops are authoritative."
+  }
+}
