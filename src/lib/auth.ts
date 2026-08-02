@@ -53,7 +53,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         Google({
             clientId: googleClientId,
             clientSecret: googleClientSecret,
-            allowDangerousEmailAccountLinking: true,
         }),
     ],
     logger: {

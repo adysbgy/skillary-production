@@ -21,6 +21,7 @@ export const STARTUP_HEADER_ROUTES = [
   "/trainers",
   "/trainers/apply",
   "/trainer-verification",
+  "/certifications",
 ];
 
 export const isStartupHeaderRoute = (pathname: string) =>
@@ -29,7 +30,7 @@ export const isStartupHeaderRoute = (pathname: string) =>
 // Subset of the above already rebuilt with the landing MarketingShell (dark
 // canvas + own footer + own top padding). These get no external spacer and
 // hide FooterV2. Grows as each page is restyled.
-export const MARKETING_SHELL_ROUTES = ["/about", "/untuk-organisasi", "/programs", "/resources", "/events", "/contact", "/portofolio", "/trainers", "/trainers/apply", "/trainer-verification"];
+export const MARKETING_SHELL_ROUTES = ["/about", "/untuk-organisasi", "/programs", "/resources", "/events", "/contact", "/portofolio", "/trainers", "/trainers/apply", "/trainer-verification", "/certifications"];
 
 // B2C-first order: Events (hero webinar product) leads. B2B lives inside
 // "Services"; "Request Proposal" is not a top-level item — its CTA lives on
@@ -37,6 +38,7 @@ export const MARKETING_SHELL_ROUTES = ["/about", "/untuk-organisasi", "/programs
 const NAV = [
   { label: "Events", href: "/events" },
   { label: "Programs", href: "/programs" },
+  { label: "Certifications", href: "/certifications" },
   { label: "Free Workshops", href: "/resources" },
   { label: "Services", href: "/untuk-organisasi" },
   { label: "Trainers", href: "/trainers" },

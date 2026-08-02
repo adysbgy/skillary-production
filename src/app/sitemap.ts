@@ -1,5 +1,4 @@
 import { PROGRAMS, BLOG_POSTS } from "@/data/content";
-import { EVENTS } from "@/data/v2-events";
 import { TRAINERS } from "@/data/trainers";
 import type { MetadataRoute } from "next";
 
@@ -55,12 +54,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
     }));
 
-    const eventRoutes = EVENTS.map((event) => ({
-        url: `${BASE_URL}/events/${event.slug}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly" as const,
-        priority: 0.6,
-    }));
 
     const trainerRoutes = TRAINERS.map((trainer) => ({
         url: `${BASE_URL}/trainers/${trainer.slug}`,
@@ -69,5 +62,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
     }));
 
-    return [...staticRoutes, ...programRoutes, ...blogRoutes, ...eventRoutes, ...trainerRoutes];
+    return [...staticRoutes, ...programRoutes, ...blogRoutes, ...trainerRoutes];
 }

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MARKETING_SHELL_ROUTES } from "@/components/v2/layout/StartupHeader";
+import { resolveHeaderMode } from "@/components/navigation/marketing-header-policy";
 import { Logo } from "@/components/ui/Logo";
 import { EMAIL_GENERAL, EMAIL_TEAMS, INSTAGRAM_URL, whatsappLink } from "@/data/config";
 
@@ -56,8 +56,7 @@ const ACCREDITATIONS = [
 export function FooterV2() {
   const pathname = usePathname();
 
-  const hiddenPaths = ["/lp", "/skillary-campus", "/admin", "/dashboard", "/learn", "/login", "/register"];
-  if (pathname === "/" || MARKETING_SHELL_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`)) || hiddenPaths.some((p) => pathname.startsWith(p))) return null;
+  if (resolveHeaderMode(pathname) !== "fallback") return null;
 
   return (
     <footer style={{ background: "rgb(17, 24, 39)" }} className="text-white">

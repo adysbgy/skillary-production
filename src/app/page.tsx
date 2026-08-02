@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import StartupHomepage from "./lp/startup/page";
+import { StartupLanding } from "@/components/marketing/startup/StartupLanding";
 
 export const metadata: Metadata = {
   title: "Skillary — Pelatihan Profesional dari Events hingga Program Korporat",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Homepage() {
-  return <StartupHomepage />;
+  return <StartupLanding />;
 }

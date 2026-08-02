@@ -6,14 +6,13 @@ import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Logo } from "@/components/ui/Logo";
 import { PrimaryButton } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
 
 const NAV_ITEMS = [
     ["programs", "Program", "/program-catalog"],
     ["organizations", "Untuk Organisasi", "/services"],
     ["certificates", "Sertifikat", "/certificates"],
     ["portfolio", "Portofolio", "/portfolio"],
-    ["contact", "Kontak", "/contact"],
+    ["contact", "Kontak", "/v2/proposal"],
 ] as const;
 
 export function Header() {
@@ -32,11 +31,7 @@ export function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Close menu on route change
-    useEffect(() => {
-        setMenuOpen(false);
-        setAccountMenuOpen(false);
-    }, [pathname]);
+
 
     // Handle click outside and Esc for desktop account menu
     useEffect(() => {
@@ -79,8 +74,8 @@ export function Header() {
 
     return (
         <>
-            <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur shadow-sm" : "bg-white"}`} style={{ borderBottom: '1.5px solid rgb(240, 217, 200)' }}>
-                <div className="max-w-7xl mx-auto px-5 md:px-6 lg:px-8 flex items-center justify-between py-4">
+            <header className={`fixed z-50 transition-all duration-400 ease-out left-0 right-0 mx-auto ${scrolled ? "top-6 w-[calc(100%-2rem)] max-w-[1100px] rounded-full bg-white/90 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-black/5" : "top-0 w-full rounded-none bg-white border-b-[1.5px] border-[rgb(240,217,200)]"}`}>
+                <div className={`mx-auto flex items-center justify-between transition-all duration-400 ${scrolled ? 'px-6 py-3' : 'max-w-7xl px-5 md:px-6 lg:px-8 py-4'}`}>
                     <Link href="/" className="text-left">
                         <Logo />
                     </Link>
@@ -192,7 +187,7 @@ export function Header() {
             <div
                 className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${menuOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
                 aria-hidden="true"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => { setMenuOpen(false); setAccountMenuOpen(false); }}
             />
             <div
                 role="dialog"
@@ -202,7 +197,7 @@ export function Header() {
                 <div className="flex items-center justify-between border-b border-black/5 px-6 py-5">
                     <Logo />
                     <button
-                        onClick={() => setMenuOpen(false)}
+                        onClick={() => { setMenuOpen(false); setAccountMenuOpen(false); }}
                         className="flex h-10 w-10 items-center justify-center rounded-2xl transition hover:bg-black/5"
                         aria-label="Close menu"
                     >
@@ -217,7 +212,7 @@ export function Header() {
                         <Link
                             key={key}
                             href={path}
-                            onClick={() => setMenuOpen(false)}
+                            onClick={() => { setMenuOpen(false); setAccountMenuOpen(false); }}
                             className={`rounded-2xl px-4 py-3 text-base font-medium transition ${pathname === path ? "text-white" : "text-black/75 hover:bg-black/5"}`}
                             style={pathname === path ? { background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' } : {}}
                         >
@@ -230,7 +225,7 @@ export function Header() {
                             <hr className="my-3 border-black/5" />
                             <Link
                                 href="/dashboard"
-                                onClick={() => setMenuOpen(false)}
+                                onClick={() => { setMenuOpen(false); setAccountMenuOpen(false); }}
                                 className={`rounded-2xl px-4 py-3 text-base font-medium transition ${pathname.startsWith("/dashboard") ? "text-white" : "text-black/75 hover:bg-black/5"}`}
                                 style={pathname.startsWith("/dashboard") ? { background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' } : {}}
                             >
@@ -239,7 +234,7 @@ export function Header() {
                             {isCreator && (
                                 <Link
                                     href="/admin"
-                                    onClick={() => setMenuOpen(false)}
+                                    onClick={() => { setMenuOpen(false); setAccountMenuOpen(false); }}
                                     className={`rounded-2xl px-4 py-3 text-base font-medium transition ${pathname.startsWith("/admin") ? "text-white" : "text-black/75 hover:bg-black/5"}`}
                                     style={pathname.startsWith("/admin") ? { background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' } : {}}
                                 >
@@ -253,7 +248,7 @@ export function Header() {
                 <div className="border-t border-black/5 px-6 py-6">
                     {session ? (
                         <>
-                            <Link href="/dashboard" onClick={() => setMenuOpen(false)}>
+                            <Link href="/dashboard" onClick={() => { setMenuOpen(false); setAccountMenuOpen(false); }}>
                                 <PrimaryButton className="w-full">Dashboard</PrimaryButton>
                             </Link>
                             <button
@@ -265,12 +260,12 @@ export function Header() {
                         </>
                     ) : (
                         <>
-                            <Link href="/proposal" onClick={() => setMenuOpen(false)}>
+                            <Link href="/proposal" onClick={() => { setMenuOpen(false); setAccountMenuOpen(false); }}>
                                 <button className="w-full px-6 py-3 text-sm font-bold text-white rounded-full shadow-md hover:opacity-90 transition-opacity" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0), rgb(255, 90, 95))' }}>Diskusikan Kebutuhan Training</button>
                             </Link>
                             <Link
                                 href="/login"
-                                onClick={() => setMenuOpen(false)}
+                                onClick={() => { setMenuOpen(false); setAccountMenuOpen(false); }}
                                 className="mt-3 block w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-center text-sm font-semibold text-black/70 transition hover:bg-black/5"
                             >
                                 Masuk

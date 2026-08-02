@@ -5,8 +5,10 @@
 // need to edit to connect all external services and links.
 // ============================================================
 
-/** Formspree form ID — get yours free at https://formspree.io */
-export const FORMSPREE_ID = "YOUR_FORM_ID";
+/**
+ * General contact configuration. Forms post to the first-party lead API
+ * instead of Formspree.
+ */
 
 /** WhatsApp number in international format (no +, no dashes) */
 export const WHATSAPP_NUMBER = "6282223617700";

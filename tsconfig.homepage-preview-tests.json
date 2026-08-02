@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "incremental": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "outDir": ".homepage-preview-test-build",
+    "rootDir": "src",
+    "declaration": false,
+    "sourceMap": false
+  },
+  "include": [
+    "src/features/marketing/homepage-preview/blueprint.ts",
+    "src/features/marketing/homepage-preview/data/types.ts",
+    "src/features/marketing/homepage-preview/data/homepage-preview-contract.ts",
+    "src/features/marketing/homepage-preview/data/homepage-preview-policy.ts",
+    "src/features/marketing/homepage-preview/data/homepage-preview-service.ts"
+  ]
+}

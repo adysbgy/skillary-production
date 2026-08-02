@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 
+export const dynamic = "force-dynamic";
+
 export default async function PathsCatalogue() {
     const paths = await prisma.learningPath.findMany({
         where: { status: "PUBLISHED" },
