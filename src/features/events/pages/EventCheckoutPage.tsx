@@ -11,6 +11,7 @@ import { getEventBySlug, formatEventPrice } from "@/data/v2-events";
 const manrope = Manrope({ subsets: ["latin"] });
 
 const CLIENT_KEY = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY;
+const PAYMENTS_AVAILABLE = process.env.NEXT_PUBLIC_PAYMENTS_ENABLED === "true";
 const SNAP_URL =
   process.env.NEXT_PUBLIC_MIDTRANS_ENV === "production"
     ? "https://app.midtrans.com/snap/snap.js"
@@ -63,6 +64,20 @@ export default function EventCheckoutPage() {
           <h1 className="text-2xl font-bold mb-2">Checkout tidak tersedia</h1>
           <p className="text-[#64748B] mb-6">Event ini gratis atau sudah selesai — tidak memerlukan pembayaran.</p>
           <Link href={`/events/${event.slug}`} className="text-sm font-bold" style={{ color: "rgb(255,138,0)" }}>← Lihat detail event</Link>
+        </div>
+      </Shell>
+    );
+  }
+
+  if (!PAYMENTS_AVAILABLE) {
+    return (
+      <Shell>
+        <div className="mx-auto max-w-lg py-20 text-center">
+          <h1 className="text-2xl font-bold mb-3">Pendaftaran berbayar belum dibuka</h1>
+          <p className="text-[#64748B] leading-7 mb-6">
+            Skillary sedang menyelesaikan verifikasi penyedia pembayaran. Tidak ada transaksi yang diproses selama periode ini.
+          </p>
+          <Link href={`/events/${event.slug}`} className="text-sm font-bold" style={{ color: "rgb(255,138,0)" }}>Kembali ke detail acara</Link>
         </div>
       </Shell>
     );

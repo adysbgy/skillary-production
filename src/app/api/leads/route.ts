@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createLeadSchema, detectSpam } from "@/lib/lead-constants";
-import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
+import { checkRateLimit, getClientKey, rateLimitHeaders } from "@/lib/rate-limit";
 import { notifyNewLead } from "@/lib/lead-notification";
 import { log } from "@/lib/observability/logger";
 import { createRequestContext } from "@/lib/observability/request-context";
@@ -9,12 +9,15 @@ import { createRequestContext } from "@/lib/observability/request-context";
 export async function POST(req: Request) {
   const context = createRequestContext(req, "/api/leads");
   try {
-    // Rate limiting: 5 submissions per 10 minutes per IP
-    const clientKey = getClientKey(req);
-    if (!checkRateLimit(clientKey, 5, 10 * 60 * 1000)) {
+    const clientKey = getClientKey(req, "leads");
+    const rateLimit = await checkRateLimit(clientKey, 5, 10 * 60 * 1000);
+    if (!rateLimit.configured && process.env.NODE_ENV === "production") {
+      return NextResponse.json({ error: "Layanan sementara tidak tersedia." }, { status: 503 });
+    }
+    if (rateLimit.configured && !rateLimit.success) {
       return NextResponse.json(
         { error: "Terlalu banyak pengiriman. Silakan coba lagi beberapa saat." },
-        { status: 429 }
+        { status: 429, headers: rateLimitHeaders(rateLimit) }
       );
     }
 

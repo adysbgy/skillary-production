@@ -3,12 +3,16 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getCertificateEligibility } from "@/lib/certificate-eligibility";
 import { PRODUCT_TYPE } from "@/lib/payment-constants";
+import { isPaymentEnabled, PAYMENT_HOLD_MESSAGE } from "@/lib/payments/payment-availability";
 
 // POST /api/checkout/certificate — Create a payment order for a digital certificate
 export async function POST(req: NextRequest) {
     const session = await auth();
     if (!session?.user?.id) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    if (!isPaymentEnabled()) {
+        return NextResponse.json({ error: PAYMENT_HOLD_MESSAGE, code: "PAYMENT_HOLD" }, { status: 503 });
     }
 
     const { courseId } = await req.json();
@@ -68,7 +72,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Create PaymentOrder for digital certificate
-    const order = await (prisma as any).paymentOrder.create({
+    const order = await prisma.paymentOrder.create({
         data: {
             userId: session.user.id,
             courseId,
@@ -113,7 +117,7 @@ export async function POST(req: NextRequest) {
             const snapData = await snapResponse.json();
 
             if (snapData?.token) {
-                await (prisma as any).paymentOrder.update({
+                await prisma.paymentOrder.update({
                     where: { id: order.id },
                     data: {
                         gatewayRef: snapData.token,

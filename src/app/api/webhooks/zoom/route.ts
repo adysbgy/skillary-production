@@ -1,41 +1,54 @@
 import { NextResponse } from "next/server";
-import crypto from "crypto";
+import { createHmac } from "node:crypto";
 import { processMeetingAttendance } from "@/lib/attendance";
+import { verifyZoomSignature } from "@/lib/security/request-signatures";
 
-// POST /api/webhooks/zoom — handles Zoom's endpoint URL validation handshake
-// and the `meeting.ended` event, which triggers attendance → certificate
-// processing (Fase D). Register this URL in the Zoom App's Event Subscriptions
-// and copy the generated Secret Token into ZOOM_WEBHOOK_SECRET_TOKEN.
+type ZoomWebhookBody = {
+  event?: string;
+  payload?: {
+    plainToken?: string;
+    object?: { id?: string | number };
+  };
+};
+
 export async function POST(req: Request) {
   const secret = process.env.ZOOM_WEBHOOK_SECRET_TOKEN;
-  const raw = await req.text();
-  const body = raw ? JSON.parse(raw) : {};
+  if (!secret) {
+    return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
+  }
 
-  // 1) Endpoint URL validation handshake (one-time, when adding the webhook).
+  const raw = await req.text();
+  let body: ZoomWebhookBody;
+  try {
+    body = JSON.parse(raw) as ZoomWebhookBody;
+  } catch {
+    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  }
+
   if (body.event === "endpoint.url_validation") {
-    if (!secret) return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
     const plainToken = body.payload?.plainToken;
-    const encryptedToken = crypto.createHmac("sha256", secret).update(plainToken).digest("hex");
+    if (!plainToken || plainToken.length > 512) {
+      return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+    }
+    const encryptedToken = createHmac("sha256", secret)
+      .update(plainToken)
+      .digest("hex");
     return NextResponse.json({ plainToken, encryptedToken });
   }
 
-  // 2) Verify signature on real events: v0=HMAC_SHA256(`v0:{timestamp}:{body}`, secret)
-  if (secret) {
-    const timestamp = req.headers.get("x-zm-request-timestamp") || "";
-    const signature = req.headers.get("x-zm-signature") || "";
-    const expected = "v0=" + crypto.createHmac("sha256", secret).update(`v0:${timestamp}:${raw}`).digest("hex");
-    if (signature !== expected) {
-      return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
-    }
+  const timestamp = req.headers.get("x-zm-request-timestamp") || "";
+  const signature = req.headers.get("x-zm-signature") || "";
+  if (!verifyZoomSignature({ rawBody: raw, timestamp, signature, secret })) {
+    return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
   if (body.event === "meeting.ended") {
-    const meetingId = body.payload?.object?.id ? String(body.payload.object.id) : null;
-    if (meetingId) {
-      // Zoom's participant report can lag briefly after the meeting ends;
-      // this is best-effort and safe to re-run if it comes back empty.
-      processMeetingAttendance(meetingId).catch((err) => console.warn("Attendance processing failed:", err));
+    const rawMeetingId = body.payload?.object?.id;
+    const meetingId = rawMeetingId === undefined ? null : String(rawMeetingId);
+    if (!meetingId || meetingId.length > 128) {
+      return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
     }
+    await processMeetingAttendance(meetingId);
   }
 
   return NextResponse.json({ ok: true });

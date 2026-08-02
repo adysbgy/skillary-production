@@ -1,1 +1,5 @@
-export { default } from "@/features/events/pages/EventCheckoutPage";
+import { notFound } from "next/navigation";
+
+export default function LegacyEventCheckoutUnavailablePage() {
+  notFound();
+}

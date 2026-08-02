@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { PrimaryButton, GradientButton } from "@/components/ui/Button";
+import { GradientButton } from "@/components/ui/Button";
 import { MarkdownRenderer } from "@/components/ui/MarkdownRenderer";
 import { isValidVideoDomain } from "@/lib/video";
 
@@ -27,7 +27,10 @@ interface QuizDataPayload {
     settings: QuizSettings;
     questions: QuizQuestionItem[];
 }
-interface QuizQuestion { question: string; options: string[]; correctIndex: number; } // Legacy fallback
+interface QuizFeedbackItem {
+    correct: boolean;
+    correctAnswers?: string[];
+}
 interface LessonResource { id: string; filename: string; url: string; fileType: string; fileSize: number; }
 interface BaseLesson {
     id: string; title: string; slug: string; type: string; content: string; videoUrl: string | null; quizData?: string | null;
@@ -70,23 +73,31 @@ export default function LessonClient({
     const [certificateCode, setCertificateCode] = useState<string | null>(initialCertificateCode || null);
 
     // Quiz state (Assessment Foundations 2.0)
-    const [answers, setAnswers] = useState<Record<string, any>>({});
+    const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
     const [submitted, setSubmitted] = useState(false);
     const [quizSaving, setQuizSaving] = useState(false);
     const [savedScore, setSavedScore] = useState<{ score: number; total: number; passed: boolean; percentage: number, attemptsCount?: number } | null>(null);
     const [attemptsUsed, setAttemptsUsed] = useState(0);
+    const [quizFeedback, setQuizFeedback] = useState<Record<string, QuizFeedbackItem>>({});
+    const [quizError, setQuizError] = useState<string | null>(null);
 
     const payload: QuizDataPayload = useMemo(() => {
-        if (lesson.type !== "QUIZ" || !lesson.quizData) return { settings: { passingScore: 80, maxAttempts: null, showScore: true, showAnswers: true }, questions: [] };
-        let parsed: any;
-        try { parsed = JSON.parse(lesson.quizData); } catch { parsed = []; }
+        const fallback: QuizDataPayload = { settings: { passingScore: 80, maxAttempts: null, showScore: true, showAnswers: true }, questions: [] };
+        if (lesson.type !== "QUIZ" || !lesson.quizData) return fallback;
+        let parsed: unknown;
+        try { parsed = JSON.parse(lesson.quizData); } catch { return fallback; }
         if (Array.isArray(parsed)) {
-            return {
-                settings: { passingScore: 80, maxAttempts: null, showScore: true, showAnswers: true },
-                questions: parsed.map((q: any, i: number) => ({ id: `legacy-${i}`, type: "SINGLE_CHOICE", prompt: q.question, options: q.options || [], correctAnswers: [q.correctIndex?.toString() || "0"] }))
-            };
+            const questions = parsed.flatMap((item, index): QuizQuestionItem[] => {
+                if (typeof item !== "object" || item === null || !("question" in item) || typeof item.question !== "string") return [];
+                const options = "options" in item && Array.isArray(item.options) && item.options.every((option: unknown) => typeof option === "string") ? item.options as string[] : [];
+                return [{ id: `legacy-${index}`, type: "SINGLE_CHOICE", prompt: item.question, options }];
+            });
+            return { ...fallback, questions };
         }
-        return { settings: { passingScore: 80, maxAttempts: null, showScore: true, showAnswers: true, ...parsed?.settings }, questions: parsed?.questions || [] };
+        if (typeof parsed !== "object" || parsed === null) return fallback;
+        const settings = "settings" in parsed && typeof parsed.settings === "object" && parsed.settings !== null ? parsed.settings : {};
+        const questions = "questions" in parsed && Array.isArray(parsed.questions) ? parsed.questions as QuizQuestionItem[] : [];
+        return { settings: { ...fallback.settings, ...settings }, questions };
     }, [lesson.quizData, lesson.type]);
 
 
@@ -98,9 +109,11 @@ export default function LessonClient({
                 .then(d => {
                     if (d.attempt) {
                         setSavedScore({ score: d.attempt.score, total: d.attempt.totalQuestions, passed: d.attempt.passed, percentage: d.attempt.percentage });
+                        if (d.attempt.answers && typeof d.attempt.answers === "object") setAnswers(d.attempt.answers);
+                        if (d.feedback && typeof d.feedback === "object") setQuizFeedback(d.feedback);
                         setSubmitted(true);
                     }
-                    if (d.count) setAttemptsUsed(d.count);
+                    if (typeof d.count === "number") setAttemptsUsed(d.count);
                 })
                 .catch(() => { });
         }
@@ -299,22 +312,11 @@ export default function LessonClient({
                                 <div className="space-y-8">
                                     {payload.questions.map((q, qi) => {
                                         const userAnswer = answers[q.id];
-
-                                        // Grading Logic
-                                        let isCorrect = false;
-                                        if (submitted) {
-                                            if (q.type === "SINGLE_CHOICE") isCorrect = userAnswer === (q.correctAnswers?.[0] || "");
-                                            else if (q.type === "MULTIPLE_SELECTION") {
-                                                const uAns = Array.isArray(userAnswer) ? userAnswer : [];
-                                                const cAns = q.correctAnswers || [];
-                                                isCorrect = uAns.length === cAns.length && uAns.every(a => cAns.includes(a));
-                                            }
-                                            else if (q.type === "SHORT_ANSWER") {
-                                                const txt = typeof userAnswer === "string" ? userAnswer.trim().toLowerCase() : "";
-                                                isCorrect = (q.correctAnswers || []).map(a => a.trim().toLowerCase()).includes(txt);
-                                            }
-                                        }
-                                        const isWrong = submitted && !isCorrect;
+                                        const feedback = quizFeedback[q.id];
+                                        const hasQuestionFeedback = submitted && payload.settings.showAnswers && feedback !== undefined;
+                                        const isCorrect = hasQuestionFeedback && feedback.correct;
+                                        const isWrong = hasQuestionFeedback && !feedback.correct;
+                                        const correctAnswers = feedback?.correctAnswers || [];
 
                                         return (
                                             <div key={q.id} className={`p-6 md:p-8 rounded-3xl border transition-all shadow-sm relative ${submitted ? (isCorrect ? 'border-green-300 bg-green-50/40' : isWrong ? 'border-red-200 bg-red-50/20' : 'border-black/10 bg-white') : 'border-black/10 bg-white'}`}>
@@ -338,7 +340,7 @@ export default function LessonClient({
                                                             const isSelectedMulti = q.type === "MULTIPLE_SELECTION" && Array.isArray(userAnswer) && userAnswer.includes(oi.toString());
                                                             const isSelected = isSelectedSingle || isSelectedMulti;
 
-                                                            const isOptCorrectAns = q.correctAnswers?.includes(oi.toString());
+                                                            const isOptCorrectAns = correctAnswers.includes(oi.toString());
                                                             const showCorrect = submitted && payload.settings.showAnswers && isOptCorrectAns;
                                                             const showMissed = submitted && payload.settings.showAnswers && isOptCorrectAns && !isSelected;
                                                             const showWrong = submitted && payload.settings.showAnswers && isSelected && !isOptCorrectAns;
@@ -389,7 +391,7 @@ export default function LessonClient({
                                                         {submitted && payload.settings.showAnswers && !isCorrect && (
                                                             <div className="text-xs bg-black/5 p-3 rounded-lg border border-black/5">
                                                                 <span className="font-semibold text-black/60 mr-2">Acceptable answers:</span>
-                                                                <span className="font-mono text-[#FF8A00]">{q.correctAnswers?.join("  OR  ")}</span>
+                                                                <span className="font-mono text-[#FF8A00]">{correctAnswers.join("  OR  ")}</span>
                                                             </div>
                                                         )}
                                                     </div>
@@ -405,46 +407,28 @@ export default function LessonClient({
                                         <button
                                             onClick={async () => {
                                                 setQuizSaving(true);
-
-                                                // Grade the full payload locally to display
-                                                let calculatedScore = 0;
-                                                payload.questions.forEach(q => {
-                                                    const ua = answers[q.id];
-                                                    if (q.type === "SINGLE_CHOICE" && ua === (q.correctAnswers?.[0] || "")) calculatedScore++;
-                                                    if (q.type === "MULTIPLE_SELECTION") {
-                                                        const uAns = Array.isArray(ua) ? ua : [];
-                                                        const cAns = q.correctAnswers || [];
-                                                        if (uAns.length === cAns.length && uAns.every(a => cAns.includes(a))) calculatedScore++;
-                                                    }
-                                                    if (q.type === "SHORT_ANSWER") {
-                                                        const txt = typeof ua === "string" ? ua.trim().toLowerCase() : "";
-                                                        if ((q.correctAnswers || []).some(a => a.trim().toLowerCase() === txt)) calculatedScore++;
-                                                    }
-                                                });
-
-                                                const isPassing = (calculatedScore / payload.questions.length) * 100 >= payload.settings.passingScore;
+                                                setQuizError(null);
 
                                                 try {
-                                                    // Pass the raw ID-keyed answers map down safely
                                                     const res = await fetch("/api/quiz", {
                                                         method: "POST",
                                                         headers: { "Content-Type": "application/json" },
-                                                        body: JSON.stringify({ lessonId: lesson.id, answers, score: calculatedScore, totalQuestions: payload.questions.length, passingScoreThreshold: payload.settings.passingScore }),
+                                                        body: JSON.stringify({ lessonId: lesson.id, answers }),
                                                     });
                                                     const data = await res.json();
-                                                    if (res.ok && data.score !== undefined) {
-                                                        setSavedScore({ score: data.score, total: data.totalQuestions, passed: data.passed, percentage: data.percentage });
-                                                        setAttemptsUsed(attemptsUsed + 1);
+                                                    if (!res.ok) {
+                                                        setQuizError(typeof data.error === "string" ? data.error : "Your answers could not be submitted. Please try again.");
+                                                        return;
                                                     }
-                                                } catch { /* Still show results */ }
-
-                                                // Fake state if API fails
-                                                if (!savedScore) {
-                                                    setSavedScore({ score: calculatedScore, total: payload.questions.length, passed: isPassing, percentage: Math.round((calculatedScore / payload.questions.length) * 100) });
-                                                    setAttemptsUsed(attemptsUsed + 1);
+                                                    setSavedScore({ score: data.score, total: data.totalQuestions, passed: data.passed, percentage: data.percentage });
+                                                    setAttemptsUsed(typeof data.attemptsCount === "number" ? data.attemptsCount : attemptsUsed + 1);
+                                                    setQuizFeedback(data.feedback && typeof data.feedback === "object" ? data.feedback : {});
+                                                    setSubmitted(true);
+                                                } catch {
+                                                    setQuizError("The assessment service is unavailable. Your answers are preserved; please try again.");
+                                                } finally {
+                                                    setQuizSaving(false);
                                                 }
-                                                setSubmitted(true);
-                                                setQuizSaving(false);
                                             }}
                                             disabled={Object.keys(answers).length < payload.questions.length || quizSaving}
                                             className="px-10 py-5 text-white rounded-2xl text-base font-bold hover:opacity-90 transition-all active:scale-95 shadow-lg w-full md:w-auto min-w-[240px]"
@@ -452,6 +436,11 @@ export default function LessonClient({
                                         >
                                             {quizSaving ? "Evaluating..." : "Submit Answer"}
                                         </button>
+                                        {quizError && (
+                                            <p role="alert" className="mt-4 max-w-xl rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm font-medium text-red-800">
+                                                {quizError}
+                                            </p>
+                                        )}
                                     </div>
                                 ) : (
                                     <div className={`p-8 rounded-3xl border-2 shadow-sm text-center flex flex-col items-center transition-all ${savedScore?.passed ? 'border-[#FF8A00] bg-[#FF8A00]/5' : 'border-black/10 bg-black/[0.02]'}`}>
@@ -468,7 +457,13 @@ export default function LessonClient({
 
                                         {!savedScore?.passed && (!payload.settings.maxAttempts || attemptsUsed < payload.settings.maxAttempts) && (
                                             <button
-                                                onClick={() => { setSubmitted(false); setAnswers({}); }}
+                                                onClick={() => {
+                                                    setSubmitted(false);
+                                                    setAnswers({});
+                                                    setSavedScore(null);
+                                                    setQuizFeedback({});
+                                                    setQuizError(null);
+                                                }}
                                                 className="px-8 py-3 bg-white border border-black/10 rounded-xl text-sm font-bold shadow-sm hover:border-black/20 hover:bg-black/5 transition-all text-black/70 mb-2"
                                             >
                                                 Retry Assessment
@@ -531,7 +526,7 @@ export default function LessonClient({
                         {courseCompleted || (progress.filter(p => p.completed).length === allSlugs.length) ? (
                             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 lg:p-8 border border-green-500/20 rounded-3xl bg-green-50/50 shadow-sm mt-16">
                                 <div className="flex-1 text-center sm:text-left">
-                                    <h4 className="font-semibold text-lg text-green-900 mb-1">🎉 You've completed this course!</h4>
+                                    <h4 className="font-semibold text-lg text-green-900 mb-1">🎉 You&apos;ve completed this course!</h4>
                                     <p className="text-sm text-green-700/80">Excellent work. Your progress has been completely recorded.</p>
                                 </div>
                                 <div className="flex gap-3 w-full sm:w-auto">

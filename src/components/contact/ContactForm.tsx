@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { FORMSPREE_ID } from "@/data/config";
+
 
 const TYPE_MAP: Record<string, string> = {
   "in-house": "In-House Training",
@@ -80,17 +80,6 @@ export function ContactForm() {
       _honeypot: honeypot,
     };
 
-    const formspreePayload = {
-      name: formData.name,
-      email: formData.email,
-      whatsapp: formData.whatsapp,
-      organization: formData.org,
-      role: formData.role,
-      inquiryType: formData.inquiryType,
-      message: formData.message,
-      sourcePage: prefillSource || "direct",
-    };
-
     try {
       // Primary: store in DB
       const dbRes = await fetch("/api/leads", {
@@ -98,13 +87,6 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(leadPayload),
       });
-
-      // Secondary: Formspree (fire-and-forget, don't block user)
-      fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(formspreePayload),
-      }).catch((err) => console.warn("Formspree submission failed:", err));
 
       if (dbRes.ok) {
         setStatus("sent");

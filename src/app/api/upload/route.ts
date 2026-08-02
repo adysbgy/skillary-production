@@ -16,7 +16,7 @@ import { uploadFile, type UploadCategory } from "@/lib/storage";
  */
 export async function POST(req: NextRequest) {
     const session = await auth();
-    const role = (session?.user as any)?.role;
+    const role = session?.user?.role;
 
     if (!session || (role !== "ADMIN" && role !== "INSTRUCTOR")) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -50,19 +50,10 @@ export async function POST(req: NextRequest) {
         );
 
         return NextResponse.json(result, { status: 201 });
-    } catch (error: any) {
+    } catch (error: unknown) {
         // Validation errors from storage.ts come as thrown Error objects
-        const status = error.message?.includes("not allowed") || error.message?.includes("exceeds") ? 400 : 500;
-        return NextResponse.json({ error: error.message || "Upload failed" }, { status });
+        const message = error instanceof Error ? error.message : "Upload failed";
+        const status = message.includes("not allowed") || message.includes("exceeds") ? 400 : 500;
+        return NextResponse.json({ error: message }, { status });
     }
 }
-
-/**
- * Next.js App Router config for this route.
- * Raise the body size limit for file uploads.
- */
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};

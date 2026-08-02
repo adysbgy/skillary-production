@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getEventBySlug, getEventStart, type EventItem } from "@/data/v2-events";
 import { sendEmail, sendWhatsApp } from "@/lib/notify";
+import { verifyBearerSecret } from "@/lib/security/request-signatures";
 
 // GET /api/cron/event-reminders — Vercel Cron (hourly). Sends H-1 (within 24h)
 // and H-1jam (within 1h) reminders to paid buyers, with the join link and an
@@ -53,9 +54,11 @@ async function sendReminder(order: { name: string; email: string; whatsapp: stri
 }
 
 export async function GET(req: Request) {
-  // Verify the Vercel Cron secret when configured.
   const secret = process.env.CRON_SECRET;
-  if (secret && req.headers.get("authorization") !== `Bearer ${secret}`) {
+  if (!secret) {
+    return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
+  }
+  if (!verifyBearerSecret(req.headers.get("authorization"), secret)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

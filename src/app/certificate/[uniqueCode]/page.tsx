@@ -49,8 +49,8 @@ export default async function CertificateVerificationPage({ params }: { params: 
                             <span className="text-green-600 text-xl font-bold">✓</span>
                         </div>
                         <div>
-                            <h2 className="text-xl font-bold text-black">Verified Credential</h2>
-                            <p className="text-sm text-black/60">This certificate is permanently verifiable via Skillary.</p>
+                            <h2 className="text-xl font-bold text-black">Credential Record Found</h2>
+                            <p className="text-sm text-black/60">This Skillary-issued record is available at the time of this review.</p>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@ export default async function CertificateVerificationPage({ params }: { params: 
 
                 <div className="text-center mt-2">
                     <p className="text-xs text-black/40">
-                        Skillary guarantees the cryptographically secured issuing record of this credential.
+                        This page displays the Skillary issuing record associated with the verification ID above.
                     </p>
                 </div>
             </Container>

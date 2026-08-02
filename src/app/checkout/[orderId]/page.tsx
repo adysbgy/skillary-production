@@ -12,7 +12,21 @@ interface OrderData {
     amount: number;
     status: string;
     gatewayRef?: string;
+    paymentAvailable: boolean;
     course: { title: string; slug: string; level: string; duration: string; };
+}
+
+interface SnapCallbacks {
+    onSuccess: () => void;
+    onPending: () => void;
+    onError: () => void;
+    onClose: () => void;
+}
+
+declare global {
+    interface Window {
+        snap?: { pay: (token: string, callbacks: SnapCallbacks) => void };
+    }
 }
 
 export default function CheckoutPage({ params }: { params: Promise<{ orderId: string }> }) {
@@ -20,7 +34,6 @@ export default function CheckoutPage({ params }: { params: Promise<{ orderId: st
     const router = useRouter();
     const [order, setOrder] = useState<OrderData | null>(null);
     const [loading, setLoading] = useState(true);
-    const [processing, setProcessing] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -34,30 +47,6 @@ export default function CheckoutPage({ params }: { params: Promise<{ orderId: st
             .catch(() => { setError("Failed to load order"); setLoading(false); });
     }, [orderId]);
 
-    // Simulate payment confirmation (replaces Midtrans Snap popup in production)
-    async function handleSimulatePayment() {
-        setProcessing(true);
-        setError("");
-        try {
-            const res = await fetch("/api/checkout/callback", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ order_id: orderId, transaction_status: "settlement", status: "PAID" }),
-            });
-            const data = await res.json();
-            if (data.success && data.status === "PAID") {
-                setOrder(prev => prev ? { ...prev, status: "PAID" } : prev);
-                setTimeout(() => router.push(`/learn/${order?.course.slug}`), 1500);
-            } else {
-                setError("Payment processing failed. Please try again.");
-            }
-        } catch {
-            setError("Network error. Please try again.");
-        } finally {
-            setProcessing(false);
-        }
-    }
-
     if (loading) return <div className="flex items-center justify-center min-h-[60vh] text-black/50">Loading checkout...</div>;
     if (error && !order) return (
         <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-6">
@@ -69,6 +58,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ orderId: st
     if (!order) return null;
 
     const isPaid = order.status === "PAID";
+    const gatewayToken = order.gatewayRef;
 
     return (
         <div className="max-w-2xl mx-auto py-12 px-6">
@@ -90,7 +80,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ orderId: st
                     </div>
                     <div className="border-t border-black/5 pt-3 flex justify-between items-center">
                         <span className="font-medium text-black/60">Total</span>
-                        <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[rgb(255,138,0)] to-[rgb(255,90,95)]">
+                        <span className="text-2xl font-bold text-[rgb(255,138,0)]">
                             Rp {order.amount.toLocaleString("id-ID")}
                         </span>
                     </div>
@@ -106,6 +96,17 @@ export default function CheckoutPage({ params }: { params: Promise<{ orderId: st
                         <PrimaryButton className="px-8">Start Learning →</PrimaryButton>
                     </Link>
                 </Card>
+            ) : !order.paymentAvailable ? (
+                <Card className="border border-amber-200 bg-amber-50 p-6">
+                    <h2 className="text-lg font-semibold text-amber-950">Pembayaran sementara ditahan</h2>
+                    <p className="mt-2 text-sm leading-6 text-amber-900/75">
+                        Verifikasi penyedia pembayaran Skillary masih berlangsung. Tidak ada pembayaran yang diproses untuk pesanan ini.
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-3">
+                        <Link href="/explore"><PrimaryButton>Jelajahi program lain</PrimaryButton></Link>
+                        <Link href="/contact"><SecondaryButton>Hubungi Skillary</SecondaryButton></Link>
+                    </div>
+                </Card>
             ) : (
                 <div className="space-y-4">
                     <Script
@@ -120,19 +121,17 @@ export default function CheckoutPage({ params }: { params: Promise<{ orderId: st
                             <div>
                                 <h3 className="font-semibold text-sm mb-1">Payment Gateway</h3>
                                 <p className="text-xs text-black/50 leading-5">
-                                    Midtrans integration is natively active. Selecting Pay will launch the Snap payment popup securely.
+                                    Pembayaran tersedia melalui mitra pembayaran Skillary. Status akses hanya berubah setelah transaksi terverifikasi.
                                 </p>
                             </div>
                         </div>
                     </Card>
 
-                    {order.gatewayRef && process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY ? (
+                    {gatewayToken && process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY ? (
                         <button
                             onClick={() => {
-                                // @ts-ignore
                                 if (window.snap) {
-                                    // @ts-ignore
-                                    window.snap.pay(order.gatewayRef, {
+                                    window.snap.pay(gatewayToken, {
                                         onSuccess: async () => {
                                             setOrder(prev => prev ? { ...prev, status: "PAID" } : prev);
                                             setTimeout(() => router.push(`/learn/${order.course.slug}`), 1500);
@@ -154,17 +153,13 @@ export default function CheckoutPage({ params }: { params: Promise<{ orderId: st
                             Pay Rp {order.amount.toLocaleString("id-ID")}
                         </button>
                     ) : (
-                        <button
-                            onClick={handleSimulatePayment}
-                            disabled={processing}
-                            className="w-full p-4 rounded-xl bg-black text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
-                        >
-                            {processing ? "Simulating..." : `Fallback Simulator: Rp ${order.amount.toLocaleString("id-ID")}`}
-                        </button>
+                        <Card className="border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-800">
+                            Gateway belum siap memproses pesanan ini. Tidak ada transaksi yang dibuat.
+                        </Card>
                     )}
 
                     <p className="text-xs text-center text-black/30 mt-2">
-                        Real sandbox transactions will route natively through Midtrans.
+                        Akses diberikan setelah notifikasi pembayaran terverifikasi oleh server.
                     </p>
                 </div>
             )}

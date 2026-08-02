@@ -400,26 +400,26 @@ model BatchCourse {
 }
 
 model TrainerProfile {
-  id               String               @id @default(cuid())
-  slug             String               @unique
-  status           String               @default("DRAFT_RESEARCH")
-  verification     String               @default("SELECTED")
+  id               String                   @id @default(cuid())
+  slug             String                   @unique
+  status           String                   @default("DRAFT_RESEARCH")
+  verification     String                   @default("SELECTED")
   name             String
   email            String
   linkedinUrl      String?
   websiteUrl       String?
-  headline         String               @default("")
-  shortBio         String               @default("")
-  fullBio          String               @default("")
+  headline         String                   @default("")
+  shortBio         String                   @default("")
+  fullBio          String                   @default("")
   portraitUrl      String?
   actionPhotoUrl   String?
   photoRights      String?
   location         String?
-  languages        String[]             @default([])
-  deliveryModes    String[]             @default([])
-  expertise        String[]             @default([])
-  audiences        String[]             @default([])
-  outcomes         String[]             @default([])
+  languages        String[]                 @default([])
+  deliveryModes    String[]                 @default([])
+  expertise        String[]                 @default([])
+  audiences        String[]                 @default([])
+  outcomes         String[]                 @default([])
   teachingApproach Json?
   experience       Json?
   credentials      Json?
@@ -430,12 +430,13 @@ model TrainerProfile {
   verifiedAt       DateTime?
   publishedAt      DateTime?
   reviewDueAt      DateTime?
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
+  createdAt        DateTime                 @default(now())
+  updatedAt        DateTime                 @updatedAt
   sources          TrainerSource[]
   claims           TrainerClaim[]
   reviewTokens     TrainerReviewToken[]
   auditEvents      TrainerAuditEvent[]
+  offerAssignments OfferTrainerAssignment[]
 
   @@index([status])
   @@index([verification])
@@ -492,4 +493,179 @@ model TrainerAuditEvent {
   trainer   TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
 
   @@index([trainerId, createdAt])
+}
+
+// Canonical public and commercial identity for every Skillary offer. Existing
+// Course, LearningPath, TrainingBatch, and payment models remain runtime systems
+// and are connected additively through OfferRuntimeMapping.
+model CommercialOffer {
+  id                   String    @id @default(cuid())
+  slug                 String    @unique
+  type                 String
+  audience             String
+  status               String    @default("DRAFT")
+  title                String
+  summary              String
+  description          String?
+  primaryAction        String    @default("REGISTER_INTEREST")
+  currency             String    @default("IDR")
+  priceAmount          Int?
+  capacity             Int?
+  registrationOpensAt  DateTime?
+  registrationClosesAt DateTime?
+  publishedAt          DateTime?
+  archivedAt           DateTime?
+  reviewedAt           DateTime?
+  ownerId              String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  runtimeMappings    OfferRuntimeMapping[]
+  trainerAssignments OfferTrainerAssignment[]
+  productionRecords  ProgramProduction[]
+  evidenceLinks      OfferEvidenceLink[]
+  auditEvents        OfferAuditEvent[]
+
+  @@index([type, status])
+  @@index([audience, status])
+  @@index([publishedAt])
+}
+
+// Compatibility bridge from a commercial offer to current runtime records.
+// runtimeType/runtimeId validity is enforced by the repository service because
+// Prisma does not support polymorphic foreign keys.
+model OfferRuntimeMapping {
+  id          String   @id @default(cuid())
+  offerId     String
+  runtimeType String
+  runtimeId   String
+  purpose     String   @default("PRIMARY")
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  offer CommercialOffer @relation(fields: [offerId], references: [id], onDelete: Cascade)
+
+  @@unique([offerId, runtimeType, runtimeId])
+  @@index([runtimeType, runtimeId])
+}
+
+// A published trainer profile proves identity readiness only. This relation
+// records the trainer's explicit role and acceptance for a particular offer.
+model OfferTrainerAssignment {
+  id                String    @id @default(cuid())
+  offerId           String
+  trainerProfileId  String
+  role              String
+  status            String    @default("PROPOSED")
+  scope             Json?
+  compensationType  String?
+  compensationTerms Json?
+  acceptedAt        DateTime?
+  completedAt       DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  offer   CommercialOffer @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  trainer TrainerProfile  @relation(fields: [trainerProfileId], references: [id], onDelete: Restrict)
+
+  @@unique([offerId, trainerProfileId, role])
+  @@index([trainerProfileId, status])
+  @@index([offerId, status])
+}
+
+// Versioned production workflow for trainer-authored programs. Public readiness
+// requires an approved production record and every required item to be approved.
+model ProgramProduction {
+  id               String    @id @default(cuid())
+  offerId          String
+  stage            String    @default("TOPIC_PROPOSAL")
+  ownerTrainerId   String?
+  reviewerId       String?
+  version          Int       @default(1)
+  reviewNotes      String?
+  pilotAt          DateTime?
+  approvedAt       DateTime?
+  maintenanceDueAt DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  offer CommercialOffer         @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  items ProgramProductionItem[]
+
+  @@unique([offerId, version])
+  @@index([stage])
+  @@index([maintenanceDueAt])
+}
+
+model ProgramProductionItem {
+  id            String    @id @default(cuid())
+  productionId  String
+  requirement   String
+  status        String    @default("MISSING")
+  assetUrl      String?
+  notes         String?
+  completedById String?
+  completedAt   DateTime?
+  reviewedById  String?
+  reviewedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  production ProgramProduction @relation(fields: [productionId], references: [id], onDelete: Cascade)
+
+  @@unique([productionId, requirement])
+  @@index([status])
+}
+
+// All public testimonials, metrics, logos, partner statements, and event results
+// are fail-closed until approval and consent are present and valid.
+model EvidenceRecord {
+  id              String    @id @default(cuid())
+  type            String
+  status          String    @default("DRAFT")
+  sourceReference String
+  approvedCopy    String?
+  subjectName     String?
+  consentStatus   String    @default("PENDING")
+  consentProofUrl String?
+  ownerId         String?
+  approvedAt      DateTime?
+  expiresAt       DateTime?
+  withdrawnAt     DateTime?
+  metadata        Json?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  offerLinks OfferEvidenceLink[]
+
+  @@index([type, status])
+  @@index([expiresAt])
+}
+
+model OfferEvidenceLink {
+  id         String   @id @default(cuid())
+  offerId    String
+  evidenceId String
+  placement  String
+  createdAt  DateTime @default(now())
+
+  offer    CommercialOffer @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  evidence EvidenceRecord  @relation(fields: [evidenceId], references: [id], onDelete: Restrict)
+
+  @@unique([offerId, evidenceId, placement])
+  @@index([evidenceId])
+}
+
+model OfferAuditEvent {
+  id        String   @id @default(cuid())
+  offerId   String
+  actorId   String?
+  action    String
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  offer CommercialOffer @relation(fields: [offerId], references: [id], onDelete: Cascade)
+
+  @@index([offerId, createdAt])
+  @@index([action])
 }
