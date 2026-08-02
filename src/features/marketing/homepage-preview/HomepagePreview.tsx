@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import individualHero from "../../../../public/images/homepage-preview/hero-individual-cutout-v2.png";
-import organizationHero from "../../../../public/images/homepage-preview/hero-organization-cutout-v2.png";
 import type {
   HomepageLearningPathCard,
   HomepagePreviewData,
@@ -744,7 +742,7 @@ function HeroFigure({ tone }: { tone: "individual" | "organization" }) {
   const isIndividual = tone === "individual";
   const figure = isIndividual
     ? {
-        image: individualHero,
+        image: "/images/homepage-preview/hero-individual-cutout-v2.png",
         alt: "Ilustrasi profesional individu yang sedang membangun skill kerja",
         capabilities: [
           { label: "Program terstruktur", kind: "learn" as const },
@@ -753,7 +751,7 @@ function HeroFigure({ tone }: { tone: "individual" | "organization" }) {
         ],
       }
     : {
-        image: organizationHero,
+        image: "/images/homepage-preview/hero-organization-cutout-v2.png",
         alt: "Ilustrasi pemimpin tim yang merancang program belajar organisasi",
         capabilities: [
           { label: "Program untuk tim", kind: "learn" as const },
