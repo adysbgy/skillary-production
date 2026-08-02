@@ -347,5 +347,11 @@
 body {
   background: #FFFDF9;
   color: #181818;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-plus-jakarta), Arial, Helvetica, sans-serif;
+}
+/* Editorial faculty preview: isolated helpers, intentionally minimal. */
+@layer components {
+  .focus-ring { @apply rounded-sm outline-none transition focus-visible:ring-2 focus-visible:ring-[#e4ad51] focus-visible:ring-offset-2 focus-visible:ring-offset-current; }
+  .section-block { @apply mt-20 border-t border-[#dcd3c7] pt-14; }
+  .section-title { @apply mt-3 text-3xl font-extrabold tracking-[-.025em] text-[#17202b] sm:text-4xl; }
 }

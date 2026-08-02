@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { isPaymentEnabled } from "@/lib/payments/payment-availability";
 
 // GET /api/checkout/[orderId] — Fetch order details for checkout page
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ orderId: string }> }) {
@@ -11,7 +12,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ ord
 
     const { orderId } = await params;
 
-    const order = await (prisma as any).paymentOrder.findUnique({
+    const order = await prisma.paymentOrder.findUnique({
         where: { id: orderId },
         include: {
             course: { select: { title: true, slug: true, level: true, duration: true } },
@@ -32,6 +33,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ ord
         amount: order.amount,
         status: order.status,
         gatewayRef: order.gatewayRef,
+        paymentAvailable: isPaymentEnabled(),
         course: order.course,
     });
 }

@@ -1,191 +1,401 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingShell } from "@/components/v2/marketing/MarketingShell";
-import { SectionHeading, GradientText } from "@/components/v2/marketing/MarketingUI";
 
-export const metadata: Metadata = {
-  title: "Pelatihan In-House untuk Organisasi — Skillary",
-  description:
-    "Solusi pelatihan korporat terstruktur: LMS khusus batch, instruktur berpengalaman, sertifikat resmi, laporan otomatis.",
-};
-
-const PAINS = [
-  { title: "Pelatihan tidak terukur hasilnya", desc: "Sulit membuktikan apakah pelatihan benar-benar meningkatkan kompetensi tim.", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
-  { title: "Laporan peserta manual dan lama", desc: "Rekap kehadiran dan nilai dikerjakan manual, memakan waktu HR berhari-hari.", icon: "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
-  { title: "Sertifikat tidak terasa resmi", desc: "Sertifikat sekadar formalitas tanpa assessment dan tanpa cara verifikasi.", icon: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" },
+const challenges = [
+  {
+    number: "01",
+    title: "Kebutuhan bisnis berhenti sebagai topik training",
+    description:
+      "Tujuan, audience, dan kriteria penyelesaian belum selalu diterjemahkan menjadi rancangan belajar yang jelas.",
+  },
+  {
+    number: "02",
+    title: "Operasional peserta tersebar di banyak tempat",
+    description:
+      "Daftar peserta, materi, progress, assessment, dan dokumen program mudah terpisah ketika tidak ada satu alur kerja.",
+  },
+  {
+    number: "03",
+    title: "Selesai hadir belum menjelaskan apa yang dipelajari",
+    description:
+      "Tim membutuhkan evidence yang relevan dengan desain program—bukan sekadar daftar hadir atau sertifikat tanpa konteks.",
+  },
 ];
 
-const FEATURES = [
-  { title: "Platform LMS khusus batch organisasi", desc: "Kelola peserta per batch, atur akses materi, dan pantau progress seluruh tim dari satu dashboard.", icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" },
-  { title: "Instruktur berpengalaman sejak 1998", desc: "Praktisi dan trainer yang telah dipercaya organisasi besar Indonesia selama puluhan tahun.", icon: "M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" },
-  { title: "Sertifikat digital resmi + badge", desc: "Sertifikat berbasis assessment dengan ID unik yang dapat diverifikasi, plus badge kompetensi.", icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" },
-  { title: "Laporan peserta otomatis", desc: "Kehadiran, nilai assessment, dan progress belajar terekap otomatis — siap dipresentasikan ke manajemen.", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
-  { title: "Program custom sesuai kebutuhan", desc: "Topik, durasi, format, dan studi kasus dirancang spesifik untuk konteks dan industri organisasi Anda.", icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" },
+const pillars = [
+  {
+    eyebrow: "01 · Relevance",
+    title: "Program yang dimulai dari kebutuhan",
+    description:
+      "Konteks kerja, profil peserta, tujuan belajar, dan format delivery dibahas sebelum program disusun.",
+    items: ["Learning objective", "Audience & context", "Program format"],
+  },
+  {
+    eyebrow: "02 · Operations",
+    title: "Delivery yang lebih rapi dijalankan",
+    description:
+      "Peserta, akses materi, progress, assessment, dan komunikasi program dikelola dalam alur yang saling terhubung.",
+    items: ["Batch & participant", "Learning access", "Progress visibility"],
+  },
+  {
+    eyebrow: "03 · Evidence",
+    title: "Hasil yang lebih mudah ditinjau",
+    description:
+      "Bukti penyelesaian, hasil assessment, sertifikat digital, dan ringkasan program mengikuti scope serta kriteria yang disepakati.",
+    items: ["Assessment evidence", "Completion criteria", "Program summary"],
+  },
 ];
 
-const COMPARISON = [
-  { aspect: "Struktur program", conv: "Materi seadanya, tidak terstandar", skillary: "Kurikulum terstruktur & terukur" },
-  { aspect: "Assessment peserta", conv: "Jarang ada, sekadar hadir", skillary: "Assessment dengan batas kelulusan" },
-  { aspect: "Sertifikat", conv: "Formalitas tanpa verifikasi", skillary: "Digital resmi + ID terverifikasi" },
-  { aspect: "Laporan hasil", conv: "Manual, berhari-hari", skillary: "Otomatis, real-time per batch" },
-  { aspect: "Dokumentasi", conv: "Tercecer, sulit dilacak", skillary: "Terpusat di platform" },
-  { aspect: "Tindak lanjut", conv: "Berhenti setelah sesi", skillary: "Progress & path berkelanjutan" },
+const lifecycle = [
+  {
+    step: "Discover",
+    label: "Kebutuhan dipetakan",
+    description:
+      "Kami membahas tujuan, audience, konteks kerja, format, timeline, dan batasan program.",
+    output: "Output: program brief",
+  },
+  {
+    step: "Design",
+    label: "Program dirancang",
+    description:
+      "Materi, delivery flow, aktivitas, assessment, dan completion criteria disusun sesuai scope.",
+    output: "Output: learning design",
+  },
+  {
+    step: "Deliver",
+    label: "Pembelajaran dijalankan",
+    description:
+      "Batch dan akses peserta disiapkan, sesi berlangsung, serta progress dikelola sepanjang program.",
+    output: "Output: learning records",
+  },
+  {
+    step: "Review",
+    label: "Evidence dirangkum",
+    description:
+      "Penyelesaian, assessment, sertifikat, dan laporan ditinjau berdasarkan kriteria program.",
+    output: "Output: agreed evidence",
+  },
 ];
 
-const STEPS = [
-  { step: "01", title: "Konsultasi", desc: "Diskusikan kebutuhan, gap kompetensi, dan tujuan pelatihan tim Anda." },
-  { step: "02", title: "Program Disusun", desc: "Kami rancang kurikulum, assessment, dan jadwal sesuai konteks organisasi." },
-  { step: "03", title: "Peserta Belajar", desc: "Tim mengikuti materi & assessment melalui platform, terpantau penuh." },
-  { step: "04", title: "Laporan + Sertifikat", desc: "Laporan peserta otomatis dan sertifikat digital resmi diterbitkan." },
+const capabilities = [
+  {
+    title: "Program terstruktur",
+    description: "Materi dan aktivitas dirangkai untuk tujuan belajar yang disepakati.",
+    icon: "M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5v-15zM4 20.5A2.5 2.5 0 016.5 18H20M8 7h8M8 11h6",
+  },
+  {
+    title: "Operasi batch & peserta",
+    description: "Peserta organisasi dan akses belajar dikelola per program atau batch.",
+    icon: "M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75",
+  },
+  {
+    title: "Progress & assessment",
+    description: "Aktivitas dan hasil evaluasi dapat digunakan sesuai rancangan program.",
+    icon: "M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11",
+  },
+  {
+    title: "Sertifikat digital",
+    description: "Bukti penyelesaian diterbitkan ketika peserta memenuhi kriteria yang ditetapkan.",
+    icon: "M12 15l-3.5 2 1-4-3-2.5 4-.5L12 6l2 4 4 .5-3 2.5 1 4-4-2zM8 19l-1 3 5-2 5 2-1-3",
+  },
+  {
+    title: "Ringkasan program",
+    description: "Data yang relevan dirangkum sesuai kebutuhan dan scope pelaporan yang disepakati.",
+    icon: "M4 19V9M10 19V5M16 19v-7M22 19V3M2 21h22",
+  },
+  {
+    title: "Learning operations support",
+    description: "Tim Skillary membantu menjaga alur program, tidak hanya menyerahkan software.",
+    icon: "M12 22a10 10 0 100-20 10 10 0 000 20zM8 12l2.5 2.5L16 9M12 6v.01",
+  },
 ];
 
-const PERSONAS = [
-  { title: "Perusahaan", desc: "Tingkatkan kompetensi karyawan lintas divisi dengan program terukur.", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" },
-  { title: "Instansi Pemerintah", desc: "Pelatihan ASN & aparatur dengan dokumentasi dan sertifikat yang rapi.", icon: "M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3" },
-  { title: "Kampus", desc: "Bekali mahasiswa & alumni dengan sertifikasi skill siap kerja.", icon: "M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" },
-  { title: "Komunitas", desc: "Jalankan program pelatihan untuk anggota dengan alur terstruktur.", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
+const useCases = [
+  ["Team upskilling", "Mengembangkan kapabilitas tim untuk kebutuhan peran atau fungsi tertentu."],
+  ["Onboarding & role readiness", "Merapikan pengetahuan dan aktivitas belajar untuk transisi ke peran baru."],
+  ["Leadership development", "Menyusun perjalanan belajar bagi manager atau calon pemimpin."],
+  ["Compliance-oriented learning", "Mendokumentasikan pembelajaran terkait kebijakan tanpa mengklaim akreditasi eksternal."],
 ];
 
-const CARD = { border: "1px solid rgb(234, 237, 243)", boxShadow: "0 1px 3px rgba(15,23,42,0.04)" } as const;
-const BAND = { backgroundImage: "url(/images/lp-startup-band.svg)", backgroundSize: "100% 100%" } as const;
+const faqs = [
+  {
+    question: "Apakah semua program harus menggunakan platform Skillary?",
+    answer:
+      "Tidak selalu dengan konfigurasi yang sama. Penggunaan platform, bentuk materi, assessment, dan dukungan ditentukan dari kebutuhan program. Pada discovery, kami menjelaskan komponen yang relevan, opsional, dan tidak termasuk scope.",
+  },
+  {
+    question: "Seberapa jauh program dapat dikustomisasi?",
+    answer:
+      "Topik, konteks kasus, format, durasi, aktivitas, dan bentuk evaluasi dapat dibahas. Setiap kebutuhan custom ditinjau dari tujuan, timeline, risiko, workload, dan kemungkinan penggunaan ulang sebelum masuk proposal.",
+  },
+  {
+    question: "Apa arti sertifikat dari Skillary?",
+    answer:
+      "Sertifikat Skillary adalah bukti digital bahwa peserta memenuhi completion criteria yang ditetapkan pada program. Sertifikat tidak otomatis berarti lisensi profesi, gelar, atau akreditasi eksternal kecuali dinyatakan secara tertulis dengan dasar yang sah.",
+  },
+  {
+    question: "Apa yang dapat dicantumkan dalam laporan program?",
+    answer:
+      "Bergantung pada desain dan data program—misalnya status peserta, penyelesaian materi, kehadiran, atau hasil assessment. Isi, format, audience, dan waktu penyampaian laporan harus disepakati dalam scope.",
+  },
+  {
+    question: "Bagaimana harga program ditentukan?",
+    answer:
+      "Harga bersifat konsultatif. Input utamanya meliputi kompleksitas topik, jumlah peserta, durasi, format delivery, kebutuhan trainer, tingkat kustomisasi, assessment, pelaporan, dukungan, dan kebutuhan teknis.",
+  },
+  {
+    question: "Berapa lama persiapan program?",
+    answer:
+      "Timeline ditentukan setelah kebutuhan minimum dipahami. Program dengan materi siap pakai berbeda dari program custom yang memerlukan discovery, desain, review materi, konfigurasi peserta, atau koordinasi trainer.",
+  },
+];
 
-export default function UntukOrganisasiPage() {
+function ArrowIcon() {
+  return (
+    <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-5-5 5 5-5 5" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg aria-hidden="true" className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m5 12 4 4L19 6" />
+    </svg>
+  );
+}
+
+export default function OrganizationPage() {
   return (
     <MarketingShell>
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden px-5 pt-16 md:pt-24 pb-14 md:pb-20">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[520px] pointer-events-none" style={{ background: "radial-gradient(ellipse at center top, rgba(255,138,0,0.13) 0%, rgba(255,90,95,0.06) 40%, transparent 70%)" }} />
-        <div data-reveal className="relative max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-1.5 rounded-full mb-7 text-[#64748B] bg-white" style={{ border: "1px solid rgb(234, 222, 210)", boxShadow: "0 1px 3px rgba(15,23,42,0.06)" }}>
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "rgb(255,138,0)" }} />
-            Solusi B2B untuk HR &amp; L&amp;D
-          </div>
-          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mb-6">
-            Platform pelatihan <GradientText>in-house</GradientText>{" "}untuk tim Anda
-          </h1>
-          <p className="text-base md:text-lg text-[#64748B] max-w-2xl mx-auto leading-relaxed mb-8">
-            Dari kebutuhan sampai laporan peserta, Skillary handle semuanya — sehingga tim HR &amp; L&amp;D Anda bisa fokus pada dampak, bukan administrasi.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link href="/contact" className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-white hover:opacity-90 transition-opacity shadow-lg" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
-              Diskusikan Kebutuhan Tim →
-            </Link>
-            <Link href="/programs" className="w-full sm:w-auto text-center text-sm font-bold px-8 py-4 rounded-full text-[#0F172A] bg-white hover:bg-gray-50 transition-colors" style={{ border: "1.5px solid rgb(226, 232, 240)" }}>
-              Lihat Katalog Program
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pain points (semantic red) ── */}
-      <section className="px-5 py-16 md:py-24" style={BAND}>
-        <div className="max-w-6xl mx-auto">
-          <div data-reveal>
-            <SectionHeading eyebrow="Tantangan" title="Yang sering dihadapi tim L&D" sub="Tiga masalah yang membuat program pelatihan terasa sia-sia." />
-          </div>
-          <div data-reveal className="grid md:grid-cols-3 gap-4 mt-12">
-            {PAINS.map((p) => (
-              <div key={p.title} className="lp-lift p-7 rounded-2xl" style={{ background: "rgb(254, 242, 242)", border: "1px solid rgb(254, 202, 202)" }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: "white", color: "rgb(220, 38, 38)", border: "1px solid rgb(254, 202, 202)" }}>
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d={p.icon} /></svg>
-                </div>
-                <h3 className="font-bold text-[#0F172A] mb-2">{p.title}</h3>
-                <p className="text-sm text-[#64748B] leading-relaxed">{p.desc}</p>
+      <main className="overflow-hidden bg-[#FFFDF9] text-[#0F172A]">
+        <section className="relative px-5 pb-20 pt-14 sm:px-8 md:pb-28 md:pt-24">
+          <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[620px] bg-[radial-gradient(circle_at_72%_18%,rgba(255,138,0,.16),transparent_32%),radial-gradient(circle_at_82%_55%,rgba(255,90,95,.09),transparent_30%)]" />
+          <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.02fr_.98fr] lg:gap-16">
+            <div className="motion-fade-up">
+              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#F0D9C8] bg-white/80 px-4 py-2 text-xs font-bold tracking-[.08em] text-[#7C4A1C] shadow-[0_6px_24px_rgba(75,42,16,.05)] backdrop-blur">
+                <span className="h-2 w-2 rounded-full bg-[#FF8A00]" />
+                MANAGED LEARNING UNTUK ORGANISASI
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Features ── */}
-      <section className="px-5 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
-          <div data-reveal>
-            <SectionHeading eyebrow="Solusi" title="Yang Skillary tangani untuk Anda" sub="Lima hal yang membuat pelatihan in-house jadi terukur dan terdokumentasi." />
-          </div>
-          <div data-reveal className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
-            {FEATURES.map((f) => (
-              <div key={f.title} className="lp-lift bg-white rounded-2xl p-7" style={CARD}>
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 text-white" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d={f.icon} /></svg>
-                </div>
-                <h3 className="font-bold text-[#0F172A] mb-2">{f.title}</h3>
-                <p className="text-sm text-[#64748B] leading-relaxed">{f.desc}</p>
+              <h1 className="max-w-3xl text-[2.65rem] font-bold leading-[1.04] tracking-[-.045em] text-[#0D101C] sm:text-6xl lg:text-[4.5rem]">
+                Pelatihan selesai. Apakah pembelajarannya
+                <span className="block bg-gradient-to-r from-[#FF8A00] via-[#FF6C31] to-[#FF5A5F] bg-clip-text text-transparent">benar-benar terlihat?</span>
+              </h1>
+              <p className="mt-7 max-w-2xl text-base leading-8 text-[#596579] md:text-lg">
+                Skillary membantu HR dan L&amp;D menjalankan program dalam satu alur yang lebih rapi—dari pemetaan kebutuhan dan desain, hingga peserta, progress, assessment, sertifikat digital, dan laporan sesuai scope.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Link id="organization-hero-consultation" href="/contact" className="motion-btn inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF8A00] to-[#FF5A5F] px-6 py-3.5 text-sm font-bold text-white shadow-[0_12px_32px_rgba(255,104,38,.23)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] focus-visible:ring-offset-2">
+                  Diskusikan Kebutuhan Tim <ArrowIcon />
+                </Link>
+                <Link id="organization-hero-process" href="#cara-kerja" className="motion-btn inline-flex min-h-12 items-center justify-center rounded-xl border border-[#DFD8CF] bg-white px-6 py-3.5 text-sm font-bold text-[#1B2535] shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] focus-visible:ring-offset-2">
+                  Lihat Cara Kerja
+                </Link>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Comparison table ── */}
-      <section className="px-5 py-16 md:py-24" style={BAND}>
-        <div className="max-w-4xl mx-auto">
-          <div data-reveal>
-            <SectionHeading eyebrow="Perbandingan" title="Training konvensional vs Skillary" sub="Perbedaan yang terasa langsung di hasil dan dokumentasi." />
-          </div>
-          <div data-reveal className="rounded-2xl overflow-hidden mt-12 bg-white" style={CARD}>
-            <div className="grid grid-cols-3" style={{ background: "rgb(255, 248, 241)", borderBottom: "1px solid rgb(240, 217, 200)" }}>
-              <div className="p-4 text-xs font-bold uppercase tracking-widest text-[#94A3B8]">Aspek</div>
-              <div className="p-4 text-xs font-bold uppercase tracking-widest text-[#94A3B8] text-center" style={{ borderLeft: "1px solid rgb(240, 217, 200)" }}>Konvensional</div>
-              <div className="p-4 text-xs font-bold uppercase tracking-widest text-center text-white" style={{ background: "linear-gradient(135deg, rgb(255,138,0), rgb(255,90,95))" }}>Skillary</div>
+              <p className="mt-5 text-xs leading-5 text-[#7B8493]">Discovery awal untuk memahami tujuan, audience, format, jumlah peserta, dan timeline.</p>
             </div>
-            {COMPARISON.map((row, i) => (
-              <div key={row.aspect} className="grid grid-cols-3 text-sm" style={{ borderTop: i === 0 ? "none" : "1px solid rgb(240, 217, 200)", background: i % 2 === 0 ? "white" : "rgb(255, 251, 245)" }}>
-                <div className="p-4 font-semibold text-[#0F172A]">{row.aspect}</div>
-                <div className="p-4 text-[#64748B] flex items-center gap-2" style={{ borderLeft: "1px solid rgb(240, 217, 200)" }}>
-                  <svg className="w-4 h-4 shrink-0 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                  {row.conv}
-                </div>
-                <div className="p-4 font-medium text-[#0F172A] flex items-center gap-2" style={{ borderLeft: "1px solid rgb(240, 217, 200)", background: "rgb(255, 251, 245)" }}>
-                  <svg className="w-4 h-4 shrink-0" style={{ color: "rgb(5,150,105)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                  {row.skillary}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── Workflow ── */}
-      <section className="px-5 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto">
-          <div data-reveal>
-            <SectionHeading eyebrow="Cara Kerja" title="Empat langkah dari kebutuhan ke laporan" sub="" />
-          </div>
-          <div data-reveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
-            {STEPS.map((s, i) => (
-              <div key={s.step} className="lp-lift bg-white rounded-2xl p-6 relative" style={CARD}>
-                <div className="text-3xl font-extrabold mb-3" style={{ color: "rgb(255, 138, 0)" }}>{s.step}</div>
-                <h3 className="font-bold text-[#0F172A] text-sm mb-2">{s.title}</h3>
-                <p className="text-xs text-[#64748B] leading-relaxed">{s.desc}</p>
-                {i < STEPS.length - 1 && (
-                  <svg className="hidden lg:block absolute top-1/2 -right-3.5 w-5 h-5 text-[rgb(255,138,0)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Personas ── */}
-      <section className="px-5 py-16 md:py-24" style={BAND}>
-        <div className="max-w-6xl mx-auto">
-          <div data-reveal>
-            <SectionHeading eyebrow="Untuk Siapa" title="Dipercaya berbagai jenis organisasi" sub="" />
-          </div>
-          <div data-reveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
-            {PERSONAS.map((p) => (
-              <div key={p.title} className="lp-lift p-7 rounded-2xl text-center bg-white" style={CARD}>
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4" style={{ background: "rgb(255, 244, 232)", color: "rgb(255, 138, 0)" }}>
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d={p.icon} /></svg>
+            <div className="motion-scale-in motion-delay-200 relative mx-auto w-full max-w-[610px]" aria-label="Ilustrasi alur operasi program Skillary">
+              <div aria-hidden="true" className="absolute -inset-8 rounded-[3rem] bg-gradient-to-br from-[#FFEDD5] via-white to-[#FFE4E6] opacity-75 blur-2xl" />
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-white/80 bg-[#111827] p-3 shadow-[0_32px_80px_rgba(15,23,42,.22)] sm:p-4">
+                <div className="flex items-center justify-between border-b border-white/10 px-3 pb-4 pt-2 text-white">
+                  <div>
+                    <p className="text-[10px] font-bold tracking-[.18em] text-[#FDBA74]">PROGRAM OPERATIONS</p>
+                    <p className="mt-1 text-sm font-semibold">Leadership Essentials · Batch A</p>
+                  </div>
+                  <span className="rounded-full border border-emerald-300/20 bg-emerald-400/10 px-3 py-1 text-[10px] font-bold text-emerald-300">Illustrative flow</span>
                 </div>
-                <h3 className="font-bold text-[#0F172A] mb-2">{p.title}</h3>
-                <p className="text-sm text-[#64748B] leading-relaxed">{p.desc}</p>
+                <div className="grid gap-3 py-3 sm:grid-cols-[1.05fr_.95fr]">
+                  <div className="rounded-2xl bg-white p-5">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="text-[10px] font-bold tracking-[.15em] text-[#9A6A38]">LEARNING JOURNEY</p>
+                        <p className="mt-2 text-lg font-bold text-[#111827]">Program progress</p>
+                      </div>
+                      <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#FFF4E8] text-sm font-extrabold text-[#E97800]">03</div>
+                    </div>
+                    <div className="mt-6 space-y-4">
+                      {["Orientation & baseline", "Core learning sessions", "Applied assessment"].map((item, index) => (
+                        <div key={item} className="flex items-center gap-3">
+                          <div className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-[10px] font-bold ${index < 2 ? "bg-[#FFF0DD] text-[#E97800]" : "border border-dashed border-[#CBD5E1] text-[#94A3B8]"}`}>{index + 1}</div>
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-xs font-semibold text-[#334155]">{item}</p>
+                            <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-[#EEF1F5]"><div className={`h-full rounded-full bg-gradient-to-r from-[#FF8A00] to-[#FF5A5F] ${index === 0 ? "w-full" : index === 1 ? "w-3/4" : "w-1/4"}`} /></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="grid gap-3">
+                    <div className="rounded-2xl bg-[#FFF8EF] p-5">
+                      <p className="text-[10px] font-bold tracking-[.15em] text-[#9A6A38]">EVIDENCE LAYER</p>
+                      <div className="mt-4 grid grid-cols-2 gap-2">
+                        {["Progress", "Assessment", "Completion", "Certificate"].map((item, index) => (
+                          <div key={item} className="rounded-xl border border-[#F1DEC9] bg-white p-3">
+                            <span className={`mb-3 block h-2 w-2 rounded-full ${index < 2 ? "bg-[#FF8A00]" : "bg-[#CBD5E1]"}`} />
+                            <p className="text-[10px] font-bold text-[#475569]">{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="rounded-2xl border border-white/10 bg-white/10 p-5 text-white backdrop-blur">
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs font-semibold">Review-ready summary</p>
+                        <span className="text-[#FDBA74]">↗</span>
+                      </div>
+                      <p className="mt-2 text-[10px] leading-5 text-slate-300">Scope, criteria, and evidence remain connected.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ))}
+              <p className="mt-4 text-center text-[11px] leading-5 text-[#8A8177]">Ilustrasi alur operasional—bukan data peserta atau dokumentasi klien.</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section className="border-y border-[#EEE2D5] bg-white px-5 py-20 sm:px-8 md:py-28">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
+              <div>
+                <p className="text-xs font-extrabold tracking-[.2em] text-[#D86F00]">MASALAHNYA BUKAN KURANG TRAINING</p>
+                <h2 className="mt-4 max-w-lg font-bold tracking-[-.035em] text-[#0D101C]">Yang sulit adalah menjaga kebutuhan, delivery, dan evidence tetap terhubung.</h2>
+                <p className="mt-5 max-w-md text-base leading-7 text-[#64748B]">Tanpa alur yang jelas, program dapat selesai tetapi sulit ditinjau kembali oleh HR, L&amp;D, manager, atau peserta.</p>
+              </div>
+              <div className="divide-y divide-[#EEE7DF] border-y border-[#EEE7DF]">
+                {challenges.map((item) => (
+                  <article key={item.number} className="group grid gap-3 py-7 sm:grid-cols-[64px_1fr] sm:gap-5">
+                    <span className="text-sm font-bold text-[#FF8A00]">{item.number}</span>
+                    <div className="grid gap-2 md:grid-cols-[.8fr_1.2fr] md:gap-8">
+                      <h3 className="text-lg font-bold leading-7 text-[#172033]">{item.title}</h3>
+                      <p className="text-sm leading-7 text-[#697386]">{item.description}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-5 py-20 sm:px-8 md:py-28">
+          <div className="mx-auto max-w-7xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-xs font-extrabold tracking-[.2em] text-[#D86F00]">THE SKILLARY MODEL</p>
+              <h2 className="mt-4 font-bold tracking-[-.035em] text-[#0D101C]">Bukan software yang ditinggal. Bukan sesi yang selesai begitu saja.</h2>
+              <p className="mt-5 text-base leading-8 text-[#64748B]">Skillary menghubungkan learning design, program operations, dan credible evidence dalam satu pengalaman yang bertanggung jawab.</p>
+            </div>
+            <div className="mt-14 grid gap-5 lg:grid-cols-3">
+              {pillars.map((pillar, index) => (
+                <article key={pillar.title} className={`relative overflow-hidden rounded-[1.5rem] border p-7 md:p-8 ${index === 1 ? "border-[#1F2937] bg-[#111827] text-white shadow-[0_24px_60px_rgba(15,23,42,.16)]" : "border-[#EDDFD0] bg-white text-[#0F172A] shadow-[0_8px_30px_rgba(72,45,20,.045)]"}`}>
+                  <p className={`text-[11px] font-extrabold tracking-[.16em] ${index === 1 ? "text-[#FDBA74]" : "text-[#D86F00]"}`}>{pillar.eyebrow}</p>
+                  <h3 className="mt-5 text-2xl font-bold leading-tight tracking-[-.02em]">{pillar.title}</h3>
+                  <p className={`mt-4 text-sm leading-7 ${index === 1 ? "text-slate-300" : "text-[#667085]"}`}>{pillar.description}</p>
+                  <ul className="mt-8 space-y-3">
+                    {pillar.items.map((item) => (
+                      <li key={item} className={`flex items-center gap-3 border-t pt-3 text-xs font-bold ${index === 1 ? "border-white/10 text-slate-200" : "border-[#F0E8DF] text-[#465365]"}`}><span className={index === 1 ? "text-[#FDBA74]" : "text-[#FF8A00]"}><CheckIcon /></span>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="cara-kerja" className="scroll-mt-24 bg-[#0D101C] px-5 py-20 text-white sm:px-8 md:py-28">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:gap-20">
+              <div className="lg:sticky lg:top-28 lg:self-start">
+                <p className="text-xs font-extrabold tracking-[.2em] text-[#FDBA74]">FROM NEED TO EVIDENCE</p>
+                <h2 className="mt-4 font-bold tracking-[-.035em]">Satu alur. Empat keputusan penting.</h2>
+                <p className="mt-5 max-w-md text-base leading-8 text-slate-400">Setiap tahap memiliki input dan output yang jelas agar ekspektasi, delivery, serta bukti tidak berjalan sendiri-sendiri.</p>
+              </div>
+              <div className="divide-y divide-white/10 border-y border-white/10">
+                {lifecycle.map((item, index) => (
+                  <article key={item.step} className="grid gap-5 py-8 sm:grid-cols-[70px_.7fr_1.1fr] sm:gap-8 md:py-10">
+                    <div className="grid h-11 w-11 place-items-center rounded-full border border-[#FDBA74]/30 bg-[#FDBA74]/10 text-xs font-bold text-[#FDBA74]">0{index + 1}</div>
+                    <div><p className="text-[11px] font-extrabold tracking-[.16em] text-[#FDBA74]">{item.step.toUpperCase()}</p><h3 className="mt-2 text-xl font-bold text-white">{item.label}</h3></div>
+                    <div><p className="text-sm leading-7 text-slate-300">{item.description}</p><p className="mt-3 text-xs font-bold text-[#FDBA74]">{item.output}</p></div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-5 py-20 sm:px-8 md:py-28">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <div className="max-w-3xl"><p className="text-xs font-extrabold tracking-[.2em] text-[#D86F00]">CONNECTED CAPABILITIES</p><h2 className="mt-4 font-bold tracking-[-.035em] text-[#0D101C]">Komponen yang bekerja sebagai satu sistem pembelajaran.</h2></div>
+              <p className="max-w-sm text-sm leading-7 text-[#64748B]">Konfigurasi aktual mengikuti objective, format, readiness, dan scope program yang disepakati.</p>
+            </div>
+            <div className="mt-14 grid gap-px overflow-hidden rounded-[1.5rem] border border-[#E8DED4] bg-[#E8DED4] sm:grid-cols-2 lg:grid-cols-3">
+              {capabilities.map((item) => (
+                <article key={item.title} className="group bg-[#FFFDF9] p-7 transition-colors duration-300 hover:bg-white md:p-8">
+                  <div className="grid h-11 w-11 place-items-center rounded-xl border border-[#F0D9C8] bg-white text-[#E97800] shadow-sm">
+                    <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                  </div>
+                  <h3 className="mt-6 text-lg font-bold text-[#172033]">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#697386]">{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-5 py-20 sm:px-8 md:py-28">
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:gap-20">
+            <div>
+              <p className="text-xs font-extrabold tracking-[.2em] text-[#D86F00]">BUILT AROUND THE NEED</p>
+              <h2 className="mt-4 font-bold tracking-[-.035em] text-[#0D101C]">Bentuk program mengikuti konteks, bukan template yang dipaksakan.</h2>
+              <p className="mt-5 max-w-xl text-base leading-8 text-[#64748B]">Berikut contoh kebutuhan yang dapat dibahas pada discovery. Kesesuaian, rancangan, dan indikatornya tetap ditentukan per program.</p>
+              <div className="mt-10 grid gap-3 sm:grid-cols-2">
+                {useCases.map(([title, description]) => (
+                  <article key={title} className="rounded-2xl border border-[#EDDFD0] bg-white p-5">
+                    <h3 className="text-sm font-bold text-[#172033]">{title}</h3>
+                    <p className="mt-2 text-xs leading-6 text-[#697386]">{description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-[1.75rem] border border-[#EBD9C8] bg-[#FFF4E8] p-7 md:p-10">
+              <p className="text-xs font-extrabold tracking-[.18em] text-[#9A5818]">SCOPE CLARITY</p>
+              <h3 className="mt-4 text-2xl font-bold tracking-[-.025em] text-[#172033]">Jelas sebelum program berjalan.</h3>
+              <div className="mt-8 space-y-7">
+                <div><p className="text-xs font-bold uppercase tracking-[.12em] text-[#D86F00]">Included by design</p><p className="mt-2 text-sm leading-7 text-[#5D6572]">Objective, audience, delivery flow, completion criteria, dan tanggung jawab program.</p></div>
+                <div className="border-t border-[#E8CFAF] pt-7"><p className="text-xs font-bold uppercase tracking-[.12em] text-[#D86F00]">Configured per program</p><p className="mt-2 text-sm leading-7 text-[#5D6572]">Materi, trainer, assessment, sertifikat, laporan, support, dan penggunaan platform.</p></div>
+                <div className="border-t border-[#E8CFAF] pt-7"><p className="text-xs font-bold uppercase tracking-[.12em] text-[#D86F00]">Requires discovery</p><p className="mt-2 text-sm leading-7 text-[#5D6572]">Integrasi, SSO, API, white-label, advanced analytics, atau kebutuhan keamanan khusus—bukan baseline otomatis.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-[#EEE2D5] bg-white px-5 py-20 sm:px-8 md:py-28">
+          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[.7fr_1.3fr] lg:gap-20">
+            <div><p className="text-xs font-extrabold tracking-[.2em] text-[#D86F00]">COMMON QUESTIONS</p><h2 className="mt-4 font-bold tracking-[-.035em] text-[#0D101C]">Hal penting sebelum memulai.</h2><p className="mt-5 text-sm leading-7 text-[#64748B]">Jika kebutuhan Anda belum tercakup, gunakan sesi discovery untuk memetakan scope dengan jelas.</p></div>
+            <div className="divide-y divide-[#E9E2DA] border-y border-[#E9E2DA]">
+              {faqs.map((item, index) => (
+                <details id={`organization-faq-${index + 1}`} key={item.question} className="group py-1">
+                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 py-5 text-left text-base font-bold text-[#172033] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
+                    {item.question}<span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#FFF4E8] text-xl font-normal text-[#D86F00] transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="max-w-2xl pb-6 pr-10 text-sm leading-7 text-[#64748B]">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-5 py-16 sm:px-8 md:py-24">
+          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#0D101C] px-6 py-12 text-white shadow-[0_30px_80px_rgba(15,23,42,.18)] sm:px-10 md:px-16 md:py-16">
+            <div aria-hidden="true" className="absolute -right-24 -top-32 h-96 w-96 rounded-full bg-[#FF8A00]/20 blur-3xl" />
+            <div aria-hidden="true" className="absolute -bottom-48 left-1/3 h-96 w-96 rounded-full bg-[#FF5A5F]/10 blur-3xl" />
+            <div className="relative grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+              <div className="max-w-3xl"><p className="text-xs font-extrabold tracking-[.2em] text-[#FDBA74]">START WITH CLARITY</p><h2 className="mt-4 font-bold tracking-[-.04em]">Ceritakan tujuan tim Anda. Kita petakan program yang masuk akal.</h2><p className="mt-5 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">Siapkan konteks kebutuhan, audience, perkiraan peserta, format, dan timeline. Skillary akan membantu membedakan yang diperlukan, opsional, dan di luar scope.</p></div>
+              <Link id="organization-closing-consultation" href="/contact" className="motion-btn inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF8A00] to-[#FF5A5F] px-6 py-3.5 text-sm font-bold text-white shadow-[0_12px_30px_rgba(255,104,38,.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FDBA74] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D101C]">Mulai Discovery <ArrowIcon /></Link>
+            </div>
+          </div>
+        </section>
+      </main>
     </MarketingShell>
   );
 }

@@ -1,9 +1,15 @@
 import{readFile,access}from"node:fs/promises";
-const clean=["src/app/programs/page.tsx","src/app/programs/[slug]/page.tsx","src/app/events/page.tsx","src/app/events/[slug]/page.tsx","src/app/events/[slug]/checkout/page.tsx","src/app/about/page.tsx","src/app/resources/page.tsx","src/app/contact/page.tsx","src/app/untuk-organisasi/page.tsx"];
+import{resolveExactRouteFile}from"./resolve-exact-route-file.mjs";
+const organization=await resolveExactRouteFile({route:"/untuk-organisasi",candidates:["src/app/untuk-organisasi/page.tsx","src/app/(marketing)/untuk-organisasi/page.tsx"]});
+const clean=["src/app/programs/page.tsx","src/app/programs/[slug]/page.tsx","src/app/events/page.tsx","src/app/about/page.tsx","src/app/resources/page.tsx","src/app/contact/page.tsx",organization];
+const retired=["src/app/events/[slug]/page.tsx","src/app/events/[slug]/checkout/page.tsx"];
 const shared=["src/features/programs/pages/ProgramsPage.tsx","src/features/programs/pages/ProgramDetailPage.tsx","src/features/events/pages/EventsPage.tsx","src/features/events/pages/EventDetailPage.tsx","src/features/events/pages/EventCheckoutPage.tsx","src/features/marketing/pages/AboutPage.tsx","src/features/marketing/pages/OrganizationPage.tsx","src/features/marketing/pages/ResourcesPage.tsx","src/features/marketing/pages/ContactPage.tsx"];
-const legacy=["src/app/v2/catalog/page.tsx","src/app/v2/program/[slug]/page.tsx","src/app/v2/events/page.tsx","src/app/v2/events/[slug]/page.tsx","src/app/v2/events/[slug]/checkout/page.tsx","src/app/v2/about/page.tsx","src/app/v2/resources/page.tsx","src/app/v2/proposal/page.tsx","src/app/v2/untuk-organisasi/page.tsx"];
-for(const file of[...clean,...shared,...legacy])await access(file);
+const legacy=["src/app/v2/catalog/page.tsx","src/app/v2/program/[slug]/page.tsx","src/app/v2/events/page.tsx","src/app/v2/about/page.tsx","src/app/v2/resources/page.tsx","src/app/v2/proposal/page.tsx","src/app/v2/untuk-organisasi/page.tsx"];
+const legacyRetired=["src/app/v2/events/[slug]/page.tsx","src/app/v2/events/[slug]/checkout/page.tsx"];
+for(const file of[...clean,...retired,...shared,...legacy,...legacyRetired])await access(file);
 for(const file of clean){const s=await readFile(file,"utf8");if(s.includes("@/app/v2/"))throw new Error(`Clean route imports v2 route module: ${file}`);if(!s.includes("@/features/"))throw new Error(`Clean route lacks shared feature import: ${file}`)}
+for(const file of retired){const s=await readFile(file,"utf8");if(!s.includes("notFound()"))throw new Error(`Retired route is not an unavailable tombstone: ${file}`)}
 for(const file of shared){const s=await readFile(file,"utf8");if(s.includes("@/app/"))throw new Error(`Shared feature imports route module: ${file}`)}
 for(const file of legacy){const s=await readFile(file,"utf8");if(!s.includes("@/features/"))throw new Error(`Legacy wrapper lacks shared feature import: ${file}`)}
+for(const file of legacyRetired){const s=await readFile(file,"utf8");if(!s.includes("notFound()"))throw new Error(`Legacy retired route is not unavailable: ${file}`)}
 console.log("Route-module dependency audit passed: clean and legacy wrappers share feature implementations.");

@@ -5,6 +5,14 @@ import { doesGrossAmountMatch } from "../../.integrity-test-build/lib/payments/p
 import { getMidtransEndpoints, resolveMidtransEnvironment, validateMidtransKeyEnvironment } from "../../.integrity-test-build/lib/payments/midtrans-config.js";
 import { mapMidtransStatus, resolvePaymentTransition } from "../../.integrity-test-build/lib/payments/payment-status.js";
 import { redactRecord } from "../../.integrity-test-build/lib/observability/redaction.js";
+import { isPaymentEnabled } from "../../.integrity-test-build/lib/payments/payment-availability.js";
+
+test("payments remain fail-closed until explicitly enabled with a server key", () => {
+  assert.equal(isPaymentEnabled({}), false);
+  assert.equal(isPaymentEnabled({ PAYMENTS_ENABLED: "true" }), false);
+  assert.equal(isPaymentEnabled({ MIDTRANS_SERVER_KEY: "SB-Mid-server-test" }), false);
+  assert.equal(isPaymentEnabled({ PAYMENTS_ENABLED: "true", MIDTRANS_SERVER_KEY: "SB-Mid-server-test" }), true);
+});
 
 test("signature verification accepts exact synthetic vector and rejects tampering", () => {
   const fields={orderId:"order-test-1",statusCode:"200",grossAmount:"150000.00"};

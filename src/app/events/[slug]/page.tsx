@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
-import EventPage, { generateStaticParams } from "@/features/events/pages/EventDetailPage";
-import { getEventBySlug } from "@/data/v2-events";
+import { notFound } from "next/navigation";
 
-export { generateStaticParams };
+export const metadata: Metadata = {
+  title: "Webinar Belum Tersedia | Skillary",
+  robots: { index: false, follow: false },
+};
 
-type Props = { params: Promise<{ slug: string }> };
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const event = getEventBySlug(slug);
-  if (!event) return { title: "Event Tidak Ditemukan", robots: { index: false, follow: false } };
-  return {
-    title: `${event.title} — Events Skillary`,
-    description: event.desc,
-    alternates: { canonical: `/events/${event.slug}` },
-  };
+export default function EventDetailUnavailablePage() {
+  notFound();
 }
-
-export default EventPage;

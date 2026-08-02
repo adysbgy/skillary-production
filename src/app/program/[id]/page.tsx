@@ -4,12 +4,25 @@ import { Container } from "@/components/ui/Container";
 import { Card, SoftCard } from "@/components/ui/Card";
 import { Pill } from "@/components/ui/Pill";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
+import { PrimaryButton } from "@/components/ui/Button";
 import { prisma } from "@/lib/prisma";
+import { isPaymentEnabled } from "@/lib/payments/payment-availability";
 import type { Metadata } from "next";
 import { auth } from "@/lib/auth";
 import { getCertificateState } from "@/lib/certificate-display";
 import { CertificatePromoBanner, SidebarCertificateCard, CertificateBenefitSection } from "@/components/certificate/CertificateUpsell";
+import type { CertificateEligibilityState } from "@/lib/certificate-eligibility";
+import Image from "next/image";
+
+function parseStringArray(value: string | null): string[] {
+    if (!value) return [];
+    try {
+        const parsed: unknown = JSON.parse(value);
+        return Array.isArray(parsed) && parsed.every((item) => typeof item === "string") ? parsed : [];
+    } catch {
+        return [];
+    }
+}
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -29,6 +42,7 @@ export default async function ProgramDetailPage({ params }: Props) {
     const session = await auth();
     const program = await prisma.course.findUnique({ where: { slug: id }, include: { modules: true } });
     if (!program) notFound();
+    const currentProgram = program;
 
     if (program.status !== "PUBLISHED") {
         const { canPreviewCourse } = await import("@/lib/entitlements");
@@ -39,7 +53,7 @@ export default async function ProgramDetailPage({ params }: Props) {
     const { state: certState, hasAssessment, uniqueCode, certificateMode } = await getCertificateState(program.id, session?.user?.id);
 
     // Fetch certificate eligibility for logged-in users (needed for PAID_DIGITAL flow)
-    let eligibilityState: string | undefined;
+    let eligibilityState: CertificateEligibilityState | undefined;
     let digitalCertificatePrice: number | null = null;
     let pendingOrderId: string | undefined;
     if (session?.user?.id) {
@@ -49,17 +63,12 @@ export default async function ProgramDetailPage({ params }: Props) {
         digitalCertificatePrice = elig.price;
         pendingOrderId = elig.pendingCertificateOrder?.id ?? undefined;
     } else {
-        digitalCertificatePrice = (program as any).digitalCertificatePrice ?? null;
+        digitalCertificatePrice = program.digitalCertificatePrice;
     }
 
-    let outcomes: string[] = [];
-    let audience: string[] = [];
-    let prerequisites: string[] = [];
-    try {
-        if ((program as any).outcomesData) outcomes = JSON.parse((program as any).outcomesData);
-        if ((program as any).audienceData) audience = JSON.parse((program as any).audienceData);
-        if ((program as any).prerequisitesData) prerequisites = JSON.parse((program as any).prerequisitesData);
-    } catch { }
+    const outcomes = parseStringArray(program.outcomesData);
+    const audience = parseStringArray(program.audienceData);
+    const prerequisites = parseStringArray(program.prerequisitesData);
 
     async function handleFreeEnroll() {
         "use server";
@@ -76,12 +85,12 @@ export default async function ProgramDetailPage({ params }: Props) {
         const user = await prisma.user.findUnique({ where: { email: session.user.email } });
         if (!user) throw new Error("User record not found");
 
-        const existing = await (prisma as any).enrollment.findUnique({
+        const existing = await prisma.enrollment.findUnique({
             where: { userId_courseId: { userId: user.id, courseId: program!.id } }
         });
 
         if (!existing) {
-            await (prisma as any).enrollment.create({
+            await prisma.enrollment.create({
                 data: { userId: user.id, courseId: program!.id, source: "FREE" }
             });
         } else if (existing.revokedAt !== null) {
@@ -93,6 +102,7 @@ export default async function ProgramDetailPage({ params }: Props) {
 
     async function handlePaidCheckout() {
         "use server";
+        if (!isPaymentEnabled()) redirect(`/program/${program!.slug}?payment=hold`);
         const session = await auth();
         if (!session?.user?.id) redirect(`/login?redirect=/program/${program!.slug}`);
 
@@ -103,19 +113,19 @@ export default async function ProgramDetailPage({ params }: Props) {
         if (existingEnrollment) redirect(`/learn/${program!.slug}`);
 
         // Check for existing pending order
-        const pendingOrder = await (prisma as any).paymentOrder.findFirst({
+        const pendingOrder = await prisma.paymentOrder.findFirst({
             where: { userId: session.user.id, courseId: program!.id, status: "PENDING" },
             orderBy: { createdAt: "desc" },
         });
         if (pendingOrder) redirect(`/checkout/${pendingOrder.id}`);
 
         // Create new payment order
-        const order = await (prisma as any).paymentOrder.create({
+        const order = await prisma.paymentOrder.create({
             data: {
                 userId: session.user.id,
                 courseId: program!.id,
                 productType: "COURSE",
-                amount: (program as any).price,
+                amount: currentProgram.price,
                 status: "PENDING",
             },
         });
@@ -135,13 +145,18 @@ export default async function ProgramDetailPage({ params }: Props) {
                     body: JSON.stringify({
                         transaction_details: {
                             order_id: order.id,
-                            gross_amount: Math.round((program as any).price)
+                            gross_amount: Math.round(currentProgram.price)
                         }
                     })
                 });
-                const midtransData = await midtransRes.json();
-                if (midtransData?.token) {
-                    await (prisma as any).paymentOrder.update({
+                const midtransData: unknown = await midtransRes.json();
+                if (
+                    typeof midtransData === "object" &&
+                    midtransData !== null &&
+                    "token" in midtransData &&
+                    typeof midtransData.token === "string"
+                ) {
+                    await prisma.paymentOrder.update({
                         where: { id: order.id },
                         data: { gatewayRef: midtransData.token }
                     });
@@ -179,10 +194,10 @@ export default async function ProgramDetailPage({ params }: Props) {
                             </h1>
                             <p className="mt-6 max-w-2xl text-lg leading-8 text-black/65">{program.description}</p>
                             <div className="mt-8 flex flex-wrap items-center gap-4">
-                                {(program as any).price > 0 ? (
+                                {program.price > 0 ? (
                                     <div className="flex flex-col gap-2">
                                         <div className="flex items-center gap-4">
-                                            <span className="text-2xl font-bold tracking-tight text-black/50">Rp {((program as any).price).toLocaleString('id-ID')}</span>
+                                            <span className="text-2xl font-bold tracking-tight text-black/50">Rp {program.price.toLocaleString('id-ID')}</span>
                                             <form action={handlePaidCheckout}>
                                                 <PrimaryButton type="button" disabled className="opacity-60 cursor-not-allowed hover:-translate-y-0 text-black/70 bg-black/10 shadow-none">Closed for Beta</PrimaryButton>
                                             </form>
@@ -205,9 +220,9 @@ export default async function ProgramDetailPage({ params }: Props) {
 
                         <div className="space-y-6">
                             {/* Thumbnail */}
-                            {(program as any).thumbnailUrl ? (
-                                <div className="rounded-2xl overflow-hidden shadow-xl border border-black/5">
-                                    <img src={(program as any).thumbnailUrl} alt={program.title} className="w-full h-48 lg:h-56 object-cover" />
+                            {program.thumbnailUrl ? (
+                                <div className="relative h-48 overflow-hidden rounded-2xl border border-black/5 shadow-xl lg:h-56">
+                                    <Image src={program.thumbnailUrl} alt={program.title} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
                                 </div>
                             ) : (
                                 <div className="rounded-2xl h-48 lg:h-56 flex items-center justify-center shadow-xl" style={{ background: 'linear-gradient(135deg, rgb(255, 138, 0, 0.1), rgb(255, 244, 232), rgb(255, 90, 95, 0.08))', border: '1.5px solid rgb(240, 217, 200)' }}>
@@ -218,7 +233,7 @@ export default async function ProgramDetailPage({ params }: Props) {
                             <Card className="p-6">
                                 <SectionTitle eyebrow="Snapshot" title="Program overview" description={`A practical flow designed for ${program.level.toLowerCase()}-level learners.`} />
                                 <div className="grid gap-3 sm:grid-cols-2">
-                                    {[["Format", "Self-Paced"], ["Duration", program.duration || "Self-Paced"], ["Level", program.level], ["Certificate", "Included"], ["Price", (program as any).price > 0 ? `Rp ${((program as any).price).toLocaleString('id-ID')}` : "Free"]].map(([label, value]) => (
+                                    {[ ["Format", "Self-Paced"], ["Duration", program.duration || "Self-Paced"], ["Level", program.level], ["Certificate", "Included"], ["Price", program.price > 0 ? `Rp ${program.price.toLocaleString('id-ID')}` : "Free"]].map(([label, value]) => (
                                         <SoftCard key={label} className="p-4">
                                             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/40">{label}</p>
                                             <p className="mt-2 text-sm font-semibold text-black/75">{value}</p>
@@ -230,11 +245,11 @@ export default async function ProgramDetailPage({ params }: Props) {
                             <SidebarCertificateCard 
                                 state={certState} 
                                 hasAssessment={hasAssessment} 
-                                isPaid={(program as any).price > 0} 
+                                isPaid={program.price > 0}
                                 programSlug={program.slug} 
                                 uniqueCode={uniqueCode}
                                 certificateMode={certificateMode}
-                                eligibilityState={eligibilityState as any}
+                                eligibilityState={eligibilityState}
                                 digitalCertificatePrice={digitalCertificatePrice}
                                 courseId={program.id}
                                 pendingOrderId={pendingOrderId}
@@ -248,7 +263,7 @@ export default async function ProgramDetailPage({ params }: Props) {
                 <CertificatePromoBanner 
                     state={certState} 
                     hasAssessment={hasAssessment} 
-                    isPaid={(program as any).price > 0} 
+                    isPaid={program.price > 0}
                     programSlug={program.slug}
                     certificateMode={certificateMode}
                 />

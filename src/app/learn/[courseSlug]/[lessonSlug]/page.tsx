@@ -3,6 +3,7 @@ import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import LessonClient from "./LessonClient";
 import { canAccessCourseContent } from "@/lib/entitlements";
+import { createPublicQuizData } from "@/lib/quiz-integrity";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +12,7 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
     const session = await auth();
     if (!session?.user?.id) redirect("/login");
 
-    const course = await (prisma as any).course.findUnique({
+    const course = await prisma.course.findUnique({
         where: { slug: courseSlug },
         include: {
             modules: {
@@ -41,18 +42,18 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
     }
 
     // Flatten all lessons in order
-    const allLessons = course.modules.flatMap((m: any) => m.lessons);
-    const currentIndex = allLessons.findIndex((l: any) => l.slug === lessonSlug);
+    const allLessons = course.modules.flatMap((module) => module.lessons);
+    const currentIndex = allLessons.findIndex((lesson) => lesson.slug === lessonSlug);
     if (currentIndex === -1) notFound();
 
     const lesson = allLessons[currentIndex];
-    const allSlugs = allLessons.map((l: any) => l.slug);
+    const allSlugs = allLessons.map((lesson) => lesson.slug);
 
     // Fetch all progress for this user in this course
     const progressRecords = await prisma.lessonProgress.findMany({
         where: {
             userId: session.user.id,
-            lessonId: { in: allLessons.map((l: any) => l.id) }
+            lessonId: { in: allLessons.map((lesson) => lesson.id) }
         },
     });
 
@@ -61,11 +62,11 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
     });
 
     // Enforce sequential locking server-side for regular learners
-    const userRole = (session.user as any).role;
+    const userRole = session.user.role;
     const isOwnerOrAdmin = userRole === "ADMIN" || course.instructorId === session.user.id;
     if (!isOwnerOrAdmin && currentIndex > 0) {
         const previousLessonId = allLessons[currentIndex - 1].id;
-        const prevIsComplete = progressRecords.some((p: any) => p.lessonId === previousLessonId && p.completed);
+        const prevIsComplete = progressRecords.some((record) => record.lessonId === previousLessonId && record.completed);
         if (!prevIsComplete) {
             redirect(`/learn/${course.slug}`);
         }
@@ -80,17 +81,17 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
     const uiCourse = {
         title: course.title,
         slug: course.slug,
-        modules: course.modules.map((m: any) => ({
-            id: m.id,
-            title: m.title,
-            lessons: m.lessons.map((l: any) => ({
-                id: l.id,
-                title: l.title,
-                slug: l.slug,
-                type: l.type,
-                content: l.content,
-                videoUrl: l.videoUrl,
-                quizData: l.quizData || null,
+        modules: course.modules.map((module) => ({
+            id: module.id,
+            title: module.title,
+            lessons: module.lessons.map((moduleLesson) => ({
+                id: moduleLesson.id,
+                title: moduleLesson.title,
+                slug: moduleLesson.slug,
+                type: moduleLesson.type,
+                content: moduleLesson.content,
+                videoUrl: moduleLesson.videoUrl,
+                quizData: moduleLesson.type === "QUIZ" ? createPublicQuizData(moduleLesson.quizData) : null,
             }))
         }))
     };
@@ -102,13 +103,13 @@ export default async function LessonPage({ params }: { params: Promise<{ courseS
         type: lesson.type,
         content: lesson.content,
         videoUrl: lesson.videoUrl,
-        quizData: lesson.quizData || null,
-        resources: ((lesson as any).resources || []).map((r: any) => ({
-            id: r.id,
-            filename: r.filename,
-            url: r.url,
-            fileType: r.fileType,
-            fileSize: r.fileSize,
+        quizData: lesson.type === "QUIZ" ? createPublicQuizData(lesson.quizData) : null,
+        resources: lesson.resources.map((resource) => ({
+            id: resource.id,
+            filename: resource.filename,
+            url: `/api/resources/${resource.id}/download`,
+            fileType: resource.fileType,
+            fileSize: resource.fileSize,
         })),
     };
 
